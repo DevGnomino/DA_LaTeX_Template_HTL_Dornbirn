@@ -1,1 +1,22 @@
+# LaTeX generated files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# LaTeX editor temporary files
+*.swp
+*.synctex(busy)
+*.synctex.gz(busy)
+
+# Generated PDF files
 *.pdf
+
+# Ignore build directories
+_build/
+out/
