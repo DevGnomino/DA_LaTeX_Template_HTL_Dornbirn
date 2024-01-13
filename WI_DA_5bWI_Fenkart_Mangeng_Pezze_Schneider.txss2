@@ -1,6 +1,6 @@
 {
     "InternalPDFViewer": {
-        "Embedded": false,
+        "Embedded": true,
         "File": ""
     },
     "Session": {
@@ -13,9 +13,9 @@
                 "Col": 0,
                 "EditorGroup": 0,
                 "FileName": "WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.tex",
-                "FirstLine": 78,
+                "FirstLine": 61,
                 "FoldedLines": "",
-                "Line": 113
+                "Line": 70
             }
         ],
         "MasterFile": "WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.tex",

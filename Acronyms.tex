@@ -1,3 +1,10 @@
+%\ac{Kuerzel} wird der Befehl \ac{Kuerzel} das erste Mal verwendet, erhält man die Langform des Ausdrucks und zusätzlich die geklammerte Kurzform. Wird der Befehl danach wieder mit dem gleichen Kürzel, erhält man die Kurzform dann aber ohne Klammern.
+%\acl{Kuerzel} schreibt die Langform des Ausdrucks.
+%\acs{Kuerzel} schreibt die Kurzform.
+%\aclp{Kuerzel} schreibt die Langform des Plurals des Ausdrucks.
+%\acsp{Kuerzel}schreibt die Kurzform des Plurals. 
+%\acf{Kuerzel} verhält sich wie \ac{Kuerzel} Befehl, wenn er das erste Mal aufgerufen wurde. Unabhängig davon, wie oft das Kürzel bereits aufgerufen wurde, wird bei der Verwendung von \acf{Kuerzel} die ausgeschriebene Langform des Ausdrucks und die geklammerte Abkürzung gesetzt.
+
 \DeclareAcronym{obv}{
 short = {\"obv},
 long  = {Österreichische Bautechnikvereinigung},
@@ -22,12 +29,32 @@ extra = {[\officialeuro{}]},
 }
 
 \DeclareAcronym{rlt}{
-	short = {RLT-Anlagen},
-	long  = {raumlufttechnische Anlagen},
+	short = RLT,
+	long  = raumlufttechnische,
 }
 
+\DeclareAcronym{rltanlage}{
+	short = RLT-Anlage,
+	long  = raumlufttechnische Anlage,
+	short-plural = RLT-Anlagen,
+	long-plural = raumlufttechnische Anlagen,
+}
+
+\DeclareAcronym{gui}{
+	short = GUI,
+	long  = Grafische Benutzeroberfläche,
+	short-plural = GUIs,
+	long-plural = Grafische Benutzeroberflächen,
+}
+
+
 \DeclareAcronym{htl}{
-short = {HTL},
-long  = {Höhere Technische Bundeslehr- und Versuchsanstalt},
+	short = HTL,
+	long  = Höhere Technische Bundeslehr- und Versuchsanstalt,
+}
+
+\DeclareAcronym{json}{
+	short = JSON,
+	long  = JavaScript Object Notation,
 }
 
