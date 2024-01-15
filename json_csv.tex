@@ -2,8 +2,37 @@
 \paragraph{Was ist \acs{csv}?}
 \acf{csv} ist ein systemunabhängiges Format für Textdateien. \acs{csv} Dateien dienen zum Speichern und Übertragen von strukturierten Daten, hauptsächlich Tabellen oder Listen, wobei durch die Verkettung von mehreren \acs{csv} Dateien oder mithilfe von zusätzlichen Regeln auch geschachtelte Objekte gespeichert werden können. \cite{FuchsMediaSolutions:o.J.}
 
-Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler unterstützt wurde. Trotzdem gibt es gegenwärtig für CSV keinen allgemeinen Standard, wobei aber mit dem RFC 4180 Dokument \cite{Shafranovich:2005} im Jahre 2005 ein erster Versuch einer weit verbreiteten inoffiziellen Definition existiert. Dieses Dokument besagt:
-\begin{list}{}{}
-	\item Hi
-	\item 123ljö
-\end{list}
+Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler unterstützt wurde. Trotzdem gibt es gegenwärtig für \acs{csv} keine formelle Spezifikation. Mit dem \acs{rfc} 4180 \cite{Shafranovich:2005} aus dem Jahre 2005 existiert ein erster Versuch einer inoffiziellen Definition, welche mittlerweile weit verbreitet ist. Durch dieses Dokument wird das \acf{mime} "text/csv"\ für das \acs{csv} Format registriert. Es folgen die wesentlichen Merkmale aus der Definition des \acs{rfc} 4180:
+
+\begin{enumerate}{}
+	
+	\item Jedem Datensatz steht eine Zeile zu, die mit einem Zeilenumbruch (\ac{crlf}) beendet wird. Dabei muss der letzte Datensatz nicht unbedingt einen Zeilenumbruch am Ende haben. \zB 
+	\begin{lstlisting}
+		aaa, bbb, ccc CRLF
+		xxx, yyy, zzz CRLF
+	\end{lstlisting}
+	oder
+	\begin{lstlisting}
+		aaa, bbb, ccc CRLF
+		xxx, yyy, zzz
+	\end{lstlisting}
+	
+	\item Am Anfang eines \acs{csv} Dokumentes kann es eine Kopfzeile geben. Diese hat das Format eines normalen Datensatzes und beinhaltet Namen für die Felder (Spalten). Die Anzahl der Felder sollte für Kopfzeile und Datensätze gleich sein. \zB
+	\begin{lstlisting}
+		spaltenname_1, spaltenname_2, spaltenname_3 CRLF
+		aaa, bbb, ccc CRLF
+		xxx, yyy, zzz CRLF
+	\end{lstlisting}
+	
+	\item Sowohl in den Datensätzen als auch in der Kopfzeile kann es einen oder mehrere Felder geben, die jeweils immer durch einen Beistrich (\acs{engl} comma). Am Ende einer Zeile bedarf es keinem Beistrich. Abstände sind Teil eines Feldes und müssen berücksichtigt werden.
+	
+	\item Jedes Feld kann in Anführungszeichen eingeschlossen sein. Bei Feldern, die Beistriche, Zeilenumbrüche oder Anführungszeichen beinhaltet, müssen jedoch verwendet werden. \zB
+	\begin{lstlisting}
+		"aaa","b CRLF
+		bb","ccc" CRLF
+		xxx,yyy,zzz
+	\end{lstlisting}
+
+\end{enumerate}
+
+
