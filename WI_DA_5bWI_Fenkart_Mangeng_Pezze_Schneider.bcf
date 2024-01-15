@@ -2367,7 +2367,6 @@
     <bcf:citekey order="1" intorder="1">Bier:09</bcf:citekey>
     <bcf:citekey order="2" intorder="1">Bier:09</bcf:citekey>
     <bcf:citekey order="3" intorder="1">Struckmann:07</bcf:citekey>
-<<<<<<< HEAD
     <bcf:citekey order="4" intorder="1">Struckmann:07</bcf:citekey>
     <bcf:citekey order="5" intorder="1">Struckmann:07</bcf:citekey>
     <bcf:citekey order="6" intorder="1">FuchsMediaSolutions:o.J.</bcf:citekey>
@@ -2380,16 +2379,6 @@
     <bcf:citekey order="12" intorder="1">Voss:22</bcf:citekey>
     <bcf:citekey order="13" intorder="1">Schranz:22</bcf:citekey>
     <bcf:citekey order="14" intorder="1">Schranz:22</bcf:citekey>
-=======
-    <bcf:citekey order="4" intorder="1">Fuchs Media Solutions:o.J.</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">Shafranovich:2005</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">DIN-ISO-690:2013</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">Kohm:20</bcf:citekey>
-    <bcf:citekey order="7" intorder="2">Voss:22</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Kohm:20</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">Voss:22</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">Schranz:22</bcf:citekey>
->>>>>>> f37dd7d3655ae36e90459c4751a2da061602d5bf
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

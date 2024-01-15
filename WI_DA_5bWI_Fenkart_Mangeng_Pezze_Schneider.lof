@@ -4,17 +4,10 @@
 \babel@toc {english}{}\relax 
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
-<<<<<<< HEAD
 \contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{5}{figure.caption.5}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{11}{figure.caption.6}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{11}{figure.caption.6}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{11}{figure.caption.6}%
-=======
-\contentsline {figure}{\numberline {1}{\ignorespaces HTLlogo}}{6}{figure.caption.5}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{12}{figure.caption.6}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{12}{figure.caption.6}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{12}{figure.caption.6}%
->>>>>>> f37dd7d3655ae36e90459c4751a2da061602d5bf
+\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{10}{figure.caption.6}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{10}{figure.caption.6}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{10}{figure.caption.6}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
