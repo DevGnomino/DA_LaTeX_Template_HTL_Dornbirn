@@ -38,7 +38,7 @@ captions=tableheading,numbers=noenddot}
 
 \hypersetup{ % Setzt einige Werte die in den Eigenschaften des PDF gespeichert sind.
   bookmarksnumbered,
-%   % pdfdisplaydoctitle = true,
+%   % pdfdisplaydoc = true,
    colorlinks, % Für Druck auf "false" setzen!
    linkcolor={black}, % auch keine grellen Rahmen im View
    citecolor={black},
@@ -70,7 +70,7 @@ automark
 \ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
 \ofoot{\thepage} % Seitennummerierung rechtsbündig
 
-% Schriftgröße für Überschriften
+%% Schriftgröße für Überschriften
 \RequirePackage{titlesec}
 \titleformat{\section}{\bfseries\fontsize{16}{20}\selectfont}{\thesection}{1em}{}
 \titleformat{\subsection}{\bfseries\fontsize{15}{16}\selectfont}{\thesubsection}{1em}{}
@@ -82,6 +82,7 @@ automark
 \renewcommand{\rmdefault}{phv} % Helvetica as the default Roman font
 \renewcommand{\sfdefault}{phv} % Helvetica as the default sans-serif font
 \addtokomafont{captionlabel}{\bfseries}
+
 
 \RequirePackage{ragged2e,tabularx}
 
