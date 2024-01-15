@@ -9,6 +9,12 @@
 *.fdb_latexmk
 *.fls
 
+# LaTeX biber
+*.bbl
+*.bcf
+*.blg
+
+
 # LaTeX editor temporary files
 *.swp
 *.synctex(busy)
@@ -20,3 +26,6 @@
 # Ignore build directories
 _build/
 out/
+
+*.lof
+*.lot
