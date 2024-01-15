@@ -74,11 +74,31 @@ automark
 \ofoot{\thepage} % Seitennummerierung rechtsbündig
 
 %% Schriftgröße für Überschriften
-\RequirePackage{titlesec}
-\titleformat{\section}{\bfseries\fontsize{16}{20}\selectfont}{\thesection}{1em}{}
-\titleformat{\subsection}{\bfseries\fontsize{15}{16}\selectfont}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\bfseries\fontsize{14}{16}\selectfont}{\thesubsubsection}{1em}{}
-\titleformat{\paragraph}{\bfseries\fontsize{13}{14}\selectfont}{\theparagraph}{1em}{}
+\RedeclareSectionCommand[
+beforeskip=1ex plus 0.2ex minus 0.2ex,
+afterskip=1em,
+font=\normalfont\fontsize{16}{20}\selectfont\bfseries
+]{section}
+
+\RedeclareSectionCommand[
+beforeskip=0.5ex plus 0.2ex minus 0.2ex,
+afterskip=1em,
+font=\normalfont\fontsize{15}{16}\selectfont\bfseries
+]{subsection}
+
+\RedeclareSectionCommand[
+beforeskip=0.5ex plus 0.2ex minus 0.2ex,
+afterskip=0.6em,
+font=\normalfont\fontsize{14}{16}\selectfont\bfseries
+]{subsubsection}
+
+\RedeclareSectionCommand[
+beforeskip=0.5ex plus 0.2ex minus 0.2ex,
+afterskip=0.3em,
+font=\normalfont\fontsize{13}{14}\selectfont\bfseries
+]{paragraph}
+
+
 
 % Schriftart / Font wird für das ganze Dokument gesetzt
 \RequirePackage{helvet}  % Use helvet package instead of uarial (Arial)
