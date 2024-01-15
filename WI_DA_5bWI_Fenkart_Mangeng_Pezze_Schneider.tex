@@ -33,6 +33,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{TUWBUIDADISS}
+\usepackage{glossaries}
 %% this style alreadz includes some useful packages:
 %% fontenc[T1], lmodern, microtype, babel[englisch,ngerman], graphicx, 
 %% geometry with all margins or areaset (choose what you like)
@@ -41,6 +42,9 @@
 %% tabularx, longtable, threeparttable, csquotes, eurosym, enumitem, 
 %% multirow, setspace, listings, scrlayer-scrpage with header/footline
 %% pdfx (including hyperref)
+
+\makeglossaries
+\newglossaryentry{example}{name={example},description={A sample entry for the glossary}}
 
 \raggedbottom 
 %% prevents the expansion of the text till the end of the page (if you like)
@@ -121,6 +125,7 @@ list-final-separator={ und }}
 \include{Résumé}
 \include{Projektmanagement}
 
+
 \appendix
 %% insert bibliography, adds chapter heading with chapter number
 \printbibliography
@@ -144,7 +149,9 @@ Kohm (2020) hat die Klassen der KOMA-Script-Reihe entwickelt, die die \enquote{t
 Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: Schranz et al. (2022).
 \end{quotation}
 
+
 \listoffigures
 \listoftables
+\printglossaries
 
 \end{document}
