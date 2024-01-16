@@ -173,6 +173,33 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 \setcounter{topnumber}{3}
 \setcounter{totalnumber}{5}
 
+%Minted Code Highlighting
+\RequirePackage{minted}
+\usemintedstyle{colorful} 
+\usepackage{xcolor}
+% python, console, cpp, csharp, java, json, tex
+
+\newminted{python}{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	fontsize=\footnotesize,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true
+}
+% \begin{pythoncode}
+\newminted{json}{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	fontsize=\footnotesize,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true
+}
 
 %% Customize Code Listing
 \lstset{
