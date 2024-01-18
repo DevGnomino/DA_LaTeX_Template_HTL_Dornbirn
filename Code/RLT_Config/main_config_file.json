@@ -1,0 +1,169 @@
+[
+  {
+    "pages": [
+      {
+        "title": "Temperaturen QBM1",
+        "sources": [
+          {
+            "port": [
+              { "QBM1": "AI1" }
+            ],
+            "description": "Temperatur 1"
+          },
+          {
+            "port": [
+              { "QBM1": "AI2" }
+            ],
+            "description": "Temperatur 2"
+          },
+          {
+            "port": [
+              { "QBM1": "P1" }
+            ],
+            "description": "Druckdifferenz 1"
+          },
+          {
+            "port": [
+              { "QBM1": "P2" }
+            ],
+            "description": "Druckdifferenz 2"
+          },
+          {
+            "port": [
+              { "QBM1": "AO1" }
+            ],
+            "description": "Klappe",
+            "python_function": "flap_position"
+          }
+        ]
+      },
+      {
+        "title": "Temperaturen QBM2",
+        "sources": [
+          {
+            "port": [
+              { "QBM2": "AI1" }
+            ],
+            "description": "Temperatur 3"
+          },
+          {
+            "port": [
+              { "QBM2": "AI2" }
+            ],
+            "description": "Temperatur 4"
+          },
+          {
+            "port": [
+              { "QBM2": "P1" }
+            ],
+            "description": "Druckdifferenz 3"
+          },
+          {
+            "port": [
+              { "QBM2": "P2" }
+            ],
+            "description": "Druckdifferenz 4"
+          },
+          {
+            "port": [
+              { "QBM2": "AO2" }
+            ],
+            "description": "Relais 2",
+            "python_function": "relay_position",
+            "additional_info": { "switching_voltage": 5 }
+          }
+        ]
+      }
+    ],
+    "devices": [
+      {
+        "device": "QBM97XX",
+        "id": "QBM1",
+        "baud_rate": 19200,
+        "mbaddress": 1,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": false,
+        "sensors": [
+          {
+            "port": "P1",
+            "type": "standardQBM"
+          },
+          {
+            "port": "P2",
+            "type": "standardQBM"
+          },
+          {
+            "port": "AI1",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AI2",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AO1",
+            "type": "AULKlappe"
+          },
+          {
+            "port": "AO2",
+            "type": "WRGKlappe"
+          }
+        ]
+      },
+      {
+        "device": "QBM97XX",
+        "id": "QBM2",
+        "baud_rate": 19200,
+        "mbaddress": 2,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": false,
+        "sensors": [
+          {
+            "port": "P1",
+            "type": "standardQBM"
+          },
+          {
+            "port": "P2",
+            "type": "standardQBM"
+          },
+          {
+            "port": "AI1",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AI2",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AO1",
+            "type": "AULKlappe"
+          },
+          {
+            "port": "AO2",
+            "type": "WRGKlappe"
+          }
+        ]
+      },
+      {
+        "device": "EBM",
+        "id": "EBM1",
+        "baud_rate": 19200,
+        "mbaddress": 23,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": true
+      },
+      {
+        "device": "EBM",
+        "id": "EBM2",
+        "baud_rate": 19200,
+        "mbaddress": 33,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": true
+      }
+    ]
+  }
+]

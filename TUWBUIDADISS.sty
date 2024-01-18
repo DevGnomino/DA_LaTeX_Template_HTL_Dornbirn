@@ -180,6 +180,17 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 \usepackage{xcolor}
 % python, console, cpp, csharp, java, json, tex
 
+\newmintedfile[pythonfile]{python}{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	fontsize=\footnotesize,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true,
+	tabsize=4
+}
 \newminted{python}{
 	frame=lines,
 	framesep=2mm,
@@ -188,7 +199,8 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
-	breaklines=true
+	breaklines=true,
+	tabsize=4
 }
 % \begin{pythoncode}
 \newminted{json}{
@@ -199,14 +211,15 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
-	breaklines=true
+	breaklines=true,
+	tabsize=4
 }
 
 %% Customize Code Listing
 \lstset{
 	basicstyle = \footnotesize\ttfamily,
 	keywordstyle=\color{blue}\bfseries,
-	tabsize=3,
+	tabsize=4,
 	breaklines=true,
 	showstringspaces = false,
 	upquote = true,

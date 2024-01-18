@@ -1,0 +1,17 @@
+\subsection{Übertragen der Config Files mittels USB}
+Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man beim Bootvorgang des Raspberry Pi einen Datenträger (USB-Stick) an. Auf dem Datenträger muss im Root-Verzeichnis ein Verzeichnis namens „RLT\_Config“ sein. Wenn dieses Verzeichnis und alle nötigen Konfigurationsdateien darin vorhanden sind, werden diese in das Documents-Verzeichnis des Raspberry Pi kopiert. Das passiert in der „usb\_routine“-Funktion. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
+
+\pythonfile[firstline=2, lastline=12]{Code/main.py}
+
+\begin{pythoncode}
+if __name__ == "__main__":
+	copy_error = usb_detection.usb_routine()
+	if copy_error:
+		exit
+	all_pages = modbus.load_config()
+	global app
+	app = App(all_pages)
+	setup_buttons()
+	modbus.data_threading(app)
+	app.mainloop()	
+\end{pythoncode}
