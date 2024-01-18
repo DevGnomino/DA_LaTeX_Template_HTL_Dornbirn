@@ -1,0 +1,66 @@
+{
+  "ports": [
+    {
+      "port": "P1",
+      "register": 5,
+      "function_code": 3,
+      "units": [
+        {
+          "unit": "Pa",
+          "scaling": 1
+        }
+      ]
+    },
+    {
+      "port": "P2",
+      "register": 7,
+      "function_code": 3,
+      "units": [
+        {
+          "unit": "Pa",
+          "scaling": 1
+        }
+      ]
+    },
+    {
+      "port": "AI1",
+      "register": 9,
+      "function_code": 3,
+      "units": [
+        {
+          "unit": "°C",
+          "scaling": 0.1
+        },
+        {
+          "unit": "mV",
+          "scaling": 1
+        }
+      ]
+    },
+    {
+      "port": "AI2",
+      "register": 11,
+      "function_code": 3,
+      "units": [
+        {
+          "unit": "°C",
+          "scaling": 0.1
+        },
+        {
+          "unit": "mV",
+          "scaling": 1
+        }
+      ]
+    },
+    {
+      "port": "AO1",
+      "register": 27,
+      "function_code": 3
+    },
+    {
+      "port": "AO2",
+      "register": 57,
+      "function_code": 3
+    }
+  ]
+}
