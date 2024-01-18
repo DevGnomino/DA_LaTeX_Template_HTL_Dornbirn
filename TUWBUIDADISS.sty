@@ -91,7 +91,7 @@ font=\normalfont\fontsize{14}{16}\selectfont\bfseries
 ]{subsubsection}
 
 \RedeclareSectionCommand[
-beforeskip=0.5ex plus 0.2ex minus 0.2ex,
+beforeskip=1.5ex plus 0.2ex minus 0.2ex,
 afterskip=0.3em,
 font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 ]{paragraph}
@@ -184,7 +184,6 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 	frame=lines,
 	framesep=2mm,
 	baselinestretch=1.2,
-	fontsize=\footnotesize,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
@@ -195,19 +194,16 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 	frame=lines,
 	framesep=2mm,
 	baselinestretch=1.2,
-	fontsize=\footnotesize,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
 	breaklines=true,
 	tabsize=4
 }
-% \begin{pythoncode}
 \newminted{json}{
 	frame=lines,
 	framesep=2mm,
 	baselinestretch=1.2,
-	fontsize=\footnotesize,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
@@ -217,7 +213,7 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 
 %% Customize Code Listing
 \lstset{
-	basicstyle = \footnotesize\ttfamily,
+	basicstyle = \ttfamily,%\footnotesize
 	keywordstyle=\color{blue}\bfseries,
 	tabsize=4,
 	breaklines=true,
