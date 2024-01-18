@@ -8,32 +8,34 @@ Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORT
 	
 	\item Jedem Datensatz steht eine Zeile zu, die mit einem Zeilenumbruch (\ac{crlf}) beendet wird. Dabei muss der letzte Datensatz nicht unbedingt einen Zeilenumbruch am Ende haben. \zB 
 	\begin{lstlisting}
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz CRLF
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz CRLF
 	\end{lstlisting}
 	oder
 	\begin{lstlisting}
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz
 	\end{lstlisting}
 	
 	\item Am Anfang eines \acs{csv} Dokumentes kann es eine Kopfzeile geben. Diese hat das Format eines normalen Datensatzes und beinhaltet Namen für die Felder (Spalten). Die Anzahl der Felder sollte für Kopfzeile und Datensätze gleich sein. \zB
 	\begin{lstlisting}
-		spaltenname_1, spaltenname_2, spaltenname_3 CRLF
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz CRLF
+	spaltenname_1, spaltenname_2, spaltenname_3 CRLF
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz CRLF
 	\end{lstlisting}
 	
 	\item Sowohl in den Datensätzen als auch in der Kopfzeile kann es ein oder mehrere Felder geben, die jeweils immer durch einen Beistrich (\acs{engl} comma) separiert werden. Am Ende einer Zeile bedarf es keinem Beistrich. Abstände sind Teil eines Feldes und müssen berücksichtigt werden.
 	
 	\item Jedes Feld kann in Anführungszeichen eingeschlossen sein. Bei Feldern, die Beistriche, Zeilenumbrüche oder Anführungszeichen beinhaltet, müssen jedoch verwendet werden. \zB
 	\begin{lstlisting}
-		"aaa","b CRLF
-		bb","ccc" CRLF
-		xxx,yyy,zzz
+	"aaa","b CRLF
+	bb","ccc" CRLF
+	xxx,yyy,zzz
 	\end{lstlisting}
 	
 \end{enumerate}
+
+\paragraph{Was ist \acs{json}?}
 
 
 
