@@ -62,7 +62,7 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/"> 
    <dc:format>application/pdf</dc:format> 
-   <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Entwicklung und Dokumentation einer kostengünstigen Anzeigelösung für Lüftungsanlagen auf Basis des "Modbus"-Protokolls</rdf:li></rdf:Alt></dc:title>
+   <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Entwicklung einer Anzeigelösung für Lüftungsanlagen auf Basis des "Modbus"-Protokolls</rdf:li></rdf:Alt></dc:title>
    <dc:language><rdf:Bag><rdf:li>de-AT</rdf:li></rdf:Bag></dc:language>
    <dc:subject><rdf:Bag><rdf:li>Diplomarbeit</rdf:li>
      <rdf:li></rdf:li>
@@ -78,15 +78,15 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> 
    <xmp:CreatorTool>LaTeX with hyperref</xmp:CreatorTool> 
-   <xmp:ModifyDate>2024-01-18T22:42:27+01:00</xmp:ModifyDate> 
-   <xmp:CreateDate>2024-01-18T22:42:27+01:00</xmp:CreateDate> 
-   <xmp:MetadataDate>2024-01-18T22:42:27+01:00</xmp:MetadataDate> 
+   <xmp:ModifyDate>2024-01-19T09:42:10+01:00</xmp:ModifyDate> 
+   <xmp:CreateDate>2024-01-19T09:42:10+01:00</xmp:CreateDate> 
+   <xmp:MetadataDate>2024-01-19T09:42:10+01:00</xmp:MetadataDate> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpRights = "http://ns.adobe.com/xap/1.0/rights/"> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"> 
    <xmpMM:DocumentID>uuid:09EA7ABE-C48C-2FA1-A332-3B27B8FCFC0E</xmpMM:DocumentID> 
-   <xmpMM:InstanceID>uuid:FA1A79D4-84B2-A7EE-AD22-EA1250401540</xmpMM:InstanceID> 
+   <xmpMM:InstanceID>uuid:A559D18F-389D-A3B2-D136-47F028501202</xmpMM:InstanceID> 
   </rdf:Description> 
  </rdf:RDF> 
 </x:xmpmeta> 

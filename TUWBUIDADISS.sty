@@ -84,6 +84,9 @@ afterskip=1em,
 font=\normalfont\fontsize{15}{16}\selectfont\bfseries
 ]{subsection}
 
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\clearpage\oldsubsection}
+
 \RedeclareSectionCommand[
 beforeskip=0.5ex plus 0.2ex minus 0.2ex,
 afterskip=0.6em,
