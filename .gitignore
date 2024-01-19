@@ -8,6 +8,7 @@
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+*.xmpi
 
 # LaTeX biber
 *.bbl
@@ -29,3 +30,5 @@ out/
 
 *.lof
 *.lot
+
+*.xmpi

@@ -1,0 +1,262 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{customtkinter} \PYG{k}{as} \PYG{n+nn}{ctk}
+\PYG{k+kn}{from} \PYG{n+nn}{PIL} \PYG{k+kn}{import} \PYG{n}{Image}
+\PYG{k+kn}{import} \PYG{n+nn}{tkinter}
+\PYG{k+kn}{from} \PYG{n+nn}{tkinter} \PYG{k+kn}{import} \PYG{n}{Canvas}
+\PYG{k+kn}{import} \PYG{n+nn}{modbus}
+\PYG{k+kn}{import} \PYG{n+nn}{globals\PYGZus{}}
+\PYG{k+kn}{import} \PYG{n+nn}{usb\PYGZus{}detection}
+\PYG{k+kn}{import} \PYG{n+nn}{RPi.GPIO} \PYG{k}{as} \PYG{n+nn}{GPIO}
+\PYG{k+kn}{import} \PYG{n+nn}{time}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+
+\PYG{k}{if} \PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}DISPLAY\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{)} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}\PYG{p}{:} \PYG{c+c1}{\PYGZsh{} Uses screen if it doesnt find a screen}
+   \PYG{n}{os}\PYG{o}{.}\PYG{n}{environ}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}setitem\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}DISPLAY\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}:0.0\PYGZsq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Initial Setup}
+\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{set\PYGZus{}default\PYGZus{}color\PYGZus{}theme}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}blue\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Supported themes: green, dark\PYGZhy{}blue, blue}
+\PYG{n}{app\PYGZus{}width}\PYG{p}{,} \PYG{n}{app\PYGZus{}height} \PYG{o}{=} \PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+m+mi}{480}
+\PYG{n}{light\PYGZus{}mode} \PYG{o}{=} \PYG{k+kc}{True}  \PYG{c+c1}{\PYGZsh{} True for Light Mode and False for Dark Mode}
+
+\PYG{k}{if} \PYG{n}{light\PYGZus{}mode}\PYG{p}{:}
+    \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{set\PYGZus{}appearance\PYGZus{}mode}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Light\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{text\PYGZus{}color} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}EBEBEB\PYGZdq{}}
+    \PYG{n}{title\PYGZus{}color} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}11345D\PYGZdq{}}
+    \PYG{n}{frame\PYGZus{}color} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}496077\PYGZdq{}}
+
+    \PYG{c+c1}{\PYGZsh{} frame\PYGZus{}color = \PYGZdq{}\PYGZsh{}496077\PYGZdq{}  \PYGZsh{} blueish grey}
+    \PYG{c+c1}{\PYGZsh{} frame\PYGZus{}color = \PYGZdq{}\PYGZsh{}304D6D\PYGZdq{} \PYGZsh{}blue}
+    \PYG{c+c1}{\PYGZsh{} frame\PYGZus{}color = \PYGZdq{}\PYGZsh{}283233\PYGZdq{} \PYGZsh{}bösch dark grey}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{set\PYGZus{}appearance\PYGZus{}mode}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Dark\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{text\PYGZus{}color} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}242424\PYGZdq{}}
+    \PYG{n}{frame\PYGZus{}color} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}EBEBEB\PYGZdq{}}
+
+
+\PYG{c+c1}{\PYGZsh{} global globals.current\PYGZus{}page}
+\PYG{c+c1}{\PYGZsh{} globals.current\PYGZus{}page = 0}
+
+\PYG{k}{class} \PYG{n+nc}{TitleFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+        \PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{800}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{60}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+
+        \PYG{n}{title\PYGZus{}font} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFont}\PYG{p}{(}\PYG{n}{family}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Roboto\PYGZdq{}}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{700}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{45}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,}
+                                      \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{title\PYGZus{}color}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{title\PYGZus{}font}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.12}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{N}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}title}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{k}{class} \PYG{n+nc}{MeasurementFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+        \PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{770}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{55}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{n}{title\PYGZus{}color}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+
+        \PYG{n}{text\PYGZus{}font} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFont}\PYG{p}{(}\PYG{n}{family}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Roboto\PYGZdq{}}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{33}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{,}
+                                            \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{485}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{52}\PYG{p}{,}
+                                            \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,}
+                                            \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{W}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{text\PYGZus{}font}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.34}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{,}
+                                      \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{190}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{52}\PYG{p}{,}
+                                      \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,}
+                                      \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{text\PYGZus{}font}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.84}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+
+        \PYG{n}{canvas} \PYG{o}{=} \PYG{n}{Canvas}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{,}
+                        \PYG{n}{bg}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{n}{highlightthickness}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{canvas}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.67}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}text}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{)}
+
+
+\PYG{k}{class} \PYG{n+nc}{PageFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{n}{parameters}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+        \PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+m+mi}{515}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame} \PYG{o}{=} \PYG{n}{TitleFrame}\PYG{p}{(}
+            \PYG{n}{master}\PYG{o}{=}\PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{corner\PYGZus{}radius}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+        \PYG{k}{for} \PYG{n}{parameter} \PYG{o+ow}{in} \PYG{n}{parameters}\PYG{p}{:}
+            \PYG{n}{frame} \PYG{o}{=} \PYG{n}{MeasurementFrame}\PYG{p}{(}
+                \PYG{n}{master}\PYG{o}{=}\PYG{n}{master}\PYG{p}{,} \PYG{n}{measurement}\PYG{o}{=}\PYG{n}{parameter}\PYG{o}{.}\PYG{n}{description}\PYG{p}{,} \PYG{n}{value}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,} \PYG{n}{corner\PYGZus{}radius}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{frame}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{show\PYGZus{}frame}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{N}\PYG{p}{)}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{tkraise}\PYG{p}{()}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place\PYGZus{}forget}\PYG{p}{()}
+
+        \PYG{n}{spacing} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+        \PYG{k}{for} \PYG{n}{my\PYGZus{}frame} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{:}
+            \PYG{k}{if} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{:}
+                \PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{p}{(}
+                        \PYG{l+m+mf}{0.20} \PYG{o}{+} \PYG{n}{spacing}\PYG{p}{),} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+                \PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{tkraise}\PYG{p}{()}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place\PYGZus{}forget}\PYG{p}{()}
+            \PYG{n}{spacing} \PYG{o}{+=} \PYG{l+m+mf}{0.143}  \PYG{c+c1}{\PYGZsh{} 0.1335}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}title\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{set\PYGZus{}title}\PYG{p}{(}\PYG{n}{title}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{index}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} ZUM TESTEN, so werden Fehler abgefangen; wird aber eigentlich nicht benötigt!}
+        \PYG{k}{if} \PYG{n}{index} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{0} \PYG{o+ow}{and} \PYG{n}{index} \PYG{o}{\PYGZlt{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{):}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{[}\PYG{n}{index}\PYG{p}{]}\PYG{o}{.}\PYG{n}{set\PYGZus{}text}\PYG{p}{(}\PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+
+
+\PYG{k}{class} \PYG{n+nc}{App}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTk}\PYG{p}{):}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{all\PYGZus{}pages}\PYG{p}{,} \PYG{o}{*}\PYG{n}{args}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+        \PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{o}{*}\PYG{n}{args}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Bösch RLT Anzeige\PYGZdq{}}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{geometry}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{app\PYGZus{}width}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{x}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{app\PYGZus{}height}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{attributes}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}fullscreen\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{resizable}\PYG{p}{(}\PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{config}\PYG{p}{(}\PYG{n}{cursor}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}none\PYGZdq{}}\PYG{p}{)}
+
+        \PYG{n}{boesch\PYGZus{}logo} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkImage}\PYG{p}{(}\PYG{n}{light\PYGZus{}image}\PYG{o}{=}\PYG{n}{Image}\PYG{o}{.}\PYG{n}{open}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/home/pi/Documents/00\PYGZus{}boesch\PYGZus{}logo\PYGZus{}transparent.png\PYGZdq{}}\PYG{p}{),}
+                                   \PYG{n}{dark\PYGZus{}image}\PYG{o}{=}\PYG{n}{Image}\PYG{o}{.}\PYG{n}{open}\PYG{p}{(}
+                                       \PYG{l+s+s2}{\PYGZdq{}/home/pi/Documents/00\PYGZus{}boesch\PYGZus{}logo\PYGZus{}transparent\PYGZus{}dark.png\PYGZdq{}}\PYG{p}{),}
+                                   \PYG{n}{size}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{230}\PYG{p}{,} \PYG{l+m+mi}{230} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{/} \PYG{l+m+mi}{3}\PYG{p}{)))}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{img\PYGZus{}label} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{image}\PYG{o}{=}\PYG{n}{boesch\PYGZus{}logo}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{img\PYGZus{}label}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.915}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+
+        \PYG{k}{global} \PYG{n}{page\PYGZus{}frame\PYGZus{}list}
+        \PYG{n}{page\PYGZus{}frame\PYGZus{}list} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{k}{global} \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}
+        \PYG{n}{page\PYGZus{}indicator\PYGZus{}list} \PYG{o}{=} \PYG{p}{[]}
+
+        \PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}pages}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} Creates Frames based on the sensor data}
+            \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{PageFrame}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{o}{=}\PYG{n}{page}\PYG{o}{.}\PYG{n}{title}\PYG{p}{,}
+                                             \PYG{n}{parameters}\PYG{o}{=}\PYG{n}{page}\PYG{o}{.}\PYG{n}{measurements}\PYG{p}{))}
+
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{))}
+        \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page}\PYG{p}{]}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{True}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Diese Buttons werden später mit Physischen Tastern ersetzt!!!}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}self.last\PYGZus{}page\PYGZus{}button = ctk.CTkButton(}
+\PYG{l+s+sd}{            master=self, text=\PYGZdq{}Last Page\PYGZdq{}, width=50, command=last\PYGZus{}page, fg\PYGZus{}color=frame\PYGZus{}color)}
+\PYG{l+s+sd}{        self.last\PYGZus{}page\PYGZus{}button.place(relx=0.065, rely=0.93, anchor=ctk.CENTER)}
+
+\PYG{l+s+sd}{        self.next\PYGZus{}page\PYGZus{}button = ctk.CTkButton(}
+\PYG{l+s+sd}{            master=self, text=\PYGZdq{}Next Page\PYGZdq{}, width=50, command=next\PYGZus{}page, fg\PYGZus{}color=frame\PYGZus{}color)}
+\PYG{l+s+sd}{        self.next\PYGZus{}page\PYGZus{}button.place(relx=0.17, rely=0.93, anchor=ctk.CENTER)\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+        \PYG{c+c1}{\PYGZsh{} add page indicator responsiveness}
+        \PYG{n}{start\PYGZus{}x\PYGZus{}position} \PYG{o}{=} \PYG{l+m+mf}{0.975} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mf}{45.0}
+
+        \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{:}
+            \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)):}
+                \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkButton}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,} \PYG{n}{corner\PYGZus{}radius}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{,}
+                                                         \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{p}{(}
+                                                             \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}898989\PYGZdq{}} \PYG{k}{if} \PYG{n}{i} \PYG{o}{==} \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}D9D9D9\PYGZdq{}}\PYG{p}{)))}
+                \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}
+                    \PYG{n}{relx}\PYG{o}{=}\PYG{n}{start\PYGZus{}x\PYGZus{}position} \PYG{o}{+} \PYG{n}{i} \PYG{o}{/} \PYG{l+m+mf}{45.0}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.93}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}page\PYGZus{}title\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{page\PYGZus{}index}\PYG{p}{,} \PYG{n}{title}\PYG{p}{):}
+        \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{page\PYGZus{}index}\PYG{p}{]}\PYG{o}{.}\PYG{n}{set\PYGZus{}title\PYGZus{}at}\PYG{p}{(}\PYG{n}{title}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{set\PYGZus{}page\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{page\PYGZus{}index}\PYG{p}{,} \PYG{n}{measurement\PYGZus{}index}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} Wieder zum Fehler abfangen, eigentlich nicht nötig}
+        \PYG{k}{if} \PYG{n}{page\PYGZus{}index} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{0} \PYG{o+ow}{and} \PYG{n}{page\PYGZus{}index} \PYG{o}{\PYGZlt{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{):}
+            \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{page\PYGZus{}index}\PYG{p}{]}\PYG{o}{.}\PYG{n}{set\PYGZus{}text\PYGZus{}at}\PYG{p}{(}
+                \PYG{n}{measurement\PYGZus{}index}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{last\PYGZus{}page}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{2}\PYG{p}{:}
+        \PYG{k}{return}
+
+    \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{\PYGZhy{}=} \PYG{l+m+mi}{1}
+    \PYG{k}{if} \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)):}
+        \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}D9D9D9\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page}\PYG{p}{]}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}898989\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{k}{for} \PYG{n}{f} \PYG{o+ow}{in} \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{:}
+        \PYG{n}{f}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page}\PYG{p}{]}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}last page loaded\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{next\PYGZus{}page}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{2}\PYG{p}{:}
+        \PYG{k}{return}
+
+    \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{+=} \PYG{l+m+mi}{1}
+    \PYG{k}{if} \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{\PYGZgt{}=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{):}
+        \PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page} \PYG{o}{=} \PYG{l+m+mi}{0}
+
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)):}
+        \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}D9D9D9\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page}\PYG{p}{]}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZsh{}898989\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{k}{for} \PYG{n}{f} \PYG{o+ow}{in} \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{:}
+        \PYG{n}{f}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{globals\PYGZus{}}\PYG{o}{.}\PYG{n}{current\PYGZus{}page}\PYG{p}{]}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Next page loaded\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{last\PYGZus{}page\PYGZus{}button\PYGZus{}clicked}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{):}
+    \PYG{n}{last\PYGZus{}page}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{)}
+    \PYG{n}{close\PYGZus{}app}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{setup\PYGZus{}buttons}\PYG{p}{():}
+    \PYG{n}{last\PYGZus{}page\PYGZus{}button} \PYG{o}{=} \PYG{l+m+mi}{37}
+    \PYG{n}{next\PYGZus{}page\PYGZus{}button} \PYG{o}{=} \PYG{l+m+mi}{38}
+
+    \PYG{c+c1}{\PYGZsh{}GPIO.BOARD refers to physical pin numbers}
+    \PYG{c+c1}{\PYGZsh{}GPIO.BCM refers to GPIO pin numbers}
+
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setmode}\PYG{p}{(}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{BOARD}\PYG{p}{)}
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setup}\PYG{p}{(}\PYG{n}{last\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{IN}\PYG{p}{,} \PYG{n}{pull\PYGZus{}up\PYGZus{}down}\PYG{o}{=}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{PUD\PYGZus{}UP}\PYG{p}{)}
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{add\PYGZus{}event\PYGZus{}detect}\PYG{p}{(}\PYG{n}{last\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{FALLING}\PYG{p}{,} \PYG{n}{callback}\PYG{o}{=}\PYG{n}{last\PYGZus{}page\PYGZus{}button\PYGZus{}clicked}\PYG{p}{,} \PYG{n}{bouncetime}\PYG{o}{=}\PYG{l+m+mi}{300}\PYG{p}{)}
+
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setmode}\PYG{p}{(}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{BOARD}\PYG{p}{)}
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setup}\PYG{p}{(}\PYG{n}{next\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{IN}\PYG{p}{,} \PYG{n}{pull\PYGZus{}up\PYGZus{}down}\PYG{o}{=}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{PUD\PYGZus{}UP}\PYG{p}{)}
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{add\PYGZus{}event\PYGZus{}detect}\PYG{p}{(}\PYG{n}{next\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{FALLING}\PYG{p}{,} \PYG{n}{callback}\PYG{o}{=}\PYG{n}{next\PYGZus{}page}\PYG{p}{,} \PYG{n}{bouncetime}\PYG{o}{=}\PYG{l+m+mi}{300}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}GPIO.add\PYGZus{}event\PYGZus{}detect(last\PYGZus{}page\PYGZus{}button, GPIO.FALLING, callback=close\PYGZus{}app, bouncetime=300)}
+
+
+\PYG{k}{def} \PYG{n+nf}{close\PYGZus{}app}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} for testing purposes, to close the program on long button press}
+    \PYG{n}{start\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()}
+    \PYG{k}{while} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{input}\PYG{p}{(}\PYG{n}{channel}\PYG{p}{)} \PYG{o}{==} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{LOW}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{}time.sleep(0.1)}
+        \PYG{n}{elapsed\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()} \PYG{o}{\PYGZhy{}} \PYG{n}{start\PYGZus{}time}
+        \PYG{k}{if} \PYG{n}{elapsed\PYGZus{}time} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{5}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Button pressed for more than 5 seconds. Exiting.\PYGZdq{}}\PYG{p}{)}
+            \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{cleanup}\PYG{p}{()}
+            \PYG{n}{app}\PYG{o}{.}\PYG{n}{quit}\PYG{p}{()}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZdq{}}\PYG{p}{:}
+    \PYG{n}{copy\PYGZus{}error} \PYG{o}{=} \PYG{n}{usb\PYGZus{}detection}\PYG{o}{.}\PYG{n}{usb\PYGZus{}routine}\PYG{p}{()}
+    \PYG{n}{log\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}/home/pi/Documents/startup\PYGZus{}log.txt\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}w\PYGZsq{}}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{copy\PYGZus{}error}\PYG{p}{:}
+        \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Copy error happened}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{exit}
+    \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}No error happened}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{all\PYGZus{}pages} \PYG{o}{=} \PYG{n}{modbus}\PYG{o}{.}\PYG{n}{load\PYGZus{}config}\PYG{p}{()}
+    \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Config loaded}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{global} \PYG{n}{app}
+    \PYG{n}{app} \PYG{o}{=} \PYG{n}{App}\PYG{p}{(}\PYG{n}{all\PYGZus{}pages}\PYG{p}{)}
+    \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}App started}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{setup\PYGZus{}buttons}\PYG{p}{()}
+    \PYG{n}{modbus}\PYG{o}{.}\PYG{n}{data\PYGZus{}threading}\PYG{p}{(}\PYG{n}{app}\PYG{p}{)}
+    \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Modbusthreading started}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{log\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+    \PYG{c+c1}{\PYGZsh{} Runs the app}
+    \PYG{n}{app}\PYG{o}{.}\PYG{n}{mainloop}\PYG{p}{()}
+\end{Verbatim}

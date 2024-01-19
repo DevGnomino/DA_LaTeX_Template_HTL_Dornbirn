@@ -23,7 +23,7 @@
 %% ========== TITLE INFORMATION ==========
 \newcommand{\thesistype}{DA} 
 \newcommand{\thesislanguage}{de-AT}
-\newcommand{\thesistitle}{Entwicklung und Dokumentation einer kostengünstigen Anzeigelösung für Lüftungsanlagen auf Basis des "Modbus"-Protokolls}
+\newcommand{\thesistitle}{Entwicklung einer Anzeigelösung für Lüftungsanlagen auf Basis des "Modbus"-Protokolls}
 \newcommand{\fenkart}{Lukas Fenkart}
 \newcommand{\mangeng}{Luca jerome Mangeng}
 \newcommand{\pezze}{Damiano Pezzè}
@@ -39,21 +39,13 @@
 %\setcapindent{0em} %% influences captions layout
 %%
 %% ========== Key Words ==========
-%%
-%% Geben Sie beim Befehl \Keywords einige Key Words ein und 
-%% trennen Sie diese mit dem Befehl \sep%%
 \begin{filecontents}[overwrite]{\jobname.xmpdata}
 \Language{\thesislanguage}
 \Title{\thesistitle}
-\Keywords{diploma thesis\sep template\sep LaTeX}
+\Keywords{Diplomarbeit\sep \sep LaTeX}
 \end{filecontents}
 
 %% use biblatex and biber for bibliography
-%% customize options as you like
-%% style=numeric-comp ... [1]
-%% style=authoryear ... Mang 1998 / use \textcite{} ... Mang (1998)
-%%
-
 \usepackage[style=numeric-comp,backend=biber,maxcitenames=2]{biblatex}
 \ExecuteBibliographyOptions{%
   giveninits=false,maxbibnames=99}%
@@ -107,14 +99,13 @@ list-final-separator={ und }}
 
 \tableofcontents
 
-\include{00-Beispiele}
 \include{Einleitung}
 \include{Planung}
 \include{Umsetzung}
 \include{Projektmanagement}
 \include{Résumé}
 
-
+\include{00-Beispiele}
 
 \minisec{Zitierbeispiele entsprechend DIN ISO 690}
 
@@ -140,8 +131,7 @@ Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: Schranz
 \printbibliography
 \listoffigures
 \listoftables
-\listoflistings 
-\printacronyms
+\printacronyms[name=Abkürzungen]
 % Für Python code im Anhang
 %\lstinputlisting{source_filename.py}
 

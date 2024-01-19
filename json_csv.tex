@@ -1,39 +1,56 @@
-\subsection{\acs{json} und \acs{csv}}
-\paragraph{Was ist \acs{csv}?}
-\acf{csv} ist ein systemunabhängiges Format für Klartextdateien. \acs{csv} Dateien dienen zum Speichern und Übertragen von strukturierten Daten, hauptsächlich Tabellen oder Listen, wobei durch die Verkettung von mehreren \acs{csv} Dateien oder mithilfe von zusätzlichen Regeln auch verschachtelte Objekte gespeichert werden können. \cite{FuchsMediaSolutions:o.J.}
+\subsection{Was ist \acs{csv}?}
+\acf{csv} ist ein systemunabhängiges Format für Klartextdateien. \acs{csv} Dateien dienen zum Speichern und Übertragen von strukturierten Daten, hauptsächlich Tabellen oder Listen, wobei durch die Verkettung von mehreren \acs{csv} Dateien oder mithilfe von zusätzlichen Regeln auch verschachtelte Objekte gespeichert werden können. Die hauptsächlichen Anwendungsbereiche von \acs{csv} Dateien sind zum Importieren und Exportieren von Daten aus Datenbanken oder die Migration von Tabellendaten zwischen Programmen. \cite{FuchsMediaSolutions:o.J.}
 
-Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler \cite{IBM:1972} unterstützt wurde. Trotzdem gibt es gegenwärtig für \acs{csv} keine formelle Spezifikation. Mit dem \acs{rfc} 4180 \cite{Shafranovich:2005} aus dem Jahre 2005 existiert ein erster Versuch einer inoffiziellen Definition, welche mittlerweile weit verbreitet ist. Durch dieses Dokument wird das \acf{mime} "text/csv"\ für das \acs{csv} Format registriert. Es folgen die wesentlichen Merkmale aus der Definition des \acs{rfc} 4180:
+Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler \cite{IBM:1972} unterstützt wurde. Trotz der langen Existenz gibt es gegenwärtig für \acs{csv} keine formelle Spezifikation. Mit dem \acs{rfc} 4180 \cite{Shafranovich:2005} aus dem Jahre 2005 existiert ein erster Versuch einer inoffiziellen Definition, welche mittlerweile weit verbreitet ist. Durch dieses Dokument wird das \acf{mime} "text/csv"\ für das \acs{csv} Format registriert. Es folgen die wesentlichen Merkmale aus der Definition des \acs{rfc} 4180:
 
 \begin{enumerate}{}
 	
-	\item Jedem Datensatz steht eine Zeile zu, die mit einem Zeilenumbruch (\ac{crlf}) beendet wird. Dabei muss der letzte Datensatz nicht unbedingt einen Zeilenumbruch am Ende haben. \zB 
+	\item Jedem Datensatz steht eine Zeile zu, die mit einem Zeilenumbruch (\ac{crlf}) beendet wird. Ein Zeilenumbruch am Ende des letzten Datensatzes ist optional. \zB 
 	\begin{lstlisting}
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz CRLF
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz CRLF
 	\end{lstlisting}
 	oder
 	\begin{lstlisting}
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz
 	\end{lstlisting}
 	
-	\item Am Anfang eines \acs{csv} Dokumentes kann es eine Kopfzeile geben. Diese hat das Format eines normalen Datensatzes und beinhaltet Namen für die Felder (Spalten). Die Anzahl der Felder sollte für Kopfzeile und Datensätze gleich sein. \zB
+	\item Am Anfang eines \acs{csv} Dokumentes kann es eine Kopfzeile geben. Diese hat das Format eines normalen Datensatzes und beinhaltet Namen für die Spalten (Felder). Die Anzahl der Spalten sollte für Kopfzeile und Datensätze gleich sein. \zB
 	\begin{lstlisting}
-		spaltenname_1, spaltenname_2, spaltenname_3 CRLF
-		aaa, bbb, ccc CRLF
-		xxx, yyy, zzz CRLF
+	spaltenname_1, spaltenname_2, spaltenname_3 CRLF
+	aaa, bbb, ccc CRLF
+	xxx, yyy, zzz CRLF
 	\end{lstlisting}
 	
-	\item Sowohl in den Datensätzen als auch in der Kopfzeile kann es ein oder mehrere Felder geben, die jeweils immer durch einen Beistrich (\acs{engl} comma) separiert werden. Am Ende einer Zeile bedarf es keinem Beistrich. Abstände sind Teil eines Feldes und müssen berücksichtigt werden.
+	\item Sowohl in den Datensätzen als auch in der Kopfzeile kann es eine oder mehrere Spalten geben, die jeweils immer durch einen Beistrich (\acs{engl} comma) separiert werden. Am Ende einer Zeile bedarf es keinem Beistrich. Abstände sind Teil eines Feldes und müssen berücksichtigt werden. (Anmerkung: Auch wenn das eigentliche Format Beistriche für die Feldtrennung vorsieht, werden oft andere Zeichen wie \zB Semikolons verwendet.)
 	
-	\item Jedes Feld kann in Anführungszeichen eingeschlossen sein. Bei Feldern, die Beistriche, Zeilenumbrüche oder Anführungszeichen beinhaltet, müssen jedoch verwendet werden. \zB
+	\item Jedes Feld kann in Anführungszeichen eingeschlossen sein und darf dann auch Beistriche, Zeilenumbrüche oder Anführungszeichen beinhaltet. \zB
 	\begin{lstlisting}
-		"aaa","b CRLF
-		bb","ccc" CRLF
-		xxx,yyy,zzz
+	"aaa","b CRLF
+	bb","ccc" CRLF
+	xxx,yyy,zzz
 	\end{lstlisting}
 	
 \end{enumerate}
 
+Da es bei \acs{csv} keine festen Vorgaben beim Datenformat gibt, ist es die Verantwortung der Benutzer sich auf eine Formatierung zu einigen. Außerdem führt das zu Problemen bei Zeit- und Datumsangaben oder Verwendung von Sonderzeichen. Eine weitere Hürde ist die fehlende explizite Angabe des verwendeten Zeichensatzes, womit \zB Umlaute fehlerhaft dargestellt werden. \cite{FuchsMediaSolutions:o.J.}
 
+\subsection{Was ist \acs{json}?}
+\acf{json} ist ein Textformat zum Speichern von strukturierten Daten. Es ist so konzipiert, dass es sowohl für Menschen einfach zu lesen und schreiben als auch für Maschinen einfach zu parsen und generieren ist. \acs{json} ist zwar programmiersprachenunabhängig, folgt jedoch vielen Konventionen der C-basierten Sprachen, was es gut für den Datenaustausch zwischen Programmiersprachen macht. Die zwei wichtigsten Strukturen auf denen \acs{json} aufbaut, sind eine geordnete Liste von Werten und Name/Wert (Key/Value) Paare. \cite{json_org:o.J.} 
 
+\acs{json} wird derzeit von zwei Spezifikation definiert, ECMA-404 \cite{ECMA:2017} und RFC 8259 \cite{Bray:2017}. Dabei ist das Ziel, dass sich nur die Beschreibung des Formats unterscheidet, aber die \acs{json} Grammatik (Syntax) beider Spezifikationen ident ist. Folgend wird sich auf die Beschreibung der offiziellen JSON.org Website \cite{json_org:o.J.} und somit auf ECMA-404 \cite{ECMA:2017} bezogen.
+
+In \acs{json} gibt es:
+\begin{itemize}
+	\item \textbf{Werte} description
+	
+	\item \textbf{Objekte} description
+	
+	\item \textbf{Arrays} description
+	
+	\item \textbf{Zeichenketten} description
+\end{itemize}
+
+\subsection{\acs{json} und \acs{csv} - Vergleich und Selektion}
+\cite{SQLizer:2017}
