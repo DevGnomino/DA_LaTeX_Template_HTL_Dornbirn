@@ -2379,14 +2379,6 @@
     <bcf:citekey order="13" intorder="1">Struckmann:07</bcf:citekey>
     <bcf:citekey order="14" intorder="1">Struckmann:07</bcf:citekey>
     <bcf:citekey order="15" intorder="1">Struckmann:07</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">DIN-ISO-690:2013</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">Kohm:20</bcf:citekey>
-    <bcf:citekey order="17" intorder="2">Voss:22</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">Kohm:20</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">Kohm:20</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">Voss:22</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">Schranz:22</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">Schranz:22</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

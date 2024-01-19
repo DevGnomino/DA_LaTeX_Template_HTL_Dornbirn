@@ -1,7 +1,11 @@
 \acswitchoff 
 \babel@toc {ngerman}{}\relax 
+\addvspace {10\p@ }
 \babel@toc {ngerman}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \babel@toc {english}{}\relax 
+\addvspace {10\p@ }
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -9,7 +13,12 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1}{\ignorespaces Ergebnisse der schriftlichen Prüfung }}{26}{table.caption.11}%
-\contentsline {table}{\numberline {2}{\ignorespaces Messwerte der bauphysikalischen Untersuchung }}{27}{table.6.2}%
-\contentsline {table}{\numberline {3}{\ignorespaces Beispiel für einen threeparttable}}{27}{table.caption.12}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2}{\ignorespaces Messwerte der bauphysikalischen Untersuchung }}{32}{table.7.2}%
+\contentsline {table}{\numberline {2}{\ignorespaces Messwerte der bauphysikalischen Untersuchung (Fortsetzung)}}{33}{table.7.2}%
+\contentsline {table}{\numberline {1}{\ignorespaces Ergebnisse der schriftlichen Prüfung }}{34}{table.caption.16}%
+\contentsline {table}{\numberline {3}{\ignorespaces Beispiel für einen threeparttable}}{34}{table.caption.17}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
