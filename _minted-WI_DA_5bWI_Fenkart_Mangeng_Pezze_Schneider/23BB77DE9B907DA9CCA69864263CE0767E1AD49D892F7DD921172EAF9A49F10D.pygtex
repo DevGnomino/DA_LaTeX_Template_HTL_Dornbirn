@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}sudo umount /dev/\PYGZdq{}} \PYG{o}{+} \PYG{n}{port}\PYG{p}{)}
+	\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}sudo mount /dev/\PYGZdq{}} \PYG{o}{+} \PYG{n}{port} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{} /home/pi/Documents/Config\PYGZdq{}}\PYG{p}{)}
+	
+	\PYG{n}{error\PYGZus{}free} \PYG{o}{=} \PYG{n}{check\PYGZus{}if\PYGZus{}files\PYGZus{}exists}\PYG{p}{(}\PYG{n}{usb\PYGZus{}config\PYGZus{}path}\PYG{p}{,} \PYG{n}{usb\PYGZus{}device\PYGZus{}config\PYGZus{}path}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{)}
+	\PYG{k}{if} \PYG{n}{error\PYGZus{}free}\PYG{p}{:}
+		\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}cp \PYGZhy{}r \PYGZti{}/Documents/Config/RLT\PYGZus{}Config \PYGZti{}/Documents/\PYGZdq{}}\PYG{p}{)}
+	\PYG{k}{else}\PYG{p}{:}
+		\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}sudo umount /dev/\PYGZdq{}} \PYG{o}{+} \PYG{n}{port}\PYG{p}{)}
+		\PYG{c+c1}{\PYGZsh{}os.system(\PYGZdq{}sudo eject /dev/\PYGZdq{} + port)}
+		\PYG{c+c1}{\PYGZsh{}os.system(\PYGZdq{}udisk \PYGZhy{}\PYGZhy{}detach /dev/\PYGZdq{} + port)}
+		\PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+		
+	\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}sudo umount /dev/\PYGZdq{}} \PYG{o}{+} \PYG{n}{port}\PYG{p}{)}
+	\PYG{c+c1}{\PYGZsh{}os.system(\PYGZdq{}sudo eject /dev/\PYGZdq{} + port)}
+	\PYG{c+c1}{\PYGZsh{}os.system(\PYGZdq{}udisk \PYGZhy{}\PYGZhy{}detach /dev/\PYGZdq{} + port)}
+	\PYG{k}{return} \PYG{l+m+mi}{0}
+\end{Verbatim}

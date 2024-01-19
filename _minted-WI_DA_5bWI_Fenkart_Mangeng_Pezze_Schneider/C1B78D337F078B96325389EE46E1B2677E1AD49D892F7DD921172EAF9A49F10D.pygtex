@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{port} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+	\PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
+		\PYG{k}{if} \PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}mount | grep sda1\PYGZdq{}}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{256}\PYG{p}{):}
+			\PYG{n}{port} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}sda1\PYGZdq{}}
+			\PYG{k}{break}
+		\PYG{k}{elif} \PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}mount | grep sdb1\PYGZdq{}}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{256}\PYG{p}{):}
+			\PYG{n}{port} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}sdb1\PYGZdq{}}
+			\PYG{k}{break}
+		\PYG{k}{elif} \PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}mount | grep sdc1\PYGZdq{}}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{256}\PYG{p}{):}
+			\PYG{n}{port} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}sdc1\PYGZdq{}}
+			\PYG{k}{break}
+		\PYG{k}{elif} \PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{system}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}mount | grep sdd1\PYGZdq{}}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{256}\PYG{p}{):}
+			\PYG{n}{port} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}sdd1\PYGZdq{}}
+			\PYG{k}{break}
+		
+		\PYG{k}{if} \PYG{p}{(}\PYG{n}{check\PYGZus{}if\PYGZus{}files\PYGZus{}exists}\PYG{p}{(}\PYG{n}{config\PYGZus{}path}\PYG{p}{,} \PYG{n}{device\PYGZus{}config\PYGZus{}path}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{)):}
+			\PYG{k}{return} \PYG{l+m+mi}{1}
+			
+		\PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
+\end{Verbatim}

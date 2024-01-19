@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{usb\PYGZus{}routine}\PYG{p}{():}
+	\PYG{n}{copy\PYGZus{}error} \PYG{o}{=} \PYG{n}{copy\PYGZus{}from\PYGZus{}usb}\PYG{p}{()}
+	\PYG{k}{if} \PYG{n}{copy\PYGZus{}error} \PYG{o}{==} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{:}
+		\PYG{k}{return} \PYG{k+kc}{True}
+	\PYG{k}{elif} \PYG{n}{copy\PYGZus{}error} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+		\PYG{n}{start\PYGZus{}window}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Config Dateien wurden kopiert. Entferne nun den USB\PYGZdq{}}\PYG{p}{)}
+	\PYG{k}{elif} \PYG{n}{copy\PYGZus{}error} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+		\PYG{n}{start\PYGZus{}window}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Kein USB\PYGZhy{}Stick gefunden und Config bereits vorhanden\PYGZdq{}}\PYG{p}{)}
+	\PYG{k}{return} \PYG{k+kc}{False}
+\end{Verbatim}
