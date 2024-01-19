@@ -13,6 +13,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+<<<<<<< HEAD
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -21,4 +22,9 @@
 \contentsline {table}{\numberline {2}{\ignorespaces Messwerte der bauphysikalischen Untersuchung (Fortsetzung)}}{33}{table.7.2}%
 \contentsline {table}{\numberline {1}{\ignorespaces Ergebnisse der schriftlichen Prüfung }}{34}{table.caption.16}%
 \contentsline {table}{\numberline {3}{\ignorespaces Beispiel für einen threeparttable}}{34}{table.caption.17}%
+=======
+\contentsline {table}{\numberline {1}{\ignorespaces Ergebnisse der schriftlichen Prüfung }}{34}{table.caption.15}%
+\contentsline {table}{\numberline {2}{\ignorespaces Messwerte der bauphysikalischen Untersuchung }}{35}{table.6.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces Beispiel für einen threeparttable}}{35}{table.caption.16}%
+>>>>>>> 3a3d9247e2dc92c458916d9378ae05c68f646e61
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
