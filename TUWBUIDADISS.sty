@@ -14,6 +14,9 @@
 \KOMAoptions{parskip=false,headinclude=true,
 captions=tableheading,numbers=noenddot}
 
+% Custom Abstand nach Absätzen
+\setlength{\parskip}{0.3\baselineskip}
+
 \renewcommand*{\chaptermarkformat}{%
   \thechapter\autodot\enskip%
 }  % no "Chapter" (or "Kapitel" in header)
@@ -25,7 +28,7 @@ captions=tableheading,numbers=noenddot}
 \RequirePackage[babel]{microtype}     % improves the micro-typographic layout
 \RequirePackage[english,ngerman]{babel} %% englisch and austrian language
 \PassOptionsToPackage{table}{xcolor}
-% \RequirePackage{xcolor} %% improvement to the color package, included by pdfx 
+\RequirePackage{xcolor} %% improvement to the color package, included by pdfx 
 % muss jetzt vor pdfx geladen werden
 
 \input{glyphtounicode.tex}    %Part of modern distribution
@@ -75,13 +78,15 @@ automark
 \RedeclareSectionCommand[
 beforeskip=1ex plus 0.2ex minus 0.2ex,
 afterskip=1em,
-font=\normalfont\fontsize{16}{20}\selectfont\bfseries
+font=\normalfont\fontsize{16}{20}\selectfont\bfseries,
+afterindent=false
 ]{section}
 
 \RedeclareSectionCommand[
 beforeskip=0.5ex plus 0.2ex minus 0.2ex,
 afterskip=1em,
-font=\normalfont\fontsize{15}{16}\selectfont\bfseries
+font=\normalfont\fontsize{15}{16}\selectfont\bfseries,
+afterindent=false
 ]{subsection}
 
 \let\oldsubsection\subsection
@@ -90,13 +95,15 @@ font=\normalfont\fontsize{15}{16}\selectfont\bfseries
 \RedeclareSectionCommand[
 beforeskip=0.5ex plus 0.2ex minus 0.2ex,
 afterskip=0.6em,
-font=\normalfont\fontsize{14}{16}\selectfont\bfseries
+font=\normalfont\fontsize{14}{16}\selectfont\bfseries,
+afterindent=false
 ]{subsubsection}
 
 \RedeclareSectionCommand[
 beforeskip=1.5ex plus 0.2ex minus 0.2ex,
 afterskip=0.3em,
-font=\normalfont\fontsize{13}{14}\selectfont\bfseries
+font=\normalfont\fontsize{13}{14}\selectfont\bfseries,
+afterindent=false
 ]{paragraph}
 
 
@@ -113,6 +120,12 @@ font=\normalfont\fontsize{13}{14}\selectfont\bfseries
 %Zeilenabstand
 \RequirePackage{setspace}
 \onehalfspacing
+
+% Falls man Word equivalent will. Ist eigentlich mehr als 1,5 Zeilenabstand
+%\setstretch{1.5}
+
+% Für große Abstände
+%\doublespacing
 
 %Durchgehende Nummerierung für Abbildungen und Tabellen
 \counterwithout{figure}{chapter}

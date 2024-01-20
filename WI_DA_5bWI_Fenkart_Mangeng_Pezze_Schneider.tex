@@ -85,17 +85,20 @@ list-final-separator={ und }}
 \begin{document}       %% start of the document
 \maketitle             %% places the title with above information
 
-\cleardoublepage
-\selectlanguage{ngerman}  %% for german abstract
-\include{00-Kurzfassung}      %% german abstract
 
-\cleardoublepage
-\selectlanguage{english}    %% for english abstract
-\include{00-abstract}         %% english abstract
 
 %\cleardoublepage
 \selectlanguage{ngerman} 
 \pagestyle{scrheadings} 
+
+\include{Vorwort}
+\include{Danksagung}
+\selectlanguage{english} 
+\include{Abstract}
+\selectlanguage{ngerman} 
+\include{Institutionen}
+\include{Impressum}
+\include{Hinweise}
 
 \tableofcontents
 
@@ -103,28 +106,29 @@ list-final-separator={ und }}
 \include{Planung}
 \include{Umsetzung}
 \include{Projektmanagement}
+\include{Tools}
 \include{Résumé}
 
 \include{00-Beispiele}
 
-\minisec{Zitierbeispiele entsprechend DIN ISO 690}
-
-Die DIN~ISO~690~\cite{DIN-ISO-690:2013} gibt Hinweise zur vollständigen Quellenangabe.
-Das folgende Beispiele ist dieser Norm entlehnt und angepasst:
+%\minisec{Zitierbeispiele entsprechend DIN ISO 690}
 %
-\begin{quotation}
-Einige Standardwerke \cite{Kohm:20,Voss:22} geben einen guten Überblick über \LaTeX{}.
-\textcite{Kohm:20} hat die Klassen der KOMA-Script-Reihe entwickelt, die die \enquote{typografischen Gepflogenheiten eines europäischen Layouts berücksichtigen}~\cite[S.~64]{Voss:22}.
-Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: \textcite{Schranz:22}.
-\end{quotation}
-
-Nun der selbe Text in Harvard Citation Style (jedoch ohne \LaTeX-Befehle -- diese wären die selben wie zuvor, es müsste nur der Zitierstil geändert werden):
+%Die DIN~ISO~690~\cite{DIN-ISO-690:2013} gibt Hinweise zur vollständigen Quellenangabe.
+%Das folgende Beispiele ist dieser Norm entlehnt und angepasst:
 %
-\begin{quotation}
-Einige Standardwerke (Kohm 2020, Voss 2022) geben einen guten Überblick über \LaTeX{}.
-Kohm (2020) hat die Klassen der KOMA-Script-Reihe entwickelt, die die \enquote{typografischen Gepflogenheiten eines europäischen Layouts berücksichtigen}~(Voss 2022, S.~64).
-Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: Schranz et al. (2022).
-\end{quotation}
+%\begin{quotation}
+%Einige Standardwerke \cite{Kohm:20,Voss:22} geben einen guten Überblick über \LaTeX{}.
+%\textcite{Kohm:20} hat die Klassen der KOMA-Script-Reihe entwickelt, die die \enquote{typografischen Gepflogenheiten eines europäischen Layouts berücksichtigen}~\cite[S.~64]{Voss:22}.
+%Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: \textcite{Schranz:22}.
+%\end{quotation}
+%
+%Nun der selbe Text in Harvard Citation Style (jedoch ohne \LaTeX-Befehle -- diese wären die selben wie zuvor, es müsste nur der Zitierstil geändert werden):
+%%
+%\begin{quotation}
+%Einige Standardwerke (Kohm 2020, Voss 2022) geben einen guten Überblick über \LaTeX{}.
+%Kohm (2020) hat die Klassen der KOMA-Script-Reihe entwickelt, die die \enquote{typografischen Gepflogenheiten eines europäischen Layouts berücksichtigen}~(Voss 2022, S.~64).
+%Daneben empfehlen wir -- nona -- unser Buch zu \LaTeX{}, Excel und Word: Schranz et al. (2022).
+%\end{quotation}
 
 
 \appendix
