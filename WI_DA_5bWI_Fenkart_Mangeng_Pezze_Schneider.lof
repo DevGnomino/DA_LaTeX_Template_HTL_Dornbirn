@@ -13,19 +13,12 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-<<<<<<< HEAD
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{25}{figure.caption.14}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{30}{figure.caption.15}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{30}{figure.caption.15}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{30}{figure.caption.15}%
-=======
-\contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{27}{figure.caption.13}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{32}{figure.caption.14}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{32}{figure.caption.14}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{32}{figure.caption.14}%
->>>>>>> 3a3d9247e2dc92c458916d9378ae05c68f646e61
+\contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{33}{figure.caption.18}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{38}{figure.caption.19}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{38}{figure.caption.19}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{38}{figure.caption.19}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
