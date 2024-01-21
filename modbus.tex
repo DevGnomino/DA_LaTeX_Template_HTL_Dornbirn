@@ -6,7 +6,8 @@ Die offizielle Definition des Modbus Protokolls bezogen von der Modbus Organizat
 
 Der Modbus Standard definiert ein Application Layer Kommunikations Protokoll, dass sich auf Schicht 7 des OSI-Modells befindet. Es bietet Client/Server Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind.
 
-Entstehung einfach hier reinquetschen, weils nicht so viel ist
+Das Modbus-Protokoll wurde 1979 von Gould-Modicon entwickelt. Aufgrund seiner offenen Art (man kann jegliche Geräte als Client anhängen) und geringer Kosten, ist das Modbus-Protokoll immer noch ein Industriestandard. Besonders oft wird das Protokoll in Mess- und Regelsystemen eingesetzt (https://www.kvm-concepts.de/wiki/m/modbus/)
+https://www.kunbus.com/de/modbus 
 
 Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
 \begin{itemize}
@@ -17,7 +18,21 @@ Es gibt zwei verschiedene Einteilungen des Modbus Protokolls:
 \cite{Modbus_Organization_SL:2012}
 
 \subsection{Funktionsweise}
-Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Server geben. Es können jedoch beliebig viele Clients am Bus angeschlossen werden. Der Server kann die Kommunikation mit den einzelnen Clients initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Client hingegen kann keine Kommunikation beginnen.
+Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
+
+Modbus basiert auf Registern 
+
+Der Grundbestandteil des Modbus Protokolls sind ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das erweiterte Datenpaket wird \acf{apu} genannt.
+(BILD VON MODBUS SEITE EINBAUEN ZU ADU UND PDU)
+\begin{itemize}
+	\item \textbf{Additional Address:}
+	\item \textbf{Function Code:} Dieses Feld ist ein Byte groß. Die Werte reichen von 1 bis 255, wobei 128 bis 255 für Fehlercodes vorbehalten sind. Wenn der Server eine Nachricht vom Client bekommt, zeigt ihm dieses Feld an, was er mit den erhaltenen Daten machen soll. 
+	\item \textbf{Data:} In diesem Feld werden die Daten beigefügt. Außerdem sind  auch zusätzliche Informationen wie die Registeradressen und die Länge der Daten enthalten.
+	\item \textbf{Error Check:}
+\end{itemize}
+
+
+\cite{Modbus_Organization_AP:2012}
 
 \subsection{Vor- und Nachteile}
 
