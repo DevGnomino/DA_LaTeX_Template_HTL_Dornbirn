@@ -17,8 +17,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{33}{figure.caption.24}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{38}{figure.caption.25}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{38}{figure.caption.25}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{38}{figure.caption.25}%
+\contentsline {figure}{\numberline {1}{\ignorespaces HTL Dornbirn Logo (Quelle: \url {https://www.htldornbirn.at/})}}{34}{figure.caption.26}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Beispiel einer \texttt {subfigure}-Umgebung }}{39}{figure.caption.27}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Zitierproblematik}}{39}{figure.caption.27}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Logo der Fakultät für Bau- und Umweltingenieurwesen der TU Wien \caption@gobble {fig:logo-fakultät}}}{39}{figure.caption.27}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

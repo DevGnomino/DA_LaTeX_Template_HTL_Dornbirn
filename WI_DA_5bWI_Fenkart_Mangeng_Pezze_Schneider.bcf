@@ -2367,30 +2367,31 @@
     <bcf:citekey order="1" intorder="1">Modbus_Organization_AP:2012</bcf:citekey>
     <bcf:citekey order="2" intorder="1">Modbus_Organization_AP:2012</bcf:citekey>
     <bcf:citekey order="3" intorder="1">Modbus_Organization_SL:2012</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">Modbus_Organization_AP:2012</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">Python_Software_Foundation:o.J.</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">Sohom_Pramanick_gfg:2019</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">Ryte:2021</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Ceaseo:2020</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">Modbus_Organization_SL:2012</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">Modbus_Organization_AP:2012</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">Python_Software_Foundation:o.J.</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">Sohom_Pramanick_gfg:2019</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Ryte:2021</bcf:citekey>
     <bcf:citekey order="9" intorder="1">Ceaseo:2020</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">Chris_Liechti_pySerial:o.J.</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">Jonas_Berg_MiniModbus:2023</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">Jonas_Berg_MiniModbus_Git:o.J.</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">FuchsMediaSolutions:o.J.</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">IBM:1972</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">Shafranovich:2005</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">FuchsMediaSolutions:o.J.</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">json_org:o.J.</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">ECMA:2017</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">Bray:2017</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">json_org:o.J.</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">ECMA:2017</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">SQLizer:2017</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">Bier:09</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Ceaseo:2020</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">Chris_Liechti_pySerial:o.J.</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Jonas_Berg_MiniModbus:2023</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">Jonas_Berg_MiniModbus_Git:o.J.</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">FuchsMediaSolutions:o.J.</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">IBM:1972</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Shafranovich:2005</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">FuchsMediaSolutions:o.J.</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">json_org:o.J.</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">ECMA:2017</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">Bray:2017</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">json_org:o.J.</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">ECMA:2017</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">SQLizer:2017</bcf:citekey>
     <bcf:citekey order="24" intorder="1">Bier:09</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">Struckmann:07</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">Bier:09</bcf:citekey>
     <bcf:citekey order="26" intorder="1">Struckmann:07</bcf:citekey>
     <bcf:citekey order="27" intorder="1">Struckmann:07</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">Struckmann:07</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

@@ -20,15 +20,30 @@ Es gibt zwei verschiedene Einteilungen des Modbus Protokolls:
 \subsection{Funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
 
+Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte von 0 bis 255 einnehmen (siehe Tab.~\ref{tab:modbus_adressen}). 
+\begin{table}[h]
+	\caption{Modbus Adressen Einteilung \label{tab:modbus_adressen}}
+	\begin{tabularx}{\textwidth}{@{}c|c|X@{}}
+		\toprule
+		\textbf{Adressen} & \textbf{Bezeichnung} & \textbf{Beschreibung} \\
+		\midrule
+		0 & Broadcast & Hiermit sendet der Client eine Anfrage an alle Server am Bus. Diese senden keine Antwort zurück. \\
+		1 - 247 & Servers & Der Client kann damit einzelne Server ansprechen. Diese senden dem Client dann eine Antwort zurück. \\
+		248 - 255 & Reserviert & \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+\cite{Modbus_Organization_SL:2012}
+
 Modbus basiert auf Registern 
 
-Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das erweiterte Datenpaket wird \acf{adu} genannt.
+Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das gesamte Datenpaket wird \acf{adu} genannt.
 (BILD VON MODBUS SEITE EINBAUEN ZU ADU UND PDU)
 \begin{itemize}
 	\item \textbf{Additional Address:}
 	\item \textbf{Function Code:} Dieses Feld ist ein Byte groß. Die Werte reichen von 1 bis 255, wobei 128 bis 255 für Fehlercodes vorbehalten sind. Wenn der Server eine Nachricht vom Client bekommt, zeigt ihm dieses Feld an, was er mit den erhaltenen Daten machen soll. 
-	\item \textbf{Data:} In diesem Feld werden die Daten beigefügt. Außerdem sind  auch zusätzliche Informationen wie die Registeradressen und die Länge der Daten enthalten.
-	\item \textbf{Error Check:}
+	\item \textbf{Data:} In diesem Feld werden die Daten beigefügt. Außerdem sind auch zusätzliche Informationen wie die Registeradressen und die Länge der Daten enthalten. Teilweise kann dieses Feld auch keine Daten enthalten. In diesem Fall werden alle nötigen Informationen durch den Function Code geliefert.
+	\item \textbf{Error Check:} 
 \end{itemize}
 
 
