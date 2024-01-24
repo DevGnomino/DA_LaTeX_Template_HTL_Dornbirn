@@ -31,7 +31,7 @@ def usb_routine():
 	return False
 \end{pythoncode}
 
-Es folgt die Beschreibung der "copy\_from\_usb" Funktion. Es wird geschaut ob auf den sd-Ports ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird nun überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert im "check\_if\_files\_exists". Wenn ja, ist der Kopiervorgang abgeschlossen, wenn nein, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird für fünf Sekunden gestoppt, damit der Benutzer oder die Benutzerin genügend Zeit hat einen Datenträger einzufügen.
+Es folgt die Beschreibung der "copy\_from\_usb"\ Funktion. Es wird geschaut ob auf einem der sd-Ports ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird nun überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert im "check\_if\_files\_exists". Wenn ja, ist der Kopiervorgang abgeschlossen, wenn nein, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird für fünf Sekunden gestoppt, damit der Benutzer oder die Benutzerin genügend Zeit hat einen Datenträger einzufügen.
 
 \begin{pythoncode}
 	port = ""
@@ -55,7 +55,7 @@ Es folgt die Beschreibung der "copy\_from\_usb" Funktion. Es wird geschaut ob au
 		time.sleep(5)
 \end{pythoncode}
 
-Wenn ein Datenträger gefunden wurde, wird dieser Port gemountet. Checkt, ob dateien auf usb existieren. Wenn ja: copy; nein: stick auswerfen und fehlercode zurückgeben. Die beiden Funktionen "check\_if\_files\_exists"\ und \dq start\_window"\ sind im Codeanhang zu finden. 
+Wenn ein Datenträger gefunden wurde, wird dieser Port gemountet. Dieses mal wird überprüft, ob die Konfigurationsdateien auf dem Datenträger existieren. Wenn nicht, wird der Datenträger ausgeworfen und ein Fehlercode zurückgegeben. Ansonsten werden die Dateien kopiert und der Datenträger ausgeworfen. Die beiden Funktionen "check\_if\_files\_exists"\ und \dq start\_window"\ sind im Codeanhang zu finden. Beim Auswerfen wird manchmal eine Nachricht angezeigt, dass der Datenträger nicht ausgeworfen wurde. Dies kann ignoriert werden (Quelle angeben; falls das überhaupt stimmt).
 
 \begin{pythoncode}
 	os.system("sudo umount /dev/" + port)

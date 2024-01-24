@@ -7,7 +7,22 @@
 
 %EVTL NICHT MEHR ERLAUBT BZW. NICHT NÖTIG
 
+%Modbus - Client/Server
+In vielen älteren Dokumentation über das Modbus Protokoll finden sich veraltete Bezeichnungen. In dieser Diplomarbeit werden auf die alten Bezeichnungen verzichtet und die Neuen verwendet. In einzelnen Abbildungen können die veralteten Bezeichnungen jedoch noch zu finden sein (siehe Tab.~\ref{tab:modbus_bezeichnung}). 
+\begin{table}[h]
+	\caption{Modbus Bezeichnungen \label{tab:modbus_bezeichnung}}
+	\begin{tabularx}{\textwidth}{@{}c|c|X@{}}
+		\toprule
+		\textbf{Neu} & \textbf{Veraltet} & \textbf{Beschreibung} \\
+		\midrule
+		Client & Master & Initialisiert die Kommunikation und kann Daten von den Servern anfordern \\
+		Server & Slave & Wird vom Client angesprochen, um Daten zu senden und Handlungen auszuführen \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
 \addchap{Hinweis zur Textformatierung}
 %Hinweis zur Textformatierung (z.B. Fachbegriffe Kursiv schreiben)
 
 %Noch entscheiden: CSV-Dateien, JSON-Dateien usw. mit oder ohne Bindestrich?
+

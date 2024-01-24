@@ -1,23 +1,62 @@
-Der Modbus Standard definiert ein Application Layer Kommunikations Protokoll, dass sich auf Schicht 7 des OSI-Modells befindet. Es bietet Client/Server Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind. (direktes Zitat; offizielle Definition)
-Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Server geben. Es können jedoch beliebig viele Clients am Bus angeschlossen werden. Der Server kann die Kommunikation mit den einzelnen Clients initialisieren. Er kann ihnen Daten senden, aber auch von ihnen Daten anfordern. Ein Client hingegen kann keine Kommunikation beginnen.
+Die offizielle Definition des Modbus Protokolls bezogen von der Modbus Organization \cite{Modbus_Organization_AP:2012} lautet:
+\begin{quotation}
+	\emph{
+		MODBUS is an application layer messaging protocol, positioned at level 7 of the OSI model, which provides client/server communication between devices connected on different types of buses or networks.}
+\end{quotation}
+
+Der Modbus Standard definiert ein Application Layer Kommunikations Protokoll, dass sich auf Schicht 7 des OSI-Modells befindet. Es bietet Client/Server Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind.
+
+Das Modbus-Protokoll wurde 1979 von Gould-Modicon entwickelt. Aufgrund seiner offenen Art (man kann jegliche Geräte als Client anhängen) und geringer Kosten, ist das Modbus-Protokoll immer noch ein Industriestandard. Besonders oft wird das Protokoll in Mess- und Regelsystemen eingesetzt (https://www.kvm-concepts.de/wiki/m/modbus/)
+https://www.kunbus.com/de/modbus 
+
 Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
 \begin{itemize}
-\item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden.
-\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen.
+\item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
+\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es hier zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
 \end{itemize}
 \cite{Modbus_Organization_AP:2012}
 \cite{Modbus_Organization_SL:2012}
 
-\subsection{Entstehung des Modbus-Protokolls}
+\subsection{Funktionsweise}
+Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
+
+Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte von 0 bis 255 einnehmen (siehe Tab.~\ref{tab:modbus_adressen}). 
+\begin{table}[h]
+	\caption{Modbus Adressen Einteilung \label{tab:modbus_adressen}}
+	\begin{tabularx}{\textwidth}{@{}c|c|X@{}}
+		\toprule
+		\textbf{Adressen} & \textbf{Bezeichnung} & \textbf{Beschreibung} \\
+		\midrule
+		0 & Broadcast & Hiermit sendet der Client eine Anfrage an alle Server am Bus. Diese senden keine Antwort zurück. \\
+		1 - 247 & Servers & Der Client kann damit einzelne Server ansprechen. Diese senden dem Client dann eine Antwort zurück. \\
+		248 - 255 & Reserviert & \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+\cite{Modbus_Organization_SL:2012}
+
+Modbus basiert auf Registern 
+
+Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das gesamte Datenpaket wird \acf{adu} genannt.
+(BILD VON MODBUS SEITE EINBAUEN ZU ADU UND PDU)
+\begin{itemize}
+	\item \textbf{Additional Address:}
+	\item \textbf{Function Code:} Dieses Feld ist ein Byte groß. Die Werte reichen von 1 bis 255, wobei 128 bis 255 für Fehlercodes vorbehalten sind. Wenn der Server eine Nachricht vom Client bekommt, zeigt ihm dieses Feld an, was er mit den erhaltenen Daten machen soll. 
+	\item \textbf{Data:} In diesem Feld werden die Daten beigefügt. Außerdem sind auch zusätzliche Informationen wie die Registeradressen und die Länge der Daten enthalten. Teilweise kann dieses Feld auch keine Daten enthalten. In diesem Fall werden alle nötigen Informationen durch den Function Code geliefert.
+	\item \textbf{Error Check:} 
+\end{itemize}
+
+
+\cite{Modbus_Organization_AP:2012}
 
 \subsection{Vor- und Nachteile}
 
 
-\subsection{Funktionsweise}
-
-
-\subsection{Ausführungsarten (RTU, TCP, ASCII)}
-
+\subsection{Ausführungsarten}
+\paragraph{RTU}
+Funktioniert über die serielle Schnittstelle.
+\paragraph{ASCII}
+\paragraph{TCP}
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
 
