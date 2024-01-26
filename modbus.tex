@@ -1,5 +1,4 @@
-Das folgende Kapitel zum Modbus Protokoll bezieht sich auf \cite{Modbus_Organization_AP:2012}  \cite{Modbus_Organization_SL:2012}.
-Die offizielle Definition des Modbus Protokolls von der Modbus Organization \cite{Modbus_Organization_AP:2012} lautet:
+Das folgende Kapitel zum Modbus Protokoll bezieht sich auf \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. \newline Die offizielle Definition des Modbus Protokolls von der Modbus Organization \cite{Modbus_Organization_AP:2012} lautet:
 \begin{quotation}
 	\emph{
 		MODBUS is an application layer messaging protocol, positioned at level 7 of the OSI model, which provides client/server communication between devices connected on different types of buses or networks.}
@@ -50,19 +49,17 @@ Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese b
 	Unterschied zu Function Fehlercodes: Function Fehlercodes deuten an, dass die Aktion, die der Server ausführen sollte fehlschlug. Die Checksumme prüft auf Übertragungsfehler (Behauptung: Mit fakten belegen).
 \end{itemize}
 
-Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register werden im Speicher des jeweiligen Geräts in einem Block zusammengefasst. 
-
-Es gibt verschiedene Arten von Registern (siehe Tab.~\ref{tab:modbus_register_tabellen}). 
-\begin{table}[h]
+Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register werden im Speicher des jeweiligen Geräts in einem Block zusammengefasst. Es gibt verschiedene Registertypen, die sich in der Länge der gespeicherten Daten und dem Zugriffstyp unterscheiden (siehe Tab.~\ref{tab:modbus_register_tabellen}). \newline Ein Server kann dann die Register auf den Clients mittels Anfragen auslesen oder setzen. Clients können ihre eigenen Register setzen.
+\begin{table}[H]
 	\caption{Modbus Register Tabellen \label{tab:modbus_register_tabellen}}
-	\begin{tabularx}{\textwidth}{@{}c|c|c|X@{}}
+	\begin{tabularx}{\textwidth}{@{}l|c|c|X@{}}
 		\toprule
 		\textbf{Tabellenname} & \textbf{Datentyp} & \textbf{Zugriffstyp} & \textbf{Beschreibung} \\
 		\midrule
-		Input Discrete & Single bit & Read-Only & desc1 \\
-		Coils & Single bit & Read-Write & desc2 \\
-		Input Registers & 16-bit word & Read-Only & desc3 \\
-		Holding Registers & 16-bit word & Read-Write & desc4 \\
+		Input Discrete & Single bit & Read-Only & Durch \acf{io} veränderbar \\
+		Coils & Single bit & Read-Write & Durch Anfragen veränderbar \\
+		Input Registers & 16-bit word & Read-Only & Durch \acs{io} veränderbar \\
+		Holding Registers & 16-bit word & Read-Write & Durch Anfragen veränderbar \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
@@ -84,14 +81,18 @@ Oder die Blöcke sind zusammengeschaltet und können durch unterschiedliche Eing
 	\label{fig:modbus_register_one_block}
 \end{figure}
 
-\subsection{Ausführungsarten}
+\subsection{Übertragungsarten}
+Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt es RTU und ASCII. Auf einem seriellen Bus, müssen alle Geräte die selbe Übertragungsart verwenden. Der RTU Modus ist dabei der Standard, den alle Modbus Geräte implementieren müssen. ASCII kann optional verwendet werden.
 \paragraph{RTU}
-Funktioniert über die serielle Schnittstelle.
 Aufbau der Nachricht
+
 Start und Stopbits
 Parity bits
+Das wird auch in dieser Diplomarbeit verwendet.
 \paragraph{ASCII}
+Ähnlich wie RTU aber doch anders
 \paragraph{TCP}
+Über Netzwerk
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
 
