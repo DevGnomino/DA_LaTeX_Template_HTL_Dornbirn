@@ -65,7 +65,7 @@ Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register 
 \end{table}
 (https://ipc2u.de/artikel/wissenswertes/modbus-rtu-einfach-gemacht-mit-detaillierten-beschreibungen-und-beispielen/)
 
-Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Abb.~\ref{fig:modbus_register_many_blocks}):
+Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Siehe Abb.~\ref{fig:modbus_register_many_blocks}):
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\linewidth]{Bilder/Modbus_Data_Model_with_separate_block}
@@ -82,21 +82,43 @@ Oder die Blöcke sind zusammengeschaltet und können durch unterschiedliche Eing
 \end{figure}
 
 \subsection{Übertragungsarten}
-Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt es RTU und ASCII. Auf einem seriellen Bus, müssen alle Geräte die selbe Übertragungsart verwenden. Der RTU Modus ist dabei der Standard, den alle Modbus Geräte implementieren müssen. ASCII kann optional verwendet werden.
-\paragraph{RTU}
-Aufbau der Nachricht
+Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt es \acf{rtu} und \acf{ascii}. Auf einem seriellen Bus, müssen alle Geräte die selbe Übertragungsart verwenden. Der \acs{rtu} Modus ist dabei der Standard, den alle Modbus Geräte implementieren müssen. \acs{ascii} kann optional verwendet werden. \newline Es gibt auch noch \acs{tcp} und Modbus Plus. Diese beiden Übertragungsarten sind für diese Diplomarbeit nicht relevant. Daher wird auf eine genauere Beschreibung verzichtet.
 
-Start und Stopbits
-Parity bits
-Das wird auch in dieser Diplomarbeit verwendet.
-\paragraph{ASCII}
-Ähnlich wie RTU aber doch anders
-\paragraph{TCP}
-Über Netzwerk
+\paragraph{\acs{rtu} Modus}
+Bei dem \acs{rtu} Modus werden 8-bit Datenbytes nacheinander gesendet. In den meisten Programmen werden diese 8-Datenbits von 2 hexadezimalen Zahlen dargestellt. Die Übertragung muss dabei ununterbrochen stattfinden. Im Vergleich zu \acs{ascii} ist bei \acs{rtu} der Datendurchsatz höher. 
+
+Die Nachricht besteht aus 11 bits und wird folgendermaßen aufgeteilt:
+\begin{itemize}
+	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass eine Nachricht folgt
+	\item \textbf{8 Datenbits:} Die eigentlichen Daten
+	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen.   (https://www.ibm.com/docs/de/aix/7.3?topic=parameters-parity-bits) Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity.
+	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Nachricht endet. Wenn no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
+\end{itemize}
+
+Nach jeder Nachricht wird 3.5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch
+erkennt das Protokoll genau, wann die nächste Nachricht anfängt. 
+Bild von Seite
+
+Benutzt CRC: ganz kurze erklärung
+
+Diese Übertragungsart wird in den Geräten bei Bösch verwendet. Daher verwendet auch die RLT Anzeige den \acs{rtu} Modus.
+
+\paragraph{\acs{ascii} Modus}
+Ähnlich wie RTU aber doch anders: 2 ASCII characters versendet.
+Zum Einleiten einer neuen Nachricht wird hier ein ":" Zeichen gesendet. Dieses ist für diesen Zweck reserviert.
+(https://www.simplymodbus.ca/ASCII.htm)
+
+Die Nachricht besteht aus 10 bits und wird folgendermaßen aufgeteilt:
+\begin{itemize}
+	\item \textbf{1 Startbit}
+	\item \textbf{7 Datenbits}
+	\item \textbf{1 Paritätsbit}
+	\item \textbf{1/2 Stopbits}
+\end{itemize}
+
+Benutzt LRC: ganz kurze erklärung
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
 
 
-
-\subsection{Vor- und Nachteile}
-
+%\subsection{Vor- und Nachteile}

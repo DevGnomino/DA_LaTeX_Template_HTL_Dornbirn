@@ -15,6 +15,11 @@
 *.bcf
 *.blg
 
+*.lof
+*.lot
+
+*.xmpi
+*.xmpdata
 
 # LaTeX editor temporary files
 *.swp
@@ -28,8 +33,3 @@
 _build/
 out/
 
-*.lof
-*.lot
-
-*.xmpi
-*.xmpdata
