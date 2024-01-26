@@ -1,4 +1,4 @@
-Lüftungsgeräte beinhalten unterschiedlichste Komponenten, beispielsweise Ventilatoren, Luftdrucksensoren oder Temperatursensoren, mit denen die Funktion überwacht und gesteuert wird. Weil die Lüftungsgeräte auf Kundenanforderungen angepasst werden, ist die Anordnung und Menge der verbauten Komponenten in den meisten Fällen unterschiedlich. Daher ist es wichtig, dass die \acs{rltanzeige} parametrierbar ausgeführt werden kann. Um dies zu erzielen, wurde vom Projektauftraggeber die Idee von einer Konfigurationsdatei vorgeschlagen. Mit dieser kann von einem  Servicetechnikerinnen und Servicetechnikern bei der Installation des Lüftungsgeräts die Konfiguration an die \acs{rltanzeige} übergeben werden. So können für das jeweilige Lüftungsgerät immer die richtigen Parameter angezeigt werden.
+Raumlufttechnische Anlagen beinhalten unterschiedlichste Komponenten, beispielsweise Ventilatoren, Luftdrucksensoren und Temperatursensoren, mit denen die Funktion überwacht und gesteuert wird. Weil die \acs{rltanlagen} der Firma Bösch auf Kundenanforderungen angepasst werden, ist die Anordnung und Menge der verbauten Komponenten in den meisten Fällen unterschiedlich. Daher ist es wichtig, dass die \acs{rltanzeige} parametrierbar ausgeführt werden kann. Um dies zu erzielen, wurde vom Projektauftraggeber die Idee einer Konfigurationsdatei vorgeschlagen. Mit dieser kann von einer  Servicetechnikerin \bzw einem Servicetechniker bei der Installation der \acs{rltanlage} die Konfiguration an die \acs{rltanzeige} übergeben werden. So können für die jeweilige \acs{rltanlage} immer die richtigen Parameter angezeigt werden.
 
 Wegen der Tatsache, dass diese Konfigurationsdateien von Servicetechnikerinnen und Servicetechnikern erstellt werden müssen, ist es wichtig, dass das gewählte Datenformat für Laien einfach zu verstehen ist. Daher lag die Entscheidung für das richtige Datenformat zwischen \acs{csv} und \acs{json}. Andere Formate  wie \acf{xml} wurden nicht in Erwägung gezogen, weil das Projektteam mit \acs{json} und \acs{csv} schon vertraut war. Darüber hinaus ist \acs{xml} im Vergleich zu \acs{json} für Laien schwerer zu lesen und schreiben, was es für die Anwendung ungeeignet macht. 
 
@@ -94,20 +94,17 @@ Mithilfe dieser Syntax, kann man in \acs{json} folgende Strukturen umsetzen:
 	
 \end{itemize}
 
+Beispiele für \acs{json} Dateien sind in Kapitel \ref{json_config_files} zu finden.
+
 \subsection{\acs{json} und \acs{csv} - Vergleich und Selektion}
-Sowohl \acs{json} als auch \acs{csv} bringen Vorteile mit sich.
+Sowohl \acs{json} als auch \acs{csv} bringen Vorteile mit sich. 
+\acs{csv} Dateien können in Microsoft Excel bearbeitet und erstellt werden. Die tabellarische Darstellung und die Bekanntheit von Excel machen es zugänglich für Laien, was der größte Vorteil für \acs{csv} ist. Außerdem wird \acs{csv} von vielen Programmiersprachen unterstützt, was die Umsetzung theoretisch möglich machen würde. 
 
-\acs{csv} bringt einige Vorteile mit sich. 
-in Excel editierbar
-einfach zu lesen
-von vielen Programmiersprachen unterstützt
+\acs{json} Dateien sind hingegen \acs{csv} zwar für Laien schwererer zu lesen, bieten aber hinsichtlich meist anderer Aspekte deutlich mehr Möglichkeiten. Anstatt des tabellarischen Aufbaus wird zum Speichern der Daten eine klare hierarchische Struktur verwendet. Die Struktur sorgt für mehr Flexibilität und eine besonders gute Darstellung verschachtelter Daten. Auch unterstützt \acs{json} unterschiedliche Datentypen, während bei \acs{csv} grundsätzlich nur Zeichenketten zum Einsatz kommen.
 
+\acs{json} ist mittlerweile an Kompatibilität kaum zu übertreffen, was dessen Verwendung unbedenklich macht. Das Datenformat wird in unzähligen Bereichen eingesetzt und der Trend scheint immer weiter gegen \acs{json} zu gehen.
 
-Ein weiterer Vorteil von \acs{json} mittlerweile an Kompatibilität kaum zu übertreffen. Auch der Trend scheint immer mehr gegen \acs{json} zu gehen. Flexibilität und die Strukturiertheit
+Schließlich überwiegen, im benötigten Anwendungsbereich, die vielen Vorteile von \acs{json} die schlechtere Leserlichkeit. Vor allem war die Möglichkeit der Verschachtelung der ausschlaggebende Grund weshalb sich für das \acs{json} Datenformat entschieden wurde. Dazu ist es wahrscheinlich, dass, wegen ihrem logischen Aufbau und  Skalierbarkeit, \acs{json} Dateien für den Anwendungszweck im Endeffekt übersichtlicher als \acs{csv} Dateien sind.
 
+Falls bei Einführung der \acs{rltanzeige} Schwierigkeiten mit der Konfiguration auftreten steht \zB die Option eines Skripts, welches Excel Dateien in das gewünschte \acs{json} Format übersetzt, zur Verfügung.
 
-Schließlich ist die Möglichkeit der Verschachtelung mit \acs{json} der guten Leserlichkeit von \acs{csv} im benötigten Anwendungsbereich überlegen. Dies war der ausschlaggebende Grund warum sich für das \acs{json} Datenformat entschieden wurde.
-
-
-
-\cite{SQLizer:2017}
