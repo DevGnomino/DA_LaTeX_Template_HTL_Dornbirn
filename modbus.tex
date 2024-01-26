@@ -1,5 +1,4 @@
-Das folgende Kapitel zum Modbus Protokoll bezieht sich auf \cite{Modbus_Organization_AP:2012}  \cite{Modbus_Organization_SL:2012}.
-Die offizielle Definition des Modbus Protokolls von der Modbus Organization \cite{Modbus_Organization_AP:2012} lautet:
+Das folgende Kapitel zum Modbus Protokoll bezieht sich auf \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. \newline Die offizielle Definition des Modbus Protokolls von der Modbus Organization \cite{Modbus_Organization_AP:2012} lautet:
 \begin{quotation}
 	\emph{
 		MODBUS is an application layer messaging protocol, positioned at level 7 of the OSI model, which provides client/server communication between devices connected on different types of buses or networks.}
@@ -50,25 +49,23 @@ Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese b
 	Unterschied zu Function Fehlercodes: Function Fehlercodes deuten an, dass die Aktion, die der Server ausführen sollte fehlschlug. Die Checksumme prüft auf Übertragungsfehler (Behauptung: Mit fakten belegen).
 \end{itemize}
 
-Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register werden im Speicher des jeweiligen Geräts in einem Block zusammengefasst. 
-
-Es gibt verschiedene Arten von Registern (siehe Tab.~\ref{tab:modbus_register_tabellen}). 
-\begin{table}[h]
+Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register werden im Speicher des jeweiligen Geräts in einem Block zusammengefasst. Es gibt verschiedene Registertypen, die sich in der Länge der gespeicherten Daten und dem Zugriffstyp unterscheiden (siehe Tab.~\ref{tab:modbus_register_tabellen}). \newline Ein Server kann dann die Register auf den Clients mittels Anfragen auslesen oder setzen. Clients können ihre eigenen Register setzen.
+\begin{table}[H]
 	\caption{Modbus Register Tabellen \label{tab:modbus_register_tabellen}}
-	\begin{tabularx}{\textwidth}{@{}c|c|c|X@{}}
+	\begin{tabularx}{\textwidth}{@{}l|c|c|X@{}}
 		\toprule
 		\textbf{Tabellenname} & \textbf{Datentyp} & \textbf{Zugriffstyp} & \textbf{Beschreibung} \\
 		\midrule
-		Input Discrete & Single bit & Read-Only & desc1 \\
-		Coils & Single bit & Read-Write & desc2 \\
-		Input Registers & 16-bit word & Read-Only & desc3 \\
-		Holding Registers & 16-bit word & Read-Write & desc4 \\
+		Input Discrete & Single bit & Read-Only & Durch \acf{io} veränderbar \\
+		Coils & Single bit & Read-Write & Durch Anfragen veränderbar \\
+		Input Registers & 16-bit word & Read-Only & Durch \acs{io} veränderbar \\
+		Holding Registers & 16-bit word & Read-Write & Durch Anfragen veränderbar \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
 (https://ipc2u.de/artikel/wissenswertes/modbus-rtu-einfach-gemacht-mit-detaillierten-beschreibungen-und-beispielen/)
 
-Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Abb.~\ref{fig:modbus_register_many_blocks}):
+Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Siehe Abb.~\ref{fig:modbus_register_many_blocks}):
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\linewidth]{Bilder/Modbus_Data_Model_with_separate_block}
@@ -84,18 +81,44 @@ Oder die Blöcke sind zusammengeschaltet und können durch unterschiedliche Eing
 	\label{fig:modbus_register_one_block}
 \end{figure}
 
-\subsection{Ausführungsarten}
-\paragraph{RTU}
-Funktioniert über die serielle Schnittstelle.
-Aufbau der Nachricht
-Start und Stopbits
-Parity bits
-\paragraph{ASCII}
-\paragraph{TCP}
+\subsection{Übertragungsarten}
+Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt es \acf{rtu} und \acf{ascii}. Auf einem seriellen Bus, müssen alle Geräte die selbe Übertragungsart verwenden. Der \acs{rtu} Modus ist dabei der Standard, den alle Modbus Geräte implementieren müssen. \acs{ascii} kann optional verwendet werden. \newline Es gibt auch noch \acs{tcp} und Modbus Plus. Diese beiden Übertragungsarten sind für diese Diplomarbeit nicht relevant. Daher wird auf eine genauere Beschreibung verzichtet.
+
+\paragraph{\acs{rtu} Modus}
+Bei dem \acs{rtu} Modus werden 8-bit Datenbytes nacheinander gesendet. In den meisten Programmen werden diese 8-Datenbits von 2 hexadezimalen Zahlen dargestellt. Die Übertragung muss dabei ununterbrochen stattfinden. Im Vergleich zu \acs{ascii} ist bei \acs{rtu} der Datendurchsatz höher. 
+
+Die Nachricht besteht aus 11 bits und wird folgendermaßen aufgeteilt:
+\begin{itemize}
+	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass eine Nachricht folgt
+	\item \textbf{8 Datenbits:} Die eigentlichen Daten
+	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen.   (https://www.ibm.com/docs/de/aix/7.3?topic=parameters-parity-bits) Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity.
+	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Nachricht endet. Wenn no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
+\end{itemize}
+
+Nach jeder Nachricht wird 3.5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch
+erkennt das Protokoll genau, wann die nächste Nachricht anfängt. 
+Bild von Seite
+
+Benutzt CRC: ganz kurze erklärung
+
+Diese Übertragungsart wird in den Geräten bei Bösch verwendet. Daher verwendet auch die RLT Anzeige den \acs{rtu} Modus.
+
+\paragraph{\acs{ascii} Modus}
+Ähnlich wie RTU aber doch anders: 2 ASCII characters versendet.
+Zum Einleiten einer neuen Nachricht wird hier ein ":" Zeichen gesendet. Dieses ist für diesen Zweck reserviert.
+(https://www.simplymodbus.ca/ASCII.htm)
+
+Die Nachricht besteht aus 10 bits und wird folgendermaßen aufgeteilt:
+\begin{itemize}
+	\item \textbf{1 Startbit}
+	\item \textbf{7 Datenbits}
+	\item \textbf{1 Paritätsbit}
+	\item \textbf{1/2 Stopbits}
+\end{itemize}
+
+Benutzt LRC: ganz kurze erklärung
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
 
 
-
-\subsection{Vor- und Nachteile}
-
+%\subsection{Vor- und Nachteile}
