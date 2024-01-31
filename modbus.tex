@@ -12,7 +12,7 @@ https://www.kunbus.com/de/modbus
 Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
 \begin{itemize}
 \item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
-\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es hier zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
+\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
 \end{itemize}
 
 \subsection{Funktionsweise}
@@ -87,17 +87,22 @@ Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt e
 \paragraph{\acs{rtu} Modus}
 Bei dem \acs{rtu} Modus werden 8-bit Datenbytes nacheinander gesendet. In den meisten Programmen werden diese 8-Datenbits von 2 hexadezimalen Zahlen dargestellt. Die Übertragung muss dabei ununterbrochen stattfinden. Im Vergleich zu \acs{ascii} ist bei \acs{rtu} der Datendurchsatz höher. 
 
-Die Nachricht besteht aus 11 bits und wird folgendermaßen aufgeteilt:
+Zusätzlich zu den 8 Datenbits kommen noch 3 Hilfsbits dazu. Für jedes übertragene Datenbyte, werden somit 11 Bits verschickt. Diese werden folgendermaßen aufgeteilt:
 \begin{itemize}
-	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass eine Nachricht folgt
+	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass die Übertragung anfängt
 	\item \textbf{8 Datenbits:} Die eigentlichen Daten
 	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen.   (https://www.ibm.com/docs/de/aix/7.3?topic=parameters-parity-bits) Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity.
-	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Nachricht endet. Wenn no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
+	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Übertragung endet. Falls no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
 \end{itemize}
 
-Nach jeder Nachricht wird 3.5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch
-erkennt das Protokoll genau, wann die nächste Nachricht anfängt. 
-Bild von Seite
+Nach jeder Nachricht wird 3.5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch erkennt das Protokoll genau, ob ein empfangenes Datenbyte noch zur vorherigen Nachricht gehört oder ob bereits die nächste Nachricht anfängt. 
+Abb.~\ref{fig:modbus_frame}):
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_frame}
+	\caption{Modbus RTU Frame (Quelle: \url{https://www.modbus.org/docs/Modbus_over_serial_line_V1.pdf})}
+	\label{fig:modbus_frame}
+\end{figure}
 
 Benutzt CRC: ganz kurze erklärung
 
