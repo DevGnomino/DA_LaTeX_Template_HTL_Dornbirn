@@ -1,0 +1,143 @@
+Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die "data_refresh" Funktion ausgeführt. 
+
+\begin{pythoncode}	
+def data_threading(app):
+	# Funktion zum Starten des Datenbeschaffungthreads
+	global t1
+	t1 = Thread(target=data_refresh, kwargs={'app': app}, daemon=True)
+	t1.start()
+\end{pythoncode}
+
+In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die "run_calculation" Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird.
+
+\begin{pythoncode}
+def data_refresh(app):
+	global stop_thread
+	stop_thread = False
+	while stop_thread == False:
+		# This looks better, because all pages are already loaded; but it might be more costly
+		page_counter = 0
+		for page in all_pages:
+			measurement_counter = 0
+			for measurement in page.measurements:
+				value = measurement.run_calculation_function()
+				app.set_page_text_at(page_counter, measurement_counter, measurement.description, value)
+				measurement_counter += 1
+			page_counter += 1
+		
+		time.sleep(0.4)
+\end{pythoncode}
+
+Das interessante ist hier die Sensor Klasse. Diese liest nämlich mithilfe von minimalmodbus die Sensordaten aus. Im Konstruktor wird die Kommunikation aufgesetzt. Es gibt eine Vielzahl von Parametern, die aus den Konfigurationsdateien ausgelesen werden. Man stellt also die Baudrate, die Bytesize etc. ein.
+
+\begin{pythoncode}
+CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
+DEVICES_CONFIG_PATH = '/home/pi/Documents/RLT_Config/devices/'
+
+class Sensor():
+	def __init__(self, baud_rate, mb_address, parity, stop_bits, scaling, register, function_code, zero_based):
+		# Mit USB Connector auf Linux       /dev/ttyUSB0
+		# Mit USB Connector auf Windows     COM4
+		self.sensor = minmb.Instrument('/dev/ttyAMA0',
+		mb_address)  # Make an "instrument" object called sensor (port name, slave address (in decimal))
+		self.sensor.serial.baudrate = baud_rate
+		self.sensor.serial.bytesize = 8  # Number of data bits to be requested
+		
+		if parity == "even":  # Parity Setting can be ODD, EVEN or NONE
+			self.sensor.serial.parity = minmb.serial.PARITY_EVEN
+		elif parity == "odd":
+			self.sensor.serial.parity = minmb.serial.PARITY_ODD
+		else:
+			self.sensor.serial.parity = minmb.serial.PARITY_NONE
+		
+		self.sensor.serial.stopbits = stop_bits  # Number of stop bits
+		self.sensor.serial.timeout = 0.5  # Timeout time in seconds
+		self.sensor.mode = minmb.MODE_RTU  # Mode to be used (RTU or ascii mode)
+		
+		# Good practice to clean up before and after each execution
+		self.sensor.clear_buffers_before_each_transaction = True
+		self.sensor.close_port_after_each_call = True
+\end{pythoncode}
+
+In der "get_data_from_modbus" Funktion wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten "read_register" Funktion ausgelesen. Dieser gibt man als Parameter an, welches Register, wie viele und welcher Modbus Function Code benutzt wird. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert.
+
+\begin{pythoncode}
+	def get_data_from_modbus(self):
+		try:
+			fetched_data = self.sensor.read_registers(self.register, 1, self.function_code)			
+			fetched_data_scaled = round((fetched_data[0] * self.scaling), 1)
+			return fetched_data_scaled
+		
+		except Exception as e:
+			print("Err: ", str(e))
+			fetched_data_scaled = "N/A"
+			return fetched_data_scaled
+\end{pythoncode}
+
+
+
+\begin{pythoncode}
+class Measurement():
+	def __init__(self, description, unit, sensors, python_function, additional_info):
+	self.description = description
+	self.unit = unit
+	self.sensors = sensors
+	self.python_function = python_function
+	self.additional_info = additional_info
+	self.value = "N/A"
+	
+	def run_calculation_function(self):
+		try:
+			if self.python_function == "standard":
+				self.value = str(modbus_functions.standard(self.sensors, self.additional_info)) + " " + self.unit
+			elif (hasattr(modbus_functions, self.python_function)):
+				calc_function = getattr(modbus_functions, self.python_function)
+				self.value = str(calc_function(self.sensors, self.additional_info))
+			else:
+				self.value = "python function was invalid"
+			
+			return self.value
+		except Exception as e:
+			print("Err: ", e)
+\end{pythoncode}
+
+!Minimalmodbus Code um Daten zu holen!
+
+\begin{pythoncode}	
+def get_sensor_data(device_full_data, port_name, sensor_unit):
+	for device in device_full_data["ports"]:
+	print(device)
+	if device["port"] == port_name:
+	print("in port if")
+	sensor_register = device["register"]
+	sensor_function_code = device["function_code"]
+	if "units" in device:
+	for unit_pair in device["units"]:  # Hier kann vielleicht später das Array anders entpackt werden (mit *)
+	if unit_pair["unit"] == sensor_unit:
+	sensor_scaling = unit_pair["scaling"]
+	return_var = {"sensor_register": sensor_register, "sensor_scaling": sensor_scaling,
+		"sensor_function_code": sensor_function_code}
+	return return_var
+	else:
+	return_var = {"sensor_register": sensor_register, "sensor_scaling": 1,
+		"sensor_function_code": sensor_function_code}
+	return return_var
+	
+	
+	return -1
+
+
+def get_sensor_unit(sensor_name):
+	sensor_file = open(DEVICES_CONFIG_PATH + 'sensors.json', encoding='utf-8')
+	sensor_full_data = json.load(sensor_file)
+	# print(sensor_full_data)
+	for sensor in sensor_full_data:
+	if sensor["type"] == sensor_name:
+	sensor_unit = sensor["unit"]
+	return sensor_unit
+
+	sensor_file.close()
+	return ""
+\end{pythoncode}
+
+!Auswahl der richtigen Auslesefunktion basierend auf config!
