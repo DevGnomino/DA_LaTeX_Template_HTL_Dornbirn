@@ -1,10 +1,4 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{class} \PYG{n+nc}{Page}\PYG{p}{():}
-	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{n}{measurements}\PYG{p}{):}
-	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title} \PYG{o}{=} \PYG{n}{title}
-	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurements} \PYG{o}{=} \PYG{n}{measurements}
-	
-	
 	\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}data}\PYG{p}{(}\PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{,} \PYG{n}{port\PYGZus{}name}\PYG{p}{,} \PYG{n}{sensor\PYGZus{}unit}\PYG{p}{):}
 	\PYG{k}{for} \PYG{n}{device} \PYG{o+ow}{in} \PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}ports\PYGZdq{}}\PYG{p}{]:}
 	\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)}
@@ -26,9 +20,9 @@
 	
 	
 	\PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
-
-
-\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}name}\PYG{p}{):}
+	
+	
+	\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}name}\PYG{p}{):}
 	\PYG{n}{sensor\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}sensors.json\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}utf\PYGZhy{}8\PYGZsq{}}\PYG{p}{)}
 	\PYG{n}{sensor\PYGZus{}full\PYGZus{}data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}file}\PYG{p}{)}
 	\PYG{c+c1}{\PYGZsh{} print(sensor\PYGZus{}full\PYGZus{}data)}
@@ -36,7 +30,7 @@
 	\PYG{k}{if} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sensor\PYGZus{}name}\PYG{p}{:}
 	\PYG{n}{sensor\PYGZus{}unit} \PYG{o}{=} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{]}
 	\PYG{k}{return} \PYG{n}{sensor\PYGZus{}unit}
-
+	
 	\PYG{n}{sensor\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
 	\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
 \end{Verbatim}
