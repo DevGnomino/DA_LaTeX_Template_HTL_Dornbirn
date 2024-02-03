@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{Measurement}\PYG{p}{():}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{description}\PYG{p}{,} \PYG{n}{unit}\PYG{p}{,} \PYG{n}{sensors}\PYG{p}{,} \PYG{n}{python\PYGZus{}function}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{description} \PYG{o}{=} \PYG{n}{description}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{unit} \PYG{o}{=} \PYG{n}{unit}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensors} \PYG{o}{=} \PYG{n}{sensors}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{python\PYGZus{}function} \PYG{o}{=} \PYG{n}{python\PYGZus{}function}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{additional\PYGZus{}info} \PYG{o}{=} \PYG{n}{additional\PYGZus{}info}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}
+\end{Verbatim}

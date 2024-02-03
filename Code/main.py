@@ -242,19 +242,12 @@ def close_app(channel):
 
 if __name__ == "__main__":
     copy_error = usb_detection.usb_routine()
-    log_file = open("/home/pi/Documents/startup_log.txt", 'w')
     if copy_error:
-        log_file.write("Copy error happened\n")
         exit
-    log_file.write("No error happened\n")
     all_pages = modbus.load_config()
-    log_file.write("Config loaded\n")
     global app
     app = App(all_pages)
-    log_file.write("App started\n")
     setup_buttons()
     modbus.data_threading(app)
-    log_file.write("Modbusthreading started\n")
-    log_file.close()
     # Runs the app
     app.mainloop()

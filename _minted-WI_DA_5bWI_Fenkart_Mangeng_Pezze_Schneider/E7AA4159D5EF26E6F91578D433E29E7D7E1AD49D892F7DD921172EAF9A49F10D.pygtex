@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{CONFIG\PYGZus{}PATH} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/home/pi/Documents/RLT\PYGZus{}Config/\PYGZsq{}}
+\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/home/pi/Documents/RLT\PYGZus{}Config/devices/\PYGZsq{}}
+
+\PYG{k}{class} \PYG{n+nc}{Sensor}\PYG{p}{():}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{baud\PYGZus{}rate}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{,} \PYG{n}{parity}\PYG{p}{,} \PYG{n}{stop\PYGZus{}bits}\PYG{p}{,} \PYG{n}{scaling}\PYG{p}{,} \PYG{n}{register}\PYG{p}{,} \PYG{n}{function\PYGZus{}code}\PYG{p}{,} \PYG{n}{zero\PYGZus{}based}\PYG{p}{):}
+        \PYG{c+c1}{\PYGZsh{} Mit USB Connector auf Linux       /dev/ttyUSB0}
+		\PYG{c+c1}{\PYGZsh{} Mit USB Connector auf Windows     COM4}
+		\PYG{c+c1}{\PYGZsh{} Über TX (8) und RX (10) Pins      /dev/ttyAMA0}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{Instrument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}/dev/ttyAMA0\PYGZsq{}}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{baudrate} \PYG{o}{=} \PYG{n}{baud\PYGZus{}rate}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{bytesize} \PYG{o}{=} \PYG{l+m+mi}{8}
+		
+		\PYG{k}{if} \PYG{n}{parity} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}even\PYGZdq{}}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} ODD, EVEN oder NONE}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}EVEN}
+		\PYG{k}{elif} \PYG{n}{parity} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}odd\PYGZdq{}}\PYG{p}{:}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}ODD}
+		\PYG{k}{else}\PYG{p}{:}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}NONE}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{stopbits} \PYG{o}{=} \PYG{n}{stop\PYGZus{}bits}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{timeout} \PYG{o}{=} \PYG{l+m+mf}{0.5}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{mode} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{MODE\PYGZus{}RTU}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{clear\PYGZus{}buffers\PYGZus{}before\PYGZus{}each\PYGZus{}transaction} \PYG{o}{=} \PYG{k+kc}{True}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{close\PYGZus{}port\PYGZus{}after\PYGZus{}each\PYGZus{}call} \PYG{o}{=} \PYG{k+kc}{True}
+\end{Verbatim}

@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}data}\PYG{p}{(}\PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{,} \PYG{n}{port\PYGZus{}name}\PYG{p}{,} \PYG{n}{sensor\PYGZus{}unit}\PYG{p}{):}
+	\PYG{k}{for} \PYG{n}{device} \PYG{o+ow}{in} \PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}ports\PYGZdq{}}\PYG{p}{]:}
+	\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)}
+	\PYG{k}{if} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{port\PYGZus{}name}\PYG{p}{:}
+	\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}in port if\PYGZdq{}}\PYG{p}{)}
+	\PYG{n}{sensor\PYGZus{}register} \PYG{o}{=} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{]}
+	\PYG{n}{sensor\PYGZus{}function\PYGZus{}code} \PYG{o}{=} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{]}
+	\PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}units\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{:}
+	\PYG{k}{for} \PYG{n}{unit\PYGZus{}pair} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}units\PYGZdq{}}\PYG{p}{]:}  \PYG{c+c1}{\PYGZsh{} Hier kann vielleicht später das Array anders entpackt werden (mit *)}
+	\PYG{k}{if} \PYG{n}{unit\PYGZus{}pair}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sensor\PYGZus{}unit}\PYG{p}{:}
+	\PYG{n}{sensor\PYGZus{}scaling} \PYG{o}{=} \PYG{n}{unit\PYGZus{}pair}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}scaling\PYGZdq{}}\PYG{p}{]}
+	\PYG{n}{return\PYGZus{}var} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}register\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}register}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}scaling\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}scaling}\PYG{p}{,}
+		\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}function\PYGZus{}code}\PYG{p}{\PYGZcb{}}
+	\PYG{k}{return} \PYG{n}{return\PYGZus{}var}
+	\PYG{k}{else}\PYG{p}{:}
+	\PYG{n}{return\PYGZus{}var} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}register\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}register}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}scaling\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,}
+		\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}function\PYGZus{}code}\PYG{p}{\PYGZcb{}}
+	\PYG{k}{return} \PYG{n}{return\PYGZus{}var}
+	
+	
+	\PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+	
+	
+	\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}name}\PYG{p}{):}
+	\PYG{n}{sensor\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}sensors.json\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}utf\PYGZhy{}8\PYGZsq{}}\PYG{p}{)}
+	\PYG{n}{sensor\PYGZus{}full\PYGZus{}data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}file}\PYG{p}{)}
+	\PYG{c+c1}{\PYGZsh{} print(sensor\PYGZus{}full\PYGZus{}data)}
+	\PYG{k}{for} \PYG{n}{sensor} \PYG{o+ow}{in} \PYG{n}{sensor\PYGZus{}full\PYGZus{}data}\PYG{p}{:}
+	\PYG{k}{if} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sensor\PYGZus{}name}\PYG{p}{:}
+	\PYG{n}{sensor\PYGZus{}unit} \PYG{o}{=} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{]}
+	\PYG{k}{return} \PYG{n}{sensor\PYGZus{}unit}
+	
+	\PYG{n}{sensor\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+	\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+\end{Verbatim}

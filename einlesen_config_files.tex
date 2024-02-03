@@ -1,0 +1,56 @@
+\subsection{Einlesen der Konfigurationsdateien}
+!Klassenstruktur beschreiben + UML-Diagramm; den ganzen code dazu weglassen --> weil sehr viel - UML struktur im GUI schon beschrieben; also hier kurz halten; vlt gui section vor config dateien verschieben!
+
+Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine Page-, Measurement- und Sensorklasse. Diese existieren, damit der Text an der richtigen Stelle verändert werden kann. Eine genauere Beschreibung findet sich hier (Grafische Benutzeroberfläche). 
+
+!Config eingelesen!
+
+\begin{pythoncode}
+class Measurement():
+	def __init__(self, description, unit, sensors, python_function, additional_info):
+	self.description = description
+	self.unit = unit
+	self.sensors = sensors
+	self.python_function = python_function
+	self.additional_info = additional_info
+	self.value = "N/A"
+\end{pythoncode}
+
+\begin{pythoncode}
+	def get_sensor_data(device_full_data, port_name, sensor_unit):
+	for device in device_full_data["ports"]:
+	print(device)
+	if device["port"] == port_name:
+	print("in port if")
+	sensor_register = device["register"]
+	sensor_function_code = device["function_code"]
+	if "units" in device:
+	for unit_pair in device["units"]:  # Hier kann vielleicht später das Array anders entpackt werden (mit *)
+	if unit_pair["unit"] == sensor_unit:
+	sensor_scaling = unit_pair["scaling"]
+	return_var = {"sensor_register": sensor_register, "sensor_scaling": sensor_scaling,
+		"sensor_function_code": sensor_function_code}
+	return return_var
+	else:
+	return_var = {"sensor_register": sensor_register, "sensor_scaling": 1,
+		"sensor_function_code": sensor_function_code}
+	return return_var
+	
+	
+	return -1
+	
+	
+	def get_sensor_unit(sensor_name):
+	sensor_file = open(DEVICES_CONFIG_PATH + 'sensors.json', encoding='utf-8')
+	sensor_full_data = json.load(sensor_file)
+	# print(sensor_full_data)
+	for sensor in sensor_full_data:
+	if sensor["type"] == sensor_name:
+	sensor_unit = sensor["unit"]
+	return sensor_unit
+	
+	sensor_file.close()
+	return ""
+\end{pythoncode}
+
+!Im entsprechenden Sensor gespeichert!

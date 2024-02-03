@@ -15,7 +15,7 @@ Es gibt zwei verschiedene Einteilungen des Modbus Protokolls:
 \item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
 \end{itemize}
 
-\subsection{Funktionsweise}
+\subsection{Funktionsweise}\label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
 
 Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte von 0 bis 255 einnehmen (siehe Tab.~\ref{tab:modbus_adressen} für die Einteilung). 
@@ -95,7 +95,7 @@ Zusätzlich zu den 8 Datenbits kommen noch 3 Hilfsbits dazu. Für jedes übertra
 	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Übertragung endet. Falls no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
 \end{itemize}
 
-Nach jeder Nachricht wird 3.5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch erkennt das Protokoll genau, ob ein empfangenes Datenbyte noch zur vorherigen Nachricht gehört oder ob bereits die nächste Nachricht anfängt. 
+Nach jeder Nachricht wird 3,5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch erkennt das Protokoll genau, ob ein empfangenes Datenbyte noch zur vorherigen Nachricht gehört oder ob bereits die nächste Nachricht anfängt. 
 Abb.~\ref{fig:modbus_frame}):
 \begin{figure}[H]
 	\centering
