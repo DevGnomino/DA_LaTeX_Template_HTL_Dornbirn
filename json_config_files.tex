@@ -1,1 +1,26 @@
 \subsection{Dateikonzept} \label{json_config_files}
+Wie bereits in Kapitel \ref{json_vs_csv} beschrieben, wurde sich für das \acs{json} Format entschieden. Dabei wurden für das Dateikonzept drei Dateitypen entwickelt:
+
+%Fenkart fragen, ob ich bei den Geräten auf seinen Teil verweisen kann
+% Wer beschreibt baud_rate, register, adresse, function code \ref{modbus_funktionsweise}
+
+\begin{enumerate}
+	\item \textbf{Haupt-Konfigurationsdatei} (\enquote{main\_config\_file.json}): Wie in Kapitel \ref{gui_design} beschrieben, werden zur übersichtlichen  Anzeige der Parameter mehrere Abschnitte \bzw Seiten benötigt. Auf diesen Seiten werden jeweils sinngemäß Parameter zusammengefasst. 
+	
+	Die Aufteilung der Seiten wird in der Haupt-Konfigurationsdatei gemacht. Dabei werden alle Seiten die später auf der \acs{rltanzeige} angezeigt werden sollen im \enquote{pages} Array angegeben. Dazu wird immer der Titel der Seite, die anzuzeigenden Messwerte und woher diese kommen (\zB von einem QBM), angegeben. 
+	In einem \enquote{devices} Array werden auf der gleichen Ebene außerdem die Geräte, die an der \acs{rltanzeige} angeschlossen sind, unter \enquote{devices} angegeben.
+	
+	\item \textbf{Geräte-Konfigurationsdateien} (\zB \enquote{QBM97XX.json} oder \enquote{EBM.json}): Hier sind gerätespezifische Daten hinterlegt bzw. welche Ports vom Gerät verwendet werden, welche Einstellungen diese haben und im Falle des QBMs, welche möglichen Maßeinheiten die anzuschließenden Sensoren zurückgeben. Diese Dateien müssen nur verändert werden, falls an einem QBM z.B. ein neuer Sensor verbaut wird, der eine neue Maßeinheit zurückgibt. Der wahrscheinlichere Fall, ist aber, dass nicht eine vorhandene Datei verändert wird, sondern eine weitere Geräte-Konfigurationsdatei für ein neues Gerät (z.B. Ventilator einer neuen Firma) erstellt werden muss.
+	
+	\item \textbf{Sensor-Konfigurationsdatei} (\enquote{sensors.json}): Eine Liste aller Sensoren (\zB LG-NI1000) mit der dazugehörigen Maßeinheit. Dieses muss nur verändert werden, wenn ein neuer Sensor eingebaut wird und dieser noch nicht im \enquote{sensors.json} steht.
+\end{enumerate}
+
+%Bedienungsanleitung für Servicetechniker erwähnen
+Dabei ist zu beachten:
+Der Techniker bekommt einen Ordner, darin findet sich direkt eine Vorlage für die \enquote{main\_config\_file.json}-Datei, welche im Normalfall die einzige Datei sein sollte, die vom Techniker bearbeitet bzw. verändert wird.
+In einem Unterordner (\enquote{devices}) sind dann die Geräte-Konfigurationsdateien und die Sensor-Konfigurationsdatei. Diese Dateien müssen, wie oben erwähnt, nur verändert werden, wenn noch nie verwendete Geräte oder Sensorik, wie z.B. eine neue Art von Ventilator oder Sensor, in der RLT-Anlage verbaut werden.
+
+
+
+
+

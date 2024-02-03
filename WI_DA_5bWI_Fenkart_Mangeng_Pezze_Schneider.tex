@@ -85,10 +85,11 @@ list-final-separator={ und }}
 % activate for double space between the lines (correction mode) 
 %\doublespacing
 
+\makeglossaries
+\loadglsentries{Glossar}
+
 \begin{document}       %% start of the document
 \maketitle             %% places the title with above information
-
-
 
 %\cleardoublepage
 \selectlanguage{ngerman} 
@@ -135,11 +136,11 @@ list-final-separator={ und }}
 
 
 \appendix
+\printglossaries
 \printbibliography
 \listoffigures
 \listoftables
 \printacronyms[name=Abkürzungen]
-% Für Python code im Anhang
-%\lstinputlisting{source_filename.py}
+
 
 \end{document}
