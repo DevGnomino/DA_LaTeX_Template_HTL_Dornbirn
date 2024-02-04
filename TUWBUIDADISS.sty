@@ -114,7 +114,6 @@ afterindent=false
 \renewcommand{\sfdefault}{phv} % Helvetica as the default sans-serif font
 \addtokomafont{captionlabel}{\bfseries}
 
-
 \RequirePackage{ragged2e,tabularx}
 
 %Zeilenabstand
@@ -206,7 +205,8 @@ afterindent=false
 	xleftmargin=4mm,
 	xrightmargin=.25in,
 	breaklines=true,
-	tabsize=4
+	tabsize=4,
+	baselinestretch=1 
 }
 \newminted{python}{
 	frame=lines,
@@ -216,7 +216,8 @@ afterindent=false
 	xleftmargin=4mm,
 	xrightmargin=.25in,
 	breaklines=true,
-	tabsize=4
+	tabsize=4,
+	baselinestretch=1 
 }
 \newminted{json}{
 	frame=lines,
@@ -226,8 +227,21 @@ afterindent=false
 	xleftmargin=4mm,
 	xrightmargin=.25in,
 	breaklines=true,
-	tabsize=4
+	tabsize=4,
+	baselinestretch=1 
 }
+\newminted[jsonfile]{json}{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true,
+	tabsize=4,
+	baselinestretch=1 
+}
+
 
 %% Customize Code Listing
 \lstset{

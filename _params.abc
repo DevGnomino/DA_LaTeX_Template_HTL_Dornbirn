@@ -1,0 +1,8 @@
+ "title": "Allgemein"
+ "sources": [ ]
+ "port": [
+  { "QBM1": "AI1" }
+  ],
+  "description": "Klappe",
+  "python_function": "flap_position"
+ }
