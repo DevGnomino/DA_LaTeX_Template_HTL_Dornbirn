@@ -1,4 +1,7 @@
-Warning: File 'WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.glo' is empty.
-Have you used any entries defined in glossary 'main'?
-Remember to use package option 'nomain' if you
-don't want to use the main glossary.
+This is makeindex, version 2.16 [MiKTeX 24.1].
+Scanning style file ./WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.ist...........................done (27 attributes redefined, 0 ignored).
+Scanning input file WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.glo....done (2 entries accepted, 0 rejected).
+Sorting entries....done (2 comparisons).
+Generating output file WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.gls....done (9 lines written, 0 warnings).
+Output written in WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.gls.
+Transcript written in WI_DA_5bWI_Fenkart_Mangeng_Pezze_Schneider.glg.
