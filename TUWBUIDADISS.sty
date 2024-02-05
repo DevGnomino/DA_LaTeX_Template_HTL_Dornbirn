@@ -241,6 +241,17 @@ afterindent=false
 	tabsize=4,
 	baselinestretch=1 
 }
+\newminted[jsonTable]{json}{
+	fontsize=\small,
+	breaklines=true,
+	tabsize=4,
+	frame=none, % Removed frame lines
+	linenos=false, % Removed line numbering
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	baselinestretch=1
+}
+
 
 
 %% Customize Code Listing
@@ -261,6 +272,7 @@ afterindent=false
 	frame=tb,
 	moredelim=**[is][\color{blue}]{@}{@}
 } 
+
 \lstset{literate=%
    {Ö}{{\"O}}1
    {Ä}{{\"A}}1
