@@ -6,17 +6,16 @@ Die offizielle Definition des Modbus Protokolls von der Modbus Organization \cit
 
 Der Modbus Standard definiert ein Application Layer Kommunikations Protokoll, dass sich auf Schicht 7 des OSI-Modells befindet. Es bietet Client/Server Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind.
 
-Das Modbus Protokoll wurde 1979 von der Firma Gould-Modicon entwickelt. Besonders oft wird das Protokoll in Mess- und Regelsystemen eingesetzt, da es speziell für die Kommunikation mit speicherprogrammierbaren Steuerungen entwickelt wurde. Das Modbus Protokoll ist ein Industriestandard. Es bietet einen universellen Übertragungsweg, ganz egal welches Übertragungsmedium genutzt wird. Es funktioniert sowohl über ein serielles Bussystem, als auch über eine Netzwerkverbindung. Außerdem können mit sogenannten Protokollumsetzern Geräte mit serieller Kommunikation in ein Netzwerksystem eingebettet werden. Durch den Einsatz von Paritätsprüfungen und Checksummen gewährleistet das Protokoll eine zuverlässige Übertragung.
-https://www.kvm-concepts.de/wiki/m/modbus/
-https://www.kunbus.com/de/modbus 
+Das Modbus Protokoll wurde 1979 von der Firma Gould-Modicon entwickelt. Besonders wird das Protokoll in Mess- und Regelsystemen eingesetzt, da es speziell für die Kommunikation mit speicherprogrammierbaren Steuerungen entwickelt wurde. Das Modbus Protokoll ist ein Industriestandard. Es bietet einen universellen Übertragungsweg, ganz egal welches Übertragungsmedium genutzt wird. Es funktioniert sowohl über ein serielles Bussystem, als auch über eine Netzwerkverbindung. Außerdem können mit sogenannten Protokollumsetzern Geräte mit serieller Kommunikation in ein Netzwerksystem eingebettet werden. Durch den Einsatz von Paritätsprüfungen und Checksummen gewährleistet das Protokoll eine zuverlässige Übertragung. \cite{KUNBUS_GmbH:o.J., kvm-concepts_GmbH:2022}
+
+
+Die folgende theoretische Beschäftigung mit dem Modbus Protokoll bezieht sich wenn nicht anders angegeben auf die offiziellen Modbus Dokumentationen \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. 
 
 Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
 \begin{itemize}
 \item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
 \item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
 \end{itemize}
-
-Die folgenden Unterkapitel zum Modbus Protokoll beziehen sich wenn nicht anders angegeben auf die offiziellen Modbus Dokumentationen \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. 
 
 \subsection{Funktionsweise}\label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
@@ -35,7 +34,7 @@ Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte vo
 	\end{tabularx}
 \end{table}
 
-Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das gesamte Datenpaket wird \acf{adu} genannt.
+Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das gesamte Datenpaket wird \acf{adu} genannt. (muss nicht immer eine Adresse vorhanden sein?)
 (siehe Abb.~\ref{fig:modbus_adu_pdu}).
 \begin{figure}[ht]
 	\centering
@@ -65,8 +64,8 @@ Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register 
 		Holding Registers & 16-bit word & Read-Write & Durch Anfragen veränderbar \\
 		\bottomrule
 	\end{tabularx}
-\end{table}
-(https://ipc2u.de/artikel/wissenswertes/modbus-rtu-einfach-gemacht-mit-detaillierten-beschreibungen-und-beispielen/)
+\end{table} 
+\cite{IPC2U_GmbH:o.J.}
 
 Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Siehe Abb.~\ref{fig:modbus_register_many_blocks}):
 \begin{figure}[H]
