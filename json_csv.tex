@@ -3,9 +3,9 @@ Raumlufttechnische Anlagen beinhalten unterschiedlichste Komponenten, beispielsw
 Wegen der Tatsache, dass diese Konfigurationsdateien von Servicetechnikerinnen und Servicetechnikern erstellt werden müssen, ist es wichtig, dass das gewählte Datenformat für Laien einfach zu verstehen ist. Daher lag die Entscheidung für das richtige Datenformat zwischen \acs{csv} und \acs{json}. Andere Formate  wie \acf{xml} wurden nicht in Erwägung gezogen, weil das Projektteam mit \acs{json} und \acs{csv} schon vertraut war. Darüber hinaus ist \acs{xml} im Vergleich zu \acs{json} für Laien schwerer zu lesen und schreiben, was es für die Anwendung ungeeignet macht. 
 
 \subsection{Was ist \acs{csv}?}
-\acf{csv} ist ein systemunabhängiges Format für Klartextdateien mit der Dateiendung \enquote{.csv}. \acs{csv} Dateien dienen zum Speichern und Übertragen von strukturierten Daten, hauptsächlich Tabellen oder Listen, wobei durch die Verkettung von mehreren \acs{csv} Dateien oder mithilfe von zusätzlichen Regeln auch verschachtelte Objekte gespeichert werden können. Die hauptsächlichen Anwendungsbereiche von \acs{csv} Dateien sind zum Importieren und Exportieren von Daten aus Datenbanken oder die Migration von Tabellendaten zwischen Programmen. \cite{FuchsMediaSolutions:o.J.}
+\acf{csv} ist ein systemunabhängiges Format für Klartextdateien mit der Dateiendung \enquote{.csv}. \acs{csv} Dateien dienen zum Speichern und Übertragen von strukturierten Daten, hauptsächlich Tabellen oder Listen, wobei durch die Verkettung von mehreren \acs{csv} Dateien oder mithilfe von zusätzlichen Regeln auch verschachtelte Objekte gespeichert werden können. Die hauptsächlichen Anwendungsbereiche von \acs{csv} Dateien sind zum Importieren und Exportieren von Daten aus Datenbanken oder die Migration von Tabellendaten zwischen Programmen. \cite[vgl.][]{FuchsMediaSolutions:o.J.}
 
-Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler \cite{IBM:1972} unterstützt wurde. Trotz der langen Existenz gibt es gegenwärtig für \acs{csv} keine formelle Spezifikation. Mit dem \acs{rfc} 4180 \cite{Shafranovich:2005} aus dem Jahre 2005 existiert ein erster Versuch einer inoffiziellen Definition, welche mittlerweile weit verbreitet ist. Durch dieses Dokument wird das \acf{mime} \enquote{text/csv} für das \acs{csv} Format registriert. Es folgen die wesentlichen Merkmale aus der Definition des \acs{rfc} 4180:
+Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORTRAN IV (H Extended) Compiler unterstützt wurde. \cite[vgl.][]{IBM:1972} Trotz der langen Existenz gibt es gegenwärtig für \acs{csv} keine formelle Spezifikation. Mit dem \acs{rfc} 4180 \cite[vgl.][]{Shafranovich:2005} aus dem Jahre 2005 existiert ein erster Versuch einer inoffiziellen Definition, welche mittlerweile weit verbreitet ist. Durch dieses Dokument wird das \acf{mime} \enquote{text/csv} für das \acs{csv} Format registriert. Es folgen die wesentlichen Merkmale aus der Definition des \acs{rfc} 4180:
 
 \begin{enumerate}{}
 	
@@ -37,22 +37,22 @@ Die erste Verwendung des Datenformates geht auf 1972 zurück, wo es vom IBM FORT
 	
 \end{enumerate}
 
-Da es bei \acs{csv} keine festen Vorgaben beim Datenformat gibt, ist es die Verantwortung der Benutzer sich auf eine Formatierung zu einigen. Das führt oft zu Problemen bei Zeit- und Datumsangaben oder bei der Verwendung von Sonderzeichen. Eine weitere Hürde ist die fehlende explizite Angabe des verwendeten Zeichensatzes, womit \zB Umlaute fehlerhaft dargestellt werden können. \cite{FuchsMediaSolutions:o.J.}
+Da es bei \acs{csv} keine festen Vorgaben beim Datenformat gibt, ist es die Verantwortung der Benutzer sich auf eine Formatierung zu einigen. Das führt oft zu Problemen bei Zeit- und Datumsangaben oder bei der Verwendung von Sonderzeichen. Eine weitere Hürde ist die fehlende explizite Angabe des verwendeten Zeichensatzes, womit \zB Umlaute fehlerhaft dargestellt werden können. \cite[vgl.][]{FuchsMediaSolutions:o.J.}
 
 \subsection{Was ist \acs{json}?}
 \begin{minipage}{0.6\textwidth}
-	\acf{json} wurde 2001 auf der \enquote{JSON.org} Website veröffentlicht und ist ein ressourcenschonendes Textformat zum Speichern von strukturierten Daten. Es ist so konzipiert, dass es sowohl für Menschen einfach zu lesen und schreiben als auch für Maschinen einfach zu parsen und generieren ist. Die Dateiendung von \acs{json} Dateien ist \enquote{.json}. \acs{json} stammt von JavaScript, ist aber programmiersprachenunabhängig und folgt vielen Konventionen der C-basierten Sprachen, was es gut für den Datenaustausch macht. \cite{json_org:o.J., ECMA:2017}
+	\acf{json} wurde 2001 auf der \enquote{JSON.org} Website veröffentlicht und ist ein ressourcenschonendes Textformat zum Speichern von strukturierten Daten. Es ist so konzipiert, dass es sowohl für Menschen einfach zu lesen und schreiben als auch für Maschinen einfach zu parsen und generieren ist. Die Dateiendung von \acs{json} Dateien ist \enquote{.json}. \acs{json} stammt von JavaScript, ist aber programmiersprachenunabhängig und folgt vielen Konventionen der C-basierten Sprachen, was es gut für den Datenaustausch macht. \cite[vgl.][]{json_org:o.J., ECMA:2017}
 \end{minipage}%
 \hfill
 \begin{minipage}{0.37\textwidth}
 	\centering	
 	\includegraphics[width=0.58\textwidth]{JSON_logo}
-	\captionof{figure}[JSON Logo]{\acs{json} Logo (Quelle:\\
+	\captionof{figure}{\acs{json} Logo (Quelle:\\
 		 \url{https://en.m.wikipedia.org/wiki/File:JSON_vector_logo.svg}) \label{fig:json_logo}}
 \end{minipage}
 \vspace{1ex}
 
-\acs{json} wird derzeit von zwei Spezifikation definiert, ECMA-404 \cite{ECMA:2017} und RFC 8259 \cite{Bray:2017}. Dabei ist das Ziel, dass sich nur die Beschreibung des Formats unterscheidet, aber die \acs{json} Syntax beider Spezifikationen ident ist. Folgend wird sich auf die Beschreibung der offiziellen JSON.org Website \cite{json_org:o.J.} und somit auf ECMA-404 \cite{ECMA:2017} bezogen.
+\acs{json} wird derzeit von zwei Spezifikation definiert, ECMA-404 \cite[vgl.][]{ECMA:2017} und RFC 8259 \cite[vgl.][]{Bray:2017}. Dabei unterscheidet sich nur die Beschreibung des Formats, die \acs{json} Syntax beider Spezifikationen ist ident. Folgend wird sich auf die Beschreibung der offiziellen JSON.org Website \cite[vgl.][]{json_org:o.J.} und somit auf ECMA-404 \cite[vgl.][]{ECMA:2017} bezogen.
 
 Die zwei wichtigsten Strukturen auf denen \acs{json} aufbaut sind Name/Wert (\engl Key/Value) Paare und geordnete Listen von Werten. Dabei unterstützt \acs{json} sehr verschachtelte Strukturen. Um diese darzustellen, werden in der Syntax folgende Zeichen benötigt:
 \begin{itemize}
@@ -69,7 +69,7 @@ Mithilfe dieser Syntax, kann man in \acs{json} folgende Strukturen umsetzen:
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=10cm]{JSON_value}
-		\caption[JSON Wert]{\acs{json} Value (Quelle: \url{https://www.json.org/img/value.png})  \label{fig:json_value}}
+		\caption{\acs{json} Value (Quelle: \url{https://www.json.org/img/value.png})  \label{fig:json_value}}
 	\end{figure}
 	
 	\item \textbf{Objects} (\dt Objekte) sind ungeordnete Listen von beliebig vielen Name/Wert Paaren. Ein Name/Wert Paar besteht immer aus einem Namen, gefolgt von einem Doppelpunkt und dem zugehörigen Wert. Beistriche kommen zum Einsatz um Name/Wert Paare voneinander zu trennen. Ein Objekt wird immer von geschwungenen Klammern umschlossen. Der Aufbau eines \acs{json} Objekts ist in Abb.~\ref{fig:json_object} zu sehen.
@@ -77,7 +77,7 @@ Mithilfe dieser Syntax, kann man in \acs{json} folgende Strukturen umsetzen:
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=10cm]{JSON_object}
-		\caption[JSON Objekt]{\acs{json} Object (Quelle: \url{https://www.json.org/img/object.png})  \label{fig:json_object}}
+		\caption{\acs{json} Object (Quelle: \url{https://www.json.org/img/object.png})  \label{fig:json_object}}
 	\end{figure}
 	
 	\item \textbf{Arrays} sind geordnete Listen von Werten. Dabei werden Beistriche verwendet, um die Werte voneinander zu trennen. Ein Array wird immer von eckigen Klammern umschlossen. Der Aufbau eines Arrays ist in Abb.~\ref{fig:json_array} zu sehen.
@@ -85,7 +85,7 @@ Mithilfe dieser Syntax, kann man in \acs{json} folgende Strukturen umsetzen:
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=10cm]{JSON_array}
-		\caption[JSON Array]{\acs{json} Array (Quelle: \url{https://www.json.org/img/array.png})  \label{fig:json_array}}
+		\caption{\acs{json} Array (Quelle: \url{https://www.json.org/img/array.png})  \label{fig:json_array}}
 	\end{figure}
 	
 	\item \textbf{Strings} sind Zeichenketten. Sie können entweder leer sein, d. h. aus keinen Zeichen bestehen oder mehrere Unicode Zeichen enthalten. Eine Zeichenkette wird immer von Anführungszeichen umschlossen. Sie kann auch besondere Escapesequenzen beinhalten, die besondere Bedeutungen haben. Diese werden mit einem Backslash aufgerufen, wie \zB \enquote{\textbackslash n}, \enquote{\textbackslash t} oder \enquote{\textbackslash r}.
@@ -96,7 +96,7 @@ Mithilfe dieser Syntax, kann man in \acs{json} folgende Strukturen umsetzen:
 
 Beispiele für \acs{json} Dateien sind in Kapitel \ref{json_config_files} zu finden.
 
-\subsection{\acs{json} und \acs{csv} - Vergleich und Selektion}
+\subsection{\acs{json} und \acs{csv} - Vergleich und Selektion} \label{json_vs_csv}
 Sowohl \acs{json} als auch \acs{csv} bringen Vorteile mit sich. 
 \acs{csv} Dateien können in Microsoft Excel bearbeitet und erstellt werden. Die tabellarische Darstellung und die Bekanntheit von Excel machen es zugänglich für Laien, was der größte Vorteil für \acs{csv} ist. Außerdem wird \acs{csv} von vielen Programmiersprachen unterstützt, was die Umsetzung theoretisch möglich machen würde. 
 

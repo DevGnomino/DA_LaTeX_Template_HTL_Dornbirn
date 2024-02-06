@@ -1,0 +1,55 @@
+% Anleitung:
+% https://en.wikibooks.org/wiki/LaTeX/Glossary
+
+% BEFEHLE FÜR GLOSSAREINTRÄGE.
+
+% \gls{<label>} 
+% prints the term associated with <label> passed as its argument.
+
+% \glspl{<label>}
+% prints the plural of the defined term.
+
+% \Gls{<label>}
+% prints the singular form with the first character converted to upper case.
+
+% \Glspl{<label>}
+% prints the plural form with first character converted to upper case.
+
+% BEFEHLE FÜR ACRONYME:
+
+% \acrlong{<label>}
+% long version of an acronym
+
+% \acrfull{<label>}
+% print the long version of an acronym and the abbreviation
+
+% \acrshort{<label>}
+% print the abbreviation
+
+
+%Beispiele:
+\newacronym{vm}{VM}{Virtuelle Maschine}
+
+\newglossaryentry{latex}
+{
+	name=latex,
+	description={LaTeX (short for Lamport TeX) is a document preparation system. The user has to think about only the content to put in the document and the software will take care of the formatting. }
+}
+
+\newglossaryentry{glsy}
+{
+	name=glossary,
+	description={Acronyms and terms which are generally unknown or new to common readers.}
+}
+
+\newglossaryentry{gpio}
+{
+	name=GPIO,
+	description={Als GPIO (Kurzform für General-Purpose Input-Output) bezeichnet man die Pins auf einem Mikrocontroller. Diese können elektrische Signale senden und empfangen, sind aber nicht für einen spezifischen Gebrauch entwickelt}
+}
+
+\newglossaryentry{hdmi}
+{
+	name=HDMI,
+	description={HDMI (Kurzform für High-Definition Multimedia Interface) ist eine Multimedia-Schnittstelle für die Übertragung von Audio- und Videosignalen}
+}

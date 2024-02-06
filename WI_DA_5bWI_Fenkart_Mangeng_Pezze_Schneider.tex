@@ -77,6 +77,7 @@ list-final-separator={ und }}
 \newcommand{\dt}{\mbox{\acs{dt}}\xspace}
 \newcommand{\engl}{\mbox{\acs{engl}}\xspace}
 \newcommand{\bzw}{\mbox{bzw.}\xspace}
+\newcommand{\ggf}{\mbox{ggf.}\xspace}
 \newcommand{\Name}[1]{\textsc{#1}}
 
 \newcommand{\vKTxv}{\mathbf{v}_1^T\tilde{\mathbf{K}}_{T},_{\xi}\mathbf{v}_1}
@@ -85,10 +86,12 @@ list-final-separator={ und }}
 % activate for double space between the lines (correction mode) 
 %\doublespacing
 
+\makeglossaries
+%\loadglsentries{Glossar}
+\input{Glossar}
+
 \begin{document}       %% start of the document
 \maketitle             %% places the title with above information
-
-
 
 %\cleardoublepage
 \selectlanguage{ngerman} 
@@ -110,7 +113,7 @@ list-final-separator={ und }}
 \include{Umsetzung}
 \include{Projektmanagement}
 \include{Tools}
-\include{Résumé}
+\include{Resume}
 
 \include{00-Beispiele}
 
@@ -135,11 +138,11 @@ list-final-separator={ und }}
 
 
 \appendix
+\printglossaries
 \printbibliography
 \listoffigures
 \listoftables
 \printacronyms[name=Abkürzungen]
-% Für Python code im Anhang
-%\lstinputlisting{source_filename.py}
+
 
 \end{document}

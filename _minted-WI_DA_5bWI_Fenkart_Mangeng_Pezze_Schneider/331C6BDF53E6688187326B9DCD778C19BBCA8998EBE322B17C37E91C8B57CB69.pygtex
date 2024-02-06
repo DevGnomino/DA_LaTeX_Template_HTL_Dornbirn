@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}NI1000\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{	}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}°C\PYGZdq{}}
+\PYG{p}{\PYGZcb{},}
+\end{Verbatim}
