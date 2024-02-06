@@ -1,23 +1,56 @@
 \subsection{Einlesen der Konfigurationsdateien}
 !Klassenstruktur beschreiben + UML-Diagramm; den ganzen code dazu weglassen --> weil sehr viel - UML struktur im GUI schon beschrieben; also hier kurz halten; vlt gui section vor config dateien verschieben!
 
-Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine Page-, Measurement- und Sensorklasse. Diese existieren, damit der Text an der richtigen Stelle verändert werden kann. Eine genauere Beschreibung findet sich hier (Grafische Benutzeroberfläche). 
+Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine Page-, Measurement- und Sensorklasse. Die Pages und Measurements existieren, damit der ausgelesene Parameter einfach an der richtigen Stelle verändert werden kann. Ein Measurement kann mehrere Sensoren enthalten, da manche Parameter zur Berechnung  (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. \newline 
+Die Page-, Measurement- und Sensorobjekte werden beim Einlesen der Konfigurationsdateien aufgrund des \enquote{pages} JSON Objekts erstellt und in Listen gespeichert. \newline
+Zum Einlesen werden drei Funktionen benötigt:
+\begin{itemize}
+	\item \textbf{\enquote{load\_config}:} Diese Funktion lädt die gesamte Hauptkonfigurationsdatei ein. Es werden die angeschlossenen Geräte und die angezeigte GUI erstellt. Außerdem kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
+	\item \textbf{\enquote{get\_sensor\_data}:} 
+	\item \textbf{\enquote{get\_sensor\_unit}:} Liest die \enquote{sensor} Konfigurationsdatei ein. Dadurch können die richtigen Messeinheiten zugewiesen werden.
+\end{itemize}
 
-!Config eingelesen!
-
+Einlesen kann man ein JSON Attribut mit folgendem Syntax. Hierbei wird aus dem page Objekt das Attribut title gesucht und zurückgeliefert.
 \begin{pythoncode}
-class Measurement():
-	def __init__(self, description, unit, sensors, python_function, additional_info):
-	self.description = description
-	self.unit = unit
-	self.sensors = sensors
-	self.python_function = python_function
-	self.additional_info = additional_info
-	self.value = "N/A"
+title = page["title"]
 \end{pythoncode}
 
+Erstellen Measurements
 \begin{pythoncode}
-	def get_sensor_data(device_full_data, port_name, sensor_unit):
+page_measurements = []
+for measurements in page["sources"]:
+page_sensors = []
+[Auslesen JSON Datei]
+[Erstellen Sensorobjekte]
+page_measurements.append(Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function, additional_info=additional_info))
+\end{pythoncode}
+
+Auslesen der Sensordaten. Für jedes Gerät wird ein neues Sensor Objekt erstellt und der Sensorliste.
+\begin{pythoncode}
+for port in port_arr:
+	device_id = list(port.keys())[0]  # example: QBM1
+	
+	for device in config_full_data[0]["devices"]:
+		if device["id"] == device_id:
+			[Auslesen Konfigurationsdateien]
+			page_sensors.append(Sensor(baud_rate=device["baud_rate"], mb_address=device["mbaddress"], parity=device["parity"], stop_bits=device["stop_bits"], register=register, scaling=scaling, function_code=function_code, zero_based=device["zero_based"]))	
+\end{pythoncode}
+
+Die Measurements werden aufgeteilt, damit maximal 5 Measurements auf einer Seite sind. 
+\begin{pythoncode}
+counter = 0
+last_slice = 0
+for measurement in page_measurements:
+	counter += 1
+	if ((counter \% 5) == 0) or (counter == len(page_measurements)):
+		all_pages.append(Page(title=title, measurements=page_measurements[last_slice:counter]))
+		last_slice = counter
+\end{pythoncode}
+
+%\pythonfile[firstline=125, lastline=197]{Code/modbus.py}
+
+\begin{pythoncode}
+def get_sensor_data(device_full_data, port_name, sensor_unit):
 	for device in device_full_data["ports"]:
 	print(device)
 	if device["port"] == port_name:
@@ -40,7 +73,7 @@ class Measurement():
 	return -1
 	
 	
-	def get_sensor_unit(sensor_name):
+def get_sensor_unit(sensor_name):
 	sensor_file = open(DEVICES_CONFIG_PATH + 'sensors.json', encoding='utf-8')
 	sensor_full_data = json.load(sensor_file)
 	# print(sensor_full_data)
@@ -52,5 +85,8 @@ class Measurement():
 	sensor_file.close()
 	return ""
 \end{pythoncode}
+
+Im Konstruktor der Page- Measurement- und Sensorobjekte werden die ausgelesenen Variablen in Instanzvariablen gespeichert.
+
 
 !Im entsprechenden Sensor gespeichert!

@@ -82,7 +82,7 @@ class Measurement():
 
 
 class Page():
-    def __init__(self, title, measurements):
+ def __init__(self, title, measurements):
         self.title = title
         self.measurements = measurements
 
@@ -174,14 +174,9 @@ def load_config():
                         register = sensor_data["sensor_register"]
                         function_code = sensor_data["sensor_function_code"]
 
-                        page_sensors.append(Sensor(baud_rate=device["baud_rate"], mb_address=device["mbaddress"],
-                                                   parity=device["parity"],
-                                                   stop_bits=device["stop_bits"], register=register,
-                                                   scaling=scaling,
-                                                   function_code=function_code, zero_based=device["zero_based"]))
+                        page_sensors.append(Sensor(baud_rate=device["baud_rate"], mb_address=device["mbaddress"], parity=device["parity"], stop_bits=device["stop_bits"], register=register, scaling=scaling, function_code=function_code, zero_based=device["zero_based"]))
 
-            page_measurements.append(
-                Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function,
+            page_measurements.append(Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function,
                             additional_info=additional_info))
 
         counter = 0

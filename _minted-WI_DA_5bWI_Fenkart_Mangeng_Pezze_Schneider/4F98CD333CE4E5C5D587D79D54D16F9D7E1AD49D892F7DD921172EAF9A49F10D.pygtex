@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{page\PYGZus{}measurements} \PYG{o}{=} \PYG{p}{[]}
+\PYG{k}{for} \PYG{n}{measurements} \PYG{o+ow}{in} \PYG{n}{page}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sources\PYGZdq{}}\PYG{p}{]:}
+\PYG{n}{page\PYGZus{}sensors} \PYG{o}{=} \PYG{p}{[]}
+\PYG{p}{[}\PYG{n}{Auslesen} \PYG{n}{JSON} \PYG{n}{Datei}\PYG{p}{]}
+\PYG{p}{[}\PYG{n}{Erstellen} \PYG{n}{Sensorobjekte}\PYG{p}{]}
+\PYG{n}{page\PYGZus{}measurements}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Measurement}\PYG{p}{(}\PYG{n}{description}\PYG{o}{=}\PYG{n}{description}\PYG{p}{,} \PYG{n}{unit}\PYG{o}{=}\PYG{n}{unit}\PYG{p}{,} \PYG{n}{sensors}\PYG{o}{=}\PYG{n}{page\PYGZus{}sensors}\PYG{p}{,} \PYG{n}{python\PYGZus{}function}\PYG{o}{=}\PYG{n}{python\PYGZus{}function}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{o}{=}\PYG{n}{additional\PYGZus{}info}\PYG{p}{))}
+\end{Verbatim}
