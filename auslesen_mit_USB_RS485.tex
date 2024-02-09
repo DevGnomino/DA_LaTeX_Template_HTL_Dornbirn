@@ -1,4 +1,4 @@
-Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Dies kann nicht im Hauptthread laufen, da customtkinter diesen blockiert.
+Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert.
 
 \begin{pythoncode}
 def data_threading(app):
@@ -8,7 +8,7 @@ def data_threading(app):
 	t1.start()
 \end{pythoncode}
 
-In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird.
+In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird.
 
 \begin{pythoncode}
 def data_refresh(app):
@@ -59,13 +59,13 @@ class Sensor():
 \end{pythoncode}
 
 \label{get_data_from_modbus}
-In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. Dieser gibt man als Parameter an, welches Register, wie viele und welcher Modbus Function Code benutzt wird. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen  der \enquote{modbus\_functions} Datei.
+In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und der Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen  der \enquote{modbus\_functions} Datei aufgerufen.
 
 \begin{pythoncode}
 class Sensor():
 	def get_data_from_modbus(self):
 		try:
-			fetched_data = self.sensor.read_registers(self.register, 1, self.function_code)			
+			fetched_data = self.sensor.read_registers(self.register, 1, self.function_code)
 			fetched_data_scaled = round((fetched_data[0] * self.scaling), 1)
 			return fetched_data_scaled
 		
@@ -74,8 +74,7 @@ class Sensor():
 			return "N/A"
 \end{pythoncode}
 
-In der \enquote{run\_calculation\_function} Methode wird die in der Konfigurationsdatei angegebene Funktion ausgewählt. Wenn \enquote{standard} eingelesen wurde, wird die Standard Funktion ausgeführt. Ansonsten wird mit \enquote{hasattr} überprüft, ob innerhalb der \enquote{modbus\_functions} Datei die angegebene Funktion existiert. Wenn diese gefunden wurde, kann mit \enquote{getattr} ein Funktionszeiger erstellt werden. Die entsprechende Funktion wird ausgeführt. Welche Funktionen vorhanden sind wird hier beschrieben (link auf python\_functions). 
-Ein Measurement kann mehrere Sensoren enthalten.
+In der \enquote{run\_calculation\_function} Methode wird die in der Konfigurationsdatei angegebene Funktion ausgewählt. Wenn \enquote{standard} eingelesen wurde, wird die Standard Funktion ausgeführt. Ansonsten wird mit \enquote{hasattr} überprüft, ob innerhalb der \enquote{modbus\_functions} Datei die angegebene Funktion existiert. Wenn diese existiert, wird mit \enquote{getattr} ein Funktionszeiger erstellt. Mit diesem Zeiger wird dann die entsprechende Funktion ausgeführt. Welche Funktionen vorhanden sind wird hier beschrieben (link auf python\_functions). 
 
 \begin{pythoncode}
 class Measurement():
