@@ -21,15 +21,9 @@ class Sensor():
             self.register = register - 1
         self.function_code = function_code
 
-        """print("Register",register)
-        print("baudrate",baud_rate)
-        print("mbaddress",mb_address)
-        print("functioncode",function_code)
-        print("zerobased",zero_based)
-        print("parity",parity)"""
-
         # Mit USB Connector auf Linux       /dev/ttyUSB0
         # Mit USB Connector auf Windows     COM4
+        # Über TX (8) und RX (10) Pins      /dev/ttyAMA0
         self.sensor = minmb.Instrument('/dev/ttyAMA0',
                                        mb_address)  # Make an "instrument" object called sensor (port name, slave address (in decimal))
         self.sensor.serial.baudrate = baud_rate
@@ -54,15 +48,7 @@ class Sensor():
         try:
             fetched_data = self.sensor.read_registers(self.register, 1, self.function_code)
 
-            # fetched_data_scaled = ""
-            # if self.scaling == 0:  # scaling 0 --> the value is a bool
-            #     if fetched_data[0] == 0:
-            #         fetched_data_scaled = False
-            #     else:
-            #         fetched_data_scaled = True
-            # else:
             fetched_data_scaled = round((fetched_data[0] * self.scaling), 1)
-                # fetched_data_scaled = str(fetched_data_scaled)
             return fetched_data_scaled
 
         except Exception as e:
@@ -96,7 +82,7 @@ class Measurement():
 
 
 class Page():
-    def __init__(self, title, measurements):
+ def __init__(self, title, measurements):
         self.title = title
         self.measurements = measurements
 
@@ -119,7 +105,6 @@ def get_sensor_data(device_full_data, port_name, sensor_unit):
                 return_var = {"sensor_register": sensor_register, "sensor_scaling": 1,
                               "sensor_function_code": sensor_function_code}
                 return return_var
-
 
     return -1
 
@@ -157,8 +142,6 @@ def load_config():
             additional_info = {}
             if "additional_info" in measurements:
                 additional_info = measurements["additional_info"]
-            # print(python_function)
-            # print(additional_info)
 
             unit = ""
             for port in port_arr:
@@ -191,14 +174,9 @@ def load_config():
                         register = sensor_data["sensor_register"]
                         function_code = sensor_data["sensor_function_code"]
 
-                        page_sensors.append(Sensor(baud_rate=device["baud_rate"], mb_address=device["mbaddress"],
-                                                   parity=device["parity"],
-                                                   stop_bits=device["stop_bits"], register=register,
-                                                   scaling=scaling,
-                                                   function_code=function_code, zero_based=device["zero_based"]))
+                        page_sensors.append(Sensor(baud_rate=device["baud_rate"], mb_address=device["mbaddress"], parity=device["parity"], stop_bits=device["stop_bits"], register=register, scaling=scaling, function_code=function_code, zero_based=device["zero_based"]))
 
-            page_measurements.append(
-                Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function,
+            page_measurements.append(Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function,
                             additional_info=additional_info))
 
         counter = 0

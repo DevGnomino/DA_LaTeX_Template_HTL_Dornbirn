@@ -47,25 +47,20 @@ def copy_from_usb():
     config_path = "/home/pi/Documents/RLT_Config/"
     device_config_path = "/home/pi/Documents/RLT_Config/devices/"
 
-    log_file = open("/home/pi/Documents/startup_log.txt", 'w')
     port = ""
     time.sleep(5)
     while True:
         if (os.system("mount | grep sda1") != 256):
             port = "sda1"
-            log_file.write("Selected drive "+ port)
             break
         elif (os.system("mount | grep sdb1") != 256):
             port = "sdb1"
-            log_file.write("Selected drive "+ port)
             break
         elif (os.system("mount | grep sdc1") != 256):
             port = "sdc1"
-            log_file.write("Selected drive "+ port)
             break
         elif (os.system("mount | grep sdd1") != 256):
             port = "sdd1"
-            log_file.write("Selected drive "+ port)
             break
 
         if (check_if_files_exists(config_path, device_config_path, False)):
@@ -79,18 +74,14 @@ def copy_from_usb():
 
     os.system("sudo umount /dev/" + port)
     os.system("sudo mount /dev/" + port + " /home/pi/Documents/Config")
-    log_file.write("Mounted disk")
     #is_mounted = os.system("mount | grep sda1")
     #print(is_mounted)
-    log_file.close()
     error_free = check_if_files_exists(usb_config_path, usb_device_config_path, True)  
     
     if error_free:
         os.system("cp -r ~/Documents/Config/RLT_Config ~/Documents/")
     else:
         os.system("sudo umount /dev/" + port)
-        #os.system("sudo eject /dev/" + port) 
-        #os.system("udisk --detach /dev/" + port)
         return -1
 
     os.system("sudo umount /dev/" + port)
@@ -105,8 +96,5 @@ def usb_routine():
     elif copy_error == 0:
         start_window("Config Dateien wurden kopiert. Entferne nun den USB")   
     elif copy_error == 1: 
-        start_window("Kein USB-Stick gefunden und Config bereits vorhanden")  
-    #start_window("Nun den Modbus-USB einstecken")
-    #time.sleep(3)
-    #os.system("python /home/pi/Documents/main.py")
+        start_window("Kein USB-Stick gefunden und Config bereits vorhanden")
     return False

@@ -1,10 +1,15 @@
 \subsection{Übertragen der Config Files mittels USB}
-Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man beim Bootvorgang des Raspberry Pi einen Datenträger (\zB USB-Stick) an. Auf dem Datenträger muss im Root-Verzeichnis (\textasciitilde) ein Verzeichnis namens "'RLT\_Config"' sein. Wenn dieses Verzeichnis und alle nötigen Konfigurationsdateien darin vorhanden sind, werden diese in das Documents-Verzeichnis des Raspberry Pi kopiert. Das passiert in der "'usb\_routine"' Funktion. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
-
-In DIA ein Ablaufdiagramm erstellen.
-Folgendes Diagramm verdeutlicht diesen Vorgang. Es wurde mit einem Programm namens Dia erstellt.
+Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man beim Bootvorgang des Raspberry Pi einen Datenträger (\zB USB-Stick) an. Auf dem Datenträger muss im Root-Verzeichnis (\textasciitilde) ein Verzeichnis namens \enquote{RLT\_Config} sein. Wenn dieses Verzeichnis und alle nötigen Konfigurationsdateien darin vorhanden sind, werden diese in das Documents Verzeichnis des Raspberry Pi kopiert. \newline Folgendes Aktivitätsdiagramm verdeutlicht diesen Vorgang. (Siehe Abb.~\ref{fig:config_ubertragen_activity}):
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{Bilder/config_ubertragen_activity_diagram}
+	\caption{Übertragen der Konfigurationsdateien}
+	\label{fig:config_ubertragen_activity}
+\end{figure}
 
 %\pythonfile[firstline=2, lastline=12]{Code/main.py}
+
+Das passiert in der \enquote{usb\_routine} Funktion. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
 
 \begin{pythoncode}
 if __name__ == "__main__":
@@ -19,7 +24,7 @@ if __name__ == "__main__":
 	app.mainloop()	
 \end{pythoncode}
 
-Es wird die "copy\_from\_usb"\ Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \dq start\_window"\ Funktion erstellt ein neues customtkinter Fenster, in dem dann der Parameter string angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt.
+Es wird die \enquote{copy\_from\_usb} Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \enquote{start\_window} Funktion erstellt ein neues customtkinter Fenster, in dem dann der Parameter string angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt.
 
 \begin{pythoncode}
 def usb_routine():
@@ -33,7 +38,7 @@ def usb_routine():
 	return False
 \end{pythoncode}
 
-Es folgt die Beschreibung der "copy\_from\_usb"\ Funktion. Es wird geschaut ob auf einem der sd-Ports ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird nun überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert im "check\_if\_files\_exists". Wenn ja, ist der Kopiervorgang abgeschlossen, wenn nein, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird für fünf Sekunden gestoppt, damit der Benutzer oder die Benutzerin genügend Zeit hat einen Datenträger einzufügen.
+Es folgt die Beschreibung der \enquote{copy\_from\_usb} Funktion. Es wird geschaut ob auf einem der sd-Ports ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird nun überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert im \enquote{check\_if\_files\_exists}. Wenn ja, ist der Kopiervorgang abgeschlossen, wenn nein, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird für fünf Sekunden gestoppt, damit der Benutzer oder die Benutzerin genügend Zeit hat einen Datenträger einzufügen.
 
 \begin{pythoncode}
 	port = ""
@@ -57,7 +62,7 @@ Es folgt die Beschreibung der "copy\_from\_usb"\ Funktion. Es wird geschaut ob a
 		time.sleep(5)
 \end{pythoncode}
 
-Wenn ein Datenträger gefunden wurde, wird dieser Port gemountet. Dieses mal wird überprüft, ob die Konfigurationsdateien auf dem Datenträger existieren. Wenn nicht, wird der Datenträger ausgeworfen und ein Fehlercode zurückgegeben. Ansonsten werden die Dateien kopiert und der Datenträger ausgeworfen. Die beiden Funktionen "check\_if\_files\_exists"\ und \dq start\_window"\ sind im Codeanhang zu finden. Beim Auswerfen wird manchmal eine Nachricht angezeigt, dass der Datenträger nicht ausgeworfen wurde. Dies kann ignoriert werden (Quelle angeben; falls das überhaupt stimmt).
+Wenn ein Datenträger gefunden wurde, wird dieser Port gemountet. Dieses mal wird überprüft, ob die Konfigurationsdateien auf dem Datenträger existieren. Wenn nicht, wird der Datenträger ausgeworfen und ein Fehlercode zurückgegeben. Ansonsten werden die Dateien kopiert und der Datenträger ausgeworfen. Die beiden Funktionen \enquote{check\_if\_files\_exists} und \enquote{start\_window} sind im Codeanhang zu finden. Beim Auswerfen wird manchmal eine Nachricht angezeigt, dass der Datenträger nicht ausgeworfen wurde. Dies kann ignoriert werden (Quelle angeben; falls das überhaupt stimmt).
 
 \begin{pythoncode}
 	os.system("sudo umount /dev/" + port)

@@ -1,11 +1,13 @@
-\chapter{Umsetzung}
+\chapter{Umsetzung} 
 
 \section{Raspberry PI Aufsetzung}
 \setAuthor{\pezze}
 \input{raspi_setup}
 
-\setAuthor{\mangeng}
-\input{library_installation}
+\section{\acf{gui}}\label{gui_design}
+\setAuthor{\pezze}
+\input{figma_design}
+\input{tkintercode}
 
 \section{\acs{json} Konfigurationsdateien}
 \setAuthor{\pezze}
@@ -23,11 +25,6 @@
 \setAuthor{\schneider}
 \input{auslesen_mit_USB_RS485}
 
-\section{\acf{gui}}
-\setAuthor{\pezze}
-\input{figma}
-\input{tkintercode}
-
 \section{Fertigstellung}
 \setAuthor{\schneider}
 \input{config_uebertragen}
@@ -35,3 +32,8 @@
 \setAuthor{\pezze}
 \input{prototyp}
 \input{raspi_image}
+
+\newpage
+\section{aufgetretene Problematiken}
+\setAuthor{\mangeng}
+\input{probleme}
