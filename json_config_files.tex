@@ -1,10 +1,14 @@
 \subsection{Dateikonzept} \label{json_config_files}
-Um das Dateikonzept besser zu verstehen, zeigt Abbildung \ref{} einen vereinfachten Aufbau der Komponenten. Hierbei sind sämtliche Bestandteile einer \acs{rltanlage} ersichtlich, welche von der Firma Bösch zur Entwicklung einer \acs{rltanzeige} bereitgestellt wurden. Die \acs{rltanzeige} selbst ist über den Bus mit einem Ventilator von Ebmpapst sowie einem QBM97XX von Siemens verbunden. Am QBM97XX sind weiters noch zwei Temperatursensoren, eine Klappe und ein Relais angeschlossen.
+Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien entwickelt. Abbildung \ref{fig:vereinfachter_aufbau_dateikonzept} dient dem besseren Verständnis des Dateikonzepts. Hauptsächlich zeigt diese einen vereinfachten Aufbau der Komponenten, die von der Firma Bösch zur Entwicklung einer \acs{rltanzeige} bereitgestellt wurden, und die dazugehörigen Konfigurationsdateien. Die \acs{rltanzeige} selbst ist über den Bus mit einem Ventilator von ebm-papst sowie einem QBM9711 von Siemens verbunden. Der Ventilator verfügt lediglich über integrierte Sensorik. Der QBM9711 hingegen verfügt über zwei integrierte Luftdruck-Sensoren (interne Ports 1 und 2), zwei (an die Ports Analog Input 1 und 2) extern angeschlossene Temperatursensoren, eine (an den Port Analog Output 1) extern angeschlossene Klappe und ein (an den Port Analog Output 2) extern angeschlossenes Relais.
 
-ABBILDUNG!
 
-Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien entwickelt:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Komponenten_simpler_Aufbau_fuer_Dateikonzept}
+	\caption{Vereinfachter Aufbau der Komponenten \label{fig:vereinfachter_aufbau_dateikonzept}}
+\end{figure}
 
+Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 %Fenkart fragen, ob ich bei den Geräten auf seinen Teil verweisen kann
 % Wer beschreibt baud_rate, register, adresse, function code \ref{modbus_funktionsweise}
 
@@ -19,7 +23,7 @@ Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien en
 	\begin{table}[h]
 		\caption{Parameter der Sensor-Konfigurationsdatei (\enquote{sensors.json})}
 		\label{tab:sensors_json_parameter}
-		\begin{tabular}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.45\textwidth} | p{0.35\textwidth}}
+		\begin{tabular}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.5\textwidth} | p{0.3\textwidth}}
 			\toprule
 			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
 			\midrule
@@ -45,36 +49,36 @@ Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien en
 },
 	\end{jsoncode}
 	
-	\item \textbf{Geräte-Konfigurationsdateien} (\zB \enquote{QBM97XX.json} oder \enquote{EBM.json}): Hier sind gerätespezifische Daten hinterlegt. Hauptsächlich welche Ausgabeports eine bestimmte Komponente (\zB Ventilator) besitzt, welche Einstellungen diese Ausgänge haben und \ggf welche Maßeinheiten die extern angeschlossenen Sensoren zurückgeben. 
+	\item \textbf{Geräte-Konfigurationsdateien} (\zB \enquote{QBM97XX.json} oder \enquote{EBM.json}): Hier sind gerätespezifische Daten hinterlegt. Hauptsächlich welche Ausgabeports eine bestimmte Komponente (\zB ein Ventilator) besitzt, welche Einstellungen diese Ausgänge haben und \ggf welche Maßeinheiten die extern angeschlossenen Sensoren zurückgeben. 
 	
 	Weil in den \acs{rltanlagen} der Firma Bösch häufig die gleichen Komponenten verwendet werden, wurden spezielle Geräte-Konfigurationsdateien konzipiert. Diese Dateien können in der Haupt-Konfigurationsdatei beliebig oft referenziert werden, da sie einmalig für jedes Gerätemodell erstellt werden und nur selten Änderungen unterliegen. Das Hinzufügen einer neuen Geräte-Konfigurationsdatei ermöglicht zudem die einfache Integration einer neuen Komponente, beispielsweise eines Ventilators einer anderen Marke.
-	%%%
-	Die Aufteilung der Seiten wird in der Haupt-Konfigurationsdatei gemacht. Dabei werden alle Seiten, die später auf der \acs{rltanzeige} angezeigt werden sollen, im \enquote{pages} Array definiert. Dazu werden unterschiedliche Parameter angegeben (siehe Tab. \ref{tab:pages_array_parameter}).
-
+	
+	Der Aufbau der Geräte-Konfigurationsdateien basiert auf einem \enquote{ports} Array. In dieses werden mithilfe der Parameter aus Tabelle \ref{tab:ports_array_parameter} die erforderlichen Informationen eingetragen.
 	
 	\begin{table}[H]
 		\caption{Parameter im \enquote{ports} Array der Geräte-Konfigurationsdateien}
-		\label{tab:pages_array_parameter}
-		\begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.47\textwidth} | p{0.3\textwidth}}
+		\label{tab:ports_array_parameter}
+		\begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.5\textwidth} | p{0.27\textwidth}}
 			\toprule
 			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
 			\midrule
-			port      	&  & 
+			port      	& Bezeichnung des Ausgabeports. Wird im Falle eines Geräts mit externer Sensorik (\zB Siemens QBM) in der Haupt-Konfigurationsdatei unter \enquote{port} referenziert. & 
 			\begin{jsonTable}
 "port": "AI1"
 			\end{jsonTable} 
 			\\
-			register 	&  & 
+			register 	& !!!!!!!!!!!Das Register, welches vom Modbus ausgelesen werden soll (Bemerkung: Immer Dezimal, nicht HEX) & 
 			\begin{jsonTable}
 "register": 11
 			\end{jsonTable} 
 			\\
-			function\_code 	&  & 
+			function\_code 	& Modbus-Funktionscode, mit dem auf das vorherig angegebene Register zugegriffen werden soll: 3 für Input Register, 4 für Holding Register & 
 			\begin{jsonTable}
 "function_code": 3
 			\end{jsonTable} 
 			\\
-			units 	&  & 
+			units 	& Array mit Unit-Objekten; Wird bei Ports weggelassen, bei denen die Werte nur von Python-Funktionen verwendet werden; In einem Objekt dieses Arrays werden folgende Parameter angegeben: „unit“, „scaling“; Funktionsweise / Zweck: Einheit wird mit dem „type“-Attribut zuerst aus der Sensor-Konfigurationsdatei herausgeholt und dann hier verglichen. Dann wird die Skalierung ausgelesen und der Wert aus dem Modbus damit multipliziert
+			z. B. „type“ : „NI1000“ $\rightarrow$ „unit“ : „°C“ $\rightarrow$ „scaling“ : 0.1 $\rightarrow$ Ausgelesener Wert wird mit 0,1 multipliziert & 
 			\begin{jsonTable}
 "units": "[ ]"
 			\end{jsonTable} 
@@ -90,12 +94,12 @@ Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien en
 			\toprule
 			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
 			\midrule
-			unit      	&  & 
+			unit      	& Die Einheit, welche aus „sensors.json“ referenziert wird & 
 			\begin{jsonTable}
 "unit": "°C"
 			\end{jsonTable} 
 			\\
-			scaling 	&  & 
+			scaling 	& Skalierung des Messwertes (wird \zB verwendet, wenn der Messwert Kommastellen besitzt). Kann aus Datenblättern entnommen werden. & 
 			\begin{jsonTable}
 "scaling": 0.1
 			\end{jsonTable} 
