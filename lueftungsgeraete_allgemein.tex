@@ -12,7 +12,7 @@ Die Anlage versorgte das House of Commons mit Zuluft welche links unten bei den 
 Die Filterung wurde durch Baumwolle, welche bei Punkt C aufgeschichtet wird realisiert.
 Nach der Filterung wurde beim Punkt A die Luft erhitzt. 
 Danach strömte die Luft durch den doppelten Boden und wurde dadurch verteilt. Die Luft strömte nun nach oben und wurde bei Punkt F aus dem Gebäude geleitet. Im Winter leitete man die Luft nach links direkt aus dem Fenster geleitet. Im Sommer hingegen wurde die Luft nach rechts durch die Verrohung und durch den Kamin  nach draußen geleitet. vgl.
-\cite{Fitzner_Finke:2010} 
+\cite[vgl.][]{Fitzner_Finke:2010} 
 
 \begin{figure}[ht]
 	\centering
@@ -42,17 +42,39 @@ Im folgenden werden die Komponenten anhand des allgemeinen Aufbauplans einer \ac
 \begin{itemize}
 	\item \textbf{Ventilatoren}: In einer \ac{rltanlage} ist immer mindestens ein Ventilator vorhanden (abhängig der Größe der \ac{rltanlage}). Dieser ist für die Beförderung von Luftmassen durch die \ac{rltanlage} sowie die Beförderung aus und in das Gebäude zuständig. Der Ventilator muss mit Bedacht dimensioniert sein, da dieser in der \ac{rltanlage} den höchsten Stromverbrauch hat. Die Dimensionierung muss so gewählt werden, dass der intern herrschende Strömungswiderstand überwindet wird. Es gibt verschiedene Arten von Ventilatoren 
 	\begin{itemize}
-		\item Axialventilatoren mit/ohne Leitrad 
+		\item Axialventilatoren mit/ohne Leitrad Abb.~\ref{fig:EBM_Axialventilator}
 		\item Radialventilatoren mit Laufräder (vorwärts- oder rückwertsgekrümmte Schaufeln)
 		\item Querstrom- oder Tangentiallüfter 
 	\end{itemize}
-	Axialventilatoren 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/axialventilator}
+		\caption{EBM Axialventilator} 
+		(Quelle: \url{https://ebmpapst-7237.kxcdn.com/de/files/2017/11/RadiPac-mit-oder-ohne-tragspinne-450x207.jpg})
+		\label{fig:EBM_Axialventilator}
+	\end{figure}
 
-	\item \textbf{Heiz- und Kühlregister}: im Heiz- und Kühlregister wird die einströmende Luft je nach Bedürfnis erhitzt oder gekühlt. Dies wird durch unterschiedlichste Heiz- oder Kühlmedien realisiert bsp. Dampf, heißes oder kaltes Wasser, welches durch das Heiz- bzw. Kühlregister fließt. Andere Arten um die einströmende Luft zu erhitzen sind: Elektrolufterhitzer, gasbetriebene Lufterhitzer. Um die Luft abzukühlen kann auch ein Direktverdampfer verwendet werden.
+	\item \textbf{Heiz- und Kühlregister}: im Heiz- und Kühlregister Abb.~\ref{fig:heizregister} wird die einströmende Luft je nach Bedürfnis erhitzt oder gekühlt. Dies wird durch unterschiedlichste Heiz- oder Kühlmedien realisiert bsp. Dampf, heißes oder kaltes Wasser, welches durch das Heiz- bzw. Kühlregister fließt. Andere Arten um die einströmende Luft zu erhitzen sind: Elektrolufterhitzer, gasbetriebene Lufterhitzer. Um die Luft abzukühlen kann auch ein Direktverdampfer verwendet werden.
 	Um Energiekosten zu sparen, wird der Abluft die Wärmeenergie entzogen und der Zuluft wieder hinzugefügt, dabei werden bis zu 98 Prozent der Wärmeenergie zurückgewonnen. Im Vergleich zu \ac{rltanlage} ohne Wärmerückgewinnung werden bis zu 30 Prozent an Heizenergie eingespart. 
 	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/luftwaermeregister}
+		\caption{Heiz- Kühlregister} 
+		(Quelle: \url{https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/5})
+		\label{fig:heizregister}
+	\end{figure}
 	
-	\item \textbf{Luft Be- und Entfeuchter}: Der Luft Be- und Entfeuchter ist dafür zuständig, dass die Zuluft und dessen Luftfeuchtigkeit den Sollwert nicht unter- bzw. überschreiten. Meist wird für diesen Schritt ein Umlaufsprühbefeuchter eingesetzt. Dieses Bauteil ist jedoch zwecks dessen Hygiene, sehr Wartungsintensiv. 
+	\item \textbf{Luft Be- und Entfeuchter}: Der Luft Be- und Entfeuchter Abb.~\ref{fig:luftbefeuchter}ist dafür zuständig, dass die Zuluft und dessen Luftfeuchtigkeit den Sollwert nicht unter- bzw. überschreiten. Meist wird für diesen Schritt ein Umlaufsprühbefeuchter eingesetzt. Dieses Bauteil ist jedoch zwecks dessen Hygiene, sehr Wartungsintensiv. 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/Luftbefeuchter}
+		\caption{Luftbe- und Entfeuchter} 
+		(Quelle: \url{	https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/6})
+		\label{fig:luftbefeuchter}
+	\end{figure}
 	
 	\item \textbf{Filter}: Die verbauten Filter sind für die Filterung der Zuluft zuständig. Filter werden laut der DIN EN ISO 16890-1 in 3 Gruppen unterteilt.
 	\begin{itemize}
@@ -60,19 +82,59 @@ Im folgenden werden die Komponenten anhand des allgemeinen Aufbauplans einer \ac
 		\item PM(Particulate Matter) 2,5: Partikel die größer als 2,5 Mikrometer sind \zB Bakterien oder Pilze
 		\item PM(Particulate Matter) 10: Partikel die größer als 10 Mikrometer sind \zB Pollen oder Staub
 	\end{itemize}
-	Es werden zur Reinigung der Zuluft entweder Taschenfilter oder Kassettenfilter verwendet. Um Gerüche aus der Luft zu filtern \zB in Küchen werden Aktivkohlefilter verwendet. Bei beiden Filterarten ist es wichtig diese in regelmäßigen Abständen zu säubern oder ersetzten.  
+	Es werden zur Reinigung der Zuluft entweder Taschenfilter Abb.~\ref{fig:taschenfilter} oder Kassettenfilter verwendet. Um Gerüche aus der Luft zu filtern \zB in Küchen werden Aktivkohlefilter verwendet. Bei beiden Filterarten ist es wichtig diese in regelmäßigen Abständen zu säubern oder ersetzten.  
 	
-	\item \textbf{Schalldämpfer}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/normalefilter}
+		\caption{Taschenfilter} 
+		(Quelle: \url{	https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/7})
+		\label{fig:taschenfilter}
+	\end{figure}
 	
-	\item \textbf{Drossel- und Jalousieklappen}:
+	\item \textbf{Schalldämpfer}: Schalldämpfer Abb.~\ref{fig:schalldaempfer} sind für die Absorption von Lärmquellen in einem Lüftungsgerät zuständig. Die Lärmquelle mit dem höchsten Lärmpegel sind dabei die Ventilatoren. Es wird dabei unterschieden zwischen:
+	\begin{itemize}
+		\item Absorptions-Schalldämpfer 
+		\item Drossel-Schalldämpfer
+		\item Resonanz-Schalldämpfer
+	\end{itemize} 
+	Auch die richtige Anordnung und Dimensionierung der Verrohung zwischen einzelnen Räumen, welche an der selben \ac{rltanlage} angeschlossen sind ist essenziell. Dabei werden Strömungsgeräusche (Geräusch welche zwischen zwei Räumen durch die Verrohung transportiert werden) verhindern.
 	
-	\item \textbf{Volumenstromregler}:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/schalldaempfer}
+		\caption{Schalldämpfer (Mineralwolle als Dämpfmaterial)} 
+		(Quelle: \url{	https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/8})
+		\label{fig:schalldaempfer}
+	\end{figure}
+	
+	\item \textbf{Drossel- und Jalousieklappen}: 
+	Drossel- und Jalousieklappen Abb.~\ref{fig:drosselklappe} werden dahingehend eingesetzt, um durchgehend einen konstanten Volumenstromwert zu erreichen. 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/drosselklappe}
+		\caption{Drosselklappe} 
+		(Quelle: \url{	https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/10})
+		\label{fig:drosselklappe}
+	\end{figure}
+	
+	\item \textbf{Volumenstromregler}: Der Volumenstromregler arbeitet eng mit den Drossel- und Jalousieklappen zusammen. Dabei wird zwischen einem Konstant-Volumenstromregler oder einem variablen Volumenstromregler. Wie aus dem Namen abzuleiten, ist dieser für die Messung und Regelung des Luftvolumens zuständig. 
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Bilder/volumenstromregler}
+		\caption{Volumenstromregler} 
+		(Quelle: \url{	https://www.baunetzwissen.de/gebaeudetechnik/fachwissen/lueftung/bestandteile-von-lueftungsanlagen-2473103/gallery-1/12})
+		\label{fig:volumenstromregler}
+	\end{figure}
 	
 	\item \textbf{Brandschutzklappen und Rauchschutzklappen}:
-	
+	Die Sicherheit vor Feuer und Rauch ist durch sogenannte Brand- und Rauchschutzklappen gegeben.
+	Diese Art von Klappen verhindert das sich Rauch oder Feuer über die Lüftungsschächte/Verrohung durch das Gebäude ausbreitet. Brandschutzklappen sind zwischen den einzelnen Brandabschnitten eines Gebäudes angebracht. Rauchschutzklappen sind im inneren der Lüftungsleitungen angebracht, dadurch wird verhindert, dass Menschen giftige Dämpfe und Rauch einatmen. Sowohl die Brandschutzklappe als auch die Rauchschutzklappe, schließen im Notfall (Brand- oder Rauchentwicklung) automatisch.
 \end{itemize}
+\cite[vgl.][]{baunetz_bestandteile_nodate:o.J.}
 
-\cite{baunetz_bestandteile_nodate:o.J.}
 
 \subsection{\ac{rltanlage} Walter-Bösch GmbH.}
 
