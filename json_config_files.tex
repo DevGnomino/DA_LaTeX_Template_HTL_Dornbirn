@@ -8,7 +8,7 @@ Für das Dateikonzept wurden drei Dateitypen auf Basis von \acs{json} Dateien en
 	\caption{Vereinfachter Aufbau der Komponenten \label{fig:vereinfachter_aufbau_dateikonzept}}
 \end{figure}
 
-Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
+Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 %Fenkart fragen, ob ich bei den Geräten auf seinen Teil verweisen kann
 % Wer beschreibt baud_rate, register, adresse, function code \ref{modbus_funktionsweise}
 
@@ -41,22 +41,15 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 		\end{tabular}
 	\end{table}
 	
-	Ein Beispiel für einen Eintrag der Sensor-Konfigurationsdatei ist folgend zu sehen:
-	\begin{jsoncode}
-{
-	"type": "NI1000",
-	"unit": "°C"
-},
-	\end{jsoncode}
-	
-	\item \textbf{Geräte-Konfigurationsdateien} (\zB \enquote{QBM97XX.json} oder \enquote{EBM.json}): Hier sind gerätespezifische Daten hinterlegt. Hauptsächlich welche Ausgabeports eine bestimmte Komponente (\zB ein Ventilator) besitzt, welche Einstellungen diese Ausgänge haben und \ggf welche Maßeinheiten die extern angeschlossenen Sensoren zurückgeben. 
+		
+	\item \textbf{Geräte-Konfigurationsdateien} (\zB \enquote{QBM97XX.json} oder \enquote{EBM.json}): Hier sind gerätespezifische Daten hinterlegt. Hauptsächlich welche Ausgabeports eine bestimmte Komponente (\zB ein Ventilator) besitzt, welche Einstellungen diese Ausgänge haben und \ggf welche Maßeinheiten die integrierten oder extern angeschlossenen Sensoren zurückgeben. 
 	
 	Weil in den \acs{rltanlagen} der Firma Bösch häufig die gleichen Komponenten verwendet werden, wurden spezielle Geräte-Konfigurationsdateien konzipiert. Diese Dateien können in der Haupt-Konfigurationsdatei beliebig oft referenziert werden, da sie einmalig für jedes Gerätemodell erstellt werden und nur selten Änderungen unterliegen. Das Hinzufügen einer neuen Geräte-Konfigurationsdatei ermöglicht zudem die einfache Integration einer neuen Komponente, beispielsweise eines Ventilators einer anderen Marke.
 	
 	Der Aufbau der Geräte-Konfigurationsdateien basiert auf einem \enquote{ports} Array. In dieses werden mithilfe der Parameter aus Tabelle \ref{tab:ports_array_parameter} die erforderlichen Informationen eingetragen.
 	
 	\begin{table}[H]
-		\caption{Parameter im \enquote{ports} Array der Geräte-Konfigurationsdateien}
+		\caption{Parameter des \enquote{ports} Array der Geräte-Konfigurationsdateien}
 		\label{tab:ports_array_parameter}
 		\begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.5\textwidth} | p{0.27\textwidth}}
 			\toprule
@@ -67,18 +60,21 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 "port": "AI1"
 			\end{jsonTable} 
 			\\
-			register 	& !!!!!!!!!!!Das Register, welches vom Modbus ausgelesen werden soll (Bemerkung: Immer Dezimal, nicht HEX) & 
+			register 	& Modbus Register (Erklärung in Kapitel \ref{modbus_funktionsweise}) in dem der jeweilige Messwert gespeichert ist \bzw welches ausgelesen werden soll. Das Register muss dabei immer dezimal angegeben werden, da minimalmodbus die hexadezimale Eingabe nicht unterstützt. & 
 			\begin{jsonTable}
 "register": 11
 			\end{jsonTable} 
 			\\
-			function\_code 	& Modbus-Funktionscode, mit dem auf das vorherig angegebene Register zugegriffen werden soll: 3 für Input Register, 4 für Holding Register & 
+			function\_code 	& Modbus Function Code (Erklärung in Kapitel \ref{modbus_funktionsweise}), mit dem auf das vorher angegebene Register zugegriffen werden soll. Die zwei meist verwendeten Function Codes sind \enquote{3} für Input Register und \enquote{4} für Holding Register. & 
 			\begin{jsonTable}
 "function_code": 3
 			\end{jsonTable} 
 			\\
-			units 	& Array mit Unit-Objekten; Wird bei Ports weggelassen, bei denen die Werte nur von Python-Funktionen verwendet werden; In einem Objekt dieses Arrays werden folgende Parameter angegeben: „unit“, „scaling“; Funktionsweise / Zweck: Einheit wird mit dem „type“-Attribut zuerst aus der Sensor-Konfigurationsdatei herausgeholt und dann hier verglichen. Dann wird die Skalierung ausgelesen und der Wert aus dem Modbus damit multipliziert
-			z. B. „type“ : „NI1000“ $\rightarrow$ „unit“ : „°C“ $\rightarrow$ „scaling“ : 0.1 $\rightarrow$ Ausgelesener Wert wird mit 0,1 multipliziert & 
+			units 	& Array in dem jeder möglichen Maßeinheit für den jeweiligen Ausgabeport eine Skalierung zugeordnet wird. Die Skalierung dient \zB dazu, dem Messwert die angemessene Anzahl von Dezimalstellen zuzuweisen, da diese über Modbus nicht übertragen werden (Funktionsweise in Kapitel \ref{auslesen_rlt_parameter} erklärt).
+			
+			Wird bei Ports weggelassen, deren Werte nur von Python Funktionen (Erklärung in Kapitel \ref{python_functions}) zur Weiterverarbeitung verwendet werden.
+			
+			Die Parameter eines Objekts dieses Arrays sind in Tabelle \ref{tab:units_array_parameter} zu sehen.  & 
 			\begin{jsonTable}
 "units": "[ ]"
 			\end{jsonTable} 
@@ -87,19 +83,21 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 		\end{tabular}
 	\end{table}
 	
+	
+	
 	\begin{table}[H]
-		\caption{Parameter im Unterarray \enquote{units}}
-		\label{tab:pages_array_parameter}
+		\caption{Parameter des Unterarray \enquote{units}}
+		\label{tab:units_array_parameter}
 		\begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.47\textwidth} | p{0.3\textwidth}}
 			\toprule
 			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
 			\midrule
-			unit      	& Die Einheit, welche aus „sensors.json“ referenziert wird & 
+			unit      	& Die Maßeinheit, die aus der Sensor-Konfigurationsdatei referenziert wird. & 
 			\begin{jsonTable}
 "unit": "°C"
 			\end{jsonTable} 
 			\\
-			scaling 	& Skalierung des Messwertes (wird \zB verwendet, wenn der Messwert Kommastellen besitzt). Kann aus Datenblättern entnommen werden. & 
+			scaling 	& Skalierung des Messwertes. Kann aus Datenblättern entnommen werden. & 
 			\begin{jsonTable}
 "scaling": 0.1
 			\end{jsonTable} 
@@ -107,33 +105,95 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 			\bottomrule
 		\end{tabular}
 	\end{table}
+		
+	\item \textbf{Haupt-Konfigurationsdatei} (\enquote{main\_config\_file.json}):
+	Wie in Kapitel \ref{gui_design} beschrieben, ist zur übersichtlichen Darstellung der Messwerte eine Aufteilung in mehrere Abschnitte bzw. Seiten erforderlich. Auf diesen Seiten werden jeweils sinngemäß Messwerte zusammengefasst. Die Konfiguration der Seiten erfolgt in der Haupt-Konfigurationsdatei mithilfe von zwei parallelen Arrays: dem \enquote{pages}-Array und dem \enquote{devices}-Array. 	
 	
-\begin{jsoncode}
-{
-	"port": "AI1",
-	"register": 9,
-	"function_code": 3,
-	"units": [
-	{
-		"unit": "°C",
-		"scaling": 0.1
-	},
-	{
-		"unit": "mV",
-		"scaling": 1
-	}
-	]
-},
-\end{jsoncode}
+	Im \enquote{devices} Array werden die alle Komponenten \bzw Quellen der \acs{rltanlage}, nämlich Ventilatoren und QBMs (vgl. Abb. \ref{fig:vereinfachter_aufbau_dateikonzept}), aufgeführt, von denen Messwerte ausgelesen werden sollen. Die Parameter des \enquote{devices} Arrays sind in Tabelle \ref{tab:devices_array_parameter} näher erläutert.
 	
-	\item \textbf{Haupt-Konfigurationsdatei} (\enquote{main\_config\_file.json}): Wie in Kapitel \ref{gui_design} beschrieben, werden zur übersichtlichen  Anzeige der Messwerte mehrere Abschnitte \bzw Seiten benötigt. Auf diesen Seiten werden jeweils sinngemäß Messwerte zusammengefasst. 
+	\begin{table}[H]
+		\caption{Parameter des \enquote{devices} Array der Haupt-Konfigurationsdatei}
+		\label{tab:devices_array_parameter}
+		\begin{tabular}{p{\dimexpr 0.17\textwidth-2\tabcolsep} p{0.48\textwidth} | p{0.3\textwidth}}
+			\toprule
+			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
+			\midrule
+			device     	& Angabe des Gerätetyps, indem auf den Namen der zugehörigen Geräte-Konfigurationsdatei referenziert wird. & 	
+			\begin{jsonTable}
+"device": "QBM97XX"
+			\end{jsonTable}  
+			\\
+			id         	& Beliebig auswählbare, jedoch eindeutige Bezeichnung für das Gerät. Mit der \enquote{id} wird im \enquote{pages} Array auf das Gerät referenziert.  & 	
+			\begin{jsonTable}
+"id": "QBM1"
+			\end{jsonTable}  
+			\\
+			baud\_rate	& Eingestellte Baudrate. Ist bei allen Komponenten einer \acs{rltanlage} gleich. & 	
+			\begin{jsonTable}
+"baud_rate": 19200
+			\end{jsonTable}  
+			\\
+			mbaddress	& Die Modbus Adresse des Geräts. (vgl. Kapitel \ref{modbus_funktionsweise}) & 	
+			\begin{jsonTable}
+"mbaddress": 1
+			\end{jsonTable}  
+			\\
+			parity	& Parität. Mögliche Werte: \enquote{even}, \enquote{odd} oder \enquote{none} (vgl. Kapitel \ref{modbus_uebertragungsarten}) & 	
+			\begin{jsonTable}
+"parity": "even"
+			\end{jsonTable}  
+			\\
+			stop\_bits	& Anzahl der Stopbits einer Nachricht (vgl. Kapitel \ref{modbus_uebertragungsarten}) & 	
+			\begin{jsonTable}
+"stop_bits": 1
+			\end{jsonTable}  
+			\\
+			zero\_based	& Gibt an, ob die Modbus Register von 0 oder 1 ausgehend gezählt werden. Mögliche Werte: \enquote{true} oder \enquote{false}.
+			
+			(Bemerkung: Bei Siemens QBMs normalerweise \enquote{false}, bei ebm-papst Ventilatoren \enquote{true}) & 	
+			\begin{jsonTable}
+"zero_based": false
+			\end{jsonTable}  
+			\\
+			sensors	& Array aller am Gerät angeschlossenen Sensoren. Bei Ventilatoren und Ausgabeports, deren Werte ausschließlich von Python Funktionen zur Weiterverarbeitung genutzt werden (Erklärung in Kapitel \ref{python_functions}), wird auf die Angabe verzichtet. 
+			
+			Die zwei Parameter, die für jedes Objekt dieses Arrays angegeben werden, sind in Tabelle \ref{tab:sensors_array_parameter} zu finden. & 	
+			\begin{jsonTable}
+"sensors": [ ]
+			\end{jsonTable}  
+			\\
+			\bottomrule
+		\end{tabular}
+	\end{table} 
 	
-	Die Aufteilung der Seiten wird in der Haupt-Konfigurationsdatei gemacht. Dabei werden alle Seiten, die später auf der \acs{rltanzeige} angezeigt werden sollen, im \enquote{pages} Array definiert. Dazu werden unterschiedliche Parameter angegeben (siehe Tab. \ref{tab:pages_array_parameter}).
+	\begin{table}[H]
+		\caption{Parameter des Unterarray \enquote{sensors}}
+		\label{tab:sensors_array_parameter}
+		\begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.45\textwidth} | p{0.32\textwidth}}
+			\toprule
+			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
+			\midrule
+			port   	& Verweist auf den Ausgabeport aus der Geräte-Konfigurationsdatei (siehe Tab. \ref{tab:ports_array_parameter}). Mögliche Werte können also \zB der Datei \enquote{QBM97XX.json} entnommen werden. & 	
+			\begin{jsonTable}
+"port": "AI1"
+			\end{jsonTable}  
+			\\
+			type 	& Verweist auf einen Sensor aus der Sensor-Konfigurationsdatei. Mögliche Werte können also \zB der Datei \enquote{sensors.json} entnommen werden. & 	
+			\begin{jsonTable}
+"type": "LG-NI1000"
+			\end{jsonTable}  
+			\\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+
+	Im \enquote{pages} Array werden alle Seiten, die später auf der \acs{rltanzeige} veranschaulicht werden sollen, definiert. Dabei werden die in Tabelle \ref{tab:devices_array_parameter} definierten Quellen den richtigen Seiten zugeordnet. Die Parameter des \enquote{pages} Array sind in Tabelle \ref{tab:pages_array_parameter} notiert.
 	
 	% unterschiedliche anzahl der Komponenten
 
 	\begin{table}[H]
-		\caption{Parameter im \enquote{pages} Array der Haupt-Konfigurationsdatei}
+		\caption{Parameter des \enquote{pages} Array der Haupt-Konfigurationsdatei}
 		\label{tab:pages_array_parameter}
 			\begin{tabular}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.45\textwidth} | p{0.35\textwidth}}
 			\toprule
@@ -154,30 +214,30 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 	\end{table}
 	
 	\begin{table}[H]
-		\caption{Parameter im Unterarray \enquote{sources}}
+		\caption{Parameter des Unterarray \enquote{sources}}
 		\label{tab:sources_array_parameter}
 			\begin{tabular}{p{\dimexpr 0.2\textwidth-2\tabcolsep} p{0.42\textwidth} | p{0.33\textwidth}}
 			\toprule
 			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
 			\midrule
-			port                & Ein Array mit den Quellen, aus denen der Messwert ausgelesen wird. Dabei wird meistens nur ein Objekt mit \enquote{id} des Geräts und \enquote{port} (siehe Tab. \ref{tab:devices_array_parameter})angegeben. In manchen Fällen werden mehrere Quellen für abgeleitete Messwerte benötigt (siehe Kapitel \ref{python_functions}). In dem Fall werden dem Array weitere Objekte hinzugefügt. &  
+			port                & Ein Array mit den Quellen, aus denen der Messwert ausgelesen wird. Dabei wird meistens nur ein Objekt mit \enquote{id} (siehe Tab. \ref{tab:devices_array_parameter}) des Geräts und \enquote{port} (siehe Tab. \ref{tab:ports_array_parameter}) angegeben. In einigen Szenarien ist es erforderlich, mehrere Quellen für abgeleitete Messwerte zu verwenden (siehe Kapitel \ref{python_functions}). In solchen Fällen werden dem Array zusätzliche Objekte hinzugefügt. &  
 			\begin{jsonTable}
 "port": [
 	{ "QBM1": "AI1" }
 ]
 			\end{jsonTable} 
 			\\
-			description         & Beliebig auswählbare Bezeichnung für einen Messwert, die auf der \acs{rltanzeige} später angezeigt wird. & 
+			description         & Beliebig auswählbare Bezeichnung für den Messwert. Der Messwert wird später auf der \acs{rltanzeige} so bezeichnet. & 
 			\begin{jsonTable}
 "description": "Temperatur Zuluft"
 			\end{jsonTable}  
 			\\
-			python\_function    & Optionaler Parameter, der angegeben wird, wenn der jeweilige Messwert abgeleitet berechnet werden muss. Weitere Erklärung in Kapitel \ref{python_functions}. & 
+			python\_function    & (Optionaler) Parameter, der nur angegeben wird, wenn der jeweilige Messwert abgeleitet berechnet werden muss. (Erklärung in Kapitel \ref{python_functions}). & 
 			\begin{jsonTable}
 "python_function": "relay_position"
 			\end{jsonTable} 
 			\\
-			additional\_info    & Optionaler Parameter, der angegeben wird, falls bei der Python Funktion zusätzliche Informationen braucht. Weitere Erklärung in Kapitel \ref{python_functions}. & 
+			additional\_info    & (Optionaler) Parameter, der nur angegeben wird, falls die jeweilige Python Funktion zusätzliche Informationen benötigt. (Erklärung in Kapitel \ref{python_functions}). & 
 			\begin{jsonTable}
 "additional_info": { "switching_voltage": 5 }
 			\end{jsonTable} 
@@ -185,65 +245,14 @@ Es folgt eine nähere Beschreibung und Erklärung der drei Dateitypen:
 			\bottomrule
 		\end{tabular}
 	\end{table} 
-		
-	Ein Beispiel für einen Seiteneintrag im \enquote{pages} Array ist folgend zu sehen:
-	
-%	\jsonfile[firstline=2, lastline=12]{Code/main.py}
-	\begin{jsoncode}
-"pages": [
-	{
-		"title": "Temperaturen QBM1",
-		"sources": [
-		{
-			"port": [{ "QBM1": "AI1" }],
-			"description": "Temperatur 1"
-		},
-		{
-			"port": [{ "QBM1": "AI2" }],
-			"description": "Temperatur 2"
-		},
-		...
-		{
-			"port": [{ "QBM1": "AO1" }],
-			"description": "Klappe",
-			"python_function": "flap_position"
-		}
-		]
-	},
-	...
-]
-	\end{jsoncode}
-	
-		
-	Parallel zum \enquote{pages} Array \bzw auf der gleichen Ebene der Haupt-Konfigurationsdatei gibt es ein \enquote{devices} Array. Darin werden die Komponenten der \acs{rltanlage} angegeben, von denen Messwerte ausgelesen werden sollen.
-	
-	\begin{table}[H]
-		\caption{Parameter im \enquote{devices} Array}
-		\label{tab:devices_array_parameter}
-		\begin{tabular}{p{\dimexpr 0.2\textwidth-2\tabcolsep} p{0.43\textwidth} | p{0.32\textwidth}}
-			\toprule
-			\textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
-			\midrule
-			device     	&  & Bsp \\
-			id         	&  & Bsp \\
-			baud\_rate	&  & Bsp \\
-			mbaddress	&  & Bsp \\
-			parity	&  & Bsp \\
-			stop\_bits	&  & Bsp \\
-			zero\_based	&  & Bsp \\
-			sensors	&  & Bsp \\
-			\bottomrule
-		\end{tabular}
-	\end{table} 
-	
+					
 \end{enumerate}
 
 %Bedienungsanleitung für Servicetechniker erwähnen
-Dabei ist zu beachten:
-Der Techniker bekommt einen Ordner, darin findet sich direkt eine Vorlage für die \enquote{main\_config\_file.json}-Datei, welche im Normalfall die einzige Datei sein sollte, die vom Techniker bearbeitet bzw. verändert wird.
-In einem Unterordner (\enquote{devices}) sind dann die Geräte-Konfigurationsdateien und die Sensor-Konfigurationsdatei. Diese Dateien müssen, wie oben erwähnt, nur verändert werden, wenn noch nie verwendete Geräte oder Sensorik, wie z.B. eine neue Art von Ventilator oder Sensor, in der RLT-Anlage verbaut werden.
+Zuletzt ist zu erwähnen, dass Servicetechnikerinnen und Servicetechniker zur Installation einen Ordner bekommen. Darin findet sich direkt eine Vorlage für die \enquote{main\_config\_file.json} Datei, welche im Normalfall die einzige Datei sein sollte, die bearbeitet bzw. verändert wird.
+In einem Unterordner (\enquote{devices}) sind Geräte-Konfigurationsdateien und die Sensor-Konfigurationsdatei zu finden. Diese Dateien müssen, wie gerade erwähnt, nur verändert werden, wenn noch nie verwendete Komponenten, wie z.B. eine neue Art von Ventilator oder Sensor, in der \acs{rltanlage} verbaut werden.
 
-Beispiel zu allen Dateitypen im Anhang!!!
+Ein Beispiel zu allen Dateitypen ist im Anhang zu finden.
 
 
 

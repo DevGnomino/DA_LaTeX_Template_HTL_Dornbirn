@@ -1,0 +1,34 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{p}{[}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}NI1000\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}°C\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}NTC10K\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}°C\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}PT1000\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}°C\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}0\PYGZhy{}10V\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}mV\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}LG\PYGZhy{}NI1000\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}°C\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}standardQBM\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Pa\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMmax\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}1/min\PYGZdq{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

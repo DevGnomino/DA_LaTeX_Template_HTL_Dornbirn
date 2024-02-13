@@ -1,0 +1,52 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n+nt}{\PYGZdq{}ports\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMreal\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53264}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{4}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMtarget\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53249}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMmax\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53529}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}units\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n+nt}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}1/min\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{					}\PYG{n+nt}{\PYGZdq{}scaling\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{]}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Power\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53281}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{4}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Uz\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53664}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Iz\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53665}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Volume\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53269}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}EngStatus\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{53270}\PYG{p}{,}
+\PYG{+w}{			}\PYG{n+nt}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

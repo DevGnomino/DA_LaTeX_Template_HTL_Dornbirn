@@ -11,11 +11,19 @@ Das Modbus Protokoll wurde 1979 von der Firma Gould-Modicon entwickelt. Besonder
 
 Die folgende theoretische Beschäftigung mit dem Modbus Protokoll bezieht sich wenn nicht anders angegeben auf die offiziellen Modbus Dokumentationen \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. 
 
-Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
+%Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
+%\begin{itemize}
+%\item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
+%\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
+%\end{itemize}
+
+Das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
 \begin{itemize}
-\item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
-\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
+	\item \textbf{Modbus TCP/IP:} Die Geräte sind an einem Netzwerk angeschlossen und kommunizieren via TCP/IP.
+	\item \textbf{Modbus Serial Line:} Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Übertragungsarten, nämlich RTU und ASCII. Genauere Beschreibungen der beiden Übertragungsarten finden sich später in diesem Kapitel.
+	\item \textbf{Modbus Plus:} Funktioniert mittels Tokens, die von einem Gerät zum nächsten wandern. Jeweils das Gerät, das den Token hat, ist der Client. (https://www.rtautomation.com/rtas-blog/good-bye-modbus-plus/)
 \end{itemize}
+(hier vielleicht modbus bild einfügen: MODBUS communication stack)
 
 \subsection{Funktionsweise}\label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
@@ -34,11 +42,11 @@ Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte vo
 	\end{tabularx}
 \end{table}
 
-Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus einem Function Code und den Daten. In manchen Fällen werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es kann zum Beispiel eine zusätzliche Adresse und eine Checksumme zur Fehlererkennung eingebaut werden. Das gesamte Datenpaket wird \acf{adu} genannt. (muss nicht immer eine Adresse vorhanden sein?)
+Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese besteht aus dem Function Code und den Daten. Sie sind für den Empfänger relevant. Damit die Übertragung zwischen Client und Server funktionieren kann, werden dem \acs{pdu} zusätzliche Felder hinzugefügt. Es wird die Adresse des angefragten Servers und eine Checksumme zur Fehlererkennung eingebaut. Das gesamte Datenpaket wird \acf{adu} genannt.
 (siehe Abb.~\ref{fig:modbus_adu_pdu}).
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1.0\linewidth]{Bilder/General_Modbus_Frame}
+	\includegraphics[width=1.0\linewidth]{Bilder/General_Modbus_Frame_Changed}
 	\caption{Modbus Dataframe (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
 	\label{fig:modbus_adu_pdu}
 \end{figure}
@@ -47,8 +55,7 @@ Der Grundbestandteil des Modbus Protokolls ist die sogenannte \acf{pdu}. Diese b
 	\item \textbf{Address Field:} Die Adresse des angefragten Servers bzw. mehrerer Server.
 	\item \textbf{Function Code:} Dieses Feld ist ein Byte groß. Die Werte reichen von 1 bis 255, wobei 128 bis 255 für Fehlercodes vorbehalten sind. Wenn der Server eine Nachricht vom Client bekommt, zeigt ihm dieses Feld den Verwendungszweck der erhaltenen Daten an. 
 	\item \textbf{Data:} In diesem Feld werden die Daten beigefügt. Außerdem sind zusätzliche Informationen wie die Registeradressen und die Länge der Daten enthalten. Teilweise kann dieses Feld auch Leer bleiben. In diesem Fall werden alle nötigen Informationen über die auszuführende Aktion durch den Function Code geliefert.
-	\item \textbf{Error Check:} Falls bei der Übertragung einzelne Bits verändert oder verloren gehen, kann mit der Checksumme die Vollständigkeit der erhaltenen Nachricht festgestellt werden.
-	Unterschied zu Function Fehlercodes: Function Fehlercodes deuten an, dass die Aktion, die der Server ausführen sollte fehlschlug. Die Checksumme prüft auf Übertragungsfehler (Behauptung: Mit fakten belegen).
+	\item \textbf{Error Check:} Falls bei der Übertragung einzelne Bits verändert oder verloren gehen, kann mit der Checksumme die Vollständigkeit der erhaltenen Nachricht festgestellt werden. Der Client bildet aus der zu versendenden Nachricht eine Checksumme und hängt sie der Nachricht an. Der Server erhält die Nachricht und bildet ebenfalls eine Checksumme aus der erhaltenen Nachricht. Nun vergleicht der Server die errechnete mit der erhaltenen Checksumme und determiniert, ob diese ident (kein Fehler) oder unterschiedlich (Übertragungsfehler) sind. Bei einem Fehler sendet er einen entsprechenden Fehlerfunktionscode zurück.
 \end{itemize}
 
 Die Datenspeicherung von Modbus basiert auf sogenannten Registern. Die Register werden im Speicher des jeweiligen Geräts in einem Block zusammengefasst. Es gibt verschiedene Registertypen, die sich in der Länge der gespeicherten Daten und dem Zugriffstyp unterscheiden (siehe Tab.~\ref{tab:modbus_register}). \newline Ein Client kann die Register auf einem Server mittels Anfragen auslesen oder setzen. Server können ihre eigenen Register setzen.
@@ -83,7 +90,7 @@ Oder die Blöcke sind zusammengeschaltet und können durch unterschiedliche Eing
 	\label{fig:modbus_register_one_block}
 \end{figure}
 
-\subsection{Übertragungsarten}
+\subsection{Übertragungsarten} \label{modbus_uebertragungsarten}
 Es gibt verschiedene Übertragungsarten. Für die serielle Schnittstelle, gibt es \acf{rtu} und \acf{ascii}. Auf einem seriellen Bus, müssen alle Geräte die selbe Übertragungsart verwenden. Der \acs{rtu} Modus ist dabei der Standard, den alle Modbus Geräte implementieren müssen. \acs{ascii} kann optional verwendet werden. \newline Es gibt auch noch \acs{tcp} und Modbus Plus. Diese beiden Übertragungsarten sind für diese Diplomarbeit nicht relevant. Daher wird auf eine genauere Beschreibung verzichtet.
 
 \paragraph{\acs{rtu} Modus}
@@ -106,16 +113,14 @@ Abb.~\ref{fig:modbus_frame}):
 	\label{fig:modbus_frame}
 \end{figure}
 
-Benutzt CRC: ganz kurze erklärung
+Zur Berechnung der Checksumme wird die \acf{crc} Methode verwendet. Diese wird auf den gesamten Inhalt der Nachricht (\acs{adu}) angewandt. Es wird ein 16 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils die 16 Bit im \acs{crc} Feld mit je 8 Bit der Nachricht XORed werden. Nach jedem XOR werden die Bits 8 mal verschoben und jedes mal mit einem fixierten Wert XORed. 
 
 Diese Übertragungsart wird in den Geräten bei Bösch verwendet. Daher verwendet auch die RLT Anzeige den \acs{rtu} Modus.
 
 \paragraph{\acs{ascii} Modus}
-Ähnlich wie RTU aber doch anders: 2 ASCII characters versendet.
-Zum Einleiten einer neuen Nachricht wird hier ein ":" Zeichen gesendet. Dieses ist für diesen Zweck reserviert.
-(https://www.simplymodbus.ca/ASCII.htm)
+Im \acs{ascii} Modus werden \acs{ascii} Zeichen verschickt. Anders als beim \acs{rtu} Modus bedarf es keiner Pause zwischen zwei Nachrichten. Eine neue Nachricht wird mit dem ":" Zeichen eingeleitet und mit "CR" und "LF" (im Glossar: carriage return + line feed) beendet.
 
-Die Nachricht besteht aus 10 bits und wird folgendermaßen aufgeteilt:
+Anders als beim \acs{rtu} Modus werden nur 7 Datenbits versendet. \acs{ascii} benötigt ebenfalls 3 Hilfsbits. Deswegen auch der geringere Datendurchsatz, da bei \acs{rtu} 3 Hilfsbits auf 8 Datenbits treffen. Diese insgesamt 10 Bits werden folgendermaßen aufgeteilt:
 \begin{itemize}
 	\item \textbf{1 Startbit}
 	\item \textbf{7 Datenbits}
@@ -123,9 +128,13 @@ Die Nachricht besteht aus 10 bits und wird folgendermaßen aufgeteilt:
 	\item \textbf{1/2 Stopbits}
 \end{itemize}
 
-Benutzt LRC: ganz kurze erklärung
+Zur Berechnung der Checksumme wird die \acf{lrc} Methode verwendet. Diese wird auf den Inhalt der Nachricht angewandt, Start- und Endzeichen sind ausgenommen. Es wird ein 8 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils 8 Bit der Nachricht addiert werden. Die Überträge werden vernachlässigt.
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
+
+
+
+Terminierungswiderstand am letzten Busteilnehmer
 
 
 %\subsection{Vor- und Nachteile}

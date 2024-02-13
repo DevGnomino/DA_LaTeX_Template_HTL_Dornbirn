@@ -1,3 +1,5 @@
+\label{auslesen_rlt_parameter}
+
 Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert.
 
 \begin{pythoncode}
