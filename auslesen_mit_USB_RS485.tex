@@ -1,16 +1,15 @@
 \label{auslesen_rlt_parameter}
 
-Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert.
+Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert. Der Thread wird als \enquote{global} markiert, damit er später wieder gestoppt werden kann. Beim erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese das customtkinter App Objekt (siehe GUI Kapitel). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
 
 \begin{pythoncode}
 def data_threading(app):
-	# Funktion zum Starten des Datenbeschaffungsthreads
 	global t1
 	t1 = Thread(target=data_refresh, kwargs={'app': app}, daemon=True)
 	t1.start()
 \end{pythoncode}
 
-In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird.
+In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird (siehe Code unten). \newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die letzten Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall einen Fehlercode an, bis die Daten erneuert werden. 
 
 \begin{pythoncode}
 def data_refresh(app):
@@ -61,7 +60,7 @@ class Sensor():
 \end{pythoncode}
 
 \label{get_data_from_modbus}
-In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und der Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen  der \enquote{modbus\_functions} Datei aufgerufen.
+In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und den Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen der \enquote{modbus\_functions} Datei aufgerufen (siehe python functions chapter).
 
 \begin{pythoncode}
 class Sensor():
