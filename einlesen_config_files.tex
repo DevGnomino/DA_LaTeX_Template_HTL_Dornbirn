@@ -1,6 +1,6 @@
 \subsection{Einlesen der Konfigurationsdateien}
 \paragraph{Klassenstruktur}
-Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine Page-, Measurement- und Sensorklasse. Die Pages und Measurements existieren, damit der ausgelesene Parameter einfach an der richtigen Stelle verändert werden kann. Ein Measurement kann mehrere Sensoren enthalten, da manche Measurements zur Berechnung  (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen (siehe Abb.~\ref{fig:uml_backend}).
+Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine Page-, Measurement- und Sensorklasse. Ein Measurement kann mehrere Sensoren enthalten, da manche Measurements zur Berechnung  (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die Pages speichern die jeweiligen Measurements, die auf dieser Seite angezeigt werden sollen. Die Pages existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele Pages Objekte wie GuiPages Objekte und gleich viele Measurement Objekte wie MeasurementFrame Objekte. (siehe Abb.~\ref{fig:uml_backend}).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/UML_Backend}
@@ -9,9 +9,9 @@ Im Backend (falls man es so nennen kann) wird die Klassenstruktur der \acs{gui} 
 \end{figure}
 
 Die Page-, Measurement- und Sensorobjekte werden beim Einlesen der Konfigurationsdateien aufgrund des \enquote{pages} JSON Objekts erstellt und in Listen gespeichert. \newline
-Zum Einlesen werden drei Funktionen benötigt:
+Zum Einlesen werden drei Funktionen implementiert:
 \begin{itemize}
-	\item \textbf{\enquote{load\_config}:} Diese Funktion lädt die gesamte Hauptkonfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die Page-, Measurement- und Sensorobjekte erstellt. Außerdem kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
+	\item \textbf{\enquote{load\_config}:} Diese Funktion lädt die gesamte Hauptkonfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die Page-, Measurement- und Sensorobjekte erstellt. Dafür kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
 	\item \textbf{\enquote{get\_sensor\_unit}:} Liest die Sensor-Konfigurationsdateien ein. Dadurch können den Messwerten die richtigen Maßeinheiten zugewiesen werden.
 	\item \textbf{\enquote{get\_sensor\_data}:} Liest aus der Geräte-Konfigurationsdatei am angegebenen Port die Parameter aus und liefert diese Parameter als JSON Objekt zurück. Sie liest das Register, den Function Code und die Skalierung aus. Die Skalierung wird anhand der Maßeinheit aus der Sensor-Konfigurationsdatei ausgewählt.
 \end{itemize}
@@ -32,18 +32,20 @@ for measurements in page["sources"]:
 	page_measurements.append(Measurement(description=description, unit=unit, sensors=page_sensors, python_function=python_function, additional_info=additional_info))
 \end{pythoncode}
 
-Im folgenden Code wird für jeden Port (muss ich das erklären?: an jedem Port ist ein Sensor angeschlossen) eines Geräts ein Sensorobjekt erstellt. Alle Sensorobjekte werden der \enquote{page\_sensors} Liste beigefügt. Dafür gibt es im Sources Array die einzelnen Ports. Das sind Wertepaare, die aus Gerät und Sensor bestehen (vgl. Kapitel damio). Mit diesen beiden Werten kann dann das entsprechende Gerät im Devices Array gefunden werden und darin der entsprechende Port im Sensors Array.
+Im folgenden Code wird für jeden Port (an jedem Port ist ein Sensor angeschlossen) eines Geräts ein Sensorobjekt erstellt. Alle Sensorobjekte werden der \enquote{page\_sensors} Liste beigefügt. Dafür gibt es im Sources Array die einzelnen Ports. Das sind Wertepaare, die aus Gerät und Sensor bestehen (vgl. Kapitel damio). Mit diesen beiden Werten kann dann das entsprechende Gerät im Devices Array gefunden werden und darin der entsprechende Port im Sensors Array. Mit der \enquote{get\_sensor\_unit} wird die Einheit erhalten und mit \enquote{get\_sensor\_data} weitere Sensordaten. Diese werden beim Erstellen des Sensorobjekts dem Konstruktor übergeben.
 \begin{pythoncode}
+port_counter = 0
 for port in port_arr:
-	device_id = list(port.keys())[0]  # example: QBM1
-	port_id = port[device_id]
+	device_id = list(port.keys())[port_counter] # example: QBM1
+	port_id = port[device_id]  # example: AI1
+	port_counter += 1
 	
 	for device in config_full_data[0]["devices"]:
 		if device["id"] == device_id:
-			[Aufruf der get\_sensor\_unit Funktion]
-			[Auslesen der Geräteparameter in der Hauptkonfigurationsdatei (baud_rate, mbaddress etc.)]
-			[Aufruf der get\_sensor\_data Funktion]
-			page_sensors.append(Sensor(baud_rate=baud_rate, mb_address=mbaddress, parity=parity, stop_bits=device["stop_bits"], register=register, scaling=scaling, function_code=function_code, zero_based=device["zero_based"]))	
+			[Aufruf der get_sensor_unit Funktion]
+			%[Auslesen der Geräteparameter in der Hauptkonfigurationsdatei (baud_rate, mbaddress etc.)]
+			[Aufruf der get_sensor_data Funktion]
+			page_sensors.append(Sensor(baud_rate=device["baud_rate"], [...], register=register, zero_based=device["zero_based"]))	
 \end{pythoncode}
 
 Die Measurements sind nach dem Erstellen alle in einer Liste gespeichert. Zum Schluss werden Pageobjekte erstellt. Die Measurements Liste wird so aufgeteilt, dass maximal 5 Measurements auf einer Seite sind. Anhand von diesen Page- und Measurement Objekten wird beim Erstellen der \acs{gui} die Anzahl an Seiten übernommen und der Seitentitel und die Beschreibungen der Messwerte gesetzt (siehe Kapitel GUI beschreibung). 
@@ -59,44 +61,4 @@ for measurement in page_measurements:
 
 %\pythonfile[firstline=125, lastline=197]{Code/modbus.py}
 
-\begin{pythoncode}
-def get_sensor_data(device_full_data, port_name, sensor_unit):
-	for device in device_full_data["ports"]:
-	print(device)
-	if device["port"] == port_name:
-	print("in port if")
-	sensor_register = device["register"]
-	sensor_function_code = device["function_code"]
-	if "units" in device:
-	for unit_pair in device["units"]:  # Hier kann vielleicht später das Array anders entpackt werden (mit *)
-	if unit_pair["unit"] == sensor_unit:
-	sensor_scaling = unit_pair["scaling"]
-	return_var = {"sensor_register": sensor_register, "sensor_scaling": sensor_scaling,
-		"sensor_function_code": sensor_function_code}
-	return return_var
-	else:
-	return_var = {"sensor_register": sensor_register, "sensor_scaling": 1,
-		"sensor_function_code": sensor_function_code}
-	return return_var
-	
-	
-	return -1
-	
-	
-def get_sensor_unit(sensor_name):
-	sensor_file = open(DEVICES_CONFIG_PATH + 'sensors.json', encoding='utf-8')
-	sensor_full_data = json.load(sensor_file)
-	# print(sensor_full_data)
-	for sensor in sensor_full_data:
-	if sensor["type"] == sensor_name:
-	sensor_unit = sensor["unit"]
-	return sensor_unit
-	
-	sensor_file.close()
-	return ""
-\end{pythoncode}
-
 Im Konstruktor der Page- Measurement- und Sensorobjekte werden die ausgelesenen Variablen in Instanzvariablen gespeichert.
-
-
-!Im entsprechenden Sensor gespeichert!

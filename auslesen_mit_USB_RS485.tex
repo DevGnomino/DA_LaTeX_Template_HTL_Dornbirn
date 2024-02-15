@@ -29,7 +29,7 @@ def data_refresh(app):
 		time.sleep(0.4)
 \end{pythoncode}
 
-Die Sensorobjekte lesen dann mithilfe von minimalmodbus die Register der am Bus angeschlossenen Geräte aus. Im Konstruktor des Sensorobjekts wird die Kommunikation aufgesetzt. Es gibt eine Vielzahl von Parametern, die aus den Konfigurationsdateien ausgelesen werden, welche hier beschrieben werden (link auf damios chapter zu config aufbau). Damit wird ein sogenanntes Instrument Objekt erstellt, welches mit den Parametern konfiguriert wird.
+Die Sensorobjekte lesen dann mithilfe von minimalmodbus die Register der am Bus angeschlossenen Geräte aus. Im Konstruktor des Sensorobjekts wird die Kommunikation aufgesetzt. Es gibt eine Vielzahl von Parametern, die aus den Konfigurationsdateien ausgelesen werden, welche hier beschrieben werden (vgl. Kapitel \ref{json_config_files}). Damit wird ein sogenanntes Instrument Objekt erstellt, welches mit den Parametern konfiguriert wird.
 
 \begin{pythoncode}
 CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
@@ -60,7 +60,7 @@ class Sensor():
 \end{pythoncode}
 
 \label{get_data_from_modbus}
-In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und den Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen der \enquote{modbus\_functions} Datei aufgerufen (siehe python functions chapter).
+In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und den Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen der \enquote{modbus\_functions} Datei aufgerufen (vgl. Kapitel \ref{python_functions}).
 
 \begin{pythoncode}
 class Sensor():
