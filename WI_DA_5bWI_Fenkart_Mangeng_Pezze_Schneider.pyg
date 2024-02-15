@@ -1,0 +1,16 @@
+	os.system("sudo umount /dev/" + port)
+	os.system("sudo mount /dev/" + port + " /home/pi/Documents/Config")
+	
+	error_free = check_if_files_exists(usb_config_path, usb_device_config_path, True)
+	if error_free:
+		os.system("cp -r ~/Documents/Config/RLT_Config ~/Documents/")
+	else:
+		os.system("sudo umount /dev/" + port)
+		#os.system("sudo eject /dev/" + port)
+		#os.system("udisk --detach /dev/" + port)
+		return -1
+		
+	os.system("sudo umount /dev/" + port)
+	#os.system("sudo eject /dev/" + port)
+	#os.system("udisk --detach /dev/" + port)
+	return 0

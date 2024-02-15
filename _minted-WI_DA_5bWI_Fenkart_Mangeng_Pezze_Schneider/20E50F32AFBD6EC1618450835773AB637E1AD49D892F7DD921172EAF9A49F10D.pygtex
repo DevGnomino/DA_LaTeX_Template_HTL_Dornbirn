@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{Funktionsname}\PYG{p}{(}\PYG{n}{sensors}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+	\PYG{o}{...}	
+	\PYG{k}{return} \PYG{n}{Ergebnis}
+\end{Verbatim}

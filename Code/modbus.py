@@ -82,7 +82,7 @@ class Measurement():
 
 
 class Page():
- def __init__(self, title, measurements):
+    def __init__(self, title, measurements):
         self.title = title
         self.measurements = measurements
 

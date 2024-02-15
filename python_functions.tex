@@ -1,2 +1,106 @@
 \label{python_functions}
-%\ref{get_data_from_modbus}
+
+Messwerte werden aus Modbus Registern der unterschiedlichen Komponenten einer \acs{rltanlage} bezogen.  Grundsätzlich wird jeder ausgelesene Wert direkt auf der \acs{rltanzeige} angezeigt, wobei Skalierung und Maßeinheit hinzugefügt werden. In einigen Fällen muss jedoch ein Wert aus mehreren Messwerten abgeleitet werden, eine spezielle Umrechnung oder Ähnliches erfolgen, bevor der Wert auf der \acs{rltanzeige} dargestellt werden kann. In einem solchen Fall wird in der Haupt-Konfigurationsdatei im \enquote{pages} Array (vgl. Kapitel \ref{json_config_files}) der Name einer Python Funktion angegeben, die ausgeführt werden muss, um den erwünschen Wert zu erhalten. 
+
+Diese Python Funktionen sind in der Datei \enquote{modbus\_functions.py} definiert, was den folgenden Vorteil bietet: Ein einfaches Hinzufügen neuer Komponenten, deren Messwerte abgeleitet werden müssen, ohne dass der restliche Code verändert werden muss. Bei der Integration einer neuen Komponente werden lediglich die nötigen Funktionen in der \enquote{modbus\_functions.py} Datei hinzugefügt und diese folgend in der Haupt-Konfigurationsdatei referenziert. Dies ermöglicht eine flexible  Erweiterung des Systems.
+
+Eine solche Python Funktion hat den folgenden grundlegenden Aufbau:
+\begin{pythoncode}
+def Funktionsname(sensors, additional_info):
+	...	
+	return Ergebnis
+\end{pythoncode}
+
+Jede Funktion erwartet die Übergabeparameter \enquote{sensors} und \enquote{addictional\_info}. \enquote{sensors} ist eine Liste, die Objekte der Klasse \enquote{Sensor} beinhaltet. Ein Objekt der Klasse \enquote{Sensor} wiederum enthält alle erforderlichen Informationen, um einen Wert aus einem Modbus Register auszulesen, wie es in Kapitel \ref{auslesen_rlt_parameter} beschrieben wird. \newline 
+Der Parameter additional\_info ermöglicht die Übermittlung weiterer Informationen, falls diese bei der Berechnung oder Ableitung der Werte verwendet benötigt werden.
+
+Im folgenden Abschnitt werden die bisher definierten Python Funktionen beschrieben, eine weitere Erklärung zum Ablauf bei der Ausführung der Python Funktionen ist in Kapitel \ref{auslesen_rlt_parameter} zu finden.
+
+
+\paragraph{Funktion \enquote{standard}}
+Diese Funktion wird standardmäßig ausgeführt, wenn in der Haupt-Konfigurationsdatei (vgl. Kapitel \ref{json_config_files}) der Parameter \enquote{python\_function} nicht angegeben wird \bzw keine besondere Python Funktion angegeben wird. Die \enquote{standard} Funktion wird daher nie direkt in der Haupt-Konfigurationsdatei referenziert und ist somit eine Ausnahme.
+
+Wie im unten stehenden Code zu sehen ist, wird bei dieser Funktion nichts berechnet. Es wird lediglich die \enquote{get\_data\_from\_modbus} Funktion der \enquote{Sensor} Instanz aufgerufen, welche den Messwert aus dem jeweiligen Modbus Register ausliest und zurück gibt (weitere Erklärung in Kapitel \ref{auslesen_rlt_parameter}).
+
+\begin{pythoncode}
+def standard(sensors, additional_info):
+	return sensors[0].get_data_from_modbus()
+\end{pythoncode}
+
+
+\paragraph{Funktion \enquote{calc\_rpm}}
+Wird verwendet, um bei ebm-papst Ventilatoren die Soll- \bzw Ist-Drehzahl zu ermitteln. Dabei werden, wie im folgenden Code zu sehen ist, zwei Register ausgelesen. Daraufhin wird das Verhältnis der jeweiligen Drehzahl zur maximalen Drehzahl des Ventilators berechnet, das Ergebnis gerundet und mit der Maßeinheit \enquote{\%} zurückgegeben.
+
+\begin{pythoncode}
+def calc_rpm(sensors, additional_info):
+	max_value = sensors[1].get_data_from_modbus()
+	rpm_value = (sensors[0].get_data_from_modbus() / 64000) * max_value
+	ratio = rpm_value / max_value * 100.0
+	return str(round(ratio, 1)) + " %"
+\end{pythoncode}
+
+Die Division durch 64000 in Zeile 3 ist daher, weil ????????????
+
+Eine Angabe in der Haupt-Konfigurationsdatei schaut wie folgt aus. Dabei ist zu sehen, dass im \enquote{port} Array zuerst die Quelle der Ist- \bzw Soll-Drehzahl (\enquote{RPMreal} \bzw \enquote{RPMtarget})und als zweites die Quelle der maximalen Drehzahl (\enquote{RPMmax}). Es wird kein \enquote{additional\_parameter} angegeben.
+
+\begin{jsoncode}
+"sources": [
+	{
+		"port": [
+		{"EBM1": "RPMreal"},
+		{"EBM1": "RPMmax"}
+		],
+		"description": "Drehzahl Istwert",
+		"python_function": "calc_rpm"
+	},
+	...
+]
+\end{jsoncode}
+
+\paragraph{Funktion \enquote{calc\_power}}
+• Verwendung bei: EBM-Leistungsverbrauch
+• Beschreibung: Berechnet aus drei Parametern den Leistungsverbrauch des Ventilators
+• Benötigte Ports (Reihenfolge wichtig!): „Power“, „Uz“ und „Iz“ eines EBM
+• Zusätzliche Parameter (additional\_info): keine
+• Rückgabewert: Aktueller Leistungsverbrauch [W]
+• Beispiel:
+
+\paragraph{Funktion \enquote{eng\_status}}
+• Verwendung bei: EBM-Motorstatus (bzw. EBM-Fehlermeldungen)
+• Beschreibung: Gibt die aktuellen Fehlercodes des Motors bzw. Ventilators zurück
+• Benötigte Ports (Reihenfolge wichtig!): „EngStatus“ eines EBM
+• Zusätzliche Parameter (additional\_info): keine
+• Rückgabewert: Aktuelle Fehlercodes (falls vorhanden)
+• Beispiel:
+
+\paragraph{Funktion \enquote{calc\_wrg}}
+• Verwendung bei: Wärmerückgewinnungsgrad
+• Beschreibung: Berechnet den Wärmerückgewinnungsgrad mit Bezug auf die Temperatur der Fortluft in %
+• Benötigte Ports (Reihenfolge wichtig!): Drei Temperatursensoren (angeschlossen an QBM-Ports) für die Temperatur der Abluft, die Temperatur der Fortluft und die Temperatur der Außenluft Dabei kann folgende Grafik zur Orientierung verwendet werden:
+Zusätzliche Parameter (additional\_info): keine
+• Rückgabewert: Wärmerückgewinnungsgrad [%]
+• Beispiel:
+
+\paragraph{Funktion \enquote{calc\_volume}}
+• Verwendung bei: EBM-Volumenstrom
+• Beschreibung: Berechnet das Luftvolumen, das vom Ventilator transportiert wird in m³/h
+• Benötigte Ports (Reihenfolge wichtig!): Druckdifferenzsensor des zugehörigen QBM
+• Zusätzliche Parameter (additional\_info): „k-faktor“ (aus Datenblatt des EBM)
+• Rückgabewert: Aktueller Volumenstrom [m³/h]
+• Beispiel:
+
+\paragraph{Funktion \enquote{flap\_position}}
+• Verwendung bei: Klappenposition
+• Beschreibung: Berechnet die Position der Klappe in %
+• Benötigte Ports (Reihenfolge wichtig!): Analog Output des QBM an dem die Klappe hängt
+• Zusätzliche Parameter (additional\_info): keine
+• Rückgabewert: Aktuelle Klappenposition [%]
+• Beispiel:
+
+\paragraph{Funktion \enquote{relay\_position}}
+• Verwendung bei: Relaisposition
+• Beschreibung: Bestimmt, ob das Relais offen oder geschlossen ist
+• Benötigte Ports (Reihenfolge wichtig!): Analog Output des QBM an dem das Relais hängt
+• Zusätzliche Parameter (additional\_info): „switching\_voltage“ (Spannung bei der das Relais schaltet in Volt)
+• Rückgabewert: Aktuelle Position des Relais [„offen“/“geschlossen“]
+• Beispiel:
