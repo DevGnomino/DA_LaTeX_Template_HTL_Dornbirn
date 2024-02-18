@@ -2,8 +2,15 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{gpio}{\glossaryentrynumbers{\relax 
+<<<<<<< HEAD
 		\setentrycounter[]{page}\glsnumberformat{66}}}\glsgroupskip
 \glsgroupheading{H}\relax \glsresetentrylist %
 \glossentry{hdmi}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{66}}}%
+=======
+		\setentrycounter[]{page}\glsnumberformat{63}}}\glsgroupskip
+\glsgroupheading{H}\relax \glsresetentrylist %
+\glossentry{hdmi}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{63}}}%
+>>>>>>> af2f0ccd9b0a3e3c010095370e4b2f26852bd236
 \end{theglossary}\glossarypostamble
