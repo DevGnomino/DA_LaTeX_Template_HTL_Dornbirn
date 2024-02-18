@@ -6,7 +6,7 @@ import customtkinter as ctk
 if os.environ.get('DISPLAY','') == '':
     os.environ.__setitem__('DISPLAY', ':0.0')
 
-def start_window(error_message):
+def start_window(message):
     root_tk = tk.Tk()  # create the Tk window like you normally do
     root_tk.geometry("500x250+100+90")
     root_tk.title("Meldung")
@@ -17,25 +17,26 @@ def start_window(error_message):
     label = ctk.CTkLabel(master=root_tk,
                         text_color="red",
                         font = ('Roboto', 26),
-                        text=error_message,
+                        text=message,
                         wraplength=450)
     label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
     root_tk.after(7000, lambda: root_tk.destroy())
     root_tk.mainloop()
 
-def check_if_files_exists(config_path, device_config_path, verbose):    
-    path_exists = os.path.exists(config_path)
-    if not path_exists:
+def check_if_files_exists(config_path, device_config_path, verbose):
+    if not os.path.exists(config_path):
         if (verbose):
             start_window("RLT_Config Ordner existiert nicht")
         return False
-    path_exists = os.path.isfile(config_path + "main_config_file.json")
-    if not path_exists:
+    if not os.path.isfile(config_path + "main_config_file.json"):
         if (verbose):
             start_window("main_config_file.json existiert nicht")
         return False
-    path_exists = os.path.exists(device_config_path)
-    if not path_exists:
+    if not os.path.exists(device_config_path):
+        if (verbose):
+            start_window("Device Ordner existiert nicht")
+        return False
+    if not os.path.exists(device_config_path):
         if (verbose):
             start_window("Device Ordner existiert nicht")
         return False
@@ -90,11 +91,11 @@ def copy_from_usb():
     return 0
 
 def usb_routine():
-    copy_error = copy_from_usb()
-    if copy_error == -1:
+    copy_status = copy_from_usb()
+    if copy_status == -1:
         return True
-    elif copy_error == 0:
+    elif copy_status == 0:
         start_window("Config Dateien wurden kopiert. Entferne nun den USB")   
-    elif copy_error == 1: 
+    elif copy_status == 1: 
         start_window("Kein USB-Stick gefunden und Config bereits vorhanden")
     return False

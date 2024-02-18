@@ -1,6 +1,5 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{data\PYGZus{}threading}\PYG{p}{(}\PYG{n}{app}\PYG{p}{):}
-	\PYG{c+c1}{\PYGZsh{} Funktion zum Starten des Datenbeschaffungsthreads}
 	\PYG{k}{global} \PYG{n}{t1}
 	\PYG{n}{t1} \PYG{o}{=} \PYG{n}{Thread}\PYG{p}{(}\PYG{n}{target}\PYG{o}{=}\PYG{n}{data\PYGZus{}refresh}\PYG{p}{,} \PYG{n}{kwargs}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}app\PYGZsq{}}\PYG{p}{:} \PYG{n}{app}\PYG{p}{\PYGZcb{},} \PYG{n}{daemon}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 	\PYG{n}{t1}\PYG{o}{.}\PYG{n}{start}\PYG{p}{()}
