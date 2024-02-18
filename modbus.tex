@@ -131,10 +131,11 @@ Anders als beim \acs{rtu} Modus werden nur 7 Datenbits versendet. \acs{ascii} be
 Zur Berechnung der Checksumme wird die \acf{lrc} Methode verwendet. Diese wird auf den Inhalt der Nachricht angewandt, Start- und Endzeichen sind ausgenommen. Es wird ein 8 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils 8 Bit der Nachricht addiert werden. Die Überträge werden vernachlässigt.
 
 \subsection{Serielle Kommunikation (bei RTU/RS485)}
+Serielle Kommunikation bedeutet grundsätzlich, dass 
+Was ist RS485? (bzw. bei Lukas beschrieben?)
+
+Was ist die BaudRaten?
 
 
 
-Terminierungswiderstand am letzten Busteilnehmer
-
-
-%\subsection{Vor- und Nachteile}
+Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Dies hat beim Test auch diverse male zu scheinbar unerklärlichen Fehlern geführt.

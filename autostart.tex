@@ -1,0 +1,8 @@
+\subsection{Autostart des Programms} \label{autostart}
+Da man bei der RLT Anzeige keine Peripherie Geräte angeschlossen hat, um das Programm manuell zu starten, muss dieses automatisch nach dem Bootvorgang gestartet werden. Dafür, müssen ein Paar Vorkehrungen getroffen werden. \newline Zuerst muss man in das im Root Verzeichnis befindliche \enquote{.config} Verzeichnis wechseln. Darin erstellt man ein neues Verzeichnis namens \enquote{autostart}. Hier kann man nun eine \enquote{BELIEBIGER\_NAME.desktop} Datei erstellen, mit dem folgenden Inhalt. Hinter dem \enquote{Exec = } kann der auszuführende Befehl deklariert werden. In diesem Fall wird das Python Programm namens \enquote{main.py} am angegebenen Pfad gestartet.
+\begin{lstlisting}
+[Desktop Entry]
+
+Exec = python /home/pi/Documents/main.py
+\end{lstlisting}
+https://www.youtube.com/watch?v=lT8XNpfo950
