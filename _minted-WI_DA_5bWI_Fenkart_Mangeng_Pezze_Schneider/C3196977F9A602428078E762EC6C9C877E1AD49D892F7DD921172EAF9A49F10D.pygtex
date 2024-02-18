@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{flap\PYGZus{}position}\PYG{p}{(}\PYG{n}{sensors}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+	\PYG{n}{flap\PYGZus{}mv} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}
+	\PYG{n}{flap\PYGZus{}pos} \PYG{o}{=} \PYG{n}{flap\PYGZus{}mv} \PYG{o}{/} \PYG{l+m+mi}{10500} \PYG{o}{*} \PYG{l+m+mi}{100}
+	\PYG{k}{return} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{flap\PYGZus{}pos}\PYG{p}{))} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}\PYGZdq{}}
+\end{Verbatim}
