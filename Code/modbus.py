@@ -24,29 +24,29 @@ class Sensor():
         # Mit USB Connector auf Linux       /dev/ttyUSB0
         # Mit USB Connector auf Windows     COM4
         # Über TX (8) und RX (10) Pins      /dev/ttyAMA0
-        self.sensor = minmb.Instrument('/dev/ttyAMA0',
+        self.instrument = minmb.Instrument('/dev/ttyAMA0',
                                        mb_address)  # Make an "instrument" object called sensor (port name, slave address (in decimal))
-        self.sensor.serial.baudrate = baud_rate
-        self.sensor.serial.bytesize = 8  # Number of data bits to be requested
+        self.instrument.serial.baudrate = baud_rate
+        self.instrument.serial.bytesize = 8  # Number of data bits to be requested
 
         if parity == "even":  # Parity Setting can be ODD, EVEN or NONE
-            self.sensor.serial.parity = minmb.serial.PARITY_EVEN
+            self.instrument.serial.parity = minmb.serial.PARITY_EVEN
         elif parity == "odd":
-            self.sensor.serial.parity = minmb.serial.PARITY_ODD
+            self.instrument.serial.parity = minmb.serial.PARITY_ODD
         else:
-            self.sensor.serial.parity = minmb.serial.PARITY_NONE
+            self.instrument.serial.parity = minmb.serial.PARITY_NONE
 
-        self.sensor.serial.stopbits = stop_bits  # Number of stop bits
-        self.sensor.serial.timeout = 0.5  # Timeout time in seconds
-        self.sensor.mode = minmb.MODE_RTU  # Mode to be used (RTU or ascii mode)
+        self.instrument.serial.stopbits = stop_bits  # Number of stop bits
+        self.instrument.serial.timeout = 0.5  # Timeout time in seconds
+        self.instrument.mode = minmb.MODE_RTU  # Mode to be used (RTU or ascii mode)
 
         # Good practice to clean up before and after each execution
-        self.sensor.clear_buffers_before_each_transaction = True
-        self.sensor.close_port_after_each_call = True
+        self.instrument.clear_buffers_before_each_transaction = True
+        self.instrument.close_port_after_each_call = True
 
     def get_data_from_modbus(self):
         try:
-            fetched_data = self.sensor.read_registers(self.register, 1, self.function_code)
+            fetched_data = self.instrument.read_registers(self.register, 1, self.function_code)
 
             fetched_data_scaled = round((fetched_data[0] * self.scaling), 1)
             return fetched_data_scaled
@@ -82,12 +82,12 @@ class Measurement():
 
 
 class Page():
- def __init__(self, title, measurements):
+    def __init__(self, title, measurements):
         self.title = title
         self.measurements = measurements
 
 
-def get_sensor_data(device_full_data, port_name, sensor_unit):
+def get_sensor_data(device_full_data, port_name, sensor_unit): #alt. name: get_device_data
     for device in device_full_data["ports"]:
         print(device)
         if device["port"] == port_name:
@@ -144,9 +144,11 @@ def load_config():
                 additional_info = measurements["additional_info"]
 
             unit = ""
+            port_counter = 0
             for port in port_arr:
-                device_id = list(port.keys())[0]  # example: QBM1
+                device_id = list(port.keys())[port_counter] # example: QBM1
                 port_id = port[device_id]  # example: AI1
+                port_counter += 1
 
                 for device in config_full_data[0]["devices"]:
                     if device["id"] == device_id:
@@ -217,7 +219,7 @@ def data_threading(app):
     t1.start()
 
 
-def stop_threading():
+"""def stop_threading():
     global stop_thread
     stop_thread = True
-    t1.join()
+    t1.join()"""

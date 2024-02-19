@@ -1,16 +1,15 @@
 \label{auslesen_rlt_parameter}
 
-Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert.
+Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert. Der Thread wird als \enquote{global} markiert, damit er später wieder gestoppt werden kann. Beim erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese das customtkinter App Objekt (siehe GUI Kapitel). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
 
 \begin{pythoncode}
 def data_threading(app):
-	# Funktion zum Starten des Datenbeschaffungsthreads
 	global t1
 	t1 = Thread(target=data_refresh, kwargs={'app': app}, daemon=True)
 	t1.start()
 \end{pythoncode}
 
-In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird.
+In diesem Thread werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle Seiten und darin alle Measurements iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird (siehe Code unten). \newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die letzten Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall einen Fehlercode an, bis die Daten erneuert werden. 
 
 \begin{pythoncode}
 def data_refresh(app):
@@ -30,17 +29,16 @@ def data_refresh(app):
 		time.sleep(0.4)
 \end{pythoncode}
 
-Die Sensorobjekte lesen dann mithilfe von minimalmodbus die Register der am Bus angeschlossenen Geräte aus. Im Konstruktor des Sensorobjekts wird die Kommunikation aufgesetzt. Es gibt eine Vielzahl von Parametern, die aus den Konfigurationsdateien ausgelesen werden, welche hier beschrieben werden (link auf damios chapter zu config aufbau). Damit wird ein sogenanntes Instrument Objekt erstellt, welches mit den Parametern konfiguriert wird.
-
+Die Sensorobjekte lesen dann mithilfe von minimalmodbus die Register der am Bus angeschlossenen Geräte aus. Im Konstruktor des Sensorobjekts wird die Kommunikation aufgesetzt. Es gibt eine Vielzahl von Parametern, die aus den Konfigurationsdateien ausgelesen werden, welche hier beschrieben werden (vgl. Kapitel \ref{json_config_files}). Damit wird ein sogenanntes Instrument Objekt erstellt, welches mit den Parametern konfiguriert wird. Zuletzt werden noch zwei Flags auf True gesetzt, die wichtig sind (RAUSFINDEN WARUM!)
+Aus den Docs: clear\_buffers\_before\_each\_transaction: If this is True, the serial port read and write buffers are cleared before each request to the instrument, to avoid cumulative byte sync errors across multiple messages. Defaults to True.
+close\_port\_after\_each\_call: If this is True, the serial port will be closed after each call. Defaults to False.
+Changing this will not affect how other instruments use the same serial port. 
 \begin{pythoncode}
 CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
 DEVICES_CONFIG_PATH = '/home/pi/Documents/RLT_Config/devices/'
 
 class Sensor():
 	def __init__(self, baud_rate, mb_address, parity, stop_bits, scaling, register, function_code, zero_based):
-        # Mit USB Connector auf Linux       /dev/ttyUSB0
-		# Mit USB Connector auf Windows     COM4
-		# Über TX (8) und RX (10) Pins      /dev/ttyAMA0
 		self.sensor = minmb.Instrument('/dev/ttyAMA0', mb_address)
 		self.sensor.serial.baudrate = baud_rate
 		self.sensor.serial.bytesize = 8
@@ -60,8 +58,15 @@ class Sensor():
 		self.sensor.close_port_after_each_call = True
 \end{pythoncode}
 
+Beim erstellen des Instruments wird als erster Parameter angegeben, an welchem Port am Raspberry Pi der Adapter angeschlossen ist bzw. über welchen Port die Kommunikation stattfindet. Dabei muss je nach Plattform und Adapterart ein anderer Gerätestring angegeben werden:
+\begin{itemize}
+\item \textbf{COM4:} Damit kann auf Windows die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Die Nummer am Ende der Zeichenkette, ist dabei bei jedem PC / Port unterschiedlich und wird intern vergeben. Man muss diese vorher im Gerätemanager nachschauen und kann dann die entsprechende Nummer verwenden. Hier fand es seinen Einsatz insbesondere bei den anfänglichen Ausleseversuchen und den ersten Programmversionen.
+\item \textbf{/dev/ttyUSB0:} Damit kann auf Linux die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Benutzt wurde dieses beim Testen des Programms auf dem Raspberry Pi, als der erste RS485 Adapter noch nicht geliefert war bzw. nicht funktionierte.
+\item \textbf{/dev/ttyAMA0:} Damit kann auf Linux über die UART (GLOSSAR) Pins, also genauer gesagt Pin 8 (TX) und Pin 10 (RX) kommuniziert werden. Im finalen Programm wird das verwendet, da dieses auf dem Raspberry Pi läuft und über die UART Pins kommuniziert. Die Pins sind dabei über einen funktionierenden RS485 Adapter als Zwischenstück an dem Bussystem angeschlossen.
+\end{itemize}
+
 \label{get_data_from_modbus}
-In der \enquote{get\_data\_from\_modbus} Funktion, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und der Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen  der \enquote{modbus\_functions} Datei aufgerufen.
+In der \enquote{get\_data\_from\_modbus} Methode, welche auch Teil der Sensorklasse ist, wird dann das entsprechende Register mithilfe der von minimalmodbus bereitgestellten \enquote{read\_register} Funktion ausgelesen. In der Parameterliste gibt man die Registernummer, die Anzahl an auszulesender Register und den Modbus Function Code an. Der ausgelesene Wert wird dann entsprechend der in der Konfigurationsdatei angegebenen Skalierung angepasst und zurückgeliefert. Diese Methode wird innerhalb der konfigurierbaren Funktionen der \enquote{modbus\_functions} Datei aufgerufen (vgl. Kapitel \ref{python_functions}).
 
 \begin{pythoncode}
 class Sensor():
@@ -76,7 +81,7 @@ class Sensor():
 			return "N/A"
 \end{pythoncode}
 
-In der \enquote{run\_calculation\_function} Methode wird die in der Konfigurationsdatei angegebene Funktion ausgewählt. Wenn \enquote{standard} eingelesen wurde, wird die Standard Funktion ausgeführt. Ansonsten wird mit \enquote{hasattr} überprüft, ob innerhalb der \enquote{modbus\_functions} Datei die angegebene Funktion existiert. Wenn diese existiert, wird mit \enquote{getattr} ein Funktionszeiger erstellt. Mit diesem Zeiger wird dann die entsprechende Funktion ausgeführt. Welche Funktionen vorhanden sind wird hier beschrieben (link auf python\_functions). 
+In der \enquote{run\_calculation\_function} Methode des Measurements wird die in der Konfigurationsdatei angegebene Funktion ausgewählt. Wenn \enquote{standard} eingelesen wurde, wird die Standard Funktion ausgeführt. Ansonsten wird mit \enquote{hasattr} überprüft, ob innerhalb der \enquote{modbus\_functions} Datei die angegebene Funktion existiert. Wenn diese existiert, wird mit \enquote{getattr} ein Funktionszeiger erstellt. Mit diesem Zeiger wird dann die entsprechende Funktion ausgeführt. Welche Funktionen vorhanden sind wird in Kapitel \ref{python_functions} beschrieben. 
 
 \begin{pythoncode}
 class Measurement():

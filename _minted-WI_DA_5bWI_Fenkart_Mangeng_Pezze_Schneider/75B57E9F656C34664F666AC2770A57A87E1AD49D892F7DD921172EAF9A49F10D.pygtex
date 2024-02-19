@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{calc\PYGZus{}wrg}\PYG{p}{(}\PYG{n}{sensors}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+	\PYG{n}{exhaust\PYGZus{}air} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}  \PYG{c+c1}{\PYGZsh{} Abluft}
+	\PYG{n}{outgoing\PYGZus{}air} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}  \PYG{c+c1}{\PYGZsh{} Fortluft}
+	\PYG{n}{outside\PYGZus{}air} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}  \PYG{c+c1}{\PYGZsh{} Außenluft}
+	
+	\PYG{n}{wrg} \PYG{o}{=} \PYG{p}{((}\PYG{n}{exhaust\PYGZus{}air} \PYG{o}{\PYGZhy{}} \PYG{n}{outgoing\PYGZus{}air}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{exhaust\PYGZus{}air} \PYG{o}{\PYGZhy{}} \PYG{n}{outside\PYGZus{}air}\PYG{p}{))} \PYG{o}{*} \PYG{l+m+mi}{100}
+	
+	\PYG{k}{return} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{wrg}\PYG{p}{))} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{} \PYGZpc{}\PYGZdq{}}
+\end{Verbatim}

@@ -68,11 +68,22 @@ automark
 \clearpairofpagestyles
 \addtokomafont{pageheadfoot}{\small} % Schriftgröße für Kopf- und Fußzeilen
 
+%\newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
+%%\ihead{\headmark}
+%\ihead{\centering \thesistitle}
+%\ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
+%\ofoot{\thepage} % Seitennummerierung rechtsbündig
+
 \newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
-%\ihead{\headmark}
 \ihead{\centering \thesistitle}
-\ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
 \ofoot{\thepage} % Seitennummerierung rechtsbündig
+\cfoot{} % Leerer Seitenfuß in der Mitte
+
+\renewcommand{\sectionmark}[1]{\markboth{\setAuthor{#1}}{}}
+\renewcommand{\subsectionmark}[1]{\markboth{\setAuthor{#1}}{}}
+
+\ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
+
 
 %% Schriftgröße für Überschriften
 \RedeclareSectionCommand[

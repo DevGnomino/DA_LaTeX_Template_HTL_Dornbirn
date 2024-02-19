@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{start\PYGZus{}window}\PYG{p}{(}\PYG{n}{message}\PYG{p}{):}
+	\PYG{n}{root\PYGZus{}tk} \PYG{o}{=} \PYG{n}{tk}\PYG{o}{.}\PYG{n}{Tk}\PYG{p}{()}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{geometry}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}500x250+100+90\PYGZdq{}}\PYG{p}{)}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Meldung\PYGZdq{}}\PYG{p}{)}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{attributes}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}fullscreen\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{)}	
+	\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{set\PYGZus{}appearance\PYGZus{}mode}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Light\PYGZdq{}}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Other: \PYGZdq{}Light\PYGZdq{}, \PYGZdq{}System\PYGZdq{} (only macOS)}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{background}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}white\PYGZdq{}}\PYG{p}{)}
+	
+	\PYG{n}{label} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n}{root\PYGZus{}tk}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}red\PYGZdq{}}\PYG{p}{,} \PYG{n}{font} \PYG{o}{=} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Roboto\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{26}\PYG{p}{),} \PYG{n}{text}\PYG{o}{=}\PYG{n}{message}\PYG{p}{,}	\PYG{n}{wraplength}\PYG{o}{=}\PYG{l+m+mi}{450}\PYG{p}{)}
+	\PYG{n}{label}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{tk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{after}\PYG{p}{(}\PYG{l+m+mi}{7000}\PYG{p}{,} \PYG{k}{lambda}\PYG{p}{:} \PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{())}
+	\PYG{n}{root\PYGZus{}tk}\PYG{o}{.}\PYG{n}{mainloop}\PYG{p}{()}
+\end{Verbatim}

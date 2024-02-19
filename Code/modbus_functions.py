@@ -8,7 +8,7 @@ def calc_wrg(sensors, additional_info):
     outgoing_air = sensors[1].get_data_from_modbus()  # Fortluft
     outside_air = sensors[2].get_data_from_modbus()  # Außenluft
 
-    wrg = (exhaust_air - outgoing_air) / (exhaust_air - outside_air)
+    wrg = ((exhaust_air - outgoing_air) / (exhaust_air - outside_air)) * 100
 
     return str(round(wrg)) + " %"
 
@@ -22,27 +22,25 @@ def eng_status(sensors, additional_info):
         if s == "1":
             if counter == 1:
                 error_string += "PHA "
-            if counter == 3:
+            elif counter == 3:
                 error_string += "TFE "
-            if counter == 4:
+            elif counter == 4:
                 error_string += "SKF "
-            if counter == 5:
+            elif counter == 5:
                 error_string += "FB "
-            if counter == 6:
+            elif counter == 6:
                 error_string += "TFM "
-            if counter == 7:
+            elif counter == 7:
                 error_string += "HLL "
-            if counter == 8:
+            elif counter == 8:
                 error_string += "BLK "
-            if counter == 9:
+            elif counter == 9:
                 error_string += "n_Limit "
-            if counter == 11:
+            elif counter == 11:
                 error_string += "RL_Cal "
-            if counter == 13:
+            elif counter == 13:
                 error_string += "UzLow "
-
-            # This should never occur:
-            if counter == 2 or counter == 10 or counter == 12 or counter > 13:
+            else:
                 error_string += "Unbekannter Fehler"
 
     if error_string == "":
@@ -83,7 +81,7 @@ def flap_position(sensors, additional_info):
 
 def relay_position(sensors, additional_info):
     relay_mv = sensors[0].get_data_from_modbus()
-    if relay_mv < additional_info["switching_voltage"]:
+    if relay_mv < (additional_info["switching_voltage"] * 1000):
         return "Geschlossen"
     else:
         return "Offen"

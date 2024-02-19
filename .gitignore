@@ -9,6 +9,8 @@
 *.fdb_latexmk
 *.fls
 *.xmpi
+*.glo
+*.gls
 
 # LaTeX biber
 *.bbl
