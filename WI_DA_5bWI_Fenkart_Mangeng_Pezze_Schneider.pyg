@@ -1,2 +1,0 @@
-	os.system("sudo eject /dev/" + port)
-	os.system("udisk --detach /dev/" + port)
