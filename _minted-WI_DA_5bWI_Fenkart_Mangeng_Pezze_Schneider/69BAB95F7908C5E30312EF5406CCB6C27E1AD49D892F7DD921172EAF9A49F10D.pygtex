@@ -4,7 +4,7 @@
 
 \PYG{k}{class} \PYG{n+nc}{Sensor}\PYG{p}{():}
 	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{baud\PYGZus{}rate}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{,} \PYG{n}{parity}\PYG{p}{,} \PYG{n}{stop\PYGZus{}bits}\PYG{p}{,} \PYG{n}{scaling}\PYG{p}{,} \PYG{n}{register}\PYG{p}{,} \PYG{n}{function\PYGZus{}code}\PYG{p}{,} \PYG{n}{zero\PYGZus{}based}\PYG{p}{):}
-		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{Instrument}\PYG{p}{(}\PYG{n}{PORT\PYGZus{}STRING}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{Instrument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}/dev/ttyAMA0\PYGZsq{}}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{)}
 		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{baudrate} \PYG{o}{=} \PYG{n}{baud\PYGZus{}rate}
 		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensor}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{bytesize} \PYG{o}{=} \PYG{l+m+mi}{8}
 		

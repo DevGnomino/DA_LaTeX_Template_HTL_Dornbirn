@@ -7,38 +7,33 @@ if os.environ.get('DISPLAY','') == '':
     os.environ.__setitem__('DISPLAY', ':0.0')
 
 def start_window(message):
-    root_tk = tk.Tk()  # create the Tk window like you normally do
-    root_tk.geometry("500x250+100+90")
-    root_tk.title("Meldung")
-    root_tk.attributes('-fullscreen', True)
+    msg_window = tk.Tk()  # create the Tk window like you normally do
+    msg_window.title("Meldung")
+    msg_window.attributes('-fullscreen', True)
 
     ctk.set_appearance_mode("Light") # Other: "Light", "System" (only macOS)
-    root_tk.configure(background="white")
-    label = ctk.CTkLabel(master=root_tk,
+    msg_window.configure(background="white")
+    label = ctk.CTkLabel(master=msg_window,
                         text_color="red",
                         font = ('Roboto', 26),
                         text=message,
                         wraplength=450)
     label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-    root_tk.after(7000, lambda: root_tk.destroy())
-    root_tk.mainloop()
+    msg_window.after(7000, lambda: msg_window.destroy())
+    msg_window.mainloop()
 
-def check_if_files_exists(config_path, device_config_path, verbose):
+def check_if_files_exists(config_path, device_config_path):
     if not os.path.exists(config_path):
-        if (verbose):
-            start_window("RLT_Config Ordner existiert nicht")
+        start_window("RLT_Config Ordner existiert nicht")
         return False
     if not os.path.isfile(config_path + "main_config_file.json"):
-        if (verbose):
-            start_window("main_config_file.json existiert nicht")
+        start_window("main_config_file.json existiert nicht")
         return False
     if not os.path.exists(device_config_path):
-        if (verbose):
-            start_window("Device Ordner existiert nicht")
+        start_window("devices Ordner existiert nicht")
         return False
-    if not os.path.exists(device_config_path):
-        if (verbose):
-            start_window("Device Ordner existiert nicht")
+    if not os.path.exists(device_config_path + "sensors.json"):
+        start_window("devices/sensors.json existiert nicht")
         return False
     return True
 
@@ -64,10 +59,9 @@ def copy_from_usb():
             port = "sdd1"
             break
 
-        if (check_if_files_exists(config_path, device_config_path, False)):
+        if (check_if_files_exists(config_path, device_config_path)):
             return 1
-
-        time.sleep(5)
+            
     #is_mounted = os.system("mount | grep " +  port)
     #if (is_mounted != 256): # Runtime error --> no drive mounted
         
@@ -77,7 +71,7 @@ def copy_from_usb():
     os.system("sudo mount /dev/" + port + " /home/pi/Documents/Config")
     #is_mounted = os.system("mount | grep sda1")
     #print(is_mounted)
-    error_free = check_if_files_exists(usb_config_path, usb_device_config_path, True)  
+    error_free = check_if_files_exists(usb_config_path, usb_device_config_path)  
     
     if error_free:
         os.system("cp -r ~/Documents/Config/RLT_Config ~/Documents/")

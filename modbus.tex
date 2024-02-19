@@ -25,7 +25,7 @@ Das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragun
 \end{itemize}
 (hier vielleicht modbus bild einfügen: MODBUS communication stack)
 
-\subsection{Funktionsweise}\label{modbus_funktionsweise}
+\subsection{Funktionsweise} \label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
 
 Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte von 0 bis 255 einnehmen (siehe Tab.~\ref{tab:modbus_adressen} für die Einteilung). 
@@ -138,4 +138,4 @@ Was ist die BaudRaten?
 
 
 
-Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Dies hat beim Test auch diverse male zu scheinbar unerklärlichen Fehlern geführt.
+Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Dies hat beim Test diverse male zu scheinbar unerklärlichen Fehlern geführt.

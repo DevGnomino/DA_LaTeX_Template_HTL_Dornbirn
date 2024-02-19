@@ -16,6 +16,4 @@
 		
 		\PYG{k}{if} \PYG{p}{(}\PYG{n}{check\PYGZus{}if\PYGZus{}files\PYGZus{}exists}\PYG{p}{(}\PYG{n}{config\PYGZus{}path}\PYG{p}{,} \PYG{n}{device\PYGZus{}config\PYGZus{}path}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{)):}
 			\PYG{k}{return} \PYG{l+m+mi}{1}
-			
-		\PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
 \end{Verbatim}
