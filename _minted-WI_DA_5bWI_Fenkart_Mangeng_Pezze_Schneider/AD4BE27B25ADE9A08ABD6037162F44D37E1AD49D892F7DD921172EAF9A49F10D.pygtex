@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{port\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{k}{for} \PYG{n}{port} \PYG{o+ow}{in} \PYG{n}{port\PYGZus{}arr}\PYG{p}{:}
+	\PYG{n}{device\PYGZus{}id} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{port}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{())[}\PYG{n}{port\PYGZus{}counter}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} example: QBM1}
+	\PYG{n}{port\PYGZus{}id} \PYG{o}{=} \PYG{n}{port}\PYG{p}{[}\PYG{n}{device\PYGZus{}id}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} example: AI1}
+	\PYG{n}{port\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
+	
+	\PYG{k}{for} \PYG{n}{device} \PYG{o+ow}{in} \PYG{n}{config\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}devices\PYGZdq{}}\PYG{p}{]:}
+		\PYG{k}{if} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}id\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{device\PYGZus{}id}\PYG{p}{:}
+			\PYG{c+c1}{\PYGZsh{}[Aufruf der get\PYGZus{}sensor\PYGZus{}unit Funktion]}
+			\PYG{c+c1}{\PYGZsh{}[Auslesen der Geräteparameter in der Haupt\PYGZhy{}Konfigurationsdatei (baud\PYGZus{}rate, mbaddress etc.)]}
+			\PYG{c+c1}{\PYGZsh{}[Aufruf der get\PYGZus{}sensor\PYGZus{}data Funktion]}
+			\PYG{n}{measurements\PYGZus{}sensors}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Sensor}\PYG{p}{(}\PYG{n}{baud\PYGZus{}rate}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}baud\PYGZus{}rate\PYGZdq{}}\PYG{p}{],} \PYG{o}{...}\PYG{p}{,} \PYG{n}{register}\PYG{o}{=}\PYG{n}{register}\PYG{p}{,} \PYG{n}{zero\PYGZus{}based}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}zero\PYGZus{}based\PYGZdq{}}\PYG{p}{]))}
+\end{Verbatim}

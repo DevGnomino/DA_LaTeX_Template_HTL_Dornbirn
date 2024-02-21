@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{relay\PYGZus{}position}\PYG{p}{(}\PYG{n}{sensors}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+	\PYG{n}{relay\PYGZus{}mv} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}
+	\PYG{k}{if} \PYG{n}{relay\PYGZus{}mv} \PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{additional\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}switching\PYGZus{}voltage\PYGZdq{}}\PYG{p}{]} \PYG{o}{*} \PYG{l+m+mi}{1000}\PYG{p}{):}
+		\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}Geschlossen\PYGZdq{}}
+	\PYG{k}{else}\PYG{p}{:}
+		\PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}Offen\PYGZdq{}}
+
+\end{Verbatim}
