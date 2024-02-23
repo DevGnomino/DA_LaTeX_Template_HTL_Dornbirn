@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	app.mainloop()	
 \end{pythoncode}
 
-In der \enquote{usb\_routine} Funktion wird die \enquote{copy\_from\_usb} Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \enquote{start\_window} Funktion erstellt ein neues customtkinter Fenster, in dem dann als Parameter angegebene Zeichenkette angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt. Die \enquote{usb\_routine} Funktion dient als Zwischenschritt, damit der Benutzer eine Rückmeldung bekommt, ob die Konfigurationsdateien erfolgreich kopiert wurden oder keine Änderung vorgenommen wird.
+In der \enquote{usb\_routine} Funktion wird die \enquote{copy\_from\_usb} Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \enquote{start\_window} Funktion erstellt ein neues customtkinter Fenster, in dem dann die als Parameter angegebene Zeichenkette angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt. Die \enquote{usb\_routine} Funktion dient als Zwischenschritt, damit der Benutzer eine Rückmeldung bekommt, ob die Konfigurationsdateien erfolgreich kopiert wurden oder keine Änderung vorgenommen wird.
 
 \begin{pythoncode}
 def usb_routine():
@@ -35,23 +35,22 @@ def usb_routine():
 	return False # Fehler
 \end{pythoncode}
 
-Es gibt eine Hilfsfunktion namens \enquote{start\_window} mit der Meldungen in einer Art Pop-Up gemacht werden können. Dabei wird ein customtkinter Fenster im Vollbildmodus erstellt. Zuerst werden die Abmessungen, die Überschrift, die Hintergrundfarbe konfiguriert. Danach wird ein neues Label erstellt, als Textinhalt wird der Parameter message zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn customtkinter bietet die Funktionalität eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. 
+Es gibt eine Hilfsfunktion namens \enquote{start\_window}, mit der Meldungen in einem Pop-Up Fenster angezeigt werden können. Dabei wird eine \enquote{Tk} Instanz erstellt, welches ein customtkinter Fenster darstellt. Zuerst wird die Überschrift, der Vollbildmodus und die Hintergrundfarbe des Fensters konfiguriert. Danach wird ein neues Label erstellt. Als Textinhalt wird der Parameter message zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn customtkinter bietet die Möglichkeit eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. Hier wird eine Lambda Funktion übergeben, die die \enquote{Tk} Instanz namens \enquote{msg\_window} zerstört.
 \begin{pythoncode}
 def start_window(message):
-	root_tk = tk.Tk() 
-	root_tk.geometry("500x250+100+90")
-	root_tk.title("Meldung")
-	root_tk.attributes('-fullscreen', True)	
-	ctk.set_appearance_mode("Light") # Other: "Light", "System" (only macOS)
-	root_tk.configure(background="white")
+	msg_window = tk.Tk()
+	msg_window.title("Meldung")
+	msg_window.attributes('-fullscreen', True)	
+	ctk.set_appearance_mode("Light")
+	msg_window.configure(background="white")
 	
-	label = ctk.CTkLabel(master=root_tk, text_color="red", font = ('Roboto', 26), text=message,	wraplength=450)
+	label = ctk.CTkLabel(master=msg_window, text_color="red", font = ('Roboto', 26), text=message, wraplength=450)
 	label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-	root_tk.after(7000, lambda: root_tk.destroy())
-	root_tk.mainloop()
+	msg_window.after(7000, lambda: msg_window.destroy())
+	msg_window.mainloop()
 \end{pythoncode}
 
-Es folgt die Beschreibung der \enquote{copy\_from\_usb} Funktion. Darin wird überprüft, ob auf einem der sd-Ports (USB-Ports in Linux) ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird in diesem Fall überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert in der \enquote{check\_if\_files\_exists} Funktion. Wenn die Dateien bereits vorhanden sind, wird 1 zurückgegeben. Wenn die Dateien nicht vorhanden sind, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird für fünf Sekunden gestoppt, damit der Benutzer oder die Benutzerin genügend Zeit hat einen Datenträger einzufügen.
+Es folgt die Beschreibung der \enquote{copy\_from\_usb} Funktion. Darin wird überprüft, ob auf einem der \enquote{sd...} Ports (USB-Ports in Linux) ein Datenträger angeschlossen ist. Wenn ja, wird der entsprechende Port gespeichert und die Abfrage beendet. Die auszuführenden CLI Befehle wurden von folgender Quelle bezogen \cite{Rendek:2023}. Wenn kein Datenträger gefunden wird, kann man davon ausgehen, dass keine Änderung an der Konfiguration vorgenommen werden soll. Es wird in diesem Fall überprüft, ob im Programmverzeichnis alle benötigten Konfigurationsdateien vorhanden sind. Das passiert in der \enquote{check\_if\_files\_exists} Funktion. Wenn die Dateien bereits vorhanden sind, wird 1 zurückgegeben. Wenn die Dateien nicht vorhanden sind, wird der Vorgang wiederholt, bis ein Datenträger gefunden wird. Die Ausführung wird nach jeder Iteration für sieben Sekunden gestoppt, da die \enquote{check\_if\_files\_exists} Funktion ein Meldungsfenster öffnet und dieses sieben Sekunden lang die weitere Ausführung verhindert. Dadurch hat der Benutzer oder die Benutzerin genügend Zeit um einen Datenträger einzufügen.
 
 \begin{pythoncode}
 	port = ""
@@ -71,8 +70,6 @@ Es folgt die Beschreibung der \enquote{copy\_from\_usb} Funktion. Darin wird üb
 		
 		if (check_if_files_exists(config_path, device_config_path, False)):
 			return 1
-			
-		time.sleep(5)
 \end{pythoncode}
 
 Wenn ein Datenträger gefunden wurde, wird der vorher gespeicherte Port gemountet. Nun wird überprüft, ob die notwendigen Konfigurationsdateien auf dem Datenträger existieren. Wenn nicht, wird der Datenträger ausgeworfen und ein Fehlercode zurückgegeben. Ansonsten werden die Dateien vom USB-Stick ins Programmverzeichnis kopiert und der Datenträger entmountet. 
@@ -91,32 +88,26 @@ Wenn ein Datenträger gefunden wurde, wird der vorher gespeicherte Port gemounte
 	return 0
 \end{pythoncode}
 
-Beim entmounten kommt es vor, dass auf dem Display eine Warnung erscheint "der Stick wurde eventuell nicht richtig ausgeworfen". Nach googeln folgende Befehle probiert, allerdings bringen beide nichts.
+Nachdem der \enquote{umount} Befehl ausgeführt und der Datenträger physisch entfernt wird, erscheint auf dem Display eine Warnung, dass der Datenträger entfernt wurde, ohne ausgeworfen worden zu sein. Ausprobiert wurde auch der folgende Befehle, allerdings erschien immer noch die selbe Warnung \cite{}. (https://unix.stackexchange.com/questions/35508/eject-usb-drives-eject-command)
 \begin{pythoncode}
-	os.system("sudo eject /dev/" + port) 
-	os.system("udisk --detach /dev/" + port)
+	os.system("sudo eject /dev/" + port)
 \end{pythoncode}
-%Beim Auswerfen wird manchmal eine Nachricht angezeigt, dass der Datenträger nicht ausgeworfen wurde. Dies kann ignoriert werden (Quelle angeben; falls das überhaupt stimmt).
+Die Erkenntnis ist, dass hier das unmounten ausreichend ist und die Warnung ignoriert werden kann, da diese in diversen Testversuchen keine unerwünschten Nebenwirkungen verursachte. Außerdem stört sie auch nicht die Benutzerfreundlichkeit, da die \acs{gui} im Vollbild ausgeführt wird und somit die Warnung verdeckt.
 
-Zweimal muss an unterschiedlichen Stellen überprüft werden, dass die Konfigurationsdateien existieren. Dafür gibt es die Funktion \enquote{check\_if\_files\_exists}. Diese erhält als Parameter zuerst eine Zeichenkette, die den Pfad zum Speicherort der Konfigurationsdateien auf dem externen Datenträger angibt. Außerdem eine Zeichenkette, die den Pfad zum Speicherort des Devices Unterordner angibt. Es wird nun also überprüft, ob an dem angegebenen Pfad tatsächlich das Verzeichnis existiert. Danach wird überprüft, ob die Hauptkonfigurationsdatei darin existiert. Danach wird überprüft, ob ein Unterordner namens \enquote{devices} existiert. Schließlich wird noch überprüft, ob die Sensors Konfigurationsdatei existiert. Die Existenz bestimmter Gerätekonfigurationsdateien kann nicht geprüft werden, da diese unterschiedliche Namen tragen (z.B. QBM97XX, EBM). Nach jeder Überprüfung wird bei einem Fehlschlag ein Fenster geöffnet, auf dem eine genauere Fehlerherkunft beschrieben steht, damit der Administrator bzw. die Administratorin den Fehler einfacher beheben kann. Ob diese Fenster überhaupt geöffnet werden, kann mit dem dritten Parameter (verbose : Boolean) gesteuert werden. Diese Ausgabe über ein Fenster kann deaktiviert werden, weil bei der ersten Abfrage, wenn kein USB angesteckt und nicht alle Dateien vorhanden sind, würden alle 5 Sekunden ein Fenster für 7 Sekunden geöffnet werden.
-
-\pythonfile[firstline=26, lastline=43]{Code/usb_detection.py}
-%\begin{pythoncode}
-%def check_if_files_exists(config_path, device_config_path, verbose):    
-%	path_exists = os.path.exists(config_path)
-%	if not path_exists:
-%		if (verbose):
-%			start_window("RLT_Config Ordner existiert nicht")
-%		return False
-%	path_exists = os.path.isfile(config_path + "main_config_file.json")
-%	if not path_exists:
-%		if (verbose):
-%			start_window("main_config_file.json existiert nicht")
-%		return False
-%	path_exists = os.path.exists(device_config_path)
-%	if not path_exists:
-%		if (verbose):
-%			start_window("device Ordner existiert nicht")
-%		return False
-%	return True
-%\end{pythoncode}
+Zweimal muss an unterschiedlichen Stellen überprüft werden, dass die Konfigurationsdateien existieren. Dafür gibt es die Funktion \enquote{check\_if\_files\_exists}. Diese erhält als Parameter zuerst eine Zeichenkette, die den Pfad zum Speicherort der Konfigurationsdateien auf dem externen Datenträger angibt. Außerdem eine Zeichenkette, die den Pfad zum Speicherort des devices Unterordner angibt. Es wird nun also überprüft, ob an dem angegebenen Pfad tatsächlich das Verzeichnis \enquote{RLT\_Config} existiert. Danach wird überprüft, ob die Hauptkonfigurationsdatei darin existiert. Danach wird überprüft, ob ein Unterordner namens \enquote{devices} existiert. Schließlich wird noch überprüft, ob die Sensors Konfigurationsdatei im devices Ordner existiert. Die Existenz bestimmter Gerätekonfigurationsdateien kann nicht geprüft werden, da die Dateinamen variabel und abhängig vom Gerätetyp sind (z.B. QBM97XX, EBM). Nach jeder fehlgeschlagenen Überprüfung wird ein Fenster geöffnet, auf dem eine genauere Fehlerherkunft beschrieben steht, damit der Administrator bzw. die Administratorin den Fehler einfacher beheben kann.
+\begin{pythoncode}
+def check_if_files_exists(config_path, device_config_path):
+	if not os.path.exists(config_path):
+		start_window("RLT_Config Ordner existiert nicht")
+		return False
+	if not os.path.isfile(config_path + "main_config_file.json"):
+		start_window("main_config_file.json existiert nicht")
+		return False
+	if not os.path.exists(device_config_path):
+		start_window("devices Ordner existiert nicht")
+		return False
+	if not os.path.exists(device_config_path + "sensors.json"):
+		start_window("devices/sensors.json existiert nicht")
+		return False
+	return True
+\end{pythoncode}

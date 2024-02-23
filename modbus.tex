@@ -25,7 +25,7 @@ Das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragun
 \end{itemize}
 (hier vielleicht modbus bild einfügen: MODBUS communication stack)
 
-\subsection{Funktionsweise}\label{modbus_funktionsweise}
+\subsection{Funktionsweise} \label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
 
 Jeder Server am Bus hat eine einzigartige Adresse. Die Adressen können Werte von 0 bis 255 einnehmen (siehe Tab.~\ref{tab:modbus_adressen} für die Einteilung). 
@@ -104,8 +104,8 @@ Zusätzlich zu den 8 Datenbits kommen noch 3 Hilfsbits dazu. Für jedes übertra
 	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Übertragung endet. Falls no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
 \end{itemize}
 
-Nach jeder Nachricht wird 3,5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch erkennt das Protokoll genau, ob ein empfangenes Datenbyte noch zur vorherigen Nachricht gehört oder ob bereits die nächste Nachricht anfängt. 
-Abb.~\ref{fig:modbus_frame}):
+Nach jeder Nachricht wird 3,5 Zeichen gewartet, bis die nächste Nachricht versendet wird. Dadurch erkennt das Protokoll genau, ob ein empfangenes Datenbyte noch zur vorherigen Nachricht gehört oder ob bereits die nächste Nachricht anfängt.
+Der Aufbau eines Modbus RTU Frames ist in Abb.~\ref{fig:modbus_frame} zu sehen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_frame}
@@ -130,12 +130,43 @@ Anders als beim \acs{rtu} Modus werden nur 7 Datenbits versendet. \acs{ascii} be
 
 Zur Berechnung der Checksumme wird die \acf{lrc} Methode verwendet. Diese wird auf den Inhalt der Nachricht angewandt, Start- und Endzeichen sind ausgenommen. Es wird ein 8 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils 8 Bit der Nachricht addiert werden. Die Überträge werden vernachlässigt.
 
-\subsection{Serielle Kommunikation (bei RTU/RS485)}
-Serielle Kommunikation bedeutet grundsätzlich, dass 
-Was ist RS485? (bzw. bei Lukas beschrieben?)
+\subsection{Serielle Kommunikation über RS485}
+Serielle Kommunikation bedeutet grundsätzlich, dass eine Nachricht Bit für Bit (seriell) versendet wird \cite{Schnabel:o.J.}. Dafür gibt es verschiedene Standards, die unterschiedliche Kriterien aufweisen (siehe Tabelle \ref{tab:serielle}) 
+\begin{table}[H]
+	\caption{Serielle Kommunikation Standards \label{tab:serielle}}
+	\begin{tabularx}{\textwidth}{@{}X|c|c|c@{}}
+		\toprule
+		\textbf{Anschlussname} & \textbf{RS232} & \textbf{RS422} & \textbf{RS485}\\
+		\midrule
+		Übertragungsart & Vollduplex & Vollduplex & Halb- oder Vollduplex \\
+		Maximale Distanz & 15 Meter & 1200 Meter & 1200 Meter \\
+		Topologie & Point-to-Point & Point-to-Point & Multi-point \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+\cite{IPC2U_GmbH_SerielleSchnittstellen:o.J.}
 
-Was ist die BaudRaten?
+In den Lüftungsgeräten der Firma Bösch wird die RS485 Schnittstelle verwendet.
 
+\paragraph{RS485} \label{rs485}
+RS485 ist ein Standard, welcher die elektrischen bzw. physikalischen Eigenschaften einer Schnittstelle definiert. Es befindet sich auf Schicht 1 des ISO/OSI Modells. Der Standard definiert nicht die Struktur der zu übertragenen Daten. Daher kann es in Kombination mit den unterschiedlichsten Protokollen, auf den darüber liegenden Schichten verwendet werden (z.B. Modbus RTU) \cite{Janitza:o.J.}.
 
+RS485 verwendet für das Übertragen 2 Leitungen. Es gibt eine Leitung, auf der das Datenbit übertragen wird. Wenn das Datenbit 1 ist, ist ein High Spannungspegel auf dieser Leitung, wenn das Datenbit 0 ein Low Spannungspegel. Auf der zweiten Leitung wird das invertierte Datenbit übertragen. Wenn das Datenbit 1 ist, ist ein Low Spannungspegel auf dieser Leitung, wenn das Datenbit 0 ein High Spannungspegel. Der Spannungsunterschied zwischen den beiden Leitungen muss beim Übertragen mindestens 1,5V betragen \cite{Kugelstadt:2021}. 
+Eine Darstellung der Spannungspegel der beiden Leitungen (dargestellt in Rot und Blau) beim Übertragen findet sich in Abb.~\ref{fig:rs485_signal}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Bilder/RS485_signal_illustration}
+	\caption{RS485 Signal (Quelle: \url{https://www.lorric.com/en/WhyLORRIC/Flowmeter/what-is-rs485})}
+	\label{fig:rs485_signal}
+\end{figure}
 
-Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Dies hat beim Test auch diverse male zu scheinbar unerklärlichen Fehlern geführt.
+Dadurch, dass es 2 Leitungen gibt und die Spannungsunterschiede genügend groß definiert sind, ist RS485 ziemlich Resistent gegen elektromagnetische Störungen. Die Daten können auch über längere Strecken sicher übertragen werden. \cite{Kugelstadt:2021, Heinen_Elektronik_GmbH:o.J.}. \\
+
+RS485 kann entweder im Halb- oder Vollduplex Modus aufgesetzt werden. \newline Halbduplex bedeutet, dass entweder gesendet oder empfangen werden kann, aber nicht beides gleichzeitig. Der Bus benötigt nur 1 Leitungspaar (2 Leitungen). \newline Vollduplex bedeutet, dass Senden und Empfangen parallel funktioniert. D.h. es gibt 2 Leitungspaare (4 Leitungen), eine für das Senden, eine für das Empfangen \cite{Kugelstadt:2021}. \\
+
+Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist, dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Dadurch lässt sich eine Reflexion des Signals verhindern. (vgl. \cite{Kugelstadt:2021}). Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Da die Existenz dieses Schalters während der praktischen Ausarbeitung unserer Diplomarbeit lange vergessen wurde, kam es beim Testen diverse male zu scheinbar unerklärlichen Fehlern.
+
+\paragraph{Baudrate} \label{baud_rate}
+Die Baudrate stellt die Schrittgeschwindigkeit in einem seriellen Bussystem dar. Die Baudrate wird häufig mit der Maßeinheit Bit/s verwechselt. Obwohl beide den Datendurchsatz darstellen, misst die Baudrate wie viel Zeit für einen Schritt benötigt wird und nicht wie viele Bits pro Sekunde übertragen werden. Diese beiden Werte können, müssen aber nicht immer gleich sein. Ein Schritt ist dabei definiert als eine Änderung des Signals. 
+\cite{KUNBUS_GmbH_Baudrate:o.J.}
+In dieser Diplomarbeit wird dennoch der Begriff Baudrate verwendet, obwohl die in den Konfigurationsdateien angegebenen Datenraten in Bit/s gemessen werden. Die Bezeichnung Baudrate wurde deswegen gewählt, da sie in der Industrie weit verbreitet ist. Gängige Baudraten sind für Modbus 9600 Bit/s und 19200 Bit/s.
