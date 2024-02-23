@@ -2,8 +2,8 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{gpio}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{79}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{84}}}\glsgroupskip
 \glsgroupheading{H}\relax \glsresetentrylist %
 \glossentry{hdmi}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{79}}}%
+		\setentrycounter[]{page}\glsnumberformat{84}}}%
 \end{theglossary}\glossarypostamble
