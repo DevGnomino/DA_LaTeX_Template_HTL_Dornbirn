@@ -193,7 +193,7 @@ Die Folgenden \acp{rltanlage} wurden von der Firma Walter Bösch GmbH für die E
 	\label{fig:LG_entwicklung}
 \end{figure}
 
-Funktionsweise / Aufbau:
+\textbf{Funktionsweise / Aufbau:}
 
 Bei der Entwicklungs- \ac{rltanlage} ist der Aufbau wie in der Abb.~\ref{fig:Bauplan_entwicklung} zu sehen, wie bei fast jeder \ac{rltanlage} in zwei größere Teile geteilt.
 Beim (Punkt ODA) wird die noch ungefilterte Außenluft in die \ac{rltanlage} eingespeist. Zuerst geht es durch die, je nach benötigter Luftmenge geöffneten, Außenluft Klappe und anschließend durch die Filter um die Außenluft von möglicher Verunreinigung zu reinigen. Danach wird durch die WRG-Klappe bestimmt ob die Zuluft am Wärmerückgewinnungsregister vorbei geleitet werden soll, oder ob dieses Durchströmt werden soll. Nach diesem Schritt geht es von links unten durch den Ventilator auf der linken Seite nach oben und dort durch das verbaute Heiz- und Kühlregister. Von dort (Punkt SUP) aus strömt die Zuluft nun durch die Verrohrung und verteilt sich im Gebäude. Die verbrauchte Abluft wird nun am (Punkt ETA) angesaugt und durch einen Filter gesogen (Reinigung der Abluft von \zB Fett oder Partikel). Danach wird die Abluft durch das Wärmerückgewinnungsregister geschleust um dieser Wärmeenergie zu entziehen (Erwärmung der Zuluft). Nach diesem Schritt wird die Abluft von rechts unten nach rechts oben durch den Ventilator befördert. Zum Schluss wird die Abluft durch die Fortluftklappe nach draußen gegeben. 
@@ -206,7 +206,7 @@ Beim (Punkt ODA) wird die noch ungefilterte Außenluft in die \ac{rltanlage} ein
 \end{figure}
 
 
-Komponenten:
+\textbf{Komponenten:}
 
 Die ganze Entwicklungs- \ac{rltanlage} baut mit dessen Komponenten auf dem Modbus Protokoll auf. Dabei wird in dieser \ac{rltanlage} eine Parity von 19200 verwendet. Die ersten Bauteil welche die digitale Infrastruktur bilden sind die beidem QBM9711 (Siemens QBM9711). Diese haben in dieser Ausbaustufe zwei Druckdifferezmesser welche je bis zu 1250Pa messen können. Damit misst man die Druckdifferenzen welche Aufschluss geben, wie verschmutzt die Filter sind (höherer Gegendruck).
 
@@ -216,7 +216,7 @@ In dieser Konfiguration werden neben den Temperatursensoren für Zu- und Abluft 
 
 Mit den Analog Output Ports werden weitere Dinge gesteuert wie \zB die Außenluftklappe. Diese Steuert die Luftzufuhr in die \ac{rltanlage}. Durch zufahren dieser Klappe wird die \ac{rltanlage} auch vor Witterung geschützt (die passiert Automatisch). Auch beim Analog Output angeschlossen ist die Wärmeregisterklappe. Wie zuvor schon erwähnt steuert diese den Durchfluss durch das Wärmerückgewinnungsregister (An heißen Tagen wird die Luft an der WRG-Klappe vorbei geführt um unnötiges erhitzen des Wärmerückgewinnungsregisters zu vermeiden).
 
-Die Ventilatoren in der Entwicklungs- \ac{rltanlage} stammen von EBM. Es handelt sich dabei um zwei EBM-Papst k3g310 Abb.~\ref{fig:ebmpapstventilator}. Diese sind in der \ac{rltanlage} für die Luft zu- und abfuhr zuständig. Die Ventilatoren können über das Modbus Protokoll direkt ausgelesen werden und damit können der aktuelle Sollwert, Istwert sowie die Leistung und das Volumen (Durchsatz) ausgegeben / berechnet werden siehe Kapitel \ref{python_functions}.
+Die Ventilatoren in der Entwicklungs- \ac{rltanlage} stammen von EBM. Es handelt sich dabei um zwei EBM-Papst k3g310 Abb.~\ref{fig:ebmpapstventilator}. Diese sind in der \ac{rltanlage} für die Luft zu- und abfuhr zuständig. Die Ventilatoren können über das Modbus Protokoll direkt ausgelesen werden und damit können der aktuelle Soll- und Istwert der Drehzahl, sowie die Leistung und das Volumen (Luftvolumen Durchsatz) ausgegeben / berechnet werden. Einer der wichtigsten Angaben ist jedoch der Motorstatus, dieser zeigt an ob es aktuell Fehler im betrieb der Ventilatoren gibt und wenn ja welcher anliegt. siehe Kapitel \ref{python_functions}.
 
 \begin{figure}[H]
 	\centering
@@ -225,7 +225,7 @@ Die Ventilatoren in der Entwicklungs- \ac{rltanlage} stammen von EBM. Es handelt
 	\label{fig:ebmpapstventilator}
 \end{figure}
 
-Verkleidung:
+\textbf{Verkleidung:}
 
 Wie man in Abb.~\ref{fig:LG_entwicklung} sieht. Ist die \ac{rltanlage} mit einem robusten Rahmen versehen, welcher mit leichten Aluminumplatten verkleidet wird. Die vorderen Klappen lassen sich leicht mit den Schwarzen Verschlüssen öffnen um einen leichteren Auf- und Zusammenbau sowie eine leichtere Wartung im Nachhinein zu garantieren. Zudem ist die \ac{rltanlage} in mehrere Segmente unterteilbar, das wiederum erleichtert einen leichteren Transport von sehr großen \ac{rltanlagen}. Da die \ac{rltanlage} immer Witterungen ausgesetzt wird, ist sowohl die Anzeigelösung sowie die gesamte \ac{rltanlage} Wasser- und Staubdicht. Um bei der Einrichtung des Gerätes Zeit und Kosten zu sparen sind alle wichtigen Anschlüsse dieser \ac{rltanlage} gut farblich und mit Schrift/Symbolen gekennzeichnet. 
 
@@ -235,7 +235,7 @@ Wie man in Abb.~\ref{fig:LG_entwicklung} sieht. Ist die \ac{rltanlage} mit einem
 
 \subsection{TdoT / Messe \ac{rltanlage}}
 
-Funktionsweise / Aufbau:
+\textbf{Funktionsweise / Aufbau:}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Bilder/Lüftungsgerät_TdoT}
@@ -243,29 +243,68 @@ Funktionsweise / Aufbau:
 	\label{fig:LG_tdot}
 \end{figure}
 
-Beim der TdoT \ac{rltanlage} folgt der Aufbau und die Luftflussrichtung der Entwicklungs- \ac{rltanlage}. Auch hier wird die Luft oben bei der schwarzen Außenluftklappe angesaugt, geht dann durch die Filter, das Wärmerückgewinnungsregister, den Ventilator und das Heiz- und Kühlregister in das Gebäude. Die Abluft wird auch auf dem selben Weg die die der Entwicklungs- \ac{rltanlage} nach draußen befördert. Die Luft wird bei der Abluftklappe (links über den beigen Pfeilen) angesogen, geht dann durch die Filter, das Wärmerückgewinnungsregister und den Ventilator durch die Fortluftklappe nach draußen.
+Beim der TdoT \ac{rltanlage} folgt der Aufbau und die Luftfließrichtung der Entwicklungs- \ac{rltanlage}. Auch hier wird die Luft oben bei der schwarzen Außenluftklappe angesaugt, geht dann durch die Filter, das Wärmerückgewinnungsregister, den Ventilator und das Heiz- und Kühlregister in das Gebäude. Die Abluft wird auch auf dem selben Weg die die der Entwicklungs- \ac{rltanlage} nach draußen befördert. Die Luft wird bei der Abluftklappe (links über den beigen Pfeilen) angesogen, geht dann durch die Filter, das Wärmerückgewinnungsregister und den Ventilator durch die Fortluftklappe nach draußen. Durch die Veranschaulichung durch LED-Panels (LED-Pfeile) welche die Luftfließrichtung anzeigen, ist in dieser \ac{rltanlage} die Funktionsweise für den Laien leichter zu verstehen.
 
-Komponenten:
-
-Lüftungsstrom wird im todt gerät mit leucht led (Pfeilen ) angezeigt
-akrylglas (Plexiglas)
+\textbf{Komponenten:}
+In der TdoT \ac{rltanlage} wurde gleich wie in der Entwicklungs- \ac{rltanlage} eine Baudrate von 19200 für die Modbus Kommunikation vordefiniert. Auch in dieser \ac{rltanlage} kommen die von Siemens produzierten QBM9711 zu Einsatz. An diese werden wie schon zuvor bei der Entwicklungs- \ac{rltanlage} an den Analog Input Ports die Temperatursensoren für Zuluft, Abluft und Fortluft angeschlossen. Zudem wird auch hier mit dem Temperatursensor welcher die Außenluft misst die Frostschutz Temperatur bestimmt. Die Klappensteuerung (Außenluftklappen und WRG-Klappe0) übernehmen auch hier die Analog Output Ports zusätzlich dem WRG-Relais. Die Druckdifferenzen werden in der Entwicklungs- \ac{rltanlage} von den in den QBM9711 eingebauten Druckdifferenzmesser übernommen. Im Gegensatz zur Entwicklungs- \ac{rltanlage} setzt man durch den kompakteren Aufbau der TdoT \ac{rltanlage} auf kleinere nicht so Leistungsstarke Ventilatoren der Marke EBM-Papst. 
 
 
+\textbf{Verkleidung:}
+Wie man in Abb.~\ref{fig:LG_tdot} sehen kann, ist diese \ac{rltanlage} anders als eine Standard \ac{rltanlage} von der Walter-Bösch GmbH. Da diese \ac{rltanlage} meist auf Messen oder wie in dieser Diplomarbeit beim TdoT (Tag der offenen Tür) der HTL Dornbirn ausgestellt ist, wurde hier vor allem auf die Veranschaulichung der Funktionen einer \ac{rltanlage} Wert gelegt. Dabei besteht der Korpus neben dem verwendeten Metallrahmen aus Herausnehmbaren Fenstern und Türen, welche aus Akrylglas (Plexiglas) bestehen. Eine weitere Besonderheit ist, dass wie schon zuvor erwähnt diese \ac{rltanlage} über veranschaulichende LED-Panels verfügt. Diese zeigen durch laufende LED-Pfeile die Fließrichtung der Luft an. Durch diesen Aufbau kann man auf \zB einer Messe dem Laien anhand der Entwicklungs- \ac{rltanlage}, den Aufbau und die Funktionen einer \ac{rltanlage} näher bringen.
 
 
+\paragraph{Ausgabe auf der Anzeigelösung}
+All diese Daten entweder von der Entwicklungs- \ac{rltanlage} oder der Tdot \ac{rltanlage} werden auf dem in der Diplomarbeit erarbeiteten Anzeigelösung ausgewertet, berechnet und ausgegeben. 
+Das betrifft alle Komponenten:
+\begin{itemize}
+
+	\item Ventilatoren: 
+	\begin{itemize}
+		\item Soll Drehzahl und Ist Drehzahl berechnet in %
+		\item Motorstatus
+		\item Leistung 
+		\item gefördertes Luftvolumen
+	\end{itemize}
+
+	\item Temperaturen:
+	\begin{itemize}
+		\item Zuluft, Abluft, Außenluft, Fortluft
+		\item Wärmerückgewinnungsgrad
+		\item Frostschutz Temperatur 
+	\end{itemize}
+
+	\item Klappen / Relais:
+	\begin{itemize}
+		\item WRG-Klappe
+		\item Außenluft-Klappe 
+	\end{itemize}
+	
+	\item Druckdifferenzen:
+	\begin{itemize}
+		\item Zuluft Filter Druckdifferenz
+		\item Abluft Filter Druckdifferenz
+	\end{itemize}
+\end{itemize}
+
+\subsection{Anzeigelösung im Einsatz der TdoT \ac{rltanlage}}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Bilder/tdot_anzeige}
+	\caption{Anzeigelösung TdoT / Messe \ac{rltanlage}} 
+	\label{fig:tdot_anzeige}
+\end{figure}
+
+In Abb.~\ref{fig:tdot_anzeige} sieht man die Anzeigelösung konfiguriert für die TdoT \ac{rltanlage}. Auf der aktuell dargestellten Seite, sieht man den Status des Abluft Ventilator. Dabei werden die berechnete IstDrehzahl angezeigt. Dazu der ausgegebene Drehzahl Sollwert und den aktuellen verbrauch an Leistung. An der 2. untersten Position befindet sich der Wert für die aktuell vom Abluft Ventilator geförderte Luftmenge. Auf der untersten Position wird der Motorstatus angezeigt, welcher keinen Fehler aufweist. Die Anzeigelösung lässt sich mithilf der gekennzeichneten Buttons weiter schalten um auf die anderen Ausgabeparameter zu kommen. Angeschlossen wird die Anzeigelösung in diesem Fall mit dem grünen Modbuskabel diese wird direkt auf der Systemsteuerung der \ac{rltanlage} angeschlossen (fungiert als Erweiterung des internen Modbus Kabelbaum).
 
 
 
 \subsection{Löschen vor abgabe}
 
-Glossar: Zuluft ist nicht = Außenluft 
+-Glossar: Zuluft ist nicht = Außenluft 
 -Zuluft Gereinigt (behandelt) 
 -Außenluft = direkt von draußen
 -Abluft (verbrauchte luft aus dem Gebäude)
 -Fortluft (Verbrauchte luft welche aus dem Gebäude geleitet wird) https://de.wiktionary.org/wiki/Luftart
 
--funktion (allgemein, Gerät tdot und walter bösch geräte) wichtigkeit. 
--ebm-papst 
--qbm siemens 
-QBM
-Die bezeichnung steht dabei für den maximal messbaren Druck des QBM (2 * 1250Pa).
+-tdot
+
