@@ -183,7 +183,7 @@ def load_config():
 
         counter = 0
         last_slice = 0
-        # If a Category has more than 5 elements it has to be splitted into two or more pages
+        # If a Category has more than 5 elements it has to be split into two or more pages
         for measurement in page_measurements:
             counter += 1
             if ((counter % 5) == 0) or (counter == len(page_measurements)):
