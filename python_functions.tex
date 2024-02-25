@@ -11,13 +11,13 @@ def Funktionsname(sensors, additional_info):
 \end{pythoncode}
 
 Jede Funktion erwartet die Übergabeparameter \enquote{sensors} und \enquote{addictional\_info}. \enquote{sensors} ist eine Liste, die Objekte der Klasse \enquote{Sensor} beinhaltet. Ein Objekt der Klasse \enquote{Sensor} wiederum enthält alle erforderlichen Informationen, um einen Wert aus einem Modbus Register auszulesen, wie es in Kapitel \ref{auslesen_rlt_parameter} beschrieben wird. \newline 
-Der Parameter \enquote{additional\_info} ermöglicht die Übermittlung weiterer Informationen, falls diese bei der Berechnung oder Ableitung der Werte verwendet benötigt werden.
+Der Parameter \enquote{additional\_info} ermöglicht die Übermittlung weiterer Informationen, falls diese bei der Berechnung oder Ableitung der Werte benötigt werden.
 
 Im folgenden Abschnitt werden die bisher definierten Python Funktionen beschrieben, eine weitere Erklärung zum Ablauf bei der Ausführung der Python Funktionen ist in Kapitel \ref{auslesen_rlt_parameter} zu finden.
 
 
 \paragraph{Funktion \enquote{standard}}
-Diese Funktion wird standardmäßig ausgeführt, wenn in der Haupt-Konfigurationsdatei (vgl. Kapitel \ref{json_config_files}) der Parameter \enquote{python\_function} nicht angegeben wird \bzw keine besondere Python Funktion angegeben wird. Die \enquote{standard} Funktion wird daher nie direkt in der Haupt-Konfigurationsdatei referenziert und ist somit eine Ausnahme.
+Diese Funktion wird standardmäßig ausgeführt, wenn in der Haupt-Konfigurationsdatei (vgl. Kapitel \ref{json_config_files}) der Parameter \enquote{python\_function} nicht angegeben wird \bzw keine besondere Python Funktion angegeben wird. Die \enquote{standard} Funktion wird daher als einzige dieser Funktionen nie direkt in der Haupt-Konfigurationsdatei referenziert.
 
 Wie im unten stehenden Code zu sehen ist, wird bei dieser Funktion nichts berechnet. Es wird lediglich die \enquote{get\_data\_from\_modbus} Funktion der \enquote{Sensor} Instanz aufgerufen, welche den Messwert aus dem jeweiligen Modbus Register ausliest und zurück gibt (weitere Erklärung in Kapitel \ref{auslesen_rlt_parameter}).
 
