@@ -17,13 +17,20 @@ Die folgende theoretische Beschäftigung mit dem Modbus Protokoll bezieht sich w
 %\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
 %\end{itemize}
 
-Das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
+Da das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
 \begin{itemize}
 	\item \textbf{Modbus TCP/IP:} Die Geräte sind an einem Netzwerk angeschlossen und kommunizieren via TCP/IP.
 	\item \textbf{Modbus Serial Line:} Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Übertragungsarten, nämlich RTU und ASCII. Genauere Beschreibungen der beiden Übertragungsarten finden sich später in diesem Kapitel.
-	\item \textbf{Modbus Plus:} Funktioniert mittels Tokens, die von einem Gerät zum nächsten wandern. Jeweils das Gerät, das den Token hat, ist der Client. (https://www.rtautomation.com/rtas-blog/good-bye-modbus-plus/)
+	\item \textbf{Modbus Plus:} Funktioniert mittels Tokens, die von einem Gerät zum nächsten wandern. Jeweils das Gerät, das den Token hat, ist der Client. (https://www.rtautomation.com/rtas-blog/good-bye-modbus-plus/) LINK IN QUELLEN EINBAUEN
 \end{itemize}
-(hier vielleicht modbus bild einfügen: MODBUS communication stack)
+
+Folgende Grafik (\ref{fig:modbus_stack}) illustriert horizontal die unterschiedlichen Übertragungssysteme und vertikal welche Schichten von darunterliegenden Protokollen und Technologien besetzt werden.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_layers}
+	\caption{Modbus Stack (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
+	\label{fig:modbus_stack}
+\end{figure}
 
 \subsection{Funktionsweise} \label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
