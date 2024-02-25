@@ -68,24 +68,19 @@ automark
 \clearpairofpagestyles
 \addtokomafont{pageheadfoot}{\small} % Schriftgröße für Kopf- und Fußzeilen
 
-%\newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
-%%\ihead{\headmark}
-%\ihead{\centering \thesistitle}
-%\ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
-%\ofoot{\thepage} % Seitennummerierung rechtsbündig
-
-\newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
 \ihead{\centering \thesistitle}
 \ofoot{\thepage} % Seitennummerierung rechtsbündig
 \cfoot{} % Leerer Seitenfuß in der Mitte
 
+\newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
 \renewcommand{\sectionmark}[1]{\markboth{\setAuthor{#1}}{}}
 \renewcommand{\subsectionmark}[1]{\markboth{\setAuthor{#1}}{}}
 
 \ifoot{\leftmark} % Linksbündig Name des Autors im Kapitel
 
-
 %% Schriftgröße für Überschriften
+\renewcommand{\chapterpagestyle}{scrheadings} %chapter seiten mit kopf- und fußzeilen
+
 \RedeclareSectionCommand[
 beforeskip=1ex plus 0.2ex minus 0.2ex,
 afterskip=1em,
@@ -100,8 +95,8 @@ font=\normalfont\fontsize{15}{16}\selectfont\bfseries,
 afterindent=false
 ]{subsection}
 
-\let\oldsubsection\subsection
-\renewcommand{\subsection}{\clearpage\oldsubsection}
+%\let\oldsubsection\subsection
+%\renewcommand{\subsection}{\clearpage\oldsubsection}
 
 \RedeclareSectionCommand[
 beforeskip=0.5ex plus 0.2ex minus 0.2ex,
