@@ -1,0 +1,29 @@
+\subsection{Tkinter und CustomTkinter}\label{tkinter_kapitel}
+\paragraph{Tkinter}
+Bei der Tkinter Bibliothek handelt es sich um die Standard Python Schnittstelle für das Tcl/Tk \ac{gui} toolkit. Tk ist grundsätzlich die Standard \acs{gui} für die Tcl (Tool Command Language) Programmiersprache, wird jedoch von vielen anderen dynamischen Programmiersprachen, wie \zB Python (vgl. Kapitel \ref{python_kapitel}), verwendet. Ein großer Vorteil von Tk ist die Erstellung umfangreicher und nativer Anwendungen, welche unverändert über mehrere Plattformen wie windows, macos und linux laufen können. \cite[vgl.][]{Python_Software_Foundation_Tk:o.J., Tcl_Developer_Xchange:o.J.}
+
+Das Tk Paket wurde in der Programmiersprache cprogrammiersprache umgesetzt und basiert auf dem Konzept von Widgets, was somit auch die grundlegenden Bausteine von Tkinter sind. Dabei ist jedes Widget eine Instanz einer Klasse, wie \zB \enquote{tk.Frame}, \enquote{tk.Label} und \enquote{tk.Button}. Die Anordnung dieser Widgets erfolgt in einer Hierarchie. So können \zB ein Label und ein Button innerhalb eines Frames enthalten sein, welches wiederum im Grundfenster enthalten ist. Die Hierarchie wird erzielt, indem beim Erstellen jedes \enquote{child} Widgets sein \enquote{parent} Widget als erstes Argument an den Konstruktor übergeben wird. Die Platzierung von Widgets erfolgt nicht automatisch beim Erstellen, sondern durch einen sog. Geometry Manager wie \enquote{grid}. Außerdem verfügt jedes Widget über Konfigurationsoptionen, mit denen sein Erscheinungsbild und Verhalten beeinflusst werden kann, wie zum Beispiel Schriftarten, Textlabels, oder Farben. \cite[vgl.][]{Python_Software_Foundation_Tk:o.J., Shipman:2013}
+
+Es folgt ein Beispiel eines Tkinter Labels, welches dem Hauptfenster (root) zugeordnet wird und den Text \enquote{Hello World!} besitzt. Anschließend wird das Label mithilfe der \enquote{grid} Methode platziert. 
+\begin{pythoncode}
+	tk.Label(root, text="Hello World!").grid(column=0, row=0)
+\end{pythoncode}
+
+Tkinter aktualisiert die \acs{gui} nur, wenn die Anwendung in einer Schleife (event loop) ausgeführt, es wird also nicht auf Benutzereingaben oder andere Änderungen im Programm geachtet. Außerdem unterstützt Tkinter eine Vielzahl an Tcl/Tk Versionen, mit oder ohne Thread Support.
+
+Tk Widgets sind sehr personalisierbar, jedoch verfügen sie über ein veraltetes Aussehen. Einen Lösungsansatz bietet Themed Tk (Ttk). Dieses bietet modernisierte Tk Widgets, die sich im Vergleich zu den klassischen Tk Widgets durch ein ansprechenderes Erscheinungsbild auszeichnen. Ttk wird seit der Tk Version 8.5 (2007) mitgeliefert und kann in Python mit dem \enquote{tkinter.ttk} Untermodul genutzt werden. Ttk basiert auf Stilen, was mehr Aufwand erfordert, insbesondere bei der Gestaltung von nicht standardmäßigen Widgets. Daher wurde sich für CustomTkinter entschieden, welches folgend beschrieben wird. \cite[vgl.][]{Python_Software_Foundation_Tk:o.J.}
+
+
+\paragraph{CustomTkinter}
+
+Im anderen Kapitel:
+CTk
+CTkFrame
+% https://customtkinter.tomschimansky.com/img/icon.ico
+CTkLabel
+CTkImage
+CTkFont
+CTkButton
+\cite[vgl.][]{Schimansky_Git:o.J.}
+
+%tkinter.canvas für die Striche \cite[vgl.][]{Shipman:2013}
