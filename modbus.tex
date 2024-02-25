@@ -101,7 +101,7 @@ Zusätzlich zu den 8 Datenbits kommen noch 3 Hilfsbits dazu. Für jedes übertra
 \begin{itemize}
 	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass die Übertragung anfängt
 	\item \textbf{8 Datenbits:} Die eigentlichen Daten
-	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen.   (https://www.ibm.com/docs/de/aix/7.3?topic=parameters-parity-bits) Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity.
+	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen \cite{IBM_Corporation:2023} (vlt. noch genauer beschreiben; wie das verglichen wird). Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity. 
 	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Übertragung endet. Falls no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
 \end{itemize}
 
