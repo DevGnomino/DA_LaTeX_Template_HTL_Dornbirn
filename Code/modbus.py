@@ -195,9 +195,7 @@ def load_config():
 
 
 def data_refresh(app):
-    global stop_thread
-    stop_thread = False
-    while stop_thread == False:
+    while True:
         # This looks better, because all pages are already loaded; but it might be more costly
         page_counter = 0
         for page in all_pages:
@@ -214,12 +212,5 @@ def data_refresh(app):
 
 def data_threading(app):
     # Funktion zum Starten des Datenaktualisierungs-Threads
-    global t1
     t1 = Thread(target=data_refresh, kwargs={'app': app}, daemon=True)
     t1.start()
-
-
-"""def stop_threading():
-    global stop_thread
-    stop_thread = True
-    t1.join()"""

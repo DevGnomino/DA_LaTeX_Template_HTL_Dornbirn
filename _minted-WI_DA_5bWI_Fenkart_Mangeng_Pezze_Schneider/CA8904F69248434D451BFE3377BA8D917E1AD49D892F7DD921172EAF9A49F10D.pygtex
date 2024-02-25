@@ -1,9 +1,6 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{data\PYGZus{}refresh}\PYG{p}{(}\PYG{n}{app}\PYG{p}{):}
-	\PYG{k}{global} \PYG{n}{stop\PYGZus{}thread}
-	\PYG{n}{stop\PYGZus{}thread} \PYG{o}{=} \PYG{k+kc}{False}
-	\PYG{k}{while} \PYG{n}{stop\PYGZus{}thread} \PYG{o}{==} \PYG{k+kc}{False}\PYG{p}{:}
-		\PYG{c+c1}{\PYGZsh{} This looks better, because all pages are already loaded; but it might be more costly}
+	\PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
 		\PYG{n}{page\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
 		\PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}pages}\PYG{p}{:}
 			\PYG{n}{measurement\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
