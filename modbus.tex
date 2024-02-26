@@ -11,19 +11,20 @@ Das Modbus Protokoll wurde 1979 von der Firma Gould-Modicon entwickelt. Besonder
 
 Die folgende theoretische Beschäftigung mit dem Modbus Protokoll bezieht sich wenn nicht anders angegeben auf die offiziellen Modbus Dokumentationen \cite{Modbus_Organization_AP:2012, Modbus_Organization_SL:2012}. 
 
-%Es gibt zwei verschiedene Einteilungen des Modbus Protokolls: 
-%\begin{itemize}
-%\item \textbf{Modbus Application Protocol:} Befindet sich auf der siebten Schicht des OSI-Modells. Dabei können die Geräte an einem Bus oder an einem Netzwerk angeschlossen werden. Genauere Information über die Ausführungsart mit dem TCP Protokoll sind später in diesem Kapitel zu finden.
-%\item \textbf{Modbus Serial Line Protocol:} Befindet sich auf der zweiten Schicht des OSI-Modells. Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Ausführungsarten, nämlich RTU und ASCII. Diese werden später ausführlicher beschrieben.
-%\end{itemize}
-
-Das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
+Da das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
 \begin{itemize}
 	\item \textbf{Modbus TCP/IP:} Die Geräte sind an einem Netzwerk angeschlossen und kommunizieren via TCP/IP.
 	\item \textbf{Modbus Serial Line:} Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Übertragungsarten, nämlich RTU und ASCII. Genauere Beschreibungen der beiden Übertragungsarten finden sich später in diesem Kapitel.
-	\item \textbf{Modbus Plus:} Funktioniert mittels Tokens, die von einem Gerät zum nächsten wandern. Jeweils das Gerät, das den Token hat, ist der Client. (https://www.rtautomation.com/rtas-blog/good-bye-modbus-plus/)
+	\item \textbf{Modbus Plus:} Funktioniert mittels eines Tokens. Jeweils das Gerät, welches den Token aktuell besitzt, ist der Client und kann die Kommunikation mit den anderen Geräten initialisieren. Wenn der derzeitige Client keine Nachrichten mehr senden muss, gibt er den Token an das nächste Gerät weiter \cite{Rinaldi:2016}.
 \end{itemize}
-(hier vielleicht modbus bild einfügen: MODBUS communication stack)
+
+Folgende Grafik (\ref{fig:modbus_stack}) illustriert horizontal die unterschiedlichen Übertragungssysteme und vertikal welche Schichten von darunterliegenden Protokollen und Technologien besetzt werden.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_layers}
+	\caption{Modbus Stack (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
+	\label{fig:modbus_stack}
+\end{figure}
 
 \subsection{Funktionsweise} \label{modbus_funktionsweise}
 Modbus verwendet das Client/Server System. In einem Bussystem kann es nur einen Client geben. Es können jedoch beliebig viele Server am Bus angeschlossen werden. Der Client kann die Kommunikation mit den einzelnen Servern initialisieren. Er kann ihnen Daten senden und von ihnen Daten anfordern. Ein Server hingegen kann keine Kommunikation beginnen, sondern lediglich auf Anfrage des Clients handeln.
@@ -100,7 +101,7 @@ Zusätzlich zu den 8 Datenbits kommen noch 3 Hilfsbits dazu. Für jedes übertra
 \begin{itemize}
 	\item \textbf{1 Startbit:} Signalisiert dem Empfänger, dass die Übertragung anfängt
 	\item \textbf{8 Datenbits:} Die eigentlichen Daten
-	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen.   (https://www.ibm.com/docs/de/aix/7.3?topic=parameters-parity-bits) Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity.
+	\item \textbf{1 Paritätsbit:} Stellt fest, ob alle Datenbits richtig empfangen wurden. Es zeigt an, ob die Summe der empfangene Datenbits gerade (even) oder ungerade (odd) ist. Ob die Summe gerade ist oder ungerade wird dann mit dem Paritätsbit verglichen \cite{IBM_Corporation:2023} (vlt. noch genauer beschreiben; wie das verglichen wird). Es können 3 verschiedene Modi eingestellt werden: even, odd oder no parity. 
 	\item \textbf{1/2 Stopbits:} Signalisiert dem Empfänger, dass die Übertragung endet. Falls no parity eingestellt wurde, gibt es 2 Stopbits, dafür aber kein Paritätsbit.
 \end{itemize}
 
@@ -113,7 +114,7 @@ Der Aufbau eines Modbus RTU Frames ist in Abb.~\ref{fig:modbus_frame} zu sehen.
 	\label{fig:modbus_frame}
 \end{figure}
 
-Zur Berechnung der Checksumme wird die \acf{crc} Methode verwendet. Diese wird auf den gesamten Inhalt der Nachricht (\acs{adu}) angewandt. Es wird ein 16 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils die 16 Bit im \acs{crc} Feld mit je 8 Bit der Nachricht XORed werden. Nach jedem XOR werden die Bits 8 mal verschoben und jedes mal mit einem fixierten Wert XORed. 
+Zur Berechnung der Checksumme wird die \acf{crc} Methode verwendet. Diese wird auf den gesamten Inhalt der Nachricht (\acs{adu}) angewandt. Es wird ein 16 Bit Wert generiert, der der Nachricht angehängt wird. Berechnet wird das, indem jeweils die 16 Bit im \acs{crc} Feld mit je 8 Bit der Nachricht XOR verknüpft werden. Nach jeder XOR Verknüpfung werden die Bits 8 mal verschoben und jedes mal mit einem fixierten Wert XOR verknüpft. 
 
 Diese Übertragungsart wird in den Geräten bei Bösch verwendet. Daher verwendet auch die RLT Anzeige den \acs{rtu} Modus.
 

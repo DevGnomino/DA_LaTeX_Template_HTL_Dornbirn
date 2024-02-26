@@ -24,9 +24,9 @@ Einlesen kann man ein JSON Attribut mit folgender Syntax. Im folgenden Beispiel 
 title = page["title"]
 \end{pythoncode}
 
-In den Codeblöcken wird in den mit \enquote{\#[Inhalt]} gekennzeichneten Zeilen weitere Funktionalität gekennzeichnet, die entweder später beschrieben wird oder zum besseren Verständnis ausgelassen werden. 
+In den Codeblöcken wird in den mit \enquote{\#[Inhalt]} gekennzeichneten Zeilen weitere Funktionalität gekennzeichnet, die entweder später beschrieben wird oder zur besseren Übersichtlichkeit ausgelassen werden. 
 
-Im folgenden Code werden die \enquote{Measurement} Instanzen erstellt, indem die anzuzeigenden Messwerte aus dem Sources Array iteriert werden. Anhand der Informationen im Sources Array werden dann die entsprechenden Geräte im Devices Array herausgesucht. Es werden weitere Parameter aus der Hauptkonfiguration ausgelesen, die zu dem entsprechenden Messwert gehören (z.B. die Bezeichnung oder die Einheit). Anschließend werden die \enquote{Sensor} Instanzen erstellt und einer Liste beigefügt, da manche Measurements mehrere Messwerte benötigen. Diese Liste, sowie die vorher ausgelesenen Parameter werden beim Erstellen der \enquote{Measurement} Instanzen dem Konstruktor übergeben und darin in Instanzvariablen gespeichert.
+Im folgenden Code werden die \enquote{Measurement} Instanzen erstellt, indem die anzuzeigenden Messwerte aus dem \enquote{sources} Array iteriert werden. Anhand der Informationen der Objekte im \enquote{sources} Array werden dann die entsprechenden Geräte im \enquote{devices} Array herausgesucht. Es werden weitere Parameter aus der Hauptkonfigurationsdatei ausgelesen, die zu dem entsprechenden Messwert gehören (z.B. die Bezeichnung oder die Einheit). Anschließend werden die \enquote{Sensor} Instanzen erstellt und einer Liste beigefügt, da manche Measurements mehrere Messwerte benötigen. Diese Liste, sowie die vorher ausgelesenen Parameter werden beim Erstellen der \enquote{Measurement} Instanzen dem Konstruktor übergeben und darin in Instanzvariablen gespeichert.
 \begin{pythoncode}
 page_measurements = []
 for measurements in page["sources"]:
@@ -36,7 +36,7 @@ for measurements in page["sources"]:
 	page_measurements.append(Measurement(description=description, unit=unit, sensors=measurements_sensors, python_function=python_function, additional_info=additional_info))
 \end{pythoncode}
 
-Im folgenden Code wird für jeden Port (an jedem Port ist ein \enquote{Sensor} angeschlossen) eines Geräts eine \enquote{Sensor} Instanzen erstellt. Alle \enquote{Sensor} Instanzen werden der \enquote{page\_sensors} Liste beigefügt. Dafür gibt es im Sources Array die einzelnen Ports. Das sind Wertepaare, die aus Gerät und \enquote{Sensor} bestehen (vgl. Kapitel \ref{json_config_files}). Mit diesen beiden Werten kann dann das entsprechende Gerät im Devices Array gefunden werden und darin der entsprechende Port im Sensoren Array. Mit der \enquote{get\_sensor\_unit} Funktion wird die Einheit erhalten und mit der \enquote{get\_sensor\_data} Funktion weitere Sensordaten. Diese werden beim Erstellen der \enquote{Sensor} Instanz dem Konstruktor übergeben.
+Im folgenden Code wird für jeden Port (an jedem Port ist ein \enquote{Sensor} angeschlossen) eines Geräts eine \enquote{Sensor} Instanzen erstellt. Alle \enquote{Sensor} Instanzen werden der \enquote{page\_sensors} Liste beigefügt. Dafür gibt es im \enquote{sources} Array die einzelnen Ports. Das sind Wertepaare, die jeweils aus Gerät und \enquote{Sensor} bestehen (vgl. Kapitel \ref{json_config_files}). Mit diesen beiden Werten kann dann das entsprechende Gerät im \enquote{devices} Array gefunden werden und darin der entsprechende Port im \enquote{sensors} Array. Mit der \enquote{get\_sensor\_unit} Funktion wird die Einheit erhalten und mit der \enquote{get\_sensor\_data} Funktion weitere Sensordaten. Diese werden beim Erstellen der \enquote{Sensor} Instanz dem Konstruktor übergeben.
 \begin{pythoncode}
 port_counter = 0
 for port in port_arr:

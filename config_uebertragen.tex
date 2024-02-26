@@ -1,5 +1,5 @@
 \subsection{Übertragen der Config Files mittels USB}
-Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man beim Bootvorgang des Raspberry Pi einen Datenträger (\zB USB-Stick) an. Auf dem Datenträger muss im Root-Verzeichnis (\textasciitilde) ein Verzeichnis namens \enquote{RLT\_Config} sein. Wenn dieses Verzeichnis und alle nötigen Konfigurationsdateien darin vorhanden sind, werden diese in das Documents Verzeichnis des Raspberry Pi kopiert. \newline Folgendes Aktivitätsdiagramm verdeutlicht diesen Vorgang. (Siehe Abb.~\ref{fig:config_ubertragen_activity}):
+Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man beim Bootvorgang des Raspberry Pi einen Datenträger (\zB USB-Stick) an. Auf dem Datenträger muss im Root-Verzeichnis (\textasciitilde) ein Verzeichnis namens \enquote{RLT\_Config} sein. Wenn dieses Verzeichnis und alle nötigen Konfigurationsdateien (vgl. Kapitel \ref{json_config_files}) darin vorhanden sind, werden diese in das Documents Verzeichnis des Raspberry Pi kopiert. Folgendes Aktivitätsdiagramm verdeutlicht diesen Vorgang (Siehe Abb.~\ref{fig:config_ubertragen_activity}).
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\linewidth]{Bilder/config_ubertragen_activity_diagram}
@@ -7,7 +7,7 @@ Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man bei
 	\label{fig:config_ubertragen_activity}
 \end{figure}
 
-Der gesamte Ablauf passiert in der \enquote{usb\_routine} Funktion. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
+Der Kopierablauf wird in der \enquote{usb\_routine} Funktion gestartet. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
 \begin{pythoncode}
 if __name__ == "__main__":
 	copy_error = usb_detection.usb_routine()
