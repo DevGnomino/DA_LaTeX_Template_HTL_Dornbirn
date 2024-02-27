@@ -14,7 +14,7 @@ Die folgende theoretische Beschäftigung mit dem Modbus Protokoll bezieht sich w
 Da das Modbus Protokoll nur Layer 7 definiert, kann es in verschiedenen Übertragungssystemen implementiert werden:
 \begin{itemize}
 	\item \textbf{Modbus TCP:} Die Geräte sind an einem Netzwerk angeschlossen und kommunizieren via TCP/IP.
-	\item \textbf{Modbus Serial Line:} Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Übertragungsarten, nämlich RTU und ASCII. Genauere Beschreibungen der beiden Übertragungsarten finden sich später in diesem Kapitel.
+	\item \textbf{Modbus Serial Line:} Die Geräte sind hier an einem seriellen Bus angeschlossen. Dabei gibt es zwei Übertragungsarten, nämlich \acs{rtu} und \acs{ascii}. Genauere Beschreibungen der beiden Übertragungsarten finden sich später in diesem Kapitel.
 	\item \textbf{Modbus Plus:} Funktioniert mittels eines Tokens. Jeweils das Gerät, welches den Token aktuell besitzt, ist der Client und kann die Kommunikation mit den anderen Geräten initialisieren. Wenn der derzeitige Client keine Nachrichten mehr senden muss, gibt er den Token an das nächste Gerät weiter \cite{Rinaldi:2016}.
 \end{itemize}
 
