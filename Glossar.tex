@@ -66,19 +66,19 @@
 	description={Gibt an ob eine Zahl gerade oder ungerade ist}
 }
 
-\newglossaryentry{tcp}
+\newglossaryentry{gls_tcp}
 {
 	name=TCP,
 	description={TCP (Transmission Control Protocol) ist ein Standard, der definiert, wie eine Netzwerkkonversation aufgebaut und aufrechterhalten wird, über die Anwendungen Daten austauschen können}
 }
 
-\newglossaryentry{rtu}
+\newglossaryentry{gls_rtu}
 {
 	name=RTU,
 	description={RTU (Remote Terminal Unit)}
 }
 
-\newglossaryentry{ascii}
+\newglossaryentry{gls_ascii}
 {
 	name=ASCII,
 	description={ASCII ()}
@@ -96,13 +96,13 @@
 	description={}
 }
 
-\newglossaryentry{pdu}
+\newglossaryentry{gls_pdu}
 {
 	name=PDU,
 	description={}
 }
 
-\newglossaryentry{adu}
+\newglossaryentry{gls_adu}
 {
 	name=ADU,
 	description={}
@@ -114,16 +114,16 @@
 	description={}
 }
 
-\newglossaryentry{crc}
+\newglossaryentry{gls_crc}
 {
 	name=CRC,
-	description={}
+	description={\nameref{modbus_uebertragungsarten}}
 }
 
-\newglossaryentry{lrc}
+\newglossaryentry{gls_lrc}
 {
 	name=LRC,
-	description={LRC (Longitudinal Rec Check)}
+	description={\nameref{modbus_uebertragungsarten}}
 }
 
 \newglossaryentry{cr}
@@ -136,4 +136,40 @@
 {
 	name=LF,
 	description={ASCII Kontrollzeichen. Bewegt den Cursor eine Zeile nach unten}
+}
+
+\newglossaryentry{zuluft}
+{
+	name=Zuluft,
+	description={Bei der Zuluft handelt es sich um die Luft welche im Lüftungsgerät schon behandelt (gefiltert) wurde}
+}
+
+\newglossaryentry{abluft}
+{
+	name=Zuluft,
+	description={Bei der Abluft handelt es sich um die Luft welche aus dem Innenraum (Gebäude) abgesaugt wird}
+}
+
+\newglossaryentry{fortluft}
+{
+	name=Fortluft,
+	description={Bei der Fortluft handelt es sich um die Luft welche aus dem Gebäude und der Lüftungsanlage nach draußen in die Umwelt geleitet wird}
+}
+
+\newglossaryentry{aussenluft}
+{
+	name=Außenluft,
+	description={Bei der Außenluft handelt es sich um die Luft aus der Umwelt, welche noch unbehandelt (nicht gefiltert) in die Lüftungsanlage eingesaugt wird}
+}
+
+\newglossaryentry{tdot}
+{
+	name=TdoT,
+	description={Der Tdot ist der Tag der offenen Tür der HTL Dornbirn. An diesem Tag wurde ein Lüftungsgerät der Firma Bösch ausgestellt inkl. RLT Anzeige}
+}
+
+\newglossaryentry{qbm}
+{
+	name=QBM,
+	description={Eine Serie von Luftdruckfühlern der Marke Siemens. Im Falle der Diplomarbeit ist das Modell QBM9711 in Verwendung, welches über eine I/O-Erweiterung verfügt, an die externe Sensorik angeschlossen werden kann bzw. mit der externe Geräte gesteuert werden können}
 }

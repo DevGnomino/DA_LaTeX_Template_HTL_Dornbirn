@@ -87,14 +87,16 @@ list-final-separator={ und }}
 \selectlanguage{ngerman} 
 \pagestyle{scrheadings} 
 
-\include{Vorwort}
-\include{Danksagung}
+\include{Eidesstaatliche_Erklaerung}
 \include{Abstract}
+\include{Vorwort}
+
+\tableofcontents
+
+\include{Danksagung}
 \include{Institutionen}
 \include{Impressum}
 \include{Hinweise}
-
-\tableofcontents
 
 \include{Einleitung}
 \include{Planung}
@@ -104,8 +106,14 @@ list-final-separator={ und }}
 \include{Resume}
 
 %\include{00-Beispiele}
+\ifoot{\leftmark}
+\printbibliography
+\listoffigures
+\listoftables
+\printglossaries
+\printacronyms[name=Abkürzungen]
 
-
+\include{Begleitprotokoll}
 \include{Anhang}
 
 
