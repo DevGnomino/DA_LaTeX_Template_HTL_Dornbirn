@@ -5,10 +5,6 @@
 %\acsp{Kuerzel}schreibt die Kurzform des Plurals. 
 %\acf{Kuerzel} verhält sich wie \ac{Kuerzel} Befehl, wenn er das erste Mal aufgerufen wurde. Unabhängig davon, wie oft das Kürzel bereits aufgerufen wurde, wird bei der Verwendung von \acf{Kuerzel} die ausgeschriebene Langform des Ausdrucks und die geklammerte Abkürzung gesetzt.
 
-\DeclareAcronym{obv}{
-short = {\"obv},
-long  = {Österreichische Bautechnikvereinigung},
-}
 
 \DeclareAcronym{dt}{
 short = {dt.},
@@ -20,11 +16,6 @@ long  = {deutsch},
 	long  = {englisch},
 }
 
-\DeclareAcronym{python}{
-	short = {Python},
-	long  = {},
-}
-
 \DeclareAcronym{abbv}{
 short = {ABBV},
 long  = {Ablösungsbeträge-Berechnungsverordnung},
@@ -32,29 +23,11 @@ short-plural = {s},
 long-plural = {en},
 }
 
-\DeclareAcronym{lzk}{
-short = {LZK},
-long  = {Lebenszykluskosten},
-extra = {[\officialeuro{}]},
-}
-
-\DeclareAcronym{rlt}{
-	short = RLT,
-	long  = raumlufttechnische,
-	short-plural = s,
-	long-plural = n,
-}
-
 \DeclareAcronym{rltanlage}{
 	short = RLT Anlage,
 	long  = raumlufttechnische Anlage,
 	short-plural = n,
 	long-plural-form = raumlufttechnische Anlagen,
-}
-
-\DeclareAcronym{rltanlagen}{
-	short = RLT Anlagen,
-	long  = raumlufttechnische Anlagen,
 }
 
 \DeclareAcronym{gui}{
@@ -126,7 +99,7 @@ long = American Standard Code for Information Interchange,
 
 \DeclareAcronym{rltanzeige}{
 	short = RLT Anzeige,
-	long = Raumlufttechnische Anzeige,
+	long = Universalanzeige für \acsp{rltanlage},
 }
 
 \DeclareAcronym{crc}{
@@ -142,6 +115,11 @@ long = Longitudinal Redundancy Checking,
 \DeclareAcronym{xml}{
 	short = XML,
 	long = Extensible Markup Language,
+}
+
+\DeclareAcronym{uxui}{
+	short = UX/UI,
+	long = User Experience/User Interface,
 }
 
 
