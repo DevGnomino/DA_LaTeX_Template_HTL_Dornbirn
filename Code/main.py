@@ -45,8 +45,6 @@ class TitleFrame(ctk.CTkFrame):
                                       text_color=title_color, anchor=ctk.CENTER, font=title_font)
         self.title_lbl.place(relx=0.5, rely=0.12, anchor=ctk.N)
 
-    def set_title(self, title):
-        self.title_lbl.configure(text="title")
 
 
 class MeasurementFrame(ctk.CTkFrame):
@@ -105,9 +103,6 @@ class PageFrame(ctk.CTkFrame):
                 my_frame.place_forget()
             spacing += 0.143  # 0.1335
 
-    def set_title_at(self, title):
-        self.title_frame.set_title(title)
-
     def set_text_at(self, index, measurement, value):
         # ZUM TESTEN, so werden Fehler abgefangen; wird aber eigentlich nicht benötigt!
         if index >= 0 and index < len(self.measurement_frames):
@@ -162,9 +157,6 @@ class App(ctk.CTk):
                                                              "#898989" if i == globals_.current_page else "#D9D9D9")))
                 page_indicator_list[i].place(
                     relx=start_x_position + i / 45.0, rely=0.93, anchor=ctk.CENTER)
-
-    def set_page_title_at(self, page_index, title):
-        page_frame_list[page_index].set_title_at(title)
 
     def set_page_text_at(self, page_index, measurement_index, measurement, value):
         # Wieder zum Fehler abfangen, eigentlich nicht nötig

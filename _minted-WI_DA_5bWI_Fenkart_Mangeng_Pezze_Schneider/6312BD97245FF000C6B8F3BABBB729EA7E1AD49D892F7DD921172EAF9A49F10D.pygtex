@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{PageFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{n}{parameters}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+		\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{l+m+mi}{800}\PYG{p}{,} \PYG{l+m+mi}{515}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames} \PYG{o}{=} \PYG{p}{[]}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame} \PYG{o}{=} \PYG{n}{TitleFrame}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{corner\PYGZus{}radius}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+		
+		\PYG{k}{for} \PYG{n}{parameter} \PYG{o+ow}{in} \PYG{n}{parameters}\PYG{p}{:}
+			\PYG{n}{frame} \PYG{o}{=} \PYG{n}{MeasurementFrame}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n}{master}\PYG{p}{,} \PYG{n}{measurement}\PYG{o}{=}\PYG{n}{parameter}\PYG{o}{.}\PYG{n}{description}\PYG{p}{,} \PYG{n}{value}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}\PYG{p}{,} \PYG{n}{corner\PYGZus{}radius}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{frame}\PYG{p}{)}
+			
+	\PYG{k}{def} \PYG{n+nf}{show\PYGZus{}frame}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{):}
+		\PYG{k}{if} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{:}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.0}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{N}\PYG{p}{)}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{tkraise}\PYG{p}{()}
+		\PYG{k}{else}\PYG{p}{:}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place\PYGZus{}forget}\PYG{p}{()}
+		
+		\PYG{n}{spacing} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+		\PYG{k}{for} \PYG{n}{my\PYGZus{}frame} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{:}
+			\PYG{k}{if} \PYG{n}{show\PYGZus{}or\PYGZus{}hide}\PYG{p}{:}
+				\PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mf}{0.20} \PYG{o}{+} \PYG{n}{spacing}\PYG{p}{),} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+				\PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{tkraise}\PYG{p}{()}
+			\PYG{k}{else}\PYG{p}{:}
+				\PYG{n}{my\PYGZus{}frame}\PYG{o}{.}\PYG{n}{place\PYGZus{}forget}\PYG{p}{()}
+			\PYG{n}{spacing} \PYG{o}{+=} \PYG{l+m+mf}{0.143}  \PYG{c+c1}{\PYGZsh{} 0.1335}
+	
+	\PYG{k}{def} \PYG{n+nf}{set\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{index}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+		\PYG{c+c1}{\PYGZsh{} ZUM TESTEN, so werden Fehler abgefangen; wird aber eigentlich nicht benötigt!}
+		\PYG{k}{if} \PYG{n}{index} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{0} \PYG{o+ow}{and} \PYG{n}{index} \PYG{o}{\PYGZlt{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{):}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}frames}\PYG{p}{[}\PYG{n}{index}\PYG{p}{]}\PYG{o}{.}\PYG{n}{set\PYGZus{}text}\PYG{p}{(}\PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+\end{Verbatim}
