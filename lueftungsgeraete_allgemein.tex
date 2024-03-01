@@ -199,7 +199,7 @@ Beim (Punkt ODA) wird die noch ungefilterte \gls{aussenluft} in die \ac{rltanlag
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[angle=270,width=0.7\linewidth]{Bilder/Aufbau_Lueftungsgerät_walter_boesch}
+	\includegraphics[angle=90,width=0.7\linewidth]{Bilder/Aufbau_Lueftungsgerät_walter_boesch}
 	\caption{Aufbau Entwicklungs- \ac{rltanlage}} 
 	\label{fig:Bauplan_entwicklung}
 \end{figure}
@@ -215,12 +215,12 @@ In dieser Konfiguration werden neben den Temperatursensoren für Zu- und \gls{ab
 
 Mit den Analog Output Ports werden weitere Dinge gesteuert wie \zB die \gls{aussenluft}klappe. Diese Steuert die Luftzufuhr in die \ac{rltanlage}. Durch zufahren dieser Klappe wird die \ac{rltanlage} auch vor Witterung geschützt (die passiert Automatisch). Auch beim Analog Output angeschlossen ist die Wärmeregisterklappe. Wie zuvor schon erwähnt steuert diese den Durchfluss durch das Wärmerückgewinnungsregister (An heißen Tagen wird die Luft an der WRG-Klappe vorbei geführt um unnötiges erhitzen des Wärmerückgewinnungsregisters zu vermeiden).
 
-Die Ventilatoren in der Entwicklungs- \ac{rltanlage} stammen von EBM. Es handelt sich dabei um zwei EBM-Papst k3g310 Abb.~\ref{fig:ebmpapstventilator}. Diese sind in der \ac{rltanlage} für die Luft zu- und abfuhr zuständig. Die Ventilatoren können über das Modbus Protokoll direkt ausgelesen werden und damit können der aktuelle Soll- und Istwert der Drehzahl, sowie die Leistung und das Volumen (Luftvolumen Durchsatz) ausgegeben / berechnet werden. Einer der wichtigsten Angaben ist jedoch der Motorstatus, dieser zeigt an ob es aktuell Fehler im betrieb der Ventilatoren gibt und wenn ja welcher anliegt. siehe Kapitel \ref{python_functions}.
+Die Ventilatoren in der Entwicklungs- \ac{rltanlage} stammen von EBM. Es handelt sich dabei um zwei ebm-papst k3g310 Abb.~\ref{fig:ebmpapstventilator}. Diese sind in der \ac{rltanlage} für die Luft zu- und abfuhr zuständig. Die Ventilatoren können über das Modbus Protokoll direkt ausgelesen werden und damit können der aktuelle Soll- und Istwert der Drehzahl, sowie die Leistung und das Volumen (Luftvolumen Durchsatz) ausgegeben / berechnet werden. Einer der wichtigsten Angaben ist jedoch der Motorstatus, dieser zeigt an ob es aktuell Fehler im Betrieb der Ventilatoren gibt und wenn ja, welcher anliegt. siehe Kapitel \ref{python_functions}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{Bilder/ebmpapstventilator}
-	\caption{EBM-Papst k3g310-pt08-j2} 
+	\caption{ebm-papst k3g310-pt08-j2} 
 	\label{fig:ebmpapstventilator}
 \end{figure}
 
@@ -245,7 +245,7 @@ Wie man in Abb.~\ref{fig:LG_entwicklung} sieht. Ist die \ac{rltanlage} mit einem
 Beim der \gls{tdot} \ac{rltanlage} folgt der Aufbau und die Luftfließrichtung der Entwicklungs- \ac{rltanlage}. Auch hier wird die Luft oben bei der schwarzen \gls{aussenluft}klappe angesaugt, geht dann durch die Filter, das Wärmerückgewinnungsregister, den Ventilator und das Heiz- und Kühlregister in das Gebäude. Die \gls{abluft} wird auch auf dem selben Weg die die der Entwicklungs- \ac{rltanlage} nach draußen befördert. Die Luft wird bei der \gls{abluft}klappe (links über den beigen Pfeilen) angesogen, geht dann durch die Filter, das Wärmerückgewinnungsregister und den Ventilator durch die Fortluftklappe nach draußen. Durch die Veranschaulichung durch LED-Panels (LED-Pfeile) welche die Luftfließrichtung anzeigen, ist in dieser \ac{rltanlage} die Funktionsweise für den Laien leichter zu verstehen.
 
 \textbf{Komponenten:}
-In der \gls{tdot} \ac{rltanlage} wurde gleich wie in der Entwicklungs- \ac{rltanlage} eine Baudrate von 19200 für die Modbus Kommunikation vordefiniert. Auch in dieser \ac{rltanlage} kommen die von Siemens produzierten \gls{qbm} zu Einsatz. An diese werden wie schon zuvor bei der Entwicklungs- \ac{rltanlage} an den Analog Input Ports die Temperatursensoren für \gls{zuluft}, \gls{abluft} und \gls{fortluft} angeschlossen. Zudem wird auch hier mit dem Temperatursensor welcher die \gls{aussenluft} misst die Frostschutz Temperatur bestimmt. Die Klappensteuerung (\gls{aussenluft}klappen und WRG-Klappe0) übernehmen auch hier die Analog Output Ports zusätzlich dem WRG-Relais. Die Druckdifferenzen werden in der Entwicklungs- \ac{rltanlage} von den in den \gls{qbm} 9711 eingebauten Druckdifferenzmesser übernommen. Im Gegensatz zur Entwicklungs- \ac{rltanlage} setzt man durch den kompakteren Aufbau der \gls{tdot} \ac{rltanlage} auf kleinere nicht so Leistungsstarke Ventilatoren der Marke EBM-Papst. 
+In der \gls{tdot} \ac{rltanlage} wurde gleich wie in der Entwicklungs- \ac{rltanlage} eine Baudrate von 19200 für die Modbus Kommunikation vordefiniert. Auch in dieser \ac{rltanlage} kommen die von Siemens produzierten \gls{qbm} zu Einsatz. An diese werden wie schon zuvor bei der Entwicklungs- \ac{rltanlage} an den Analog Input Ports die Temperatursensoren für \gls{zuluft}, \gls{abluft} und \gls{fortluft} angeschlossen. Zudem wird auch hier mit dem Temperatursensor welcher die \gls{aussenluft} misst die Frostschutz Temperatur bestimmt. Die Klappensteuerung (\gls{aussenluft}klappen und WRG-Klappe0) übernehmen auch hier die Analog Output Ports zusätzlich dem WRG-Relais. Die Druckdifferenzen werden in der Entwicklungs- \ac{rltanlage} von den in den \gls{qbm} 9711 eingebauten Druckdifferenzmesser übernommen. Im Gegensatz zur Entwicklungs- \ac{rltanlage} setzt man durch den kompakteren Aufbau der \gls{tdot} \ac{rltanlage} auf kleinere nicht so Leistungsstarke Ventilatoren der Marke ebm-papst. 
 
 
 \textbf{Verkleidung:}

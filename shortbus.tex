@@ -1,7 +1,7 @@
 Shortbus Abb.~\ref{fig:Shortbusfenster} ist ein Programm (Desktop-Anwendung) welches in der seriellen- aber auch Netzwerkkommunikation zum Einsatz kommt. 
-Es handelt sich bei Shortbus um ein Modbus RTU und Modbus TCP/IP Scanner.
-Dabei ist die Hauptaufgabe bei der seriellen Kommunikation das Auslesen und Einschreiben von Werten in ausgewählte Modbus Register. Diese folgen einer klassischen Client/Server Architektur.
-Das Programm unterstützt neben dem Auslesen und Einschreiben von Werten in Modbus Register auch das  automatische Einschreiben in ausgewählte Modbus Register (Zweck: automatische Testung einer Client/Server Verbindung).
+Es handelt sich bei Shortbus um ein \gls{modbus} RTU und \gls{modbus} TCP/IP Scanner.
+Dabei ist die Hauptaufgabe bei der seriellen Kommunikation das Auslesen und Einschreiben von Werten in ausgewählte \gls{modbus} Register. Diese folgen einer klassischen Client/Server Architektur.
+Das Programm unterstützt neben dem Auslesen und Einschreiben von Werten in \gls{modbus} Register auch das  automatische Einschreiben in ausgewählte \gls{modbus} Register (Zweck: automatische Testung einer Client/Server Verbindung).
 Shortbus unterstützt noch andere Funktionen (Netzwerkfunktionen), doch in der seriellen Kommunikation, wie es im Projekt verwendet wurde, sind diese nicht relevant.
 \cite[vgl.][]{software.informer:2024}
 
@@ -18,7 +18,7 @@ Im oberen Teil von Shortbus Abb.~\ref{fig:Shortbuseingabe} erfolgen die gesamten
 \begin{itemize}
 	\item Connection: Das ist die Art wie man sich mit dem System verbinden möchte. Man unterscheidet hierbei zwischen TCP (Transmission Control Protocol) oder COM (Schnittstelle am Laptop meist COM7)
 	
-	\item Node Adress: Ist die Adresse, welche vom Bauteil verwendet wird. Jedes Bauteil (\zB \gls{qbm}  oder EBM-Papst) hat eine eigene Node Adresse.
+	\item Node Adress: Ist die Adresse, welche vom Bauteil verwendet wird. Jedes Bauteil (\zB \gls{qbm}  oder ebm-papst) hat eine eigene Node Adresse.
 	
 	\item Starting Address: Diese bestimmt das erste Register was Ausgelesen werden soll. Die Register und deren Adressen können wie folgt angegeben werden:
 		\begin{itemize}
@@ -29,19 +29,19 @@ Im oberen Teil von Shortbus Abb.~\ref{fig:Shortbuseingabe} erfolgen die gesamten
 	\item Read Function: Hier wird die Registerart angegeben. (Es gibt insgesamt 4 Registerarten)
 \end{itemize}
 
-Im unteren Teil Abb.~\ref{fig:Shortbusausgabe} erfolgt die Ausgabe der einzelnen Modbus Register. Dabei wird mit den zuvor festgelegten Werten (Baudrate, Registerart etc.) eine Verbindung aufgebaut und die zuvor angegebene Zahl an Register wird ausgegeben. 
+Im unteren Teil Abb.~\ref{fig:Shortbusausgabe} erfolgt die Ausgabe der einzelnen \gls{modbus} Register. Dabei wird mit den zuvor festgelegten Werten (Baudrate, Registerart etc.) eine Verbindung aufgebaut und die zuvor angegebene Zahl an Register wird ausgegeben. 
 
 
   
 
 \subsection{Shortbus Anwendung in der Entwicklungs- \ac{rltanlage}}
 
-In der Entwicklungs- \ac{rltanlage} wird die Schnittstelle COM7 (USB-Port des Laptops) verwendet um eine Kommunikation (Connection) mit dem Modbus aufzubauen. Welche COM Schnittstelle die richtige ist, kann im Windows Geräte-Manager nachgesehen werden. Dabei wird der Modbus per Kabel  Abb.~\ref{fig:modbus_usbkabel} erweitert und auf der einen Seite mit dem Laptop und dessen USB-Schnittstelle verbunden. Die andere Seite wird in der \acp{rltanlage} auf den bestehenden Modbus angeschlossen. 
+In der Entwicklungs- \ac{rltanlage} wird die Schnittstelle COM7 (USB-Port des Laptops) verwendet um eine Kommunikation (Connection) mit dem \gls{modbus} aufzubauen. Welche COM Schnittstelle die richtige ist, kann im Windows Geräte-Manager nachgesehen werden. Dabei wird der \gls{modbus} per Kabel  Abb.~\ref{fig:modbus_usbkabel} erweitert und auf der einen Seite mit dem Laptop und dessen USB-Schnittstelle verbunden. Die andere Seite wird in der \acp{rltanlage} auf den bestehenden \gls{modbus} angeschlossen. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\linewidth]{Bilder/modbus_usbkabel}
-	\caption{Modbus USB-Kabel} 
+	\caption{\gls{modbus} USB-Kabel} 
 	\label{fig:modbus_usbkabel}
 \end{figure}
 
