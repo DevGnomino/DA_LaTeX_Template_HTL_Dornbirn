@@ -8,18 +8,18 @@ Im Hintergrund wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine
 	\label{fig:uml_backend}
 \end{figure}
 
-Die \enquote{Page}-, \enquote{Measurement}- und \enquote{Sensor} Instanzen werden beim Einlesen der Konfigurationsdateien aufgrund der Objekte im \enquote{pages} JSON Arrays (vgl. Kapitel \ref{json_config_files}) erstellt und in Listen gespeichert. \newline
+Die \enquote{Page}-, \enquote{Measurement}- und \enquote{Sensor} Instanzen werden beim Einlesen der Konfigurationsdateien aufgrund der Objekte im \enquote{pages} \acs{json} Arrays (vgl. Kapitel \ref{json_config_files}) erstellt und in Listen gespeichert. \newline
 Zum Einlesen werden drei Funktionen implementiert:
 \begin{itemize}
 	\item \textbf{\enquote{load\_config}:} Diese Funktion lädt die gesamte Haupt-Konfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die \enquote{Page}-, \enquote{Measurement}- und \enquote{Sensor} Instanzen erstellt. Dafür kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
     \begin{itemize}
 		\item \textbf{\enquote{get\_sensor\_unit}:} Liest die Sensor-Konfigurationsdateien ein. Dadurch können den Messwerten die richtigen Maßeinheiten zugewiesen werden.
-		\item \textbf{\enquote{get\_sensor\_data}:} Liest aus der Geräte-Konfigurationsdatei am angegebenen Port die Parameter aus und liefert diese Parameter als JSON Objekt zurück. Sie liest das Register, den Modbus Function Code und die Skalierung aus. Die Skalierung wird anhand der Maßeinheit aus der Sensor-Konfigurationsdatei ausgewählt.
+		\item \textbf{\enquote{get\_sensor\_data}:} Liest aus der Geräte-Konfigurationsdatei am angegebenen Port die Parameter aus und liefert diese Parameter als \acs{json} Objekt zurück. Sie liest das Register, den \gls{modbus} Function Code und die Skalierung aus. Die Skalierung wird anhand der Maßeinheit aus der Sensor-Konfigurationsdatei ausgewählt.
 	\end{itemize}
 \end{itemize}
 
 \paragraph{Einlesen und erstellen der Instanzen}
-Einlesen kann man ein JSON Attribut mit folgender Syntax. Im folgenden Beispiel wird aus der Instanz namens \enquote{page} das Attribut title gesucht und zurückgeliefert.
+Einlesen kann man ein \acs{json} Attribut mit folgender Syntax. Im folgenden Beispiel wird aus der Instanz namens \enquote{page} das Attribut title gesucht und zurückgeliefert.
 \begin{pythoncode}
 title = page["title"]
 \end{pythoncode}
