@@ -167,138 +167,181 @@
 \paragraph{Beispiel einer Haupt-Konfigurationsdatei \enquote{main\_config\_file.json}:}
 \begin{jsoncode}
 [
-	{
-		"pages": [
-			{
-				"title": "Temperaturen",
-				"sources": [
-					{
-						"port": [ {"QBM1": "AI1"} ],
-						"description": "AUL. Temperatur"
-					},
-					{
-						"port": [ {"QBM1": "AI2"} ],
-						"description": "ZUL. Temperatur"
-					},
-					{
-						"port": [
-							{"QBM1": "AI1"},
-							{"QBM1": "AI2"},
-							{"QBM1": "AI1"}
-						],
-						"description": "Wärmerückgewinnungsgrad",
-						"python_function": "calc_wrg"
-					}
-				]
-			},
-			{
-				"title": "Allgemein",
-				"sources": [
-					{
-						"port": [ {"QBM1": "P1"} ],
-						"description": "ZUL. Filter Druckdifferenz"
-					},
-					{
-						"port": [ {"QBM1": "P2"} ],
-						"description": "ABL. Filter Druckdifferenz"
-					},
-					{
-						"port": [ {"QBM1": "AI1"} ],
-						"description": "Frostschutz Temperatur"
-					},
-					{
-						"port": [ {"QBM1": "AO1"} ],
-						"description": "AUL. Klappe",
-						"python_function": "flap_position"
-					},
-					{
-						"port": [ {"QBM1": "AO2"} ],
-						"description": "WRG. Relais",
-						"python_function": "relay_position",
-						"additional_info": {"switching_voltage": 8}
-					}
-				]
-			},
-			{
-				"title": "Ventilator Abluft",
-				"sources": [
-					{
-						"port": [
-							{"EBM1": "RPMreal"},
-							{"EBM1": "RPMmax"}
-						],
-						"description": "Drehzahl Istwert",
-						"python_function": "calc_rpm"
-					},
-					{
-						"port": [
-							{"EBM1": "RPMtarget"},
-							{"EBM1": "RPMmax"}
-						],
-						"description": "Drehzahl Sollwert",
-						"python_function": "calc_rpm"
-					},
-					{
-						"port": [
-							{"EBM1": "Power"},
-							{"EBM1": "Uz"},
-							{"EBM1": "Iz"}
-						],
-						"description": "Leistung",
-						"python_function": "calc_power"
-					},
-					{
-						"port": [ {"QBM1": "P1"} ],
-						"description": "Volumen",
-						"python_function": "calc_volume",
-						"additional_info": {"k-faktor": 116}
-					},
-					{
-						"port": [ {"EBM1": "EngStatus"} ],
-						"description": "Motorstatus",
-						"python_function": "eng_status"
-					}
-				]
-			}
-		],
-		"devices": [
-			{
-				"device": "QBM97XX",
-				"id": "QBM1",
-				"baud_rate": 19200,
-				"mbaddress": 41,
-				"parity": "even",
-				"stop_bits": 1,
-				"zero_based": false,
-				"sensors": [
-					{
-						"port": "P1",
-						"type": "standardQBM"
-					},
-					{
-						"port": "P2",
-						"type": "standardQBM"
-					},
-					{
-						"port": "AI1",
-						"type": "LG-NI1000"
-					},
-					{
-						"port": "AI2",
-						"type": "LG-NI1000"
-					}
-				]
-			},
-			{
-				"device": "EBM",
-				"id": "EBM1",
-				"baud_rate": 19200,
-				"mbaddress": 33,
-				"parity": "even",
-				"stop_bits": 1,
-				"zero_based": true
-			}
-		]
-	}
+  {
+    "pages": [
+      {
+        "title": "Allgemein",
+        "sources": [
+          {
+            "port": [{"QBM1": "AI1"}],
+            "description": "AUL. Temperatur"
+          },
+          {
+            "port": [{"QBM2": "AI1"}],
+            "description": "ABL. Temperatur"
+          },
+          {
+            "port": [{"QBM2": "AI2"}],
+            "description": "ZUL. Temperatur"
+          },
+          {
+            "port": [{"QBM1": "AI2"}],
+            "description": "Frostschutz Temperatur"
+          },
+          {
+            "port": [
+              {"QBM2": "AI1"},
+              {"QBM1": "AI2"},
+              {"QBM1": "AI1"}
+            ],
+            "description": "Wärmerückgewinnungsgrad",
+            "python_function": "calc_wrg"
+          },
+          {
+            "port": [{"QBM1": "AO1"}],
+            "description": "AUL. Klappe",
+            "python_function": "flap_position"
+          },
+          {
+            "port": [{"QBM1": "AO2"}],
+            "description": "WRG. Klappe",
+            "python_function": "flap_position"
+          },
+          {
+            "port": [
+              {"QBM1": "P2"}
+            ],
+            "description": "ZUL. Filter Druckdifferenz"
+          },
+          {
+            "port": [{"QBM2": "P2"}],
+            "description": "ABL. Filter Druckdifferenz"
+          }
+        ]
+      },
+      {
+        "title": "Ventilator Zuluft",
+        "sources": [
+          {
+            "port": [
+              {"EBM1": "RPMreal"},
+              {"EBM1": "RPMmax"}
+            ],
+            "description": "Drehzahl Istwert",
+            "python_function": "calc_rpm"
+          },
+          {
+            "port": [
+              {"EBM1": "RPMtarget"},
+              {"EBM1": "RPMmax"}
+            ],
+            "description": "Drehzahl Sollwert",
+            "python_function": "calc_rpm"
+          },
+          {
+            "port": [
+              {"EBM1": "Power"},
+              {"EBM1": "Uz"},
+              {"EBM1": "Iz"}
+            ],
+            "description": "Leistung",
+            "python_function": "calc_power"
+          },
+          {
+            "port": [{"QBM2": "P1"}],
+            "description": "ZUL. Volumen",
+            "python_function": "calc_volume",
+            "additional_info": {"k-faktor": 116}
+          },
+          {
+            "port": [{"EBM1": "EngStatus"}],
+            "description": "Motorstatus",
+            "python_function": "eng_status"
+          }
+        ]
+      }
+    ],
+    "devices": [
+      {
+        "device": "QBM97XX",
+        "id": "QBM1",
+        "baud_rate": 19200,
+        "mbaddress": 41,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": false,
+        "sensors": [
+          {
+            "port": "P1",
+            "type": "standardQBM"
+          },
+          {
+            "port": "P2",
+            "type": "standardQBM"
+          },
+          {
+            "port": "AI1",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AI2",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AO1",
+            "type": "AULKlappe"
+          },
+          {
+            "port": "AO2",
+            "type": "WRGKlappe"
+          }
+        ]
+      },
+      {
+        "device": "QBM97XX",
+        "id": "QBM2",
+        "baud_rate": 19200,
+        "mbaddress": 40,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": false,
+        "sensors": [
+          {
+            "port": "P1",
+            "type": "standardQBM"
+          },
+          {
+            "port": "P2",
+            "type": "standardQBM"
+          },
+          {
+            "port": "AI1",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AI2",
+            "type": "LG-NI1000"
+          },
+          {
+            "port": "AO1",
+            "type": "AULKlappe"
+          },
+          {
+            "port": "AO2",
+            "type": "WRGKlappe"
+          }
+        ]
+      },
+      {
+        "device": "EBM",
+        "id": "EBM1",
+        "baud_rate": 19200,
+        "mbaddress": 33,
+        "parity": "even",
+        "stop_bits": 1,
+        "zero_based": true
+      }
+    ]
+  }
 ]
 \end{jsoncode}

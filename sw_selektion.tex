@@ -1,15 +1,15 @@
-Für die Ausarbeitung der Diplomarbeit stehen eine Vielzahl von Programmiersprachen zur Verfügung. Geachtet wurde bei der Auswahl auf die Einfachheit bzw. Vertrautheit der einzelnen Teammitglieder mit der Sprache, deren Funktionalität, das Bibliotheken-Angebot und die vorhandene Dokumentation. In dieser Diplomarbeit wird somit die Programmiersprache Python verwendet. Auf die genauen Gründe zur Auswahl wird in dem folgenden Kapitel \ref{python_kapitel} eingegangen.
+Für die Ausarbeitung der Diplomarbeit stehen eine Vielzahl von Programmiersprachen zur Verfügung. Geachtet wurde bei der Auswahl auf die Einfachheit bzw. Vertrautheit der einzelnen Teammitglieder mit der Sprache, deren Funktionalität, das Bibliotheken-Angebot und die vorhandene Dokumentation. In dieser Diplomarbeit wird somit die Programmiersprache \gls{gls_python} verwendet. Auf die genauen Gründe zur Auswahl wird in dem folgenden Kapitel \ref{python_kapitel} eingegangen.
 
 \subsection{Python}\label{python_kapitel}
 \begin{minipage}{0.6\textwidth}
-	Python ist eine vielseitig einsetzbare Programmiersprache. Die Erstellung einer ersten Version wurde 1989 von Guido van Rossum als Hobbyprojekt gestartet, während er am Centrum Wiskunde \& Informatica Institut in den Niederlanden arbeitete. Diese erste Version erschien 1991. Seither wird Python stetig weiterentwickelt. Besonders durch seine einfache Syntax und die vielen vorhandenen Bibliotheken konnte sich Python immer stärker auch in betrieblichen Umgebungen etablieren. Im Gegensatz zu Sprachen wie C, C\#, etc. verwendet Python keinen Compiler, um das Coding vor der Ausführung des Programms in Maschinencode umzuwandeln, sondern einen Interpreter, der beim Start des Programms jede Zeile nacheinander überprüft und ausführt. Diese Praktik wurde erstmals mit der Programmiersprache Lisp eingeführt und wird unter anderen von Java, Ruby oder PHP benutzt. 
+	\gls{gls_python} ist eine vielseitig einsetzbare Programmiersprache. Die Erstellung einer ersten Version wurde 1989 von Guido van Rossum als Hobbyprojekt gestartet, während er am Centrum Wiskunde \& Informatica Institut in den Niederlanden arbeitete. Diese erste Version erschien 1991. Seither wird \gls{gls_python} stetig weiterentwickelt. Besonders durch seine einfache Syntax und die vielen vorhandenen Bibliotheken konnte sich \gls{gls_python} immer stärker auch in betrieblichen Umgebungen etablieren. Im Gegensatz zu Sprachen wie C, C\#, etc. verwendet \gls{gls_python} keinen Compiler, um das Coding vor der Ausführung des Programms in Maschinencode umzuwandeln, sondern einen Interpreter, der beim Start des Programms jede Zeile nacheinander überprüft und ausführt. Diese Praktik wurde erstmals mit der Programmiersprache Lisp eingeführt und wird unter anderen von Java, Ruby oder PHP benutzt. 
 	\cite{Python_Software_Foundation:o.J., Pramanick_gfg:2019, Ryte:2021}
 \end{minipage}%
 \hfill
 \begin{minipage}{0.37\textwidth}
 	\centering	
 	\includegraphics[width=0.58\textwidth]{Bilder/Python_logo}
-	\captionof{figure}{Python Logo (Quelle:\\
+	\captionof{figure}{\gls{gls_python} Logo (Quelle:\\
 		\url{https://en.wikipedia.org/wiki/File:Python-logo-notext.svg}) \label{fig:python_logo}}
 \end{minipage}
 \vspace{1ex}
@@ -18,8 +18,8 @@ Die folgenden Vor- und Nachteile beziehen sich auf \textcite{Ceaseo:2020}.
 \paragraph{Vorteile}
 \begin{itemize}
 	\item Nicht nur die Syntax ist übersichtlich, sondern auch die Bibliotheken-Verwaltung ist einfach. Mit dem pip-Paketmanager können mit einem \enquote{pip install} alle vorhandenen Bibliotheken installiert werden.
-	\item Python kann in den unterschiedlichsten Anwendungen zum Einsatz kommen. Es können damit unter anderem Web-, Mobile- und Backendanwendungen erstellt werden. Außerdem eignet sie sich auch als Skriptsprache für Probleme, bei denen es keiner komplexen Software bedarf. Es können objektorientierte Strukturen genauso wie funktionale verwendet werden. 
-	\item Wie bereits erwähnt, bietet Python sehr viele unterschiedliche Bibliotheken, die von der Community ständig weiterentwickelt und verbessert werden. Außerdem besitzen diese Bibliotheken meist gut angelegtes Dokumentationsmaterial und Diskussionen bzw. Hilfestellungen in diversen Foren.
+	\item \gls{gls_python} kann in den unterschiedlichsten Anwendungen zum Einsatz kommen. Es können damit unter anderem Web-, Mobile- und Backendanwendungen erstellt werden. Außerdem eignet sie sich auch als Skriptsprache für Probleme, bei denen es keiner komplexen Software bedarf. Es können objektorientierte Strukturen genauso wie funktionale verwendet werden. 
+	\item Wie bereits erwähnt, bietet \gls{gls_python} sehr viele unterschiedliche Bibliotheken, die von der Community ständig weiterentwickelt und verbessert werden. Außerdem besitzen diese Bibliotheken meist gut angelegtes Dokumentationsmaterial und Diskussionen bzw. Hilfestellungen in diversen Foren.
 \end{itemize}
 
 \paragraph{Nachteile}
@@ -29,8 +29,8 @@ Die folgenden Vor- und Nachteile beziehen sich auf \textcite{Ceaseo:2020}.
 \end{itemize}
 
 \paragraph{Gründe für die Verwendung}
-Ein ausschlaggebender Grund für die Verwendung von Python ist, dass alle Teammitglieder damit schon Erfahrungen gemacht haben. Beim Einsatz anderer Sprachen wäre die Einarbeitungszeit einzelner Teammitglieder zu berücksichtigen. Außerdem liegt es nahe, da es für den Raspberry PI eine Standardsprache ist. Die oben beschriebenen Nachteile der Sprache sind für ein Proof-of-Concept vernachlässigbar. Außerdem hat die Recherche ergeben, dass viele gut dokumentierte Bibliotheken für Modbus und \aclp{gui} vorhanden sind.
+Ein ausschlaggebender Grund für die Verwendung von \gls{gls_python} ist, dass alle Teammitglieder damit schon Erfahrungen gemacht haben. Beim Einsatz anderer Sprachen wäre die Einarbeitungszeit einzelner Teammitglieder zu berücksichtigen. Außerdem liegt es nahe, da es für den Raspberry PI eine Standardsprache ist. Die oben beschriebenen Nachteile der Sprache sind für ein Proof-of-Concept vernachlässigbar. Außerdem hat die Recherche ergeben, dass viele gut dokumentierte Bibliotheken für \gls{modbus} und \aclp{gui} vorhanden sind.
 
 \paragraph{Verwendete Python-Bibliotheken}
-Für das Auslesen der \acfp{rlt} Messwerte über das Modbus Protokoll wird minimalmodbus verwendet. Um die erhaltenen Werte auch grafisch anzuzeigen, wird CustomTkinter verwendet. Es folgen die Beschreibungen dieser beiden Bibliotheken.
+Für das Auslesen der raumlufttechnischen Messwerte über das \gls{modbus} Protokoll wird minimalmodbus verwendet. Um die erhaltenen Werte auch grafisch anzuzeigen, wird \gls{gls_ctk} verwendet. Es folgen die Beschreibungen dieser beiden Bibliotheken.
 

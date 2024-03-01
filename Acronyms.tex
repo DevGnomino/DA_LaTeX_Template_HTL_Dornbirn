@@ -5,14 +5,10 @@
 %\acsp{Kuerzel}schreibt die Kurzform des Plurals. 
 %\acf{Kuerzel} verhält sich wie \ac{Kuerzel} Befehl, wenn er das erste Mal aufgerufen wurde. Unabhängig davon, wie oft das Kürzel bereits aufgerufen wurde, wird bei der Verwendung von \acf{Kuerzel} die ausgeschriebene Langform des Ausdrucks und die geklammerte Abkürzung gesetzt.
 
-\DeclareAcronym{obv}{
-short = {\"obv},
-long  = {Österreichische Bautechnikvereinigung},
-}
 
 \DeclareAcronym{dt}{
-short = {dt.},
-long  = {deutsch},
+	short = {dt.},
+	long  = {deutsch},
 }
 
 \DeclareAcronym{engl}{
@@ -20,29 +16,11 @@ long  = {deutsch},
 	long  = {englisch},
 }
 
-\DeclareAcronym{python}{
-	short = {Python},
-	long  = {},
-}
-
 \DeclareAcronym{abbv}{
-short = {ABBV},
-long  = {Ablösungsbeträge-Berechnungsverordnung},
-short-plural = {s},
-long-plural = {en},
-}
-
-\DeclareAcronym{lzk}{
-short = {LZK},
-long  = {Lebenszykluskosten},
-extra = {[\officialeuro{}]},
-}
-
-\DeclareAcronym{rlt}{
-	short = RLT,
-	long  = raumlufttechnische,
-	short-plural = s,
-	long-plural = n,
+	short = {ABBV},
+	long  = {Ablösungsbeträge-Berechnungsverordnung},
+	short-plural = {s},
+	long-plural = {en},
 }
 
 \DeclareAcronym{rltanlage}{
@@ -50,11 +28,6 @@ extra = {[\officialeuro{}]},
 	long  = raumlufttechnische Anlage,
 	short-plural = n,
 	long-plural-form = raumlufttechnische Anlagen,
-}
-
-\DeclareAcronym{rltanlagen}{
-	short = RLT Anlagen,
-	long  = raumlufttechnische Anlagen,
 }
 
 \DeclareAcronym{gui}{
@@ -70,12 +43,12 @@ extra = {[\officialeuro{}]},
 }
 
 \DeclareAcronym{json}{
-	short = JSON,
+	short = \gls{gls_json},
 	long  = JavaScript Object Notation,
 }
 
 \DeclareAcronym{csv}{
-	short = CSV,
+	short = \gls{gls_csv},
 	long  = Comma-Separated Values,
 }
 
@@ -95,28 +68,28 @@ extra = {[\officialeuro{}]},
 }
 
 \DeclareAcronym{pdu}{
-	short = PDU,
+	short = \gls{gls_pdu},
 	long = Protocol Data Unit,
 }
 
 \DeclareAcronym{adu}{
-	short = ADU,
+	short = \gls{gls_adu},
 	long = Application Data Unit,
 }
 
 \DeclareAcronym{tcp}{
-	short = TCP,
+	short = \gls{gls_tcp},
 	long = Transmission Control Protocol,
 }
 
 \DeclareAcronym{rtu}{
-	short = RTU,
+	short = \gls{gls_rtu},
 	long = Remote Terminal Unit, 
 }
 
 \DeclareAcronym{ascii}{
-short = ASCII,
-long = American Standard Code for Information Interchange, 
+	short = \gls{gls_ascii},
+	long = American Standard Code for Information Interchange, 
 }
 
 \DeclareAcronym{io}{
@@ -126,22 +99,27 @@ long = American Standard Code for Information Interchange,
 
 \DeclareAcronym{rltanzeige}{
 	short = RLT Anzeige,
-	long = Raumlufttechnische Anzeige,
+	long = Universalanzeige für \acsp{rltanlage},
 }
 
 \DeclareAcronym{crc}{
-short = CRC,
-long = Cyclical Redundancy Checking, 
+	short = \gls{gls_crc},
+	long = Cyclical Redundancy Checking, 
 }
 
 \DeclareAcronym{lrc}{
-short = LRC,
-long = Longitudinal Redundancy Checking, 
+	short =  \gls{gls_lrc},
+	long = Longitudinal Redundancy Checking, 
 }
 
 \DeclareAcronym{xml}{
 	short = XML,
 	long = Extensible Markup Language,
+}
+
+\DeclareAcronym{uxui}{
+	short = UX/UI,
+	long = User Experience/User Interface,
 }
 
 

@@ -1,13 +1,13 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{l+s+s2}{\PYGZdq{}sources\PYGZdq{}}\PYG{err}{:} \PYG{p}{[}
-	\PYG{p}{\PYGZob{}}
-		\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}
-			\PYG{p}{\PYGZob{}}\PYG{n+nt}{\PYGZdq{}EBM1\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}RPMreal\PYGZdq{}}\PYG{p}{\PYGZcb{},}
-			\PYG{p}{\PYGZob{}}\PYG{n+nt}{\PYGZdq{}EBM1\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}RPMmax\PYGZdq{}}\PYG{p}{\PYGZcb{}}
-		\PYG{p}{],}
-		\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Drehzahl Istwert\PYGZdq{}}\PYG{p}{,}
-		\PYG{n+nt}{\PYGZdq{}python\PYGZus{}function\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}calc\PYGZus{}rpm\PYGZdq{}}
-	\PYG{p}{\PYGZcb{},}
-	\PYG{err}{...}
+\PYG{n+nt}{\PYGZdq{}sources\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{n+nt}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}\PYG{n+nt}{\PYGZdq{}EBM1\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMreal\PYGZdq{}}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}\PYG{n+nt}{\PYGZdq{}EBM1\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}RPMmax\PYGZdq{}}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{],}
+\PYG{+w}{		}\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Drehzahl Istwert\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{		}\PYG{n+nt}{\PYGZdq{}python\PYGZus{}function\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}calc\PYGZus{}rpm\PYGZdq{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{},}
+\PYG{+w}{	}\PYG{err}{...}
 \PYG{p}{]}
 \end{Verbatim}
