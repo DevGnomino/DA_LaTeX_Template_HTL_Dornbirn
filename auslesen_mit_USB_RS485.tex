@@ -1,6 +1,6 @@
 \label{auslesen_rlt_parameter}
 
-Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da \gls{gls_ctk} den Hauptthread blockiert. Außerdem wird durch den Einsatz von Threads die Last besser verteilt. Beim Erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese die \gls{gls_ctk} \enquote{app} Instanz (siehe Kapitel  \ref{tkintercode}). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
+Um über die \gls{gls_rs485} Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da \gls{gls_ctk} den Hauptthread blockiert. Außerdem wird durch den Einsatz von Threads die Last besser verteilt. Beim Erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese die \gls{gls_ctk} \enquote{app} Instanz (siehe Kapitel  \ref{tkintercode}). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
 
 \begin{pythoncode}
 def data_threading(app):
@@ -52,8 +52,8 @@ class Sensor():
 Beim Erstellen der \enquote{Instrument} Instanz wird als erster Parameter angegeben, an welchem Port am Raspberry Pi der Adapter angeschlossen ist bzw. über welchen Port die Kommunikation stattfindet. Dabei muss je nach Plattform und Adapterart ein anderer Gerätestring angegeben werden:
 \begin{itemize}
 \item \textbf{COM4:} Damit kann auf Windows die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Die Nummer am Ende der Zeichenkette, ist dabei bei jedem PC / Port unterschiedlich und wird intern vergeben. Man muss diese vorher im Gerätemanager nachschauen und kann dann die entsprechende Nummer verwenden. Hier fand es seinen Einsatz insbesondere bei den anfänglichen Ausleseversuchen und den ersten Programmversionen.
-\item \textbf{/dev/ttyUSB0:} Damit kann auf Linux die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Benutzt wurde dieses beim Testen des Programms auf dem Raspberry Pi, als der erste RS485 Adapter noch nicht geliefert war bzw. nicht funktionierte.
-\item \textbf{/dev/ttyAMA0:} Damit kann auf Linux über die UART (GLOSSAR) Pins, also genauer gesagt Pin 8 (TX) und Pin 10 (RX) kommuniziert werden. Im finalen Programm wird das verwendet, da dieses auf dem Raspberry Pi läuft und über die UART Pins kommuniziert. Die Pins sind dabei über einen funktionierenden RS485 Adapter als Zwischenstück an dem Bussystem angeschlossen.
+\item \textbf{/dev/ttyUSB0:} Damit kann auf Linux die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Benutzt wurde dieses beim Testen des Programms auf dem Raspberry Pi, als der erste \gls{gls_rs485} Adapter noch nicht geliefert war bzw. nicht funktionierte.
+\item \textbf{/dev/ttyAMA0:} Damit kann auf Linux über die UART (GLOSSAR) Pins, also genauer gesagt Pin 8 (TX) und Pin 10 (RX) kommuniziert werden. Im finalen Programm wird das verwendet, da dieses auf dem Raspberry Pi läuft und über die UART Pins kommuniziert. Die Pins sind dabei über einen funktionierenden \gls{gls_rs485} Adapter als Zwischenstück an dem Bussystem angeschlossen.
 \end{itemize}
 
 \vfill
