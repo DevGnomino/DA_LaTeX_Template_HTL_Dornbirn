@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	app.mainloop()	
 \end{pythoncode}
 
-In der \enquote{usb\_routine} Funktion wird die \enquote{copy\_from\_usb} Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \enquote{start\_window} Funktion erstellt ein neues customtkinter Fenster, in dem dann die als Parameter angegebene Zeichenkette angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt. Die \enquote{usb\_routine} Funktion dient als Zwischenschritt, damit der Benutzer eine Rückmeldung bekommt, ob die Konfigurationsdateien erfolgreich kopiert wurden oder keine Änderung vorgenommen wird.
+In der \enquote{usb\_routine} Funktion wird die \enquote{copy\_from\_usb} Funktion aufgerufen. Diese gibt einen Statuscode zurück. Die \enquote{start\_window} Funktion erstellt ein neues \gls{gls_ctk} Fenster, in dem dann die als Parameter angegebene Zeichenkette angezeigt wird. Das Fenster bleibt für sieben Sekunden offen, bevor es wieder geschlossen wird und die Ausführung fortfährt. Die \enquote{usb\_routine} Funktion dient als Zwischenschritt, damit der Benutzer eine Rückmeldung bekommt, ob die Konfigurationsdateien erfolgreich kopiert wurden oder keine Änderung vorgenommen wird.
 
 \begin{pythoncode}
 def usb_routine():
@@ -35,7 +35,7 @@ def usb_routine():
 	return False # Fehler
 \end{pythoncode}
 
-Es gibt eine Hilfsfunktion namens \enquote{start\_window}, mit der Meldungen in einem Pop-Up Fenster angezeigt werden können. Dabei wird eine \enquote{Tk} Instanz erstellt, welches ein customtkinter Fenster darstellt. Zuerst wird die Überschrift, der Vollbildmodus und die Hintergrundfarbe des Fensters konfiguriert. Danach wird ein neues Label erstellt. Als Textinhalt wird der Parameter message zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn customtkinter bietet die Möglichkeit eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. Hier wird eine Lambda Funktion übergeben, die die \enquote{Tk} Instanz namens \enquote{msg\_window} zerstört.
+Es gibt eine Hilfsfunktion namens \enquote{start\_window}, mit der Meldungen in einem Pop-Up Fenster angezeigt werden können. Dabei wird eine \enquote{Tk} Instanz erstellt, welches ein \gls{gls_ctk} Fenster darstellt. Zuerst wird die Überschrift, der Vollbildmodus und die Hintergrundfarbe des Fensters konfiguriert. Danach wird ein neues Label erstellt. Als Textinhalt wird der Parameter message zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn \gls{gls_ctk} bietet die Möglichkeit eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. Hier wird eine Lambda Funktion übergeben, die die \enquote{Tk} Instanz namens \enquote{msg\_window} zerstört.
 \begin{pythoncode}
 def start_window(message):
 	msg_window = tk.Tk()

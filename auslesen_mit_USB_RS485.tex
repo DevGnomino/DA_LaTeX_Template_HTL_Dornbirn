@@ -1,6 +1,6 @@
 \label{auslesen_rlt_parameter}
 
-Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da customtkinter den Hauptthread blockiert. Außerdem wird durch den Einsatz von Threads die Last besser verteilt. Beim Erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese die customtkinter \enquote{app} Instanz (siehe Kapitel  \ref{tkintercode}). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
+Um über die RS485 Schnittstelle mit minimalmodbus Daten auszulesen wird ein separater Thread erstellt. In diesem wird die \enquote{data\_refresh} Funktion ausgeführt. Diese Funktion kann nicht im Hauptthread laufen, da \gls{gls_ctk} den Hauptthread blockiert. Außerdem wird durch den Einsatz von Threads die Last besser verteilt. Beim Erstellen des Threads wird angegeben, dass die \enquote{data\_refresh} Funktion darin ausgeführt wird. Als Parameter erhält diese die \gls{gls_ctk} \enquote{app} Instanz (siehe Kapitel  \ref{tkintercode}). Außerdem deklariert man ihn als Daemon Thread. Dadurch kann das Programm terminieren, auch wenn der Daemon Thread noch nicht geendet hat.
 
 \begin{pythoncode}
 def data_threading(app):

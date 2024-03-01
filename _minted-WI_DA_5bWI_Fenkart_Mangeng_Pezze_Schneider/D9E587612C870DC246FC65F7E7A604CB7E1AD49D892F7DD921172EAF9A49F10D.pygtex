@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{MeasurementFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+		\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{770}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{55}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{n}{title\PYGZus{}color}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+		
+		\PYG{n}{text\PYGZus{}font} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFont}\PYG{p}{(}\PYG{n}{family}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Roboto\PYGZdq{}}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{33}\PYG{p}{)}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{485}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{52}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{W}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{text\PYGZus{}font}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.34}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{190}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{52}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{text\PYGZus{}font}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.84}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+		
+		\PYG{n}{canvas} \PYG{o}{=} \PYG{n}{Canvas}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{,} \PYG{n}{bg}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{n}{highlightthickness}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+		\PYG{n}{canvas}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.67}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{)}
+	
+	\PYG{k}{def} \PYG{n+nf}{set\PYGZus{}text}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{)}
+\end{Verbatim}

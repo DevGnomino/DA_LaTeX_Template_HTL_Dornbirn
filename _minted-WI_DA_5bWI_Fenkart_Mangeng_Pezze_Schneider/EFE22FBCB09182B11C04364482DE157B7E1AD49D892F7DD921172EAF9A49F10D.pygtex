@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{TitleFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+		\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{master}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{800}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{60}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{n}{text\PYGZus{}color}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{)}
+		
+		\PYG{n}{title\PYGZus{}font} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFont}\PYG{p}{(}\PYG{n}{family}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Roboto\PYGZdq{}}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{)}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{700}\PYG{p}{,} \PYG{n}{height}\PYG{o}{=}\PYG{l+m+mi}{45}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}transparent\PYGZdq{}}\PYG{p}{,} \PYG{n}{text\PYGZus{}color}\PYG{o}{=}\PYG{n}{title\PYGZus{}color}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{n}{title\PYGZus{}font}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{n}{rely}\PYG{o}{=}\PYG{l+m+mf}{0.12}\PYG{p}{,} \PYG{n}{anchor}\PYG{o}{=}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{N}\PYG{p}{)}
+\end{Verbatim}
