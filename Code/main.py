@@ -65,9 +65,9 @@ class MeasurementFrame(ctk.CTkFrame):
                                       anchor=ctk.CENTER, font=text_font)
         self.value_lbl.place(relx=0.84, rely=0.5, anchor=ctk.CENTER)
 
-        canvas = Canvas(master=self, width=2, height=50,
+        self.canvas = Canvas(master=self, width=2, height=50,
                         bg=text_color, highlightthickness=0)
-        canvas.place(relx=0.67, rely=0.5, anchor=ctk.CENTER)
+        self.canvas.place(relx=0.67, rely=0.5, anchor=ctk.CENTER)
 
     def set_text(self, measurement, value):
         self.measurement_lbl.configure(text=measurement)

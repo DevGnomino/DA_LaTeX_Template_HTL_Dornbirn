@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{MeasurementFrame}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkFrame}\PYG{p}{):}
+	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{master}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{,} \PYG{o}{**}\PYG{n}{kwargs}\PYG{p}{):}
+		\PYG{c+c1}{\PYGZsh{}[Initialisierung des CTkFrames + Erstellung eines CTkFont Objekts zur Schriftformatierung der MeasurementFrames]}
+		
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{,} \PYG{o}{...}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl} \PYG{o}{=} \PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkLabel}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{,} \PYG{o}{...}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{canvas} \PYG{o}{=} \PYG{n}{Canvas}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{...}\PYG{p}{)}
+		\PYG{c+c1}{\PYGZsh{}[Platzierung beider Labels + Canvas]}
+		
+	\PYG{k}{def} \PYG{n+nf}{set\PYGZus{}text}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurement\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{measurement}\PYG{p}{)}
+		\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value\PYGZus{}lbl}\PYG{o}{.}\PYG{n}{configure}\PYG{p}{(}\PYG{n}{text}\PYG{o}{=}\PYG{n}{value}\PYG{p}{)}
+\end{Verbatim}

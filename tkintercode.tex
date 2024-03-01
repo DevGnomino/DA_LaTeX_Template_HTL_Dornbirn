@@ -10,9 +10,9 @@ Im Vordergrund basiert die Klassenstruktur grundsätzlich auf \gls{gls_ctk} Komp
 
 \paragraph{CustomTkinter Code}
 Eine nähere Beschreibung und die Umsetzung der vorher genannten Klassen erfolgt in diesem Kapitel. 
-\newline Wie zuletzt beschrieben, basieren alle Klassen im Frontend auf \gls{gls_ctk}. Die Klassen sind dabei alle (bis auf die Klasse \enquote{App}) vom Typen \enquote{CTkFrame}. Ein \enquote{CTkFrame} ist ein Widget, das wie ein Rahmen \bzw Behälter für andere Widgets fungiert. So können diese weiteren Widgets gruppiert und besser organisiert werden. Als erster Parameter wird für \enquote{CTkFrames}, wie bei allen \gls{gls_tk} und \gls{gls_ctk} Widgets, der \enquote{master} \bzw das Elternobjekt angegeben. Darüber hinaus können die Breite (\enquote{width}), Höhe (\enquote{height}), Rahmenbreite \bzw -Farbe (\enquote{border\_width} \bzw \enquote{border\_color}) sowie die Hintergrundfarbe (\enquote{fg\_color}) angegeben werden. \ref{Schimansky:o.J.}
+\newline Wie zuletzt beschrieben, basieren alle Klassen im Frontend auf \gls{gls_ctk}. Die Klassen sind dabei alle (bis auf die Klasse \enquote{App}) vom Typen \enquote{CTkFrame}. Ein \enquote{CTkFrame} ist ein Widget, das wie ein Rahmen \bzw Behälter für andere Widgets fungiert. So können diese weiteren Widgets gruppiert und besser organisiert werden. Als erster Parameter wird für \enquote{CTkFrames}, wie bei allen \gls{gls_tk} und \gls{gls_ctk} Widgets, der \enquote{master} \bzw das Elternobjekt angegeben. Darüber hinaus können die Breite (\enquote{width}), Höhe (\enquote{height}), Rahmenbreite \bzw -Farbe (\enquote{border\_width} \bzw \enquote{border\_color}) sowie die Hintergrundfarbe (\enquote{fg\_color}) angegeben werden. \cite[vgl.][]{Schimansky:o.J.}
 
-Die Klasse \enquote{TitleFrame} enthält ein \enquote{CTkLabel}. Die Klasse \enquote{CTkLabel} basiert auf der Klasse \enquote{tkinter.Label} und dient zur Darstellung eines Textes. In diesem Label steht immer der Titel der Seite zu der es gehört.
+Die Klasse \enquote{TitleFrame} enthält ein \enquote{CTkLabel}, welches mit der \enquote{place( )} Methode im Behälter platziert wird. Die Klasse \enquote{CTkLabel} basiert auf der Klasse \enquote{tkinter.Label} und dient zur Darstellung eines Textes. In diesem Label steht immer der Titel der zugehörigen Seite. Das \enquote{title\_font} Objekt, welches im folgenden Code zu sehen ist, ist eine Instanz der \gls{gls_ctk} Utility Klasse \enquote{CTkFont}. Es wird verwendet um die Schriftformatierung von \gls{gls_ctk} Widgets vorzunehmen. Jedes \gls{gls_ctk} Widget bekommt standardmäßig ein \enquote{CTkFont} Objekt, wobei ein solches Objekt zeitgleich mehreren Widgets angefügt werden. Eine Änderung eines \enquote{CTkFont} Objekts wird an alle Widgets, die es verwenden, weitergeleitet. \cite[vgl.][]{Schimansky:o.J.}
 
 \begin{pythoncode}
 class TitleFrame(ctk.CTkFrame):
@@ -25,41 +25,25 @@ class TitleFrame(ctk.CTkFrame):
 		self.title_lbl.place(relx=0.5, rely=0.12, anchor=ctk.N)
 \end{pythoncode}
 
-%CTk
-%CTkLabel
-%CTkImage
-%CTkFont
-%CTkButton
-
-
-%tkinter.canvas für die Striche \cite[vgl.][]{Shipman:2013}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.90\textwidth]{CTK_components}
-	\caption{Ergebnis der \acs{gui} mit Bezeichnungen zugehöriger Klassen \label{fig:ctk_components}}
-\end{figure}
+Wie in der Klassenstruktur beschrieben, beinhaltet ein jedes \enquote{PageFrame} neben einem \enquote{TitleFrame} eine Liste von \enquote{MeasurementFrames}. Eine Instanz der Klasse \enquote{MeasurementFrame} enthält die Informationen eines Messwerts, welche mithilfe von zwei \enquote{CTkLabel} Widgets dargestellt werden. Dabei wird die Bezeichnung des Messwerts links im \enquote{measurement\_lbl} und der tätsichliche Wert einschließlich Maßeinheit rechts im \enquote{value\_lbl} platziert. Die zwei Labels werden durch einen Strich getrennt, der mit dem \gls{gls_tk} Widget \enquote{Canvas} erstellt wird. Ein Canvas ist ein rechteckiger Bereich \bzw eine Leinwand, auf dem Bilder oder andere komplexe Layouts gezeichnet werden können. Zusätzlich lassen sich auf einem Canvas Widget \zB weitere Widgets, Text oder Bilder platzieren. \cite[vgl.][20]{Shipman:2013} 
+\newline Da jeder Messwert kontinuierlich aktualisiert wird, verfügt die \enquote{MeasurementFrame} über die Methode \enquote{set\_text}. In dieser wird mithilfe der \enquote{configure( )} Methode der Text beider Labels aktualisiert. 
 
 \begin{pythoncode}
 class MeasurementFrame(ctk.CTkFrame):
 	def __init__(self, master, measurement, value, **kwargs):
-		super().__init__(master, width=770, height=55, fg_color=title_color, **kwargs)
+		#[Initialisierung des CTkFrames + Erstellung eines CTkFont Objekts zur Schriftformatierung der MeasurementFrames]
 		
-		text_font = ctk.CTkFont(family="Roboto", size=33)
+		self.measurement_lbl = ctk.CTkLabel(master=self, text=measurement, ...)
+		self.value_lbl = ctk.CTkLabel(master=self, text=value, ...)
+		self.canvas = Canvas(master=self, ...)
+		#[Platzierung beider Labels + Canvas]
 		
-		self.measurement_lbl = ctk.CTkLabel(master=self, text=measurement, width=485, height=52, fg_color="transparent", text_color=text_color, anchor=ctk.W, font=text_font)
-		self.measurement_lbl.place(relx=0.34, rely=0.5, anchor=ctk.CENTER)
-		
-		self.value_lbl = ctk.CTkLabel(master=self, text=value, width=190, height=52, fg_color="transparent", text_color=text_color, anchor=ctk.CENTER, font=text_font)
-		self.value_lbl.place(relx=0.84, rely=0.5, anchor=ctk.CENTER)
-		
-		canvas = Canvas(master=self, width=2, height=50, bg=text_color, highlightthickness=0)
-		canvas.place(relx=0.67, rely=0.5, anchor=ctk.CENTER)
-	
 	def set_text(self, measurement, value):
 		self.measurement_lbl.configure(text=measurement)
 		self.value_lbl.configure(text=value)
 \end{pythoncode}
+
+\textit{HIER NOCH NICHT FERTIG GEWORDEN, DER FOLGENDE CODE WIRD WIE OBEN NOCH GEKÜRZT UND BESCHRIEBEN!}
 	
 \begin{pythoncode}
 class PageFrame(ctk.CTkFrame):
@@ -93,6 +77,7 @@ class PageFrame(ctk.CTkFrame):
 		if index >= 0 and index < len(self.measurement_frames):
 			self.measurement_frames[index].set_text(measurement, value)
 \end{pythoncode}
+
 
 
 \begin{pythoncode}
