@@ -140,7 +140,7 @@ Serielle Kommunikation bedeutet grundsätzlich, dass eine Nachricht Bit für Bit
 		\toprule
 		\textbf{Anschlussname} & \textbf{RS232} & \textbf{RS422} & \textbf{\gls{gls_rs485}}\\
 		\midrule
-		Übertragungsart & Vollduplex & Vollduplex & Halb- oder Vollduplex \\
+		Übertragungsart & \gls{vollduplex} & \gls{vollduplex} & \gls{halbduplex}- oder \gls{vollduplex} \\
 		Maximale Distanz & 15 Meter & 1200 Meter & 1200 Meter \\
 		Topologie & Point-to-Point & Point-to-Point & Multi-point \\
 		\bottomrule
@@ -164,11 +164,11 @@ Eine Darstellung der Spannungspegel der beiden Leitungen (dargestellt in Rot und
 
 Dadurch, dass es 2 Leitungen gibt und die Spannungsunterschiede genügend groß definiert sind, ist \gls{gls_rs485} ziemlich Resistent gegen elektromagnetische Störungen. Die Daten können auch über längere Strecken sicher übertragen werden. \cite{Kugelstadt:2021, Heinen_Elektronik_GmbH:o.J.}. \\
 
-\gls{gls_rs485} kann entweder im Halb- oder Vollduplex Modus aufgesetzt werden. \newline Halbduplex bedeutet, dass entweder gesendet oder empfangen werden kann, aber nicht beides gleichzeitig. Der Bus benötigt nur 1 Leitungspaar (2 Leitungen). \newline Vollduplex bedeutet, dass Senden und Empfangen parallel funktioniert. D.h. es gibt 2 Leitungspaare (4 Leitungen), eine für das Senden, eine für das Empfangen \cite{Kugelstadt:2021}. \\
+\gls{gls_rs485} kann entweder im Halb- oder \gls{vollduplex} Modus aufgesetzt werden. \newline \gls{halbduplex} bedeutet, dass entweder gesendet oder empfangen werden kann, aber nicht beides gleichzeitig. Der Bus benötigt nur 1 Leitungspaar (2 Leitungen). \newline \gls{vollduplex} bedeutet, dass Senden und Empfangen parallel funktioniert. D.h. es gibt 2 Leitungspaare (4 Leitungen), eine für das Senden, eine für das Empfangen \cite{Kugelstadt:2021}. \\
 
 Eine wichtige Information, die uns durch unseren Firmenbetreuer mitgeteilt wurde, ist, dass der Bus nach dem letzten Teilnehmer einen Terminierungswiderstand benötigt. Dadurch lässt sich eine Reflexion des Signals verhindern. (vgl. \cite{Kugelstadt:2021}). Auf den QBM Geräten gibt es dafür einen Schalter, mit diesem man den Terminierungswiderstand ein bzw. ausschalten kann. Da die Existenz dieses Schalters während der praktischen Ausarbeitung unserer Diplomarbeit lange vergessen wurde, kam es beim Testen diverse male zu scheinbar unerklärlichen Fehlern.
 
 \paragraph{Baudrate} \label{baud_rate}
-Die Baudrate stellt die Schrittgeschwindigkeit in einem seriellen Bussystem dar. Die Baudrate wird häufig mit der Maßeinheit Bit/s verwechselt. Obwohl beide den Datendurchsatz darstellen, misst die Baudrate wie viel Zeit für einen Schritt benötigt wird und nicht wie viele Bits pro Sekunde übertragen werden. Diese beiden Werte können, müssen aber nicht immer gleich sein. Ein Schritt ist dabei definiert als eine Änderung des Signals. 
+Die \gls{gls_baudrate} stellt die Schrittgeschwindigkeit in einem seriellen Bussystem dar. Die \gls{gls_baudrate} wird häufig mit der Maßeinheit Bit/s verwechselt. Obwohl beide den Datendurchsatz darstellen, misst die \gls{gls_baudrate} wie viel Zeit für einen Schritt benötigt wird und nicht wie viele Bits pro Sekunde übertragen werden. Diese beiden Werte können, müssen aber nicht immer gleich sein. Ein Schritt ist dabei definiert als eine Änderung des Signals. 
 \cite{KUNBUS_GmbH_Baudrate:o.J.}
-In dieser Diplomarbeit wird dennoch der Begriff Baudrate verwendet, obwohl die in den Konfigurationsdateien angegebenen Datenraten in Bit/s gemessen werden. Die Bezeichnung Baudrate wurde deswegen gewählt, da sie in der Industrie weit verbreitet ist. Gängige Übertragungsraten sind für \gls{modbus} 9600 Bit/s und 19200 Bit/s.
+In dieser Diplomarbeit wird dennoch der Begriff \gls{gls_baudrate} verwendet, obwohl die in den Konfigurationsdateien angegebenen Datenraten in Bit/s gemessen werden. Die Bezeichnung \gls{gls_baudrate} wurde deswegen gewählt, da sie in der Industrie weit verbreitet ist. Gängige Übertragungsraten sind für \gls{modbus} 9600 Bit/s und 19200 Bit/s.
