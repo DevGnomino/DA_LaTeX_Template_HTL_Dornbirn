@@ -5,7 +5,7 @@
 		\PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}pages}\PYG{p}{:}
 			\PYG{n}{measurement\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
 			\PYG{k}{for} \PYG{n}{measurement} \PYG{o+ow}{in} \PYG{n}{page}\PYG{o}{.}\PYG{n}{measurements}\PYG{p}{:}
-				\PYG{n}{value} \PYG{o}{=} \PYG{n}{measurement}\PYG{o}{.}\PYG{n}{run\PYGZus{}calculation\PYGZus{}function}\PYG{p}{()}
+				\PYG{n}{value} \PYG{o}{=} \PYG{n}{measurement}\PYG{o}{.}\PYG{n}{run\PYGZus{}calculation}\PYG{p}{()}
 				\PYG{n}{app}\PYG{o}{.}\PYG{n}{set\PYGZus{}page\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n}{page\PYGZus{}counter}\PYG{p}{,} \PYG{n}{measurement\PYGZus{}counter}\PYG{p}{,} \PYG{n}{measurement}\PYG{o}{.}\PYG{n}{description}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
 				\PYG{n}{measurement\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
 			\PYG{n}{page\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}

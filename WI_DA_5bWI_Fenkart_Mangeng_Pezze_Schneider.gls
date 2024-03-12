@@ -29,7 +29,8 @@
 \glossentry{cprogrammiersprache}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{58}}}%
 \glossentry{gls_cli}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{99}}}%
+		\setentrycounter[]{page}\glsnumberformat{99}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{136}}}%
 \glossentry{client}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{32\delimR 35}}}%
 \glossentry{cr}{\glossaryentrynumbers{\relax 
@@ -149,7 +150,8 @@
 		\setentrycounter[]{page}\glsnumberformat{71\delimN 72}}}\glsgroupskip
 \glsgroupheading{U}\relax \glsresetentrylist %
 \glossentry{gls_uart}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{96}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{96}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{136}}}\glsgroupskip
 \glsgroupheading{V}\relax \glsresetentrylist %
 \glossentry{vollduplex}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{38\delimN 39}}}\glsgroupskip

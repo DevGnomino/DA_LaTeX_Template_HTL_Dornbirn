@@ -8,7 +8,7 @@ def data_threading(app):
 	t1.start()
 \end{pythoncode}
 
-In diesem \gls{gls_thread} werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle \enquote{Page} Instanzen und darin alle \enquote{Measurement} Instanzen iteriert und die \enquote{run\_calculation\_function} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird. \newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die zuletzt verfügbaren Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall einen Fehlercode an, bis die Daten erneuert werden. 
+In diesem \gls{gls_thread} werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle \enquote{Page} Instanzen und darin alle \enquote{Measurement} Instanzen iteriert und die \enquote{run\_calculation( )} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird. Dies passiert mit der \enquote{set\_page\_text\_at} Methode der \enquote{App} Klasse (siehe Kapitel \ref{tkintercode}). \newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die zuletzt verfügbaren Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall einen Fehlercode an, bis die Daten erneuert werden. 
 
 \begin{pythoncode}
 def data_refresh(app):
@@ -17,7 +17,7 @@ def data_refresh(app):
 		for page in all_pages:
 			measurement_counter = 0
 			for measurement in page.measurements:
-				value = measurement.run_calculation_function()
+				value = measurement.run_calculation()
 				app.set_page_text_at(page_counter, measurement_counter, measurement.description, value)
 				measurement_counter += 1
 			page_counter += 1
@@ -78,7 +78,7 @@ In der \enquote{run\_calculation\_function} Methode der \enquote{Measurement} In
 
 \begin{pythoncode}
 class Measurement():
-	def run_calculation_function(self):
+	def run_calculation(self):
 		try:
 			if self.python_function == "standard":
 				self.value = str(modbus_functions.standard(self.sensors, self.additional_info)) + " " + self.unit

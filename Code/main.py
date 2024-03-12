@@ -69,8 +69,7 @@ class MeasurementFrame(ctk.CTkFrame):
                         bg=text_color, highlightthickness=0)
         self.canvas.place(relx=0.67, rely=0.5, anchor=ctk.CENTER)
 
-    def set_text(self, measurement, value):
-        self.measurement_lbl.configure(text=measurement)
+    def set_text(self, value):
         self.value_lbl.configure(text=value)
 
 
@@ -103,10 +102,10 @@ class PageFrame(ctk.CTkFrame):
                 my_frame.place_forget()
             spacing += 0.143  # 0.1335
 
-    def set_text_at(self, index, measurement, value):
+    def set_text_at(self, index, value):
         # ZUM TESTEN, so werden Fehler abgefangen; wird aber eigentlich nicht benötigt!
         if index >= 0 and index < len(self.measurement_frames):
-            self.measurement_frames[index].set_text(measurement, value)
+            self.measurement_frames[index].set_text(value)
 
 
 class App(ctk.CTk):
@@ -158,11 +157,11 @@ class App(ctk.CTk):
                 page_indicator_list[i].place(
                     relx=start_x_position + i / 45.0, rely=0.93, anchor=ctk.CENTER)
 
-    def set_page_text_at(self, page_index, measurement_index, measurement, value):
+    def set_page_text_at(self, page_index, measurement_index, value):
         # Wieder zum Fehler abfangen, eigentlich nicht nötig
         if page_index >= 0 and page_index < len(page_frame_list):
             page_frame_list[page_index].set_text_at(
-                measurement_index, measurement, value)
+                measurement_index, value)
 
 
 def last_page(channel):

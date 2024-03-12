@@ -24,8 +24,6 @@ Einlesen kann man ein \acs{json} Attribut mit folgender Syntax. Im folgenden Bei
 title = page["title"]
 \end{pythoncode}
 
-In den Codeblöcken wird in den mit \enquote{\#[Inhalt]} gekennzeichneten Zeilen weitere Funktionalität gekennzeichnet, die entweder später beschrieben wird oder zur besseren Übersichtlichkeit ausgelassen werden. 
-
 Im folgenden Code werden die \enquote{Measurement} Instanzen erstellt, indem die anzuzeigenden Messwerte aus dem \enquote{sources} Array iteriert werden. Anhand der Informationen der Objekte im \enquote{sources} Array werden dann die entsprechenden Geräte im \enquote{devices} Array herausgesucht. Es werden weitere Parameter aus der Hauptkonfigurationsdatei ausgelesen, die zu dem entsprechenden Messwert gehören (z.B. die Bezeichnung oder die Einheit). Anschließend werden die \enquote{Sensor} Instanzen erstellt und einer Liste beigefügt, da manche Measurements mehrere Messwerte benötigen. Diese Liste, sowie die vorher ausgelesenen Parameter werden beim Erstellen der \enquote{Measurement} Instanzen dem Konstruktor übergeben und darin in Instanzvariablen gespeichert.
 \begin{pythoncode}
 page_measurements = []
