@@ -60,6 +60,9 @@ group-separator = {~},
 per-mode = symbol, 
 list-final-separator={ und }}
 
+%Damit bei untrennbaren Wörtern nicht über den Rand geschrieben wird
+\setlength{\emergencystretch}{3em}
+
 \graphicspath{{Bilder/}}
 
 %% examples for useful shortcuts in German
@@ -114,7 +117,7 @@ list-final-separator={ und }}
 \printglossaries
 \printacronyms[name=Abkürzungen]
 
-\include{Begleitprotokoll}
+%\include{Begleitprotokoll}
 \include{Anhang}
 
 
