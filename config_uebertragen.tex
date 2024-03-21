@@ -88,7 +88,7 @@ Wenn ein Datenträger gefunden wurde, wird der vorher gespeicherte Port gemounte
 	return 0
 \end{pythoncode}
 
-Nachdem der \enquote{umount} Befehl ausgeführt und der Datenträger physisch entfernt wird, erscheint auf dem Display eine Warnung, dass der Datenträger entfernt wurde, ohne ausgeworfen worden zu sein. Ausprobiert wurde auch der folgende Befehle, allerdings erschien immer noch die selbe Warnung \cite{Totor:2022}.
+Nachdem der \enquote{umount} Befehl ausgeführt und der Datenträger physisch entfernt wird, erscheint auf dem Display eine Warnung, dass der Datenträger entfernt wurde, ohne ausgeworfen worden zu sein. Ausprobiert wurde auch der folgende Befehl, allerdings erschien immer noch die selbe Warnung \cite{Totor:2022}.
 \begin{pythoncode}
 	os.system("sudo eject /dev/" + port)
 \end{pythoncode}
