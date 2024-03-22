@@ -82,6 +82,12 @@ automark
 \renewcommand{\chapterpagestyle}{scrheadings} %chapter seiten mit kopf- und fußzeilen
 
 \RedeclareSectionCommand[
+beforeskip=2ex plus 0.2ex minus 0.2ex,
+afterskip=2em
+]{chapter}
+
+
+\RedeclareSectionCommand[
 beforeskip=1ex plus 0.2ex minus 0.2ex,
 afterskip=1em,
 font=\normalfont\fontsize{16}{20}\selectfont\bfseries,
