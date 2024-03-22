@@ -68,8 +68,9 @@ automark
 \clearpairofpagestyles
 \addtokomafont{pageheadfoot}{\small} % Schriftgröße für Kopf- und Fußzeilen
 
+\RequirePackage{lastpage}
 \ihead{\centering \thesistitle}
-\ofoot{\thepage} % Seitennummerierung rechtsbündig
+\ofoot{\thepage\ von \pageref*{LastPage}} % Seitennummerierung rechtsbündig
 \cfoot{} % Leerer Seitenfuß in der Mitte
 
 \newcommand{\setAuthor}[1]{\markboth{#1}{#1}}
@@ -85,7 +86,6 @@ automark
 beforeskip=2ex plus 0.2ex minus 0.2ex,
 afterskip=2em
 ]{chapter}
-
 
 \RedeclareSectionCommand[
 beforeskip=1ex plus 0.2ex minus 0.2ex,
