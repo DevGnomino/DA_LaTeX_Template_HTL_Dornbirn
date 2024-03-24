@@ -6,6 +6,7 @@ import modbus
 from globals_ import current_page
 from globals_ import page_frame_list
 from globals_ import page_indicator_list
+from globals_ import all_pages
 import usb_detection
 import RPi.GPIO as GPIO
 import time

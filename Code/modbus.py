@@ -7,6 +7,7 @@ from threading import Thread
 import math
 import json
 import modbus_functions
+from globals_ import all_pages
 
 CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
 DEVICES_CONFIG_PATH = '/home/pi/Documents/RLT_Config/devices/'
@@ -131,8 +132,6 @@ def load_config():
     config_full_data = json.load(config_file)
     config_file.close()
 
-    global all_pages
-    all_pages = []
     for page in config_full_data[0]["pages"]:
         title = page["title"]
         page_measurements = []
