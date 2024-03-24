@@ -11,6 +11,10 @@ import modbus_functions
 CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
 DEVICES_CONFIG_PATH = '/home/pi/Documents/RLT_Config/devices/'
 
+#for testing
+#CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\\"
+#DEVICES_CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\devices\\"
+
 class Sensor():
     def __init__(self, baud_rate, mb_address, parity, stop_bits, scaling, register,
                  function_code, zero_based):

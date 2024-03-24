@@ -3,11 +3,14 @@ from PIL import Image
 import tkinter
 from tkinter import Canvas
 import modbus
-import globals_
+from globals_ import current_page
+from globals_ import page_frame_list
+from globals_ import page_indicator_list
 import usb_detection
 import RPi.GPIO as GPIO
 import time
 import os
+
 
 if os.environ.get('DISPLAY','') == '': # Uses screen if it doesnt find a screen
    os.environ.__setitem__('DISPLAY', ':0.0')
@@ -16,6 +19,7 @@ if os.environ.get('DISPLAY','') == '': # Uses screen if it doesnt find a screen
 ctk.set_default_color_theme("blue")  # Supported themes: green, dark-blue, blue
 app_width, app_height = 800, 480
 light_mode = True  # True for Light Mode and False for Dark Mode
+
 
 if light_mode:
     ctk.set_appearance_mode("Light")
@@ -109,7 +113,7 @@ class PageFrame(ctk.CTkFrame):
 
 
 class App(ctk.CTk):
-    def __init__(self, all_pages, *args, **kwargs):
+    def __init__(self, all_pages, page_frame_list, page_indicator_list, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title("Bösch RLT Anzeige")
         self.geometry(f"{app_width}x{app_height}")
@@ -125,26 +129,17 @@ class App(ctk.CTk):
         self.img_label = ctk.CTkLabel(master=self, image=boesch_logo, text="")
         self.img_label.place(relx=0.5, rely=0.915, anchor=ctk.CENTER)
 
-        global page_frame_list
-        page_frame_list = []
-        global page_indicator_list
-        page_indicator_list = []
+        # global page_frame_list
+        # page_frame_list = []
+        # global page_indicator_list
+        # page_indicator_list = []
 
         for page in all_pages:  # Creates Frames based on the sensor data
             page_frame_list.append(PageFrame(master=self, title=page.title,
                                              parameters=page.measurements))
 
         print(len(page_frame_list))
-        page_frame_list[globals_.current_page].show_frame(True)
-
-        # Diese Buttons werden später mit Physischen Tastern ersetzt!!!
-        """self.last_page_button = ctk.CTkButton(
-            master=self, text="Last Page", width=50, command=last_page, fg_color=frame_color)
-        self.last_page_button.place(relx=0.065, rely=0.93, anchor=ctk.CENTER)
-
-        self.next_page_button = ctk.CTkButton(
-            master=self, text="Next Page", width=50, command=next_page, fg_color=frame_color)
-        self.next_page_button.place(relx=0.17, rely=0.93, anchor=ctk.CENTER)"""
+        page_frame_list[0].show_frame(True)
 
         # add page indicator responsiveness
         start_x_position = 0.975 - len(page_frame_list) / 45.0
@@ -153,7 +148,7 @@ class App(ctk.CTk):
             for i in range(0, len(page_frame_list)):
                 page_indicator_list.append(ctk.CTkButton(master=self, width=15, height=15, text="", corner_radius=50,
                                                          fg_color=(
-                                                             "#898989" if i == globals_.current_page else "#D9D9D9")))
+                                                             "#898989" if i == current_page else "#D9D9D9")))
                 page_indicator_list[i].place(
                     relx=start_x_position + i / 45.0, rely=0.93, anchor=ctk.CENTER)
 
@@ -168,17 +163,17 @@ def last_page(channel):
     if len(page_frame_list) < 2:
         return
 
-    globals_.current_page -= 1
-    if globals_.current_page < 0:
-        globals_.current_page = len(page_frame_list) - 1
+    current_page -= 1
+    if current_page < 0:
+        current_page = len(page_frame_list) - 1
 
     for i in range(0, len(page_frame_list)):
         page_indicator_list[i].configure(fg_color="#D9D9D9")
-    page_indicator_list[globals_.current_page].configure(fg_color="#898989")
+    page_indicator_list[current_page].configure(fg_color="#898989")
 
     for f in page_frame_list:
         f.show_frame(False)
-    page_frame_list[globals_.current_page].show_frame(True)
+    page_frame_list[current_page].show_frame(True)
     print("last page loaded")
 
 
@@ -186,22 +181,24 @@ def next_page(channel):
     if len(page_frame_list) < 2:
         return
 
-    globals_.current_page += 1
-    if globals_.current_page >= len(page_frame_list):
-        globals_.current_page = 0
+    current_page += 1
+    if current_page >= len(page_frame_list):
+        current_page = 0
 
     for i in range(0, len(page_frame_list)):
         page_indicator_list[i].configure(fg_color="#D9D9D9")
-    page_indicator_list[globals_.current_page].configure(fg_color="#898989")
+    page_indicator_list[current_page].configure(fg_color="#898989")
 
     for f in page_frame_list:
         f.show_frame(False)
-    page_frame_list[globals_.current_page].show_frame(True)
+    page_frame_list[current_page].show_frame(True)
     print("Next page loaded")
+
 
 def last_page_button_clicked(channel):
     last_page(channel)
     close_app(channel)
+
 
 def setup_buttons():
     last_page_button = 37
@@ -231,13 +228,14 @@ def close_app(channel):
             GPIO.cleanup()
             app.quit()
 
+
 if __name__ == "__main__":
     copy_error = usb_detection.usb_routine()
     if copy_error:
         exit
     all_pages = modbus.load_config()
     global app
-    app = App(all_pages)
+    app = App(all_pages, page_frame_list, page_indicator_list)
     setup_buttons()
     modbus.data_threading(app)
     # Runs the app
