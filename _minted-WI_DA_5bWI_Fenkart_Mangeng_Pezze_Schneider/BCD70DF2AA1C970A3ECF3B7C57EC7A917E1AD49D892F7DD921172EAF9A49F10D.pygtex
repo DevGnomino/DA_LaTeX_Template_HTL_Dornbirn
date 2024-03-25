@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{def} \PYG{n+nf}{set\PYGZus{}page\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{page\PYGZus{}index}\PYG{p}{,} \PYG{n}{measurement\PYGZus{}index}\PYG{p}{,} \PYG{n}{value}\PYG{p}{):}
+    	\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{n}{page\PYGZus{}index}\PYG{p}{]}\PYG{o}{.}\PYG{n}{set\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n}{measurement\PYGZus{}index}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+\end{Verbatim}
