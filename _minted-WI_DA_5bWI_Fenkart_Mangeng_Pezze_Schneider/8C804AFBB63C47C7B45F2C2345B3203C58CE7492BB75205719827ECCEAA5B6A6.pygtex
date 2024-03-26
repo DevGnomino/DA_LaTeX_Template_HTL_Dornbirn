@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+go}{ssh [Username]@[IP\PYGZhy{}Adresse]}
+\end{Verbatim}

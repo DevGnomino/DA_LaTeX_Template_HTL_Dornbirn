@@ -7,7 +7,7 @@ Um dem Programm die neuesten Konfigurationsdateien zu übergeben, steckt man bei
 	\label{fig:config_ubertragen_activity}
 \end{figure}
 
-Der Kopierablauf wird in der \enquote{usb\_routine} Funktion gestartet. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort.
+Der Kopierablauf wird in der \enquote{usb\_routine()} Funktion gestartet. Diese Funktion liefert einen Fehlercode zurück, der daraufhin in einer Verzweigung abgefragt wird. Wenn ein Fehler beim Übertragen auftritt, terminiert das Programm. Ansonsten fährt das Programm fort. Es wird die \enquote{load\_config()} Funktion aufgerufen, welche die Konfigurationsdateien einliest und die nötigen Instanzen erstellt (siehe Kapitel \ref{einlesen_konfigurationsdateien}). Anschließend wird eine globale Variable erstellt, welche die \enquote{App} Instanz (siehe Kapitel \ref{tkintercode}) speichert. Mit der \enquote{setup\_buttons()} Funktion werden die \acs{gpio} Pins initialisiert (siehe Kapitel \ref{gpio_taster}), damit die beiden Taster zum Wechseln der Seite verwendbar werden. Anschließend wird über die \enquote{data\_threading()} Funktion der Datenbeschaffungsthread gestartet (siehe Kapitel  \ref{auslesen_rlt_parameter}). Zuletzt wird die \enquote{mainloop()} Methode der \enquote{App} Instanz aufgerufen, welche die \acs{gui} startet und somit den Hauptthread blockiert.
 \begin{pythoncode}
 if __name__ == "__main__":
 	copy_error = usb_detection.usb_routine()

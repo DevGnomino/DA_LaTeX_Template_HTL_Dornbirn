@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{setup\PYGZus{}buttons}\PYG{p}{():}
+    \PYG{n}{last\PYGZus{}page\PYGZus{}button} \PYG{o}{=} \PYG{c+c1}{\PYGZsh{}[Pinnummer des \PYGZdq{}Zurück\PYGZdq{}\PYGZhy{}Tasters]}
+    \PYG{n}{next\PYGZus{}page\PYGZus{}button} \PYG{o}{=} \PYG{c+c1}{\PYGZsh{}[Pinnummer des \PYGZdq{}Weiter\PYGZdq{}\PYGZhy{}Tasters]}
+
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setmode}\PYG{p}{(}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{BOARD}\PYG{p}{)}
+
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{setup}\PYG{p}{(}\PYG{n}{last\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{IN}\PYG{p}{,} \PYG{n}{pull\PYGZus{}up\PYGZus{}down}\PYG{o}{=}\PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{PUD\PYGZus{}UP}\PYG{p}{)}
+    \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{add\PYGZus{}event\PYGZus{}detect}\PYG{p}{(}\PYG{n}{last\PYGZus{}page\PYGZus{}button}\PYG{p}{,} \PYG{n}{GPIO}\PYG{o}{.}\PYG{n}{FALLING}\PYG{p}{,} \PYG{n}{callback}\PYG{o}{=}\PYG{n}{last\PYGZus{}page}\PYG{p}{,} \PYG{n}{bouncetime}\PYG{o}{=}\PYG{l+m+mi}{300}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{}[Gleiche Konfiguration für den anderen Taster. Der callback wird aber auf \PYGZdq{}next\PYGZus{}page\PYGZdq{} gesetzt]}
+\end{Verbatim}
