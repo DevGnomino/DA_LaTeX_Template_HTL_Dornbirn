@@ -68,6 +68,9 @@
 \glsgroupheading{H}\relax \glsresetentrylist %
 \glossentry{halbduplex}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{44\delimN 45}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossentry{image}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{120}}}\glsgroupskip
 \glsgroupheading{J}\relax \glsresetentrylist %
 \glossentry{gls_json}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
@@ -92,6 +95,7 @@
 \glsgroupheading{M}\relax \glsresetentrylist %
 \glossentry{gls_minimalmodbus}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{64}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{89}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{110\delimR 112}}}%
 \glossentry{modbus}{\glossaryentrynumbers{\relax 

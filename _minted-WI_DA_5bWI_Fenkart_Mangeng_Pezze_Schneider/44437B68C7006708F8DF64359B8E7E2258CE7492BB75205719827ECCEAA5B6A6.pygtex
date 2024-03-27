@@ -1,4 +1,5 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{g+go}{pip install tk}
 \PYG{g+go}{pip install customtkinter}
+\PYG{g+go}{pip install minimalmodbus}
 \end{Verbatim}

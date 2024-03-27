@@ -1,7 +1,7 @@
 \subsection{Autostart des Programms} \label{autostart}
 Da man bei der \acs{rltanzeige} keine Peripherie Geräte angeschlossen hat, um das Programm manuell zu starten, muss dieses automatisch nach dem Bootvorgang gestartet werden. Dafür, müssen einige Schritte ausgeführt werden. \newline Zuerst muss man in das im Root Verzeichnis befindliche \enquote{.config} Verzeichnis wechseln. Darin erstellt man ein neues Verzeichnis namens \enquote{autostart}. Hier kann man nun eine \enquote{start\_app.desktop} Datei erstellen, mit dem folgenden Inhalt.
-\begin{lstlisting}
+\begin{textcode}
 [Desktop Entry]
 Exec = python /home/pi/Documents/main.py
-\end{lstlisting}
+\end{textcode}
 Hinter dem \enquote{Exec = } kann der auszuführende Befehl deklariert werden. In diesem Fall wird das \gls{gls_python} Programm namens \enquote{main.py} am angegebenen Pfad gestartet. \cite{Grace_Xing:2021}
