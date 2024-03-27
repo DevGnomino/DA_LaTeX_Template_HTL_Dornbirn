@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{...}	
+		\PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}pages}\PYG{p}{:}
+			\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{PageFrame}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{o}{=}\PYG{n}{page}\PYG{o}{.}\PYG{n}{title}\PYG{p}{,} \PYG{n}{parameters}\PYG{o}{=}\PYG{n}{page}\PYG{o}{.}\PYG{n}{measurements}\PYG{p}{))}
+
+		\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{show\PYGZus{}frame}\PYG{p}{(}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{o}{...}
+\end{Verbatim}

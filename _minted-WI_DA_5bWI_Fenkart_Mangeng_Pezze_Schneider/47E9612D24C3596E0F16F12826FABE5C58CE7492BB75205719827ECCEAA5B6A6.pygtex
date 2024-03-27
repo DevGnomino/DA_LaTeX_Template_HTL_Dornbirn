@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+go}{pip install tk}
+\PYG{g+go}{pip install customtkinter}
+\end{Verbatim}

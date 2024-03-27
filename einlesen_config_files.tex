@@ -1,4 +1,4 @@
-\subsection{Einlesen der Konfigurationsdateien}
+\subsection{Einlesen der Konfigurationsdateien} \label{einlesen_konfigurationsdateien}
 \paragraph{Klassenstruktur}
 Im Hintergrund wird die Klassenstruktur der \acs{gui} nachgebildet. Es gibt eine \enquote{Page}-, eine \enquote{Measurement}- und eine \enquote{Sensor} Klasse. Eine \enquote{Measurement} Instanz kann mehrere \enquote{Sensor} Instanzen enthalten, da manche \enquote{Measurement} zur Berechnung (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die \enquote{Page} Instanzen speichern die jeweiligen \enquote{Measurement} Instanzen, die auf dieser Seite angezeigt werden sollen. Die \enquote{Page} Instanzen existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele \enquote{Page} Instanzen wie \enquote{PageFrame} Instanzen (vgl. Kapitel \ref{tkintercode}) und gleich viele \enquote{Measurement} Instanzen wie \enquote{MeasurementFrame} Instanzen. (siehe Abb.~\ref{fig:uml_backend}).
 \begin{figure}[ht]
