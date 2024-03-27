@@ -49,11 +49,11 @@ class Sensor():
 		self.sensor.close_port_after_each_call = True
 \end{pythoncode}
 
-Beim Erstellen der \enquote{Instrument} Instanz wird als erster Parameter angegeben, an welchem Port am Raspberry Pi der Adapter angeschlossen ist bzw. über welchen Port die Kommunikation stattfindet. Dabei muss je nach Plattform und Adapterart ein anderer Gerätestring angegeben werden:
+Beim Erstellen der \enquote{Instrument} Instanz wird als erster Parameter angegeben, an welchem Port am Raspberry PI der Adapter angeschlossen ist bzw. über welchen Port die Kommunikation stattfindet. Dabei muss je nach Plattform und Adapterart ein anderer Gerätestring angegeben werden:
 \begin{itemize}
 \item \textbf{COM4:} Damit kann auf Windows die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Die Nummer am Ende der Zeichenkette, ist dabei bei jedem PC / Port unterschiedlich und wird intern vergeben. Man muss diese vorher im Gerätemanager nachschauen und kann dann die entsprechende Nummer verwenden. Hier fand es seinen Einsatz insbesondere bei den anfänglichen Ausleseversuchen und den ersten Programmversionen.
-\item \textbf{/dev/ttyUSB0:} Damit kann auf Linux die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Benutzt wurde dieses beim Testen des Programms auf dem Raspberry Pi, als der erste \gls{gls_rs485} Adapter noch nicht geliefert war bzw. nicht funktionierte.
-\item \textbf{/dev/ttyAMA0:} Damit kann auf Linux über die \acf{uart} Pins, also genauer gesagt Pin 8 (TX) und Pin 10 (RX) kommuniziert werden. Im finalen Programm wird das verwendet, da dieses auf dem Raspberry Pi läuft und über die \acs{uart} Pins kommuniziert. Die Pins sind dabei über einen funktionierenden \gls{gls_rs485} Adapter als Zwischenstück an dem Bussystem angeschlossen.
+\item \textbf{/dev/ttyUSB0:} Damit kann auf Linux die Kommunikation mit Modbus über einen USB Connector aufgesetzt werden. Benutzt wurde dieses beim Testen des Programms auf dem Raspberry PI, als der erste \gls{gls_rs485} Adapter noch nicht geliefert war bzw. nicht funktionierte.
+\item \textbf{/dev/ttyAMA0:} Damit kann auf Linux über die \acf{uart} Pins, also genauer gesagt Pin 8 (TX) und Pin 10 (RX) kommuniziert werden. Im finalen Programm wird das verwendet, da dieses auf dem Raspberry PI läuft und über die \acs{uart} Pins kommuniziert. Die Pins sind dabei über einen funktionierenden \gls{gls_rs485} Adapter als Zwischenstück an dem Bussystem angeschlossen.
 \end{itemize}
 
 \vfill
