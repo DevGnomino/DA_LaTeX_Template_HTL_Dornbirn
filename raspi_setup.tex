@@ -7,10 +7,10 @@ Während der Entwicklung der \ac{rltanzeige} wird mit mehreren Raspberry PIs gea
 \cite[vgl.][]{Piltch:2022}
 
 \paragraph{Aktivierung von \textit{SSH}}
-\ac{ssh} ist ein Netzwerkprotokoll, das verwendet wird, um sich sicher über das Netzwerk mit einem anderen Gerät zu verbinden und darauf Operationen auszuführen. \ac{ssh} ist am Raspberry PI standardmäßig deaktiviert.  Daher muss \ac{ssh}, durch das Erstellen einer Datei Namens \enquote{ssh.}auf der SD-Card, aktiviert werden. Nun kann eine kabellose oder kabelgebundene \ac{ssh} Verbindung mit dem Raspberry PI aufgebaut werden.
+\ac{ssh} ist ein Netzwerkprotokoll, das verwendet wird, um sich sicher über das Netzwerk mit einem anderen Gerät zu verbinden und darauf Operationen auszuführen. \ac{ssh} ist am Raspberry PI standardmäßig deaktiviert.  Daher muss \ac{ssh}, durch das Erstellen einer Datei Namens \enquote{ssh.} auf der SD-Card, aktiviert werden. Nun kann eine kabellose oder kabelgebundene \ac{ssh} Verbindung mit dem Raspberry PI aufgebaut werden.
 
 \paragraph{Kabellose Verbindung über \textit{SSH}}
-Für eine kabellose Verbindung über \ac{ssh} muss zuerst auf dem Raspberry PI ein Netzwerkzugang konfiguriert werden. Dazu wird auf der SD-Card eine Konfigurationsdatei Namens \enquote{wpa\_supplicant.conf} mit folgendem Inahlt angelegt:
+Für eine kabellose Verbindung über \ac{ssh} muss zuerst auf dem Raspberry PI ein Netzwerkzugang konfiguriert werden. Dazu wird auf der SD-Card eine Konfigurationsdatei Namens \enquote{wpa\_supplicant.conf} mit folgendem Inhalt angelegt:
 \begin{textcode}
 country=DE
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -29,7 +29,7 @@ ssh [Username]@[IP-Adresse]
 \end{minted}
 
 \paragraph{Kabelgebundene Verbindung über \textit{SSH}}
-Da die normale Version des Raspberry Pi Zero keine kabellose Netzwerkverbindung unterstützt, ist es notwendig, eine kabelgebundene Verbindung herzustellen, um \ac{ssh} zu verwenden. Dazu sind folgende Schritte notwendig:
+Da die normale Version des Raspberry PI Zero keine kabellose Netzwerkverbindung unterstützt, ist es notwendig, eine kabelgebundene Verbindung herzustellen, um \ac{ssh} zu verwenden. Dazu sind folgende Schritte notwendig:
 
 \begin{enumerate}
     \item Am Ende der Datei \enquote{config.txt} auf der SD-Card folgende Zeile hinzufügen: \begin{textcode}
@@ -48,9 +48,10 @@ ssh [Username]@[RaspberryPIZero-Name].local
 \end{enumerate}
 
 \subsection{Installieren der nötigen Python Pakete}
-Nach dem Aufsetzen des Raspberry PI OS und \ac{ssh} müssen zuletzt noch die Python Pakete für \gls{gls_tk} und \gls{gls_ctk} mit den folgenden Befehlen über die Konsole installiert werden:
+Nach dem Aufsetzen des Raspberry PI OS und \ac{ssh} müssen zuletzt noch die Python Pakete für \gls{gls_tk}, \gls{gls_ctk} und \gls{gls_minimalmodbus} mit den folgenden Befehlen über die Konsole installiert werden:
 
 \begin{minted}{console}
 pip install tk
 pip install customtkinter
+pip install minimalmodbus
 \end{minted}
