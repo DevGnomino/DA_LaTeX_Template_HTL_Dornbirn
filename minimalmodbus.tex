@@ -1,10 +1,10 @@
 \subsection{Minimalmodbus} \label{minimalmodbus}
 Es handelt sich bei \gls{gls_minimalmodbus} um eine Open-Source Bibliothek. Die Bibliothek ermöglicht die Kommunikation verschiedener Geräte über das \gls{modbus} Protokoll mit \gls{gls_python}. Das Gerät, auf dem das \gls{gls_python} Programm läuft, muss der Server sein. Das Programm kann dann die einzelnen Clients ansprechen und ihre Register auslesen bzw. überschreiben.
 
-Sie wurde hauptsächlich von Jonas Berg entwickelt, aber auch zahlreiche andere Entwickler haben dazu beigetragen. Sie ist in \gls{gls_python} geschrieben und ist eine Weiterentwicklung der pySerial-Bibliothek. Diese Abhängigkeit wird benötigt, um auf die seriellen Ports des Geräts zuzugreifen \cite{Liechti_pySerial:o.J.}. 
+Sie wurde hauptsächlich von Jonas Berg entwickelt, aber auch zahlreiche andere Entwickler haben dazu beigetragen. Sie ist in \gls{gls_python} geschrieben und ist eine Weiterentwicklung der pySerial-Bibliothek. Diese Abhängigkeit wird benötigt, um auf die seriellen Ports des Geräts zuzugreifen. \cite[vgl.][]{Liechti_pySerial:o.J.}
 
 Die Bibliothek bietet \gls{modbus} \acs{rtu} und \gls{modbus} \acs{ascii} Funktionalitäten. In den Lüftungsgeräten der Firma Bösch wird über \gls{modbus} \acs{rtu} kommuniziert, daher ist diese Bibliothek einsetzbar. Außerdem bietet sie eine umfangreiche Dokumentation.
-\cite{Berg_MiniModbus:2023, Berg_MiniModbus_Git:2023} 
+\cite[vgl.][]{Berg_MiniModbus:2023, Berg_MiniModbus_Git:2023} 
 %https://pypi.org/project/minimalmodbus/#description %gleiche infos wie auf github-repo und doku
 
 Andere in Erwägung gezogene Bibliotheken für die \gls{modbus} Kommunikation sind PyModbus und Modbus-TK. Obwohl die Bibliothek von der Funktionalität sehr umfangreich ist, stellt sich die Einarbeitung in PyModbus als kompliziert heraus. Bei Modbus-TK hingegen reicht schon eine kurze Recherche nach Dokumentationsmaterial aus, um festzustellen, dass diese gar keine besitzt.
