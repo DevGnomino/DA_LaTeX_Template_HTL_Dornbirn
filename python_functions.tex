@@ -208,7 +208,7 @@ Die Formel für die Berechnung des Volumenstroms \eqref{glg:volumenstrom_berechn
 	\label{glg:volumenstrom_berechnung}
 \end{equation} 
 
-Im unten stehenden Code ist die Anwendung der obigen Formel zu sehen. Der Differenzdruck wird dabei aus einem Modbus Register ausgelesen. In manchen Fällen kann es dazu kommen, dass ein Ventilator nicht dreht. Trotzdem ermittelt der Luftdrucksensor eine kleine Druckdifferenz, welche zu unrealistischen Ergebnissen führt. Daher wird unter einer bestimmten Druckdifferenz ein Volumenstrom von 0 zurückgegeben.
+Im unten stehenden Code ist die Anwendung der obigen Formel zu sehen. Der Differenzdruck wird dabei aus einem Modbus Register ausgelesen. In manchen Fällen kann es dazu kommen, dass ein Ventilator nicht dreht. Trotzdem ermittelt der Luftdrucksensor eine kleine Druckdifferenz, welche zu unrealistischen Ergebnissen führt. Daher wird unter einer bestimmten Druckdifferenz ein Volumenstrom von $0$ zurückgegeben.
 
 \begin{pythoncode}
 def calc_volume(sensors, additional_info):
@@ -242,7 +242,7 @@ Eine Angabe in der Haupt-Konfigurationsdatei sieht wie folgt aus. Dabei ist zu s
 
 \paragraph{Funktion \enquote{flap\_position}}
 Wird verwendet, um die Klappenposition \bzw den Öffnungsgrad einer Klappe zu ermitteln. 
-Dazu wird ein Register ausgelesen, das einen Wert zwischen 0 und 10500 $mV$ enthält \cite[vgl.][17]{siemens:2021}, wie im folgenden Code ersichtlich ist. Anschließend wird das Verhältnis des ausgelesenen Werts zum maximalen Wert von 10500 $mV$ berechnet. Das Ergebnis wird gerundet und in Prozent zurückgegeben.
+Dazu wird ein Register ausgelesen, das einen Wert zwischen $0$ und $10500$ $mV$ enthält \cite[vgl.][17]{siemens:2021}, wie im folgenden Code ersichtlich ist. Anschließend wird das Verhältnis des ausgelesenen Werts zum maximalen Wert von $10500$ $mV$ berechnet. Das Ergebnis wird gerundet und in Prozent zurückgegeben.
 
 \begin{pythoncode}
 def flap_position(sensors, additional_info):
@@ -269,7 +269,7 @@ Eine Angabe in der Haupt-Konfigurationsdatei sieht wie folgt aus. Im \enquote{po
 
 
 \paragraph{Funktion \enquote{relay\_position}}
-Wird verwendet, um die Relaisposition \bzw, ob ein Relais offen oder geschlossen ist, zu ermitteln. Dazu wird ein Register ausgelesen, das einen Wert zwischen 0 und 10500 $mV$ enthält \cite[vgl.][17]{siemens:2021}, wie im folgenden Code ersichtlich ist. Anschließend wird überprüft, ob der ausgelesene Werts größer oder kleiner als die angegebene Schaltschwelle ist. Daraus wird der Zustand des Relais abgeleitet.
+Wird verwendet, um die Relaisposition \bzw, ob ein Relais offen oder geschlossen ist, zu ermitteln. Dazu wird ein Register ausgelesen, das einen Wert zwischen $0$ und $10500$ $mV$ enthält \cite[vgl.][17]{siemens:2021}, wie im folgenden Code ersichtlich ist. Anschließend wird überprüft, ob der ausgelesene Werts größer oder kleiner als die angegebene Schaltschwelle ist. Daraus wird der Zustand des Relais abgeleitet.
 
 \begin{pythoncode}
 def relay_position(sensors, additional_info):
