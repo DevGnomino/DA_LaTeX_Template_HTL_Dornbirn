@@ -24,7 +24,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 \begin{table}[h]
     \caption{Parameter der Sensor-Konfigurationsdatei (\enquote{sensors.json})}
     \label{tab:sensors_json_parameter}
-    \begin{tabular}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.5\textwidth} | p{0.3\textwidth}}
+    \begin{tabular}{p{\dimexpr 0.1\textwidth-2\tabcolsep} p{0.6\textwidth} | p{0.25\textwidth}}
         \toprule
         \textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
         \midrule
@@ -49,7 +49,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 	
 	Der Aufbau der Geräte-Konfigurationsdateien basiert auf einem \enquote{ports} Array. In dieses werden mithilfe der Parameter aus Tab. \ref{tab:ports_array_parameter} die erforderlichen Informationen eingetragen.
     
-\begin{longtable}[h]{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.47\textwidth} | p{0.3\textwidth}}
+\begin{longtable}[h]{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.50\textwidth} | p{0.27\textwidth}}
     \caption{Parameter des \enquote{ports} Array der Geräte-Konfigurationsdateien}
     \label{tab:ports_array_parameter}
     \\ \toprule
@@ -75,12 +75,14 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 "port": "AI1"
     \end{jsonTable} 
     \\
-    register 	& \gls{modbus} Register (Erklärung in Kapitel \ref{modbus_funktionsweise}) in dem der jeweilige Messwert gespeichert ist \bzw welches ausgelesen werden soll. Das Register muss dabei immer dezimal angegeben werden, da \gls{gls_minimalmodbus} die hexadezimale Eingabe nicht unterstützt. & 
+    register 	& \gls{modbus} Register (Erklärung in Kapitel \ref{modbus_funktionsweise}) in dem der jeweilige Messwert gespeichert ist \bzw welches ausgelesen werden soll. % Das Register muss dabei immer dezimal angegeben werden, da \gls{gls_minimalmodbus} die hexadezimale Eingabe nicht unterstützt. 
+    & 
     \begin{jsonTable}
 "register": 11
     \end{jsonTable} 
     \\
-    function\_code 	& \gls{modbus} Function Code (Erklärung in Kapitel \ref{modbus_funktionsweise}), mit dem auf das vorher angegebene Register zugegriffen werden soll. Die zwei meist verwendeten Function Codes sind \enquote{3} für Input Register und \enquote{4} für Holding Register. & 
+    function\_code 	& \gls{modbus} Function Code (Erklärung in Kapitel \ref{modbus_funktionsweise}), mit dem auf das vorher angegebene Register zugegriffen werden soll. %Die zwei meist verwendeten Function Codes sind \enquote{3} für Input Register und \enquote{4} für Holding Register. 
+    & 
     \begin{jsonTable}
 "function_code": 3
     \end{jsonTable} 
@@ -123,7 +125,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 	
 	Im \enquote{devices} Array werden die alle Komponenten \bzw Quellen der \acs{rltanlage}, nämlich Ventilatoren und \gls{qbm}s (vgl. Abb. \ref{fig:vereinfachter_aufbau_dateikonzept}), aufgeführt, von denen Messwerte ausgelesen werden sollen. Die Parameter des \enquote{devices} Arrays sind in Tab. \ref{tab:devices_array_parameter} näher erläutert.
 
- \begin{longtable}{p{\dimexpr 0.17\textwidth-2\tabcolsep} p{0.48\textwidth} | p{0.3\textwidth}}
+ \begin{longtable}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.52\textwidth} | p{0.28\textwidth}}
     \caption{Parameter des \enquote{devices} Array der Haupt-Konfigurationsdatei}
     \label{tab:devices_array_parameter}
     \\ \toprule
@@ -193,7 +195,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 \begin{table}[H]
     \caption{Parameter des Unterarray \enquote{sensors}}
     \label{tab:sensors_array_parameter}
-    \begin{tabular}{p{\dimexpr 0.18\textwidth-2\tabcolsep} p{0.45\textwidth} | p{0.32\textwidth}}
+    \begin{tabular}{p{\dimexpr 0.12\textwidth-2\tabcolsep} p{0.53\textwidth} | p{0.3\textwidth}}
         \toprule
         \textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
         \midrule
@@ -219,7 +221,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 \begin{table}[H]
     \caption{Parameter des \enquote{pages} Array der Haupt-Konfigurationsdatei}
     \label{tab:pages_array_parameter}
-        \begin{tabular}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.45\textwidth} | p{0.35\textwidth}}
+        \begin{tabular}{p{\dimexpr 0.12\textwidth-2\tabcolsep} p{0.53\textwidth} | p{0.3\textwidth}}
         \toprule
         \textbf{Name} & \textbf{Beschreibung} & \textbf{Beispiel} \\
         \midrule
@@ -236,10 +238,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
         \bottomrule
     \end{tabular}
 \end{table}
-	
 
-    
-    
    
 \begin{longtable}{p{\dimexpr 0.2\textwidth-2\tabcolsep} p{0.42\textwidth} | p{0.33\textwidth}}
     \caption{Parameter des Unterarray \enquote{sources}}
@@ -265,7 +264,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
     port & Ein Array mit den Quellen, aus denen der Messwert ausgelesen wird. Dabei wird meistens nur ein Objekt mit \enquote{id} (siehe Tab. \ref{tab:devices_array_parameter}) des Geräts und \enquote{port} (siehe Tab. \ref{tab:ports_array_parameter}) angegeben. In einigen Szenarien ist es erforderlich, mehrere Quellen für abgeleitete Messwerte zu verwenden (siehe Kapitel \ref{python_functions}). In solchen Fällen werden dem Array zusätzliche Objekte hinzugefügt. &  
     \begin{jsonTable}
 "port": [
-{ "QBM1": "AI1" }
+    { "QBM1": "AI1" }
 ]
     \end{jsonTable} 
     \\

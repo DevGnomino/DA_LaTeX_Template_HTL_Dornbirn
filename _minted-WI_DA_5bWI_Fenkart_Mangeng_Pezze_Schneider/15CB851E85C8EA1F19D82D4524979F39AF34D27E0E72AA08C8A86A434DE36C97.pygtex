@@ -1,0 +1,221 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{minimalmodbus} \PYG{k}{as} \PYG{n+nn}{minmb}
+\PYG{k+kn}{import} \PYG{n+nn}{customtkinter} \PYG{k}{as} \PYG{n+nn}{ctk}
+\PYG{k+kn}{import} \PYG{n+nn}{sys}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{time}
+\PYG{k+kn}{from} \PYG{n+nn}{threading} \PYG{k+kn}{import} \PYG{n}{Thread}
+\PYG{k+kn}{import} \PYG{n+nn}{math}
+\PYG{k+kn}{import} \PYG{n+nn}{json}
+\PYG{k+kn}{import} \PYG{n+nn}{modbus\PYGZus{}functions}
+\PYG{k+kn}{from} \PYG{n+nn}{globals\PYGZus{}} \PYG{k+kn}{import} \PYG{n}{all\PYGZus{}pages}
+
+\PYG{n}{CONFIG\PYGZus{}PATH} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/home/pi/Documents/RLT\PYGZus{}Config/\PYGZsq{}}
+\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/home/pi/Documents/RLT\PYGZus{}Config/devices/\PYGZsq{}}
+
+\PYG{c+c1}{\PYGZsh{}for testing}
+\PYG{c+c1}{\PYGZsh{} CONFIG\PYGZus{}PATH = \PYGZdq{}c:\PYGZbs{}Schule\PYGZbs{}DA\PYGZus{}LaTeX\PYGZbs{}Code\PYGZbs{}RLT\PYGZus{}Config\PYGZbs{}\PYGZbs{}\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} DEVICES\PYGZus{}CONFIG\PYGZus{}PATH = \PYGZdq{}c:\PYGZbs{}Schule\PYGZbs{}DA\PYGZus{}LaTeX\PYGZbs{}Code\PYGZbs{}RLT\PYGZus{}Config\PYGZbs{}devices\PYGZbs{}\PYGZbs{}\PYGZdq{}}
+
+\PYG{k}{class} \PYG{n+nc}{Sensor}\PYG{p}{():}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{baud\PYGZus{}rate}\PYG{p}{,} \PYG{n}{mb\PYGZus{}address}\PYG{p}{,} \PYG{n}{parity}\PYG{p}{,} \PYG{n}{stop\PYGZus{}bits}\PYG{p}{,} \PYG{n}{scaling}\PYG{p}{,} \PYG{n}{register}\PYG{p}{,}
+                 \PYG{n}{function\PYGZus{}code}\PYG{p}{,} \PYG{n}{zero\PYGZus{}based}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scaling} \PYG{o}{=} \PYG{n}{scaling}
+        \PYG{k}{if} \PYG{n}{zero\PYGZus{}based}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{register} \PYG{o}{=} \PYG{n}{register}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{register} \PYG{o}{=} \PYG{n}{register} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{function\PYGZus{}code} \PYG{o}{=} \PYG{n}{function\PYGZus{}code}
+
+        \PYG{c+c1}{\PYGZsh{} Mit USB Connector auf Linux       /dev/ttyUSB0}
+        \PYG{c+c1}{\PYGZsh{} Mit USB Connector auf Windows     COM4}
+        \PYG{c+c1}{\PYGZsh{} Über TX (8) und RX (10) Pins      /dev/ttyAMA0}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{Instrument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}COM3\PYGZsq{}}\PYG{p}{,}
+                                       \PYG{n}{mb\PYGZus{}address}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Make an \PYGZdq{}instrument\PYGZdq{} object called sensor (port name, slave address (in decimal))}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{baudrate} \PYG{o}{=} \PYG{n}{baud\PYGZus{}rate}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{bytesize} \PYG{o}{=} \PYG{l+m+mi}{8}  \PYG{c+c1}{\PYGZsh{} Number of data bits to be requested}
+
+        \PYG{k}{if} \PYG{n}{parity} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}even\PYGZdq{}}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} Parity Setting can be ODD, EVEN or NONE}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}EVEN}
+        \PYG{k}{elif} \PYG{n}{parity} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}odd\PYGZdq{}}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}ODD}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{parity} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{PARITY\PYGZus{}NONE}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{stopbits} \PYG{o}{=} \PYG{n}{stop\PYGZus{}bits}  \PYG{c+c1}{\PYGZsh{} Number of stop bits}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{serial}\PYG{o}{.}\PYG{n}{timeout} \PYG{o}{=} \PYG{l+m+mf}{0.5}  \PYG{c+c1}{\PYGZsh{} Timeout time in seconds}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{mode} \PYG{o}{=} \PYG{n}{minmb}\PYG{o}{.}\PYG{n}{MODE\PYGZus{}RTU}  \PYG{c+c1}{\PYGZsh{} Mode to be used (RTU or ascii mode)}
+
+        \PYG{c+c1}{\PYGZsh{} Good practice to clean up before and after each execution}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{clear\PYGZus{}buffers\PYGZus{}before\PYGZus{}each\PYGZus{}transaction} \PYG{o}{=} \PYG{k+kc}{True}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{close\PYGZus{}port\PYGZus{}after\PYGZus{}each\PYGZus{}call} \PYG{o}{=} \PYG{k+kc}{True}
+
+    \PYG{k}{def} \PYG{n+nf}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{try}\PYG{p}{:}
+            \PYG{n}{fetched\PYGZus{}data} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{instrument}\PYG{o}{.}\PYG{n}{read\PYGZus{}registers}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{register}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{function\PYGZus{}code}\PYG{p}{)}
+
+            \PYG{n}{fetched\PYGZus{}data\PYGZus{}scaled} \PYG{o}{=} \PYG{n+nb}{round}\PYG{p}{((}\PYG{n}{fetched\PYGZus{}data}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{scaling}\PYG{p}{),} \PYG{l+m+mi}{1}\PYG{p}{)}
+            \PYG{k}{return} \PYG{n}{fetched\PYGZus{}data\PYGZus{}scaled}
+
+        \PYG{k}{except} \PYG{n+ne}{Exception} \PYG{k}{as} \PYG{n}{e}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Err: \PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{e}\PYG{p}{))}
+            \PYG{n}{fetched\PYGZus{}data\PYGZus{}scaled} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}
+            \PYG{k}{return} \PYG{n}{fetched\PYGZus{}data\PYGZus{}scaled}
+
+
+\PYG{k}{class} \PYG{n+nc}{Measurement}\PYG{p}{():}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{description}\PYG{p}{,} \PYG{n}{unit}\PYG{p}{,} \PYG{n}{sensors}\PYG{p}{,} \PYG{n}{python\PYGZus{}function}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{description} \PYG{o}{=} \PYG{n}{description}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{unit} \PYG{o}{=} \PYG{n}{unit}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensors} \PYG{o}{=} \PYG{n}{sensors}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{python\PYGZus{}function} \PYG{o}{=} \PYG{n}{python\PYGZus{}function}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{additional\PYGZus{}info} \PYG{o}{=} \PYG{n}{additional\PYGZus{}info}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}N/A\PYGZdq{}}
+
+    \PYG{k}{def} \PYG{n+nf}{run\PYGZus{}calculation\PYGZus{}function}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{try}\PYG{p}{:}
+            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{python\PYGZus{}function} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}standard\PYGZdq{}}\PYG{p}{:}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{modbus\PYGZus{}functions}\PYG{o}{.}\PYG{n}{standard}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensors}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{additional\PYGZus{}info}\PYG{p}{))} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{unit}
+            \PYG{k}{elif} \PYG{p}{(}\PYG{n+nb}{hasattr}\PYG{p}{(}\PYG{n}{modbus\PYGZus{}functions}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{python\PYGZus{}function}\PYG{p}{)):}
+                \PYG{n}{calc\PYGZus{}function} \PYG{o}{=} \PYG{n+nb}{getattr}\PYG{p}{(}\PYG{n}{modbus\PYGZus{}functions}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{python\PYGZus{}function}\PYG{p}{)}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{calc\PYGZus{}function}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{sensors}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{additional\PYGZus{}info}\PYG{p}{))}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}python function was invalid\PYGZdq{}}
+
+            \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{value}
+        \PYG{k}{except} \PYG{n+ne}{Exception} \PYG{k}{as} \PYG{n}{e}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Err: \PYGZdq{}}\PYG{p}{,} \PYG{n}{e}\PYG{p}{)}
+
+
+\PYG{k}{class} \PYG{n+nc}{Page}\PYG{p}{():}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{title}\PYG{p}{,} \PYG{n}{measurements}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{title} \PYG{o}{=} \PYG{n}{title}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{measurements} \PYG{o}{=} \PYG{n}{measurements}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}data}\PYG{p}{(}\PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{,} \PYG{n}{port\PYGZus{}name}\PYG{p}{,} \PYG{n}{sensor\PYGZus{}unit}\PYG{p}{):} \PYG{c+c1}{\PYGZsh{}alt. name: get\PYGZus{}device\PYGZus{}data}
+    \PYG{k}{for} \PYG{n}{device} \PYG{o+ow}{in} \PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}ports\PYGZdq{}}\PYG{p}{]:}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{device}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{port\PYGZus{}name}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}in port if\PYGZdq{}}\PYG{p}{)}
+            \PYG{n}{sensor\PYGZus{}register} \PYG{o}{=} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}register\PYGZdq{}}\PYG{p}{]}
+            \PYG{n}{sensor\PYGZus{}function\PYGZus{}code} \PYG{o}{=} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{]}
+            \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}units\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{:}
+                \PYG{k}{for} \PYG{n}{unit\PYGZus{}pair} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}units\PYGZdq{}}\PYG{p}{]:}  \PYG{c+c1}{\PYGZsh{} Hier kann vielleicht später das Array anders entpackt werden (mit *)}
+                    \PYG{k}{if} \PYG{n}{unit\PYGZus{}pair}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sensor\PYGZus{}unit}\PYG{p}{:}
+                        \PYG{n}{sensor\PYGZus{}scaling} \PYG{o}{=} \PYG{n}{unit\PYGZus{}pair}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}scaling\PYGZdq{}}\PYG{p}{]}
+                        \PYG{n}{return\PYGZus{}var} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}register\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}register}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}scaling\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}scaling}\PYG{p}{,}
+                                      \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}function\PYGZus{}code}\PYG{p}{\PYGZcb{}}
+                        \PYG{k}{return} \PYG{n}{return\PYGZus{}var}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n}{return\PYGZus{}var} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}register\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}register}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}scaling\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,}
+                              \PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{:} \PYG{n}{sensor\PYGZus{}function\PYGZus{}code}\PYG{p}{\PYGZcb{}}
+                \PYG{k}{return} \PYG{n}{return\PYGZus{}var}
+
+    \PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}name}\PYG{p}{):}
+    \PYG{n}{sensor\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}sensors.json\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}utf\PYGZhy{}8\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{sensor\PYGZus{}full\PYGZus{}data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}file}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} print(sensor\PYGZus{}full\PYGZus{}data)}
+    \PYG{k}{for} \PYG{n}{sensor} \PYG{o+ow}{in} \PYG{n}{sensor\PYGZus{}full\PYGZus{}data}\PYG{p}{:}
+        \PYG{k}{if} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{sensor\PYGZus{}name}\PYG{p}{:}
+            \PYG{n}{sensor\PYGZus{}unit} \PYG{o}{=} \PYG{n}{sensor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}unit\PYGZdq{}}\PYG{p}{]}
+            \PYG{k}{return} \PYG{n}{sensor\PYGZus{}unit}
+
+    \PYG{n}{sensor\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+    \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+
+
+\PYG{k}{def} \PYG{n+nf}{load\PYGZus{}config}\PYG{p}{():}
+    \PYG{n}{config\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{CONFIG\PYGZus{}PATH} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}main\PYGZus{}config\PYGZus{}file.json\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}utf\PYGZhy{}8\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{config\PYGZus{}full\PYGZus{}data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{config\PYGZus{}file}\PYG{p}{)}
+    \PYG{n}{config\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+
+    \PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{config\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}pages\PYGZdq{}}\PYG{p}{]:}
+        \PYG{n}{title} \PYG{o}{=} \PYG{n}{page}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}title\PYGZdq{}}\PYG{p}{]}
+        \PYG{n}{page\PYGZus{}measurements} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{k}{for} \PYG{n}{measurements} \PYG{o+ow}{in} \PYG{n}{page}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sources\PYGZdq{}}\PYG{p}{]:}
+            \PYG{n}{measurements\PYGZus{}sensors} \PYG{o}{=} \PYG{p}{[]}
+            \PYG{n}{port\PYGZus{}arr} \PYG{o}{=} \PYG{n}{measurements}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{]}
+            \PYG{n}{python\PYGZus{}function} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}standard\PYGZdq{}}
+            \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}python\PYGZus{}function\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{measurements}\PYG{p}{:}
+                \PYG{n}{python\PYGZus{}function} \PYG{o}{=} \PYG{n}{measurements}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}python\PYGZus{}function\PYGZdq{}}\PYG{p}{]}
+            \PYG{n}{description} \PYG{o}{=} \PYG{n}{measurements}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{]}
+            \PYG{n}{additional\PYGZus{}info} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+            \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}additional\PYGZus{}info\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{measurements}\PYG{p}{:}
+                \PYG{n}{additional\PYGZus{}info} \PYG{o}{=} \PYG{n}{measurements}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}additional\PYGZus{}info\PYGZdq{}}\PYG{p}{]}
+
+            \PYG{n}{unit} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+            \PYG{n}{port\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
+            \PYG{k}{for} \PYG{n}{port} \PYG{o+ow}{in} \PYG{n}{port\PYGZus{}arr}\PYG{p}{:}
+                \PYG{n}{device\PYGZus{}id} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{port}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{())[}\PYG{n}{port\PYGZus{}counter}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} example: QBM1}
+                \PYG{n}{port\PYGZus{}id} \PYG{o}{=} \PYG{n}{port}\PYG{p}{[}\PYG{n}{device\PYGZus{}id}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} example: AI1}
+                \PYG{n}{port\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+                \PYG{k}{for} \PYG{n}{device} \PYG{o+ow}{in} \PYG{n}{config\PYGZus{}full\PYGZus{}data}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}devices\PYGZdq{}}\PYG{p}{]:}
+                    \PYG{k}{if} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}id\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{device\PYGZus{}id}\PYG{p}{:}
+                        \PYG{c+c1}{\PYGZsh{} If the device has ports that can have different sensors attached (on a QBM for example),}
+                        \PYG{c+c1}{\PYGZsh{} the sensor type has to be checked}
+                        \PYG{k}{if} \PYG{l+s+s2}{\PYGZdq{}sensors\PYGZdq{}} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{:}
+                            \PYG{k}{for} \PYG{n}{sensor\PYGZus{}port} \PYG{o+ow}{in} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sensors\PYGZdq{}}\PYG{p}{]:}
+                                \PYG{k}{if} \PYG{n}{sensor\PYGZus{}port}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}port\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{n}{port\PYGZus{}id}\PYG{p}{:}
+                                    \PYG{n}{sensor\PYGZus{}type} \PYG{o}{=} \PYG{n}{sensor\PYGZus{}port}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}type\PYGZdq{}}\PYG{p}{]}
+                                    \PYG{n}{unit} \PYG{o}{=} \PYG{n}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{sensor\PYGZus{}type}\PYG{p}{)}
+                        \PYG{k}{else}\PYG{p}{:}
+                            \PYG{n}{unit} \PYG{o}{=} \PYG{n}{get\PYGZus{}sensor\PYGZus{}unit}\PYG{p}{(}\PYG{n}{port\PYGZus{}id}\PYG{p}{)}
+
+                        \PYG{n}{device\PYGZus{}file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{DEVICES\PYGZus{}CONFIG\PYGZus{}PATH} \PYG{o}{+} \PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}device\PYGZdq{}}\PYG{p}{]} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}.json\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}utf\PYGZhy{}8\PYGZsq{}}\PYG{p}{)}
+                        \PYG{n}{device\PYGZus{}full\PYGZus{}data} \PYG{o}{=} \PYG{n}{json}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{n}{device\PYGZus{}file}\PYG{p}{)}
+                        \PYG{n}{device\PYGZus{}file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{()}
+
+                        \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{port\PYGZus{}id}\PYG{p}{,} \PYG{n}{unit}\PYG{p}{)}
+
+                        \PYG{n}{sensor\PYGZus{}data} \PYG{o}{=} \PYG{n}{get\PYGZus{}sensor\PYGZus{}data}\PYG{p}{(}\PYG{n}{device\PYGZus{}full\PYGZus{}data}\PYG{p}{,} \PYG{n}{port\PYGZus{}id}\PYG{p}{,} \PYG{n}{unit}\PYG{p}{)}
+
+                        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}data: \PYGZdq{}}\PYG{p}{,} \PYG{n}{sensor\PYGZus{}data}\PYG{p}{)}
+
+                        \PYG{n}{scaling} \PYG{o}{=} \PYG{n}{sensor\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}scaling\PYGZdq{}}\PYG{p}{]}
+                        \PYG{n}{register} \PYG{o}{=} \PYG{n}{sensor\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}register\PYGZdq{}}\PYG{p}{]}
+                        \PYG{n}{function\PYGZus{}code} \PYG{o}{=} \PYG{n}{sensor\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}sensor\PYGZus{}function\PYGZus{}code\PYGZdq{}}\PYG{p}{]}
+
+                        \PYG{n}{measurements\PYGZus{}sensors}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Sensor}\PYG{p}{(}\PYG{n}{baud\PYGZus{}rate}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}baud\PYGZus{}rate\PYGZdq{}}\PYG{p}{],} \PYG{n}{mb\PYGZus{}address}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}mbaddress\PYGZdq{}}\PYG{p}{],} \PYG{n}{parity}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}parity\PYGZdq{}}\PYG{p}{],} \PYG{n}{stop\PYGZus{}bits}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}stop\PYGZus{}bits\PYGZdq{}}\PYG{p}{],} \PYG{n}{register}\PYG{o}{=}\PYG{n}{register}\PYG{p}{,} \PYG{n}{scaling}\PYG{o}{=}\PYG{n}{scaling}\PYG{p}{,} \PYG{n}{function\PYGZus{}code}\PYG{o}{=}\PYG{n}{function\PYGZus{}code}\PYG{p}{,} \PYG{n}{zero\PYGZus{}based}\PYG{o}{=}\PYG{n}{device}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}zero\PYGZus{}based\PYGZdq{}}\PYG{p}{]))}
+
+            \PYG{n}{page\PYGZus{}measurements}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Measurement}\PYG{p}{(}\PYG{n}{description}\PYG{o}{=}\PYG{n}{description}\PYG{p}{,} \PYG{n}{unit}\PYG{o}{=}\PYG{n}{unit}\PYG{p}{,} \PYG{n}{sensors}\PYG{o}{=}\PYG{n}{page\PYGZus{}sensors}\PYG{p}{,} \PYG{n}{python\PYGZus{}function}\PYG{o}{=}\PYG{n}{python\PYGZus{}function}\PYG{p}{,}
+                            \PYG{n}{additional\PYGZus{}info}\PYG{o}{=}\PYG{n}{additional\PYGZus{}info}\PYG{p}{))}
+
+        \PYG{n}{counter} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{n}{last\PYGZus{}slice} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{c+c1}{\PYGZsh{} If a Category has more than 5 elements it has to be split into two or more pages}
+        \PYG{k}{for} \PYG{n}{measurement} \PYG{o+ow}{in} \PYG{n}{page\PYGZus{}measurements}\PYG{p}{:}
+            \PYG{n}{counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
+            \PYG{k}{if} \PYG{p}{((}\PYG{n}{counter} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{5}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o+ow}{or} \PYG{p}{(}\PYG{n}{counter} \PYG{o}{==} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}measurements}\PYG{p}{)):}
+                \PYG{c+c1}{\PYGZsh{} print(title)}
+                \PYG{n}{all\PYGZus{}pages}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Page}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{measurements}\PYG{o}{=}\PYG{n}{page\PYGZus{}measurements}\PYG{p}{[}\PYG{n}{last\PYGZus{}slice}\PYG{p}{:}\PYG{n}{counter}\PYG{p}{]))}
+                \PYG{n}{last\PYGZus{}slice} \PYG{o}{=} \PYG{n}{counter}
+
+    \PYG{k}{return} \PYG{n}{all\PYGZus{}pages}
+
+
+\PYG{k}{def} \PYG{n+nf}{data\PYGZus{}refresh}\PYG{p}{(}\PYG{n}{app}\PYG{p}{):}
+    \PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} This looks better, because all pages are already loaded; but it might be more costly}
+        \PYG{n}{page\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
+        \PYG{k}{for} \PYG{n}{page} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}pages}\PYG{p}{:}
+            \PYG{n}{measurement\PYGZus{}counter} \PYG{o}{=} \PYG{l+m+mi}{0}
+            \PYG{k}{for} \PYG{n}{measurement} \PYG{o+ow}{in} \PYG{n}{page}\PYG{o}{.}\PYG{n}{measurements}\PYG{p}{:}
+                \PYG{n}{value} \PYG{o}{=} \PYG{n}{measurement}\PYG{o}{.}\PYG{n}{run\PYGZus{}calculation\PYGZus{}function}\PYG{p}{()}
+                \PYG{n}{app}\PYG{o}{.}\PYG{n}{set\PYGZus{}page\PYGZus{}text\PYGZus{}at}\PYG{p}{(}\PYG{n}{page\PYGZus{}counter}\PYG{p}{,} \PYG{n}{measurement\PYGZus{}counter}\PYG{p}{,} \PYG{n}{measurement}\PYG{o}{.}\PYG{n}{description}\PYG{p}{,} \PYG{n}{value}\PYG{p}{)}
+                \PYG{c+c1}{\PYGZsh{} app.set\PYGZus{}page\PYGZus{}title\PYGZus{}at(current\PYGZus{}page, all\PYGZus{}pages[current\PYGZus{}page].title)}
+                \PYG{n}{measurement\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
+            \PYG{n}{page\PYGZus{}counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+        \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mf}{0.4}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{data\PYGZus{}threading}\PYG{p}{(}\PYG{n}{app}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} Funktion zum Starten des Datenaktualisierungs\PYGZhy{}Threads}
+    \PYG{n}{t1} \PYG{o}{=} \PYG{n}{Thread}\PYG{p}{(}\PYG{n}{target}\PYG{o}{=}\PYG{n}{data\PYGZus{}refresh}\PYG{p}{,} \PYG{n}{kwargs}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}app\PYGZsq{}}\PYG{p}{:} \PYG{n}{app}\PYG{p}{\PYGZcb{},} \PYG{n}{daemon}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n}{t1}\PYG{o}{.}\PYG{n}{start}\PYG{p}{()}
+\end{Verbatim}
