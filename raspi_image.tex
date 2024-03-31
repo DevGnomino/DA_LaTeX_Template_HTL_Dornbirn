@@ -1,5 +1,5 @@
 \subsection{Erstellung des Raspberry PI \textit{Images}}
-Technikerinnen und Techniker müssen die Schritte zum Aufsetzen eines Raspberry PIs (siehe Kapitel \ref{raspi_setup}) bei einer Neuinstallation nicht durchführen, da ihnen ein vorgefertigtes \gls{image} verabreicht wird. Dieses muss lediglich auf die SD-Karte des Raspberry PIs kopiert und nicht weiter konfiguriert werden. Die Erstellung dieses \gls{image}\textit{s} wird folgend erläutert. Das \gls{image} wird über ein Gerät mit Linux erstellt, daher kommt eine \ac{vm} zum Einsatz, um einfach eine Linux Distribution auf einem Windows Gerät laufen zu lassen. Dabei können unterschiedliche Linux Distributionen verwendet werden, wobei mindestens $4$ Gigabyte Arbeitsspeicher, $2$ Prozessorkerne und $80$ Gigabyte Festplattenspeicher empfohlen werden. 
+Technikerinnen und Techniker müssen die Schritte zum Aufsetzen eines Raspberry PIs (siehe Kapitel \ref{raspi_setup}) bei einer Neuinstallation nicht durchführen, da ihnen ein vorgefertigtes \gls{image} verabreicht wird. Dieses muss lediglich auf die SD-Karte des Raspberry PIs kopiert und nicht weiter konfiguriert werden. Die Erstellung dieses \gls{image}\textit{s} wird folgend erläutert. Das \gls{image} wird über einen Computer mit Linux erstellt, daher kommt eine \ac{vm} zum Einsatz, um einfach eine Linux Distribution auf einem Windows Computer laufen zu lassen. Dabei können unterschiedliche Linux Distributionen verwendet werden, wobei mindestens 4 Gigabyte Arbeitsspeicher, 2 Prozessorkerne und 80 Gigabyte Festplattenspeicher empfohlen werden. 
 
 \paragraph{\textit{Image} klonen}
 Das \gls{image} wird erstellt, indem ein Speicherabbild einer SD-Karte mit funktionierendem Betriebssystem und Python Programm gemacht wird. Dieser Prozess findet hauptsächlich in der Kommandozeile statt, daher muss das Linux-Terminal geöffnet werden, um die folgenden Befehle auszuführen:
@@ -19,7 +19,7 @@ Das \gls{image} wird erstellt, indem ein Speicherabbild einer SD-Karte mit funkt
 sudo dd if=/dev/sdb of=/home/ubuntu/Desktop/clone.img
     \end{minted}
 
-    \item Da die aus dem vorgehenden Befehl generierte \gls{image} Datei mehr als $30$ Gigabyte groß ist, kann das \enquote{PyShrink} Skript verwendet werden, um das große  \gls{image} auf etwa $5$ bis $6$ Gigabyte zu verkleinern. \enquote{PyShrink} wird mit den folgenden Befehlen über die Kommandozeile installiert:
+    \item Da die aus dem vorgehenden Befehl generierte \gls{image} Datei mehr als 30 Gigabyte groß ist, kann das \enquote{PyShrink} Skript verwendet werden, um das große  \gls{image} auf etwa 5 bis 6 Gigabyte zu verkleinern. \enquote{PyShrink} wird mit den folgenden Befehlen über die Kommandozeile installiert:
     \begin{minted}[breaklines=true, breakanywhere=true]{console}
 wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 chmod +x pishrink.sh
