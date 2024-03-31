@@ -1,6 +1,6 @@
 \subsection{Einlesen der Konfigurationsdateien} \label{einlesen_konfigurationsdateien}
 \paragraph{Klassenstruktur}
-Im Hintergrund wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine \lstinline{Page}-, eine \lstinline{Measurement}- und eine \lstinline{Sensor} Klasse. Eine \lstinline{Measurement} Instanz kann mehrere \lstinline{Sensor} Instanzen enthalten, da manche \lstinline{Measurements} zur Berechnung (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die \lstinline{Page} Instanzen speichern die jeweiligen \lstinline{Measurement} Instanzen, die auf dieser Seite angezeigt werden sollen. Die \lstinline{Page} Instanzen existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele \lstinline{Page} Instanzen wie \lstinline{PageFrame} Instanzen (vgl. Kapitel \ref{tkintercode}) und gleich viele \lstinline{Measurement} Instanzen wie \lstinline{MeasurementFrame} Instanzen. (siehe Abb.~\ref{fig:uml_backend}).
+Im Backend wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine \lstinline{Page}-, eine \lstinline{Measurement}- und eine \lstinline{Sensor} Klasse. Eine \lstinline{Measurement} Instanz kann mehrere \lstinline{Sensor} Instanzen enthalten, da manche \lstinline{Measurements} zur Berechnung (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die \lstinline{Page} Instanzen speichern die jeweiligen \lstinline{Measurement} Instanzen, die auf dieser Seite angezeigt werden sollen. Die \lstinline{Page} Instanzen existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele \lstinline{Page} Instanzen wie \lstinline{PageFrame} Instanzen (vgl. Kapitel \ref{tkintercode}) und gleich viele \lstinline{Measurement} Instanzen wie \lstinline{MeasurementFrame} Instanzen. (siehe Abb.~\ref{fig:uml_backend}).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/UML_Backend}
@@ -8,7 +8,7 @@ Im Hintergrund wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine 
 	\label{fig:uml_backend}
 \end{figure}
 
-Die \lstinline{Page}-, \lstinline{Measurement}- und \lstinline{Sensor} Instanzen werden beim Einlesen der Konfigurationsdateien aufgrund der Objekte im \lstinline{pages} \acs{json} Array (vgl. Kapitel \ref{json_config_files}) erstellt und in Listen gespeichert. \newline
+Die \lstinline{Page}, \lstinline{Measurement} und \lstinline{Sensor} Instanzen werden beim Einlesen der \acs{json} Konfigurationsdateien aufgrund der Objekte im \enquote{pages}  Array (vgl. Kapitel \ref{json_config_files}) erstellt und in Listen gespeichert. \newline
 Zum Einlesen werden drei Funktionen implementiert:
 \begin{itemize}
 	\item \textbf{\lstinline{load_config()}:} Diese Funktion lädt die gesamte Haupt-Konfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die \lstinline{Page}-, \lstinline{Measurement}- und \lstinline{Sensor} Instanzen erstellt. Dafür kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
@@ -19,12 +19,12 @@ Zum Einlesen werden drei Funktionen implementiert:
 \end{itemize}
 
 \paragraph{Einlesen und Erstellen der Instanzen}
-Einlesen kann man ein \acs{json} Attribut mit folgender Syntax. Im folgenden Beispiel wird aus der Instanz namens \lstinline{page} das Attribut title gesucht und zurückgeliefert.
+Einlesen kann man ein \acs{json} Attribut mit folgender Syntax. Im folgenden Beispiel wird aus der Instanz namens \lstinline{page} das Attribut \enquote{title} gesucht und zurückgeliefert.
 \begin{pythoncode}
 title = page["title"]
 \end{pythoncode}
 
-Im folgenden Code werden die \lstinline{Measurement} Instanzen erstellt, indem die anzuzeigenden Messwerte aus dem \lstinline{sources} Array iteriert werden. Anhand der Informationen der Objekte im \lstinline{sources} Array werden dann die entsprechenden Geräte im \lstinline{devices} Array herausgesucht. Es werden weitere Parameter aus der Hauptkonfigurationsdatei ausgelesen, die zu dem entsprechenden Messwert gehören (z.B. die Bezeichnung oder die Einheit). Anschließend werden die \lstinline{Sensor} Instanzen erstellt und einer Liste beigefügt, da manche Measurements mehrere Messwerte benötigen. Diese Liste, sowie die vorher ausgelesenen Parameter werden beim Erstellen der \lstinline{Measurement} Instanzen dem Konstruktor übergeben und darin in Instanzvariablen gespeichert.
+Im folgenden Code werden die \lstinline{Measurement} Instanzen erstellt, indem die anzuzeigenden Messwerte aus dem \enquote{sources} Array iteriert werden. Anhand der Informationen der Objekte im \enquote{sources} Array werden dann die entsprechenden Geräte im \enquote{devices} Array herausgesucht. Es werden weitere Parameter aus der Haupt-Konfigurationsdatei ausgelesen, die zu dem entsprechenden Messwert gehören (z.B. die Bezeichnung oder die Einheit). Anschließend werden die \lstinline{Sensor} Instanzen erstellt und einer Liste beigefügt, da manche Measurements (z.B. die Rückwärmzahl) mehrere Messwerte benötigen. Diese Liste, sowie die vorher ausgelesenen Parameter werden beim Erstellen der \lstinline{Measurement} Instanzen dem Konstruktor übergeben und darin in Instanzvariablen gespeichert.
 \begin{pythoncode}
 page_measurements = []
 for measurements in page["sources"]:
@@ -34,7 +34,7 @@ for measurements in page["sources"]:
 	page_measurements.append(Measurement(description=description, unit=unit, sensors=measurements_sensors, python_function=python_function, additional_info=additional_info))
 \end{pythoncode}
 
-Im folgenden Code wird für jeden Port (an jedem Port ist ein \lstinline{Sensor} angeschlossen) eines Geräts eine \lstinline{Sensor} Instanzen erstellt. Alle \lstinline{Sensor} Instanzen werden der \lstinline{page_sensors} Liste beigefügt. Dafür gibt es im \lstinline{sources} Array die einzelnen Ports. Das sind Wertepaare, die jeweils aus Gerät und \lstinline{Sensor} bestehen (vgl. Kapitel \ref{json_config_files}). Mit diesen beiden Werten kann dann das entsprechende Gerät im \lstinline{devices} Array gefunden werden und darin der entsprechende Port im \lstinline{sensors} Array. Mit der \lstinline{get_sensor_unit()} Funktion wird die Einheit erhalten und mit der \lstinline{get_sensor_data()} Funktion weitere Sensordaten. Diese werden beim Erstellen der \lstinline{Sensor} Instanz dem Konstruktor übergeben.
+Im folgenden Code wird für jeden Port (an jedem Port ist ein \lstinline{Sensor} angeschlossen) eines Geräts eine \lstinline{Sensor} Instanz erstellt. Alle \lstinline{Sensor} Instanzen werden der \lstinline{page_sensors} Liste beigefügt. Dafür gibt es im \enquote{sources} Array die einzelnen Ports. Das sind Wertepaare, die jeweils aus Gerät und \lstinline{Sensor} bestehen (vgl. Kapitel \ref{json_config_files}). Mit diesen beiden Werten kann dann das entsprechende Gerät im \enquote{devices} Array gefunden werden und darin der entsprechende Port im \enquote{sensors} Array. Mit der \lstinline{get_sensor_unit()} Funktion wird die Einheit erhalten und mit der \lstinline{get_sensor_data()} Funktion weitere Sensordaten. Diese werden beim Erstellen der \lstinline{Sensor} Instanz dem Konstruktor übergeben.
 \begin{pythoncode}
 port_counter = 0
 for port in port_arr:
