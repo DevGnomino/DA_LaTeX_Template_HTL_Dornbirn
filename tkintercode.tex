@@ -1,6 +1,6 @@
 \subsection{Umsetzung der GUI im Code}\label{tkintercode}
 \paragraph{Klassenstruktur}
-Im Vordergrund basiert die Klassenstruktur grundsätzlich auf \gls{gls_ctk} Komponenten (siehe Abb.~\ref{fig:klassenstruktur_frontend}). Dabei gibt es die Klassen \lstinline{App}, \lstinline{PageFrame}, \lstinline{TitleFrame} und \lstinline{MeasurementFrame}. Im Programm wird eine \lstinline{App} Instanz ausgeführt, welche das Hauptfenster ist. Diese Instanz kann beliebig viele \lstinline{PageFrames} enthalten, die wiederum jeweils ein \lstinline{TitleFrame} und eine Liste von \lstinline{MeasurementFrames} beinhalten. Die \lstinline{PageFrames} stellen die einzelnen Seiten dar, welche per Knopfdruck an der \acs{rltanzeige} durchgeblättert werden können. In einem \lstinline{TitleFrame} wird immer der Titel der jeweiligen Seite gespeichert \bzw angezeigt. In den \lstinline{MeasurementFrame} Instanzen werden hingegen die tatsächlichen Messwerte (Bezeichnung + Wert + Maßeinheit) dargestellt.
+Im Frontend basiert die Klassenstruktur (siehe Abb.~\ref{fig:klassenstruktur_frontend}) grundsätzlich auf \gls{gls_ctk} Komponenten. Dabei gibt es die Klassen \lstinline{App}, \lstinline{PageFrame}, \lstinline{TitleFrame} und \lstinline{MeasurementFrame}. Im Programm wird eine \lstinline{App} Instanz ausgeführt, welche das Hauptfenster ist. Diese Instanz kann beliebig viele \lstinline{PageFrames} enthalten, die wiederum jeweils ein \lstinline{TitleFrame} und eine Liste von \lstinline{MeasurementFrames} beinhalten. Die \lstinline{PageFrames} stellen die einzelnen Seiten dar, welche per Knopfdruck an der \acs{rltanzeige} durchgeblättert werden können. In einem \lstinline{TitleFrame} wird immer der Titel der jeweiligen Seite gespeichert \bzw angezeigt. In den \lstinline{MeasurementFrame} Instanzen werden hingegen die tatsächlichen Messwerte (Bezeichnung + Wert + Maßeinheit) dargestellt.
 
 \begin{figure}[H]
 	\centering
@@ -11,7 +11,7 @@ Im Vordergrund basiert die Klassenstruktur grundsätzlich auf \gls{gls_ctk} Komp
 \paragraph{CustomTkinter Code}
 
 Eine nähere Beschreibung und die Umsetzung der vorher genannten Klassen erfolgt in diesem Kapitel. 
-\newline Wie zuletzt beschrieben, basieren alle Klassen im Frontend auf \gls{gls_ctk}. Die Klassen sind dabei alle (bis auf die Klasse \lstinline{App}) vom Typ \lstinline{CTkFrame}. Ein \lstinline{CTkFrame} ist ein Widget, das wie ein Rahmen \bzw Behälter für andere Widgets fungiert. So können diese in weiteren Widgets gruppiert und besser organisiert werden. Als erster Parameter wird für \lstinline{CTkFrames}, wie bei allen \gls{gls_tk} und \gls{gls_ctk} Widgets, der \lstinline{master} \bzw das Elternobjekt angegeben. Darüber hinaus können die Breite (\lstinline{width}), Höhe (\lstinline{height}), Rahmenbreite \bzw -Farbe (\lstinline{border_width} \bzw \lstinline{border_color}) sowie die Hintergrundfarbe (\lstinline{fg_color}) angegeben werden. \cite[vgl.][]{Schimansky:o.J.}
+\newline Wie zuletzt beschrieben, basieren alle Klassen im Frontend auf \gls{gls_ctk}. Die Klassen sind dabei alle (bis auf die Klasse \lstinline{App}) vom Typ \lstinline{CTkFrame}. Ein \lstinline{CTkFrame} ist ein Widget, das wie ein Rahmen \bzw Behälter für andere Widgets fungiert. So können diese in weiteren Widgets gruppiert und besser organisiert werden. Als erster Parameter wird für \lstinline{CTkFrames}, wie bei allen \gls{gls_tk} und \gls{gls_ctk} Widgets, der \lstinline{master} \bzw das Elternobjekt angegeben. Darüber hinaus können die Breite (\lstinline{width}), Höhe (\lstinline{height}), Rahmenbreite \bzw \ -Farbe (\lstinline{border_width} \bzw \lstinline{border_color}) sowie die Hintergrundfarbe (\lstinline{fg_color}) angegeben werden. \cite[vgl.][]{Schimansky:o.J.}
 
 Die Klasse \lstinline{TitleFrame} enthält ein \lstinline{CTkLabel}, welches mit der \lstinline{place()} Methode im Behälter platziert wird. Die Klasse \lstinline{CTkLabel} basiert auf der Klasse \lstinline{tkinter.Label} und dient zur Darstellung eines Textes. Im \lstinline{TitleFrame} Label steht immer der Titel der zugehörigen Seite. Das \lstinline{title_font} Objekt, welches im folgenden Code zu sehen ist, ist eine Instanz der \gls{gls_ctk} Utility Klasse \lstinline{CTkFont}. Es wird verwendet, um die Schriftformatierung von \gls{gls_ctk} Widgets vorzunehmen. Jedes \gls{gls_ctk} Widget bekommt standardmäßig ein \lstinline{CTkFont} Objekt, wobei ein solches Objekt zeitgleich mehreren Widgets angefügt werden kann. Eine Änderung eines \lstinline{CTkFont} Objekts wird an alle Widgets, die es verwenden, weitergeleitet. \cite[vgl.][]{Schimansky:o.J.}
 
@@ -27,7 +27,7 @@ class TitleFrame(ctk.CTkFrame):
 \end{pythoncode}
 
 
-Wie in der Klassenstruktur beschrieben, beinhaltet ein jedes \lstinline{PageFrame} neben einem \lstinline{TitleFrame} eine Liste von \lstinline{MeasurementFrames}. Eine Instanz der Klasse \lstinline{MeasurementFrame} enthält immer Informationen zu einem bestimmten Messwert, welche mithilfe von zwei \lstinline{CTkLabel} Widgets dargestellt werden. Dabei wird die Bezeichnung des Messwerts links im \lstinline{measurement_lbl} und der tatsächliche Wert einschließlich Maßeinheit rechts im \lstinline{value_lbl} platziert. Die zwei Labels werden durch einen Strich getrennt, der mit dem \gls{gls_tk} Widget \enquote{Canvas} erstellt wird. Ein Canvas ist ein rechteckiger Bereich \bzw eine Leinwand, auf dem Bilder oder andere komplexe Layouts gezeichnet werden können. Zusätzlich lassen sich auf einem Canvas Widget \zB weitere Widgets, Text oder Bilder platzieren. \cite[vgl.][20]{Shipman:2013} 
+Wie in der Klassenstruktur beschrieben, beinhaltet ein jedes \lstinline{PageFrame} neben einem \lstinline{TitleFrame} eine Liste von \lstinline{MeasurementFrames}. Eine Instanz der Klasse \lstinline{MeasurementFrame} enthält immer Informationen zu einem bestimmten Messwert, welche mithilfe von zwei \lstinline{CTkLabel} Widgets dargestellt werden. Dabei wird die Bezeichnung des Messwerts links im \lstinline{measurement_lbl} und der tatsächliche Wert einschließlich Maßeinheit rechts im \lstinline{value_lbl} platziert. Die zwei Labels werden durch einen Strich getrennt, der mit dem \gls{gls_tk} Widget \lstinline{Canvas} erstellt wird. Ein \lstinline{Canvas} ist ein rechteckiger Bereich \bzw eine Leinwand, auf dem Bilder oder andere komplexe Layouts gezeichnet werden können. Zusätzlich lassen sich auf einem \lstinline{Canvas} Widget \zB weitere Widgets, Text oder Bilder platzieren. \cite[vgl.][20]{Shipman:2013} 
 \newline Da jeder Messwert kontinuierlich aktualisiert wird, verfügt die \lstinline{MeasurementFrame} Klasse über die Methode \lstinline{set_text()}. In dieser wird mithilfe der \lstinline{configure()} Methode der Text beider Labels aktualisiert. Es folgt ein gekürzter Code zur \lstinline{MeasurementFrame} Klasse.
 
 \begin{pythoncode}
@@ -44,7 +44,7 @@ class MeasurementFrame(ctk.CTkFrame):
 		self.value_lbl.configure(text=value)
 \end{pythoncode}
 
-Die letzte der \gls{gls_ctk} \lstinline{CTkFrame} Klassen ist die \lstinline{PageFrame} Klasse. Wie bereits erwähnt ist jede Instanz dieser Klasse ein unsichtbarer Behälter, der ein \lstinline{TitleFrame} sowie eine Liste von \lstinline{MeasurementFrames} beinhält und als Seite dient. Diese Komponenten werden, wie im nachstehenden Code zu sehen ist, im Konstruktor eines jeden \lstinline{PageFrames} zugeordnet. Die Parameter \lstinline{title} und \lstinline{measurement} stammen aus der \acs{json} Haupt-Konfigurationsdatei (siehe Kapitel \ref{json_config_files}, Tab. \ref{tab:pages_array_parameter} unter \enquote{title} \bzw Tab. \ref{tab:sources_array_parameter}  unter \enquote{description}) und können daher schon bei Erstellung der \lstinline{PageFrame} Instanzen übergeben werden. Der \lstinline{value} Parameter der individuellen \lstinline{MeasurementFrames} hingegen wird laufend von der Methode \lstinline{set_text_at()} aktualisiert und ist daher am Anfang bis zum ersten Auslesen auf \enquote{N/A} (\dt nicht verfügbar) gesetzt.
+Die letzte der \lstinline{CTkFrame} Klassen ist die \lstinline{PageFrame} Klasse. Wie bereits erwähnt ist jede Instanz dieser Klasse ein unsichtbarer Behälter, der ein \lstinline{TitleFrame} sowie eine Liste von \lstinline{MeasurementFrames} beinhält und als Seite dient. Diese Komponenten werden, wie im nachstehenden Code zu sehen ist, im Konstruktor eines jeden \lstinline{PageFrames} zugeordnet. Die Parameter \lstinline{title} und \lstinline{measurement} stammen aus der \acs{json} Haupt-Konfigurationsdatei (siehe Kapitel \ref{json_config_files}, Tab. \ref{tab:pages_array_parameter} unter \enquote{title} \bzw Tab. \ref{tab:sources_array_parameter}  unter \enquote{description}) und können daher schon bei Erstellung der \lstinline{PageFrame} Instanzen übergeben werden. Der \lstinline{value} Parameter der individuellen \lstinline{MeasurementFrames} hingegen wird laufend von der Methode \lstinline{set_text_at()} aktualisiert und ist daher am Anfang bis zum ersten Auslesen auf \enquote{N/A} (\dt nicht verfügbar) gesetzt.
 	
 \begin{pythoncode}
 class PageFrame(ctk.CTkFrame):
@@ -102,7 +102,7 @@ class App(ctk.CTk):
 
 % Weiters werden im Konstruktor die globalen Listen \enquote{page\_frame\_list } und \enquote{page\_indicator\_list} erstellt, die zur Verwaltung der \enquote{PageFrames} sowie Indikatoren für die Seitenanzeige dienen.
 
-Weiters wird im Konstruktor für jede Seite in der Liste \lstinline{all\_pages} ein \lstinline{PageFrame} erstellt und der \lstinline{page_frame_list} hinzugefügt. Die Liste \lstinline{all_pages} ist eine Liste mit allen nötigen Informationen für ein \lstinline{PageFrame} und wird im Backend des Programmes erstellt (siehe Kapitel \ref{auslesen_rlt_parameter}). Die \lstinline{page_frame_list} ist eine globale Liste, die zur Verwaltung der \lstinline{PageFrames} dient. Anschließend wird das erste \lstinline{PageFrame} sichtbar gemacht, indem die Methode \lstinline{show_frame(True)} aufgerufen wird.
+Weiters wird im Konstruktor für jede Seite in der Liste \lstinline{all_pages} ein \lstinline{PageFrame} erstellt und der \lstinline{page_frame_list} hinzugefügt. Die Liste \lstinline{all_pages} ist eine Liste mit allen nötigen Informationen für ein \lstinline{PageFrame} und wird im Backend des Programmes erstellt (siehe Kapitel \ref{auslesen_rlt_parameter}). Die \lstinline{page_frame_list} ist eine globale Liste, die zur Verwaltung der \lstinline{PageFrames} dient. Anschließend wird das erste \lstinline{PageFrame} sichtbar gemacht, indem die Methode \lstinline{show_frame(True)} aufgerufen wird.
 %\lstinline{show_frame(True)}
 
 \begin{pythoncode}
@@ -114,7 +114,7 @@ Weiters wird im Konstruktor für jede Seite in der Liste \lstinline{all\_pages} 
 ...
 \end{pythoncode}
 
-Zuletzt werden im Konstruktor die Seitenindikatoren erstellt und platziert. Jeder Indikator wird mithilfe des \gls{gls_ctk} Widgets \lstinline{CTkButton} erstellt und ist somit grundsätzlich ein grauer, runder Knopf ohne Text. Mithilfe der globalen Variable \lstinline{current_page} wird dabei erkannt, ob die zum Knopf zugehörige Seite angezeigt wird und daraus abgeleitet, ob dieser Hellgrau oder Dunkelgrau erstellt werden soll.
+Zuletzt werden im Konstruktor die Seitenindikatoren erstellt und platziert. Jeder Indikator wird mithilfe des \gls{gls_ctk} Widgets \lstinline{CTkButton} erstellt und ist somit grundsätzlich ein grauer, runder Button ohne Text. Mithilfe der globalen Variable \lstinline{current_page} wird dabei erkannt, ob die zum Button zugehörige Seite angezeigt wird und daraus abgeleitet, ob dieser Hellgrau oder Dunkelgrau erstellt werden soll.
 
 Die Position der Seitenindikatoren wird basierend auf der Anzahl der Seiten dynamisch berechnet. Wenn mehr als eine Seite vorhanden ist, wird für jede Seite in der Liste \lstinline{page_frame_list} ein Indikator erstellt und platziert, wie im folgenden Code vereinfacht gezeigt wird.
 
@@ -134,11 +134,19 @@ Die Klasse \lstinline{App} beinhaltet eine Methode mit dem Namen \lstinline{set_
     	page_frame_list[page_index].set_text_at(measurement_index, value)
 \end{pythoncode}
 
+Das Ergebnis der mit \gls{gls_python} und \gls{gls_ctk} programmierten \ac{gui} sieht dann wie folgt aus (siehe Abb.~\ref{fig:ctk_gui}).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Bilder/CTK_components.png}
+    \caption{Ergebnis der \ac{gui} für die \ac{rltanzeige}}
+    \label{fig:ctk_gui}
+\end{figure}
+
 \paragraph{Code zur Navigation der Seiten mit GPIO Tastern} \label{gpio_taster}
 
 Nachdem die Erstellung der einzelnen Seiten mittels \gls{gls_ctk} erfolgt ist, müssen Methoden definiert werden, um an der \acs{rltanzeige} mit zwei Tastern zwischen diesen Seiten wechseln zu können. Eine kurze Erklärung dieser Methoden erfolgt in diesem Kapitel.
 
-Um auf die \ac{gpio} Pins des Raspberry PIs \bzw die Taster der \acs{rltanzeige} zugreifen zu können wird die \enquote{RPi.GPIO} Bibliothek verwendet, welche im untenstehenden Code als \lstinline{GPIO} importiert wurde. Das ganze geschieht in der Methode \lstinline{setup_buttons()}, die als Teil des Anfangs des Programms ausgeführt wird.
+Um auf die \ac{gpio} Pins des Raspberry PIs \bzw die Taster der \acs{rltanzeige} zugreifen zu können wird die \enquote{RPi.GPIO} Bibliothek verwendet, welche im untenstehenden Code als \lstinline{GPIO} importiert wurde. Das Ganze geschieht in der Methode \lstinline{setup_buttons()}, die als Teil des Anfangs des Programms ausgeführt wird.
 Als Erstes wird mit \lstinline{setmode(GPIO.BOARD)} angegeben, dass die pysikalischen Pinnummern des Raspberry PIs verwendet werden. Alternativ kann \lstinline{setmode(GPIO.BCM)} verwendet werden, um die logischen \ac{gpio} Pinnummern zu verwenden. Daraufhin wird jedem Taster ein \ac{gpio} Pin zugeordnet. Weiters werden für die beiden Taster entsprechende Ereignisdetektoren eingerichtet, die bei Betätigung der Taster die entsprechende Callback-Funktion (\lstinline{last_page()} \bzw \lstinline{next_page()}) aufrufen.
 
 \begin{pythoncode}
@@ -154,7 +162,7 @@ def setup_buttons():
     #[Gleiche Konfiguration für den anderen Taster. Der callback wird aber auf "next_page" gesetzt]
 \end{pythoncode}
 
-Die Funktion \lstinline{last_page()} wird aufgerufen, wenn der "Zurück"-Taster gedrückt wird. Zuerst wird überprüft, ob es mehr als eine Seite gibt, da sonst kein Wechseln auf eine andere Seite möglich wäre. Dann wird die globale Variable \lstinline{current_page} um eins verringert, um zur vorherigen Seite zu wechseln. Falls \lstinline{current_page} dabei negativ wird, wird \lstinline{current_page} auf den Index der letzten Seite gesetzt, um eine zyklische Navigation der Seiten zu ermöglichen. Anschließend werden sowohl  die Seiten an sich als auch die Farbe die Seitenindikatoren aktualisiert, um den aktuellen Stand zu reflektieren. Dabei werden zuerst alle Seiten \bzw \lstinline{PageFrames} ausgeblendet und daraufhin die aktuelle Seite wieder sichtbar gemacht. Auch bei den Seitenidentifikatoren werden zuerst alle hellgrau gemacht, bevor der zur aktuellen Seite zugehörige Indikator in einem dunkleren grau dargestellt wird.
+Die Funktion \lstinline{last_page()} wird aufgerufen, wenn der \enquote{Zurück}-Taster gedrückt wird. Zuerst wird überprüft, ob es mehr als eine Seite gibt, da sonst kein Wechseln auf eine andere Seite möglich wäre. Dann wird die globale Variable \lstinline{current_page} um eins verringert, um zur vorherigen Seite zu wechseln. Falls \lstinline{current_page} dabei negativ wird, wird \lstinline{current_page} auf den Index der letzten Seite gesetzt, um eine zyklische Navigation der Seiten zu ermöglichen. Anschließend werden sowohl  die Seiten an sich als auch die Farbe die Seitenindikatoren aktualisiert, um den aktuellen Stand zu reflektieren. Dabei werden zuerst alle Seiten \bzw \lstinline{PageFrames} ausgeblendet und daraufhin die aktuelle Seite wieder sichtbar gemacht. Auch bei den Seitenidentifikatoren werden zuerst alle hellgrau gemacht, bevor der zur aktuellen Seite zugehörige Indikator in einem dunkleren grau dargestellt wird.
 
 \begin{pythoncode}
 def last_page(channel):
@@ -174,5 +182,5 @@ def last_page(channel):
     page_indicator_list[current_page].configure(fg_color="dunkelgrau")
 \end{pythoncode}
 
-Die \lstinline{next_page()} Methode wird dann aufgerufen, wenn der "Weiter"-Taster gedrückt wird. Sie funktioniert ähnlich wie \lstinline{last_page()}, jedoch wird \lstinline{current_page} um eins erhöht, um zur nächsten Seite zu wechseln. Dazu wird \lstinline{current_page}, um eine zyklische Navigation zu ermöglichen, auf Null zurückgesetzt, wenn die Variable den Index der letzten Seite überschreitet.
+Die \lstinline{next_page()} Methode wird dann aufgerufen, wenn der \enquote{Weiter}-Taster gedrückt wird. Sie funktioniert ähnlich wie \lstinline{last_page()}, jedoch wird \lstinline{current_page} um eins erhöht, um zur nächsten Seite zu wechseln. Dazu wird \lstinline{current_page}, um eine zyklische Navigation zu ermöglichen, auf 0 zurückgesetzt, wenn die Variable den Index der letzten Seite überschreitet.
 
