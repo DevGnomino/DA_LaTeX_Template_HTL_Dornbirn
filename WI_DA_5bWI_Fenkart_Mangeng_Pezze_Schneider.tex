@@ -111,13 +111,29 @@ list-final-separator={ und }}
 
 %\include{00-Beispiele}
 \ifoot{\leftmark}
+
+\phantomsection
+\clearpage
+\addcontentsline{toc}{chapter}{Literatur}
 \printbibliography
+
+\phantomsection
+\clearpage
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \listoffigures
+
+\phantomsection
+\clearpage
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 \listoftables
+
 \printglossaries
+
+\phantomsection
+\clearpage
+\addcontentsline{toc}{chapter}{Abkürzungen}
 \printacronyms[name=Abkürzungen]
 
-%\include{Begleitprotokoll}
 \include{Anhang}
 
 
