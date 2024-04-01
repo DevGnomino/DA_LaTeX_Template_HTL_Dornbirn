@@ -27,7 +27,7 @@ class TitleFrame(ctk.CTkFrame):
 \end{pythoncode}
 
 
-Wie in der Klassenstruktur beschrieben, beinhaltet ein jedes \lstinline{PageFrame} neben einem \lstinline{TitleFrame} eine Liste von \lstinline{MeasurementFrames}. Eine Instanz der Klasse \lstinline{MeasurementFrame} enthält immer Informationen zu einem bestimmten Messwert, welche mithilfe von zwei \lstinline{CTkLabel} Widgets dargestellt werden. Dabei wird die Bezeichnung des Messwerts links im \lstinline{measurement_lbl} und der tatsächliche Wert einschließlich Maßeinheit rechts im \lstinline{value_lbl} platziert. Die zwei Labels werden durch einen Strich getrennt, der mit dem \gls{gls_tk} Widget \lstinline{Canvas} erstellt wird. Ein \lstinline{Canvas} ist ein rechteckiger Bereich \bzw eine Leinwand, auf dem Bilder oder andere komplexe Layouts gezeichnet werden können. Zusätzlich lassen sich auf einem \lstinline{Canvas} Widget \zB weitere Widgets, Text oder Bilder platzieren. \cite[vgl.][20]{Shipman:2013} 
+Wie in der Klassenstruktur beschrieben, beinhaltet ein jedes \lstinline{PageFrame} neben einem \lstinline{TitleFrame} eine Liste von \lstinline{MeasurementFrames}. Eine Instanz der Klasse \lstinline{MeasurementFrame} enthält immer Informationen zu einem bestimmten Messwert, welche mithilfe von zwei \lstinline{CTkLabel} Widgets dargestellt werden. Dabei wird die Bezeichnung des Messwerts links im \lstinline{measurement_lbl} und der tatsächliche Wert einschließlich Maßeinheit rechts im \lstinline{value_lbl} platziert. Die zwei Labels werden durch einen Strich getrennt, der mit dem \gls{gls_tk} Widget \lstinline{Canvas} erstellt wird. Ein \lstinline{Canvas} ist ein rechteckiger Bereich, auf dem Bilder oder andere komplexe Layouts gezeichnet werden können. Zusätzlich lassen sich auf einem \lstinline{Canvas} Widget \zB weitere Widgets, Text oder Bilder platzieren. \cite[vgl.][20]{Shipman:2013} 
 \newline Da jeder Messwert kontinuierlich aktualisiert wird, verfügt die \lstinline{MeasurementFrame} Klasse über die Methode \lstinline{set_text()}. In dieser wird mithilfe der \lstinline{configure()} Methode der Text beider Labels aktualisiert. Es folgt ein gekürzter Code zur \lstinline{MeasurementFrame} Klasse.
 
 \begin{pythoncode}
@@ -84,7 +84,7 @@ Die \lstinline{PageFrame} Klasse enthält zudem eine \lstinline{show_frame()} Me
 Die Klasse \lstinline{App} ist eine Instanz der \gls{gls_ctk} Window Klasse \lstinline{CTk}. Die \lstinline{CTk} Klasse bildet als Hauptfenster die Grundlage für jedes \gls{gls_ctk} Programm. Dabei sollte während der Laufzeit eines Programmes immer nur eine Instanz der \lstinline{CTk} Klasse existieren, wobei weitere Fenster mit der \lstinline{CTkToplevel} Klasse erstellt werden können. Mit Aufruf der \lstinline{mainloop()} Methode wird das Programm gestartet.
 \cite[vgl.][]{Schimansky:o.J.} 
 
-Folgend ist ein vereinfachter Code des Konstruktors der Klasse \lstinline{App} zu sehen. Hier wird das Hauptfenster aufgesetzt. Dabei wird zuerst mit den Methoden \lstinline{attributes()}, \lstinline{resizable()} und \lstinline{config()} die Größe des Fensters festgelegt, sowie der Cursor deaktiviert, da die \acs{rltanzeige} durch Taster gesteuert wird und dieser daher irrelevant ist. Daraufhin wird das Logo der Firma Bösch hinzugefügt. Dafür kommt die \gls{gls_ctk} Utility Klasse \lstinline{CTkImage} zum Einsatz, die als Behälter für das Bild dient und wiederum mithilfe eines \lstinline{CTkLabels} im Hauptfenster platziert wird.
+Folgend ist ein vereinfachter Code des Konstruktors der Klasse \lstinline{App} zu sehen. Hier wird das Hauptfenster aufgesetzt. Dabei wird zuerst mit den Methoden \lstinline{attributes()}, \lstinline{resizable()} und \lstinline{config()} die Größe des Fensters festgelegt, sowie der Cursor deaktiviert, da die \acs{rltanzeige} durch Taster gesteuert wird und dieser somit irrelevant ist. Daraufhin wird das Logo der Firma Bösch hinzugefügt. Dafür kommt die \gls{gls_ctk} Utility Klasse \lstinline{CTkImage} zum Einsatz, die als Behälter für das Bild dient und wiederum mithilfe eines \lstinline{CTkLabels} im Hauptfenster platziert wird.
 
 \begin{pythoncode}
 class App(ctk.CTk):
@@ -114,7 +114,7 @@ Weiters wird im Konstruktor für jede Seite in der Liste \lstinline{all_pages} e
 ...
 \end{pythoncode}
 
-Zuletzt werden im Konstruktor die Seitenindikatoren erstellt und platziert. Jeder Indikator wird mithilfe des \gls{gls_ctk} Widgets \lstinline{CTkButton} erstellt und ist somit grundsätzlich ein grauer, runder Button ohne Text. Mithilfe der globalen Variable \lstinline{current_page} wird dabei erkannt, ob die zum Button zugehörige Seite angezeigt wird und daraus abgeleitet, ob dieser Hellgrau oder Dunkelgrau erstellt werden soll.
+Zuletzt werden im Konstruktor die Seitenindikatoren erstellt und platziert. Jeder Indikator wird mithilfe des \gls{gls_ctk} Widgets \lstinline{CTkButton} erstellt und ist somit grundsätzlich ein grauer, runder Button ohne Text. Mithilfe der globalen Variable \lstinline{current_page} wird dabei erkannt, ob die zum Button zugehörige Seite angezeigt wird und daraus abgeleitet, ob dieser hellgrau oder dunkelgrau erstellt werden soll.
 
 Die Position der Seitenindikatoren wird basierend auf der Anzahl der Seiten dynamisch berechnet. Wenn mehr als eine Seite vorhanden ist, wird für jede Seite in der Liste \lstinline{page_frame_list} ein Indikator erstellt und platziert, wie im folgenden Code vereinfacht gezeigt wird.
 
@@ -147,7 +147,7 @@ Das Ergebnis der mit \gls{gls_python} und \gls{gls_ctk} programmierten \ac{gui} 
 Nachdem die Erstellung der einzelnen Seiten mittels \gls{gls_ctk} erfolgt ist, müssen Methoden definiert werden, um an der \acs{rltanzeige} mit zwei Tastern zwischen diesen Seiten wechseln zu können. Eine kurze Erklärung dieser Methoden erfolgt in diesem Kapitel.
 
 Um auf die \ac{gpio} Pins des Raspberry PIs \bzw die Taster der \acs{rltanzeige} zugreifen zu können wird die \enquote{RPi.GPIO} Bibliothek verwendet, welche im untenstehenden Code als \lstinline{GPIO} importiert wurde. Das Ganze geschieht in der Methode \lstinline{setup_buttons()}, die als Teil des Anfangs des Programms ausgeführt wird.
-Als Erstes wird mit \lstinline{setmode(GPIO.BOARD)} angegeben, dass die pysikalischen Pinnummern des Raspberry PIs verwendet werden. Alternativ kann \lstinline{setmode(GPIO.BCM)} verwendet werden, um die logischen \ac{gpio} Pinnummern zu verwenden. Daraufhin wird jedem Taster ein \ac{gpio} Pin zugeordnet. Weiters werden für die beiden Taster entsprechende Ereignisdetektoren eingerichtet, die bei Betätigung der Taster die entsprechende Callback-Funktion (\lstinline{last_page()} \bzw \lstinline{next_page()}) aufrufen.
+Als Erstes wird mit \lstinline{setmode(GPIO.BOARD)} angegeben, dass die physikalischen Pinnummern des Raspberry PIs verwendet werden. Alternativ kann \lstinline{setmode(GPIO.BCM)} verwendet werden, um die logischen \ac{gpio} Pinnummern zu verwenden. Daraufhin wird jedem Taster ein \ac{gpio} Pin zugeordnet. Weiters werden für die beiden Taster entsprechende Ereignisdetektoren eingerichtet, die bei Betätigung der Taster die entsprechende Callback-Funktion (\lstinline{last_page()} \bzw \lstinline{next_page()}) aufrufen.
 
 \begin{pythoncode}
 def setup_buttons():
@@ -162,7 +162,7 @@ def setup_buttons():
     #[Gleiche Konfiguration für den anderen Taster. Der callback wird aber auf "next_page" gesetzt]
 \end{pythoncode}
 
-Die Funktion \lstinline{last_page()} wird aufgerufen, wenn der \enquote{Zurück}-Taster gedrückt wird. Zuerst wird überprüft, ob es mehr als eine Seite gibt, da sonst kein Wechseln auf eine andere Seite möglich wäre. Dann wird die globale Variable \lstinline{current_page} um eins verringert, um zur vorherigen Seite zu wechseln. Falls \lstinline{current_page} dabei negativ wird, wird \lstinline{current_page} auf den Index der letzten Seite gesetzt, um eine zyklische Navigation der Seiten zu ermöglichen. Anschließend werden sowohl  die Seiten an sich als auch die Farbe die Seitenindikatoren aktualisiert, um den aktuellen Stand zu reflektieren. Dabei werden zuerst alle Seiten \bzw \lstinline{PageFrames} ausgeblendet und daraufhin die aktuelle Seite wieder sichtbar gemacht. Auch bei den Seitenidentifikatoren werden zuerst alle hellgrau gemacht, bevor der zur aktuellen Seite zugehörige Indikator in einem dunkleren grau dargestellt wird.
+Die Funktion \lstinline{last_page()} wird aufgerufen, wenn der \enquote{Zurück}-Taster gedrückt wird. Zuerst wird überprüft, ob es mehr als eine Seite gibt, da sonst kein Wechseln auf eine andere Seite möglich wäre. Dann wird die globale Variable \lstinline{current_page} um eins verringert, um zur vorherigen Seite zu wechseln. Falls \lstinline{current_page} dabei negativ wird, wird \lstinline{current_page} auf den Index der letzten Seite gesetzt, um eine zyklische Navigation der Seiten zu ermöglichen. Anschließend werden sowohl  die Seiten an sich als auch die Farbe der Seitenindikatoren aktualisiert, um den aktuellen Stand zu reflektieren. Dabei werden zuerst alle Seiten \bzw \lstinline{PageFrames} ausgeblendet und daraufhin die aktuelle Seite wieder sichtbar gemacht. Auch bei den Seitenidentifikatoren werden zuerst alle hellgrau gemacht, bevor der zur aktuellen Seite zugehörige Indikator in einem dunkleren grau dargestellt wird.
 
 \begin{pythoncode}
 def last_page(channel):
@@ -182,5 +182,4 @@ def last_page(channel):
     page_indicator_list[current_page].configure(fg_color="dunkelgrau")
 \end{pythoncode}
 
-Die \lstinline{next_page()} Methode wird dann aufgerufen, wenn der \enquote{Weiter}-Taster gedrückt wird. Sie funktioniert ähnlich wie \lstinline{last_page()}, jedoch wird \lstinline{current_page} um eins erhöht, um zur nächsten Seite zu wechseln. Dazu wird \lstinline{current_page}, um eine zyklische Navigation zu ermöglichen, auf 0 zurückgesetzt, wenn die Variable den Index der letzten Seite überschreitet.
-
+Die \lstinline{next_page()} Methode wird dann aufgerufen, wenn der \enquote{Weiter}-Taster gedrückt wird. Sie funktioniert ähnlich wie \lstinline{last_page()}, jedoch wird \lstinline{current_page} um eins erhöht, um zur nächsten Seite zu wechseln. Dazu wird \lstinline{current_page} auf 0 zurückgesetzt, um eine zyklische Navigation zu ermöglichen, wenn die Variable den Index der letzten Seite überschreitet.

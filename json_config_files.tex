@@ -123,7 +123,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 	\item \textbf{Haupt-Konfigurationsdatei} (\enquote{main\_config\_file.json}):
 	Wie in Kapitel \ref{gui_design} beschrieben, ist zur übersichtlichen Darstellung der Messwerte eine Aufteilung in mehrere Abschnitte bzw. Seiten erforderlich. Auf diesen Seiten werden jeweils sinngemäß Messwerte zusammengefasst. Die Konfiguration der Seiten erfolgt in der Haupt-Konfigurationsdatei mithilfe von zwei parallelen Arrays: dem \enquote{pages}-Array und dem \enquote{devices}-Array. 	
 	
-	Im \enquote{devices} Array werden die alle Komponenten \bzw Quellen der \acs{rltanlage}, nämlich Ventilatoren und \gls{qbm}s (vgl. Abb. \ref{fig:vereinfachter_aufbau_dateikonzept}), aufgeführt, von denen Messwerte ausgelesen werden sollen. Die Parameter des \enquote{devices} Arrays sind in Tab. \ref{tab:devices_array_parameter} näher erläutert.
+	Im \enquote{devices} Array werden alle Komponenten \bzw Quellen der \acs{rltanlage}, nämlich Ventilatoren und \gls{qbm}s (vgl. Abb. \ref{fig:vereinfachter_aufbau_dateikonzept}), aufgeführt, von denen Messwerte ausgelesen werden sollen. Die Parameter des \enquote{devices} Arrays sind in Tab. \ref{tab:devices_array_parameter} näher erläutert.
 
  \begin{longtable}{p{\dimexpr 0.15\textwidth-2\tabcolsep} p{0.52\textwidth} | p{0.28\textwidth}}
     \caption{Parameter des \enquote{devices} Array der Haupt-Konfigurationsdatei}
@@ -288,7 +288,7 @@ Es folgt eine aufbauende Beschreibung und Erklärung der drei Dateitypen:
 \end{enumerate}
 
 %Bedienungsanleitung für Servicetechniker erwähnen
-Zuletzt ist zu erwähnen, dass Servicetechnikerinnen und Servicetechniker zur Installation einen Ordner bekommen. Darin befindet sich direkt eine Vorlage für die \enquote{main\_config\_file.json} Datei, welche im Normalfall die einzige Datei sein sollte, die bearbeitet bzw. verändert wird.
+Zuletzt ist zu erwähnen, dass Servicetechnikerinnen und Servicetechniker zur Installation einen Ordner bekommen. Darin befindet sich eine Vorlage für die \enquote{main\_config\_file.json} Datei, welche im Normalfall die einzige Datei sein sollte, die bearbeitet bzw. verändert wird.
 In einem Unterordner (\enquote{devices}) sind Geräte-Konfigurationsdateien und die Sensor-Konfigurationsdatei zu finden. Diese Dateien müssen, wie gerade erwähnt, nur verändert werden, wenn noch nie verwendete Komponenten, wie z.B. eine neue Art von Ventilator oder Sensor, in der \acs{rltanlage} verbaut werden.
 
 Ein Beispiel zu allen Dateitypen ist im Anhang zu finden.
