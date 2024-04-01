@@ -45,7 +45,7 @@ In der Entwicklungs- \ac{rltanlage} wird die Schnittstelle COM7 (USB-Port des La
 	\label{fig:modbus_usbkabel}
 \end{figure}
 
-Danach werden die einzelnen Komponenten (Komponenten der Entwicklungs- \ac{rltanlage}) der seriellen Kommunikation angegeben (oberer Teil des Shortbus Fensters) Abb.~\ref{fig:Shortbuseingabe}:
+Danach werden die einzelnen Komponenten (Komponenten der Entwicklungs- \ac{rltanlage}) der seriellen Kommunikation angegeben (oberer Teil des Shortbus Fensters) (Abb.~\ref{fig:Shortbuseingabe}):
 \begin{itemize}
 	\item Baudrate (9600)
 	\item Parity (Even)
@@ -56,7 +56,7 @@ Danach werden die einzelnen Komponenten (Komponenten der Entwicklungs- \ac{rltan
 	\item Read Funktion (FC 3 - Holding Register)
 \end{itemize}
 
-Beschreibung der Werte und Funktion von: Baudrate, Parity, Stop Bits, Read Funktion siehe (Kapitel \ref{modbus_funktionsweise}).
+Beschreibung der Werte und Funktion von: Baudrate, Parity, Stop Bits, Read Funktion (Siehe Kapitel \ref{modbus_funktionsweise}).
 Im Projekt wurde zudem die Funktion Write Multiple verwendet (Abb.~\ref{fig:writemultiple}). Diese Funktion wurde eingesetzt, um zu testen, ob das passende Register für \zB die Ventilatoren, ausgelesen wurde. Dabei wurde in das Register ein Wert eingeschrieben und getestet, ob die Ventilatoren auf einen veränderten Sollwert reagieren (sich mit vorgegebenen Sollwert Drehen). Das Gleiche gilt auch für die angesteuerten Klappen \zB WRG-Klappe (Wärmerückgewinnungs-Klappe). Dort wurde zum Testen dauerhaft ein Wert eingeschrieben und nachgesehen, ob sich die Klappen-Stellung ändert.
 
 \begin{figure}[H]
@@ -85,7 +85,7 @@ Im Projekt wurde zudem die Funktion Write Multiple verwendet (Abb.~\ref{fig:writ
 
 In der \ac{rltanlage} wurden mehrere \gls{qbm} von Siemens eingebaut. Aufgabe war es bei diesen und allen anderen Bauteilen, welche in der \ac{rltanlage} verbaut waren, die Register zu den einzelnen Werten herauszufinden um diese später in den Konfigurations-Files und für die Berechnungen bereitzustellen. 
 
-Die ersten Versuche (siehe  Abb.~\ref{fig:ersteauslesung}), etwas auszulesen wurden, durch einen einfachen Aufbau von einem oder zwei \gls{qbm}  bewerkstelligt. Dabei wurde herausgefunden, auf welchen Register der Druckunterschied angezeigt wird. Durch das Anschließen von Temperatursensoren konnte man überprüfen, ob auch die Register für die Analog Input Ports (Temperatur) auf die richtigen Register geschrieben wurden.
+Die ersten Versuche (Siehe  Abb.~\ref{fig:ersteauslesung}), etwas auszulesen wurden, durch einen einfachen Aufbau von einem oder zwei \gls{qbm}  bewerkstelligt. Dabei wurde herausgefunden, auf welchen Register der Druckunterschied angezeigt wird. Durch das Anschließen von Temperatursensoren konnte man überprüfen, ob auch die Register für die Analog Input Ports (Temperatur) auf die richtigen Register geschrieben wurden.
 
 \begin{figure}[H]
 	\centering
@@ -94,7 +94,7 @@ Die ersten Versuche (siehe  Abb.~\ref{fig:ersteauslesung}), etwas auszulesen wur
 	\label{fig:ersteauslesung}
 \end{figure}
 
-Beschreibung der Ansteuerung anhand eines Beispiels Abb.~\ref{fig:Shortbusausgabe} (\gls{qbm}):
+Beschreibung der Ansteuerung anhand eines Beispiels (Abb.~\ref{fig:Shortbusausgabe}) (\gls{qbm}):
 \begin{itemize}
 	\item Bei diesem \gls{qbm}  kommt auf dem ersten Register die genaue Typenbezeichnung des \gls{qbm} .  
 	\item Auf den Registern 5 und 7 kommen die gemessenen Druckunterschieden gemessen in Pascal(Pa) herein. 
