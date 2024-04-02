@@ -4,9 +4,9 @@
 \glossentry{abluft}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{18\delimN 19}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{21}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{28}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{30\delimN 31}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{33\delimR 35}}}%
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{29\delimR 31}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33\delimR 36}}}%
 \glossentry{gls_adu}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{39}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{44}\delimN 
@@ -64,7 +64,7 @@
 \glsgroupheading{F}\relax \glsresetentrylist %
 \glossentry{fortluft}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{31}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{34}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{34\delimN 35}}}\glsgroupskip
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{gls_gpio}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{86\delimN 87}\delimN 
@@ -112,6 +112,7 @@
 		\setentrycounter[]{page}\glsnumberformat{112\delimR 114}}}%
 \glossentry{modbus}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{10}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{13}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{15}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{17}\delimN 
@@ -122,7 +123,7 @@
 		\setentrycounter[]{page}\glsnumberformat{90\delimR 94}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{99}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{102\delimN 103}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{109}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{108}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{114}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{127}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{130}\delimN 
@@ -143,7 +144,9 @@
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{63\delimR 67}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{86}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{102\delimN 103}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{121}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{124}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{126}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{147}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{160}\delimN 
@@ -151,7 +154,7 @@
 \glsgroupheading{Q}\relax \glsresetentrylist %
 \glossentry{qbm}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{30\delimN 31}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{33\delimN 34}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{34}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{46}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{49}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{52\delimN 53}\delimN 
@@ -195,7 +198,7 @@
 \glossentry{tdot}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{6\delimN 7}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{28}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{32\delimR 35}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{33\delimR 36}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{159}}}%
 \glossentry{gls_thread}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{112\delimN 113}}}%
@@ -226,7 +229,7 @@
 \glossentry{zuluft}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{18}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{21\delimN 22}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{28}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{30\delimN 31}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{29\delimR 31}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{34\delimN 35}}}%
 \end{theglossary}\glossarypostamble
