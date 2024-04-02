@@ -33,7 +33,7 @@ Im unteren Teil (Abb.~\ref{fig:Shortbusausgabe}) erfolgt die Ausgabe der einzeln
 
 
   
-
+\newpage
 \subsection{Shortbus Anwendung in der Entwicklungs- \ac{rltanlage}}
 
 In der Entwicklungs- \ac{rltanlage} wird die Schnittstelle COM7 (USB-Port des Laptops) verwendet, um eine Kommunikation (Connection) mit dem \gls{modbus} aufzubauen. Welche COM Schnittstelle die richtige ist, kann im Windows Geräte-Manager nachgesehen werden. Dabei wird der \gls{modbus} per Kabel  (Abb.~\ref{fig:modbus_usbkabel}) erweitert und auf der einen Seite mit dem Laptop und dessen USB-Schnittstelle verbunden. Die andere Seite wird in der \ac{rltanlage} an den bestehenden \gls{modbus} angeschlossen. 
@@ -57,7 +57,7 @@ Danach werden die einzelnen Komponenten (Komponenten der Entwicklungs- \ac{rltan
 \end{itemize}
 
 Beschreibung der Werte und Funktion von: Baudrate, Parity, Stop Bits, Read Funktion (Siehe Kapitel \ref{modbus_funktionsweise}).
-Im Projekt wurde zudem die Funktion Write Multiple verwendet (Abb.~\ref{fig:writemultiple}). Diese Funktion wurde eingesetzt, um zu testen, ob das passende Register für \zB die Ventilatoren, ausgelesen wurde. Dabei wurde in das Register ein Wert eingeschrieben und getestet, ob die Ventilatoren auf einen veränderten Sollwert reagieren (sich mit vorgegebenen Sollwert Drehen). Das Gleiche gilt auch für die angesteuerten Klappen \zB WRG-Klappe (Wärmerückgewinnungs-Klappe). Dort wurde zum Testen dauerhaft ein Wert eingeschrieben und nachgesehen, ob sich die Klappen-Stellung ändert.
+Im Projekt wurde zudem die Funktion Write Multiple verwendet (Abb.~\ref{fig:writemultiple}). Diese Funktion wurde eingesetzt, um zu testen, ob das passende Register für \zB die Ventilatoren, ausgelesen wurde. Dabei wurde in das Register ein Wert eingeschrieben und getestet, ob die Ventilatoren auf einen veränderten Sollwert reagieren (sich mit vorgegebenen Sollwert Drehen). Das Gleiche gilt auch für die angesteuerten Klappen \zB WRG-Klappe (Wärmerückgewinnungsklappe). Dort wurde zum Testen dauerhaft ein Wert eingeschrieben und nachgesehen, ob sich die Klappen-Stellung ändert.
 
 \begin{figure}[H]
 	\centering
