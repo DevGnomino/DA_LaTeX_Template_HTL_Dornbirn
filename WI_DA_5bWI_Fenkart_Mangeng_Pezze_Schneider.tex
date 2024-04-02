@@ -120,14 +120,14 @@ list-final-separator={ und }}
 \phantomsection
 \clearpage
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
-\listoffigures
+{\renewcommand{\addvspace}[1]{} \listoffigures}
 
 \phantomsection
 \clearpage
 \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-\listoftables
+{\renewcommand{\addvspace}[1]{} \listoftables}
 
-\printglossaries
+\printglossary[nonumberlist]
 
 \phantomsection
 \clearpage
@@ -135,6 +135,4 @@ list-final-separator={ und }}
 \printacronyms[name=Abkürzungen]
 
 \include{Anhang}
-
-
 \end{document}
