@@ -1,6 +1,6 @@
 \subsection{Einlesen der Konfigurationsdateien} \label{einlesen_konfigurationsdateien}
 \paragraph{Klassenstruktur}
-Im Backend wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine \lstinline{Page}-, eine \lstinline{Measurement}- und eine \lstinline{Sensor} Klasse. Eine \lstinline{Measurement} Instanz kann mehrere \lstinline{Sensor} Instanzen enthalten, da manche \lstinline{Measurements} zur Berechnung (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die \lstinline{Page} Instanzen speichern die jeweiligen \lstinline{Measurement} Instanzen, die auf dieser Seite angezeigt werden sollen. Die \lstinline{Page} Instanzen existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele \lstinline{Page} Instanzen wie \lstinline{PageFrame} Instanzen (vgl. Kapitel \ref{tkintercode}) und gleich viele \lstinline{Measurement} Instanzen wie \lstinline{MeasurementFrame} Instanzen. (siehe Abb.~\ref{fig:uml_backend}).
+Im Backend wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine \lstinline{Page}, eine \lstinline{Measurement} und eine \lstinline{Sensor} Klasse. Eine \lstinline{Measurement} Instanz kann mehrere \lstinline{Sensor} Instanzen enthalten, da manche \lstinline{Measurements} zur Berechnung (z.B. der Wärmerückgewinnungsgrad) mehrere Messwerte benötigen. Die \lstinline{Page} Instanzen speichern die jeweiligen \lstinline{Measurement} Instanzen, die auf dieser Seite angezeigt werden sollen. Die \lstinline{Page} Instanzen existieren, damit der ausgelesene Parameter an der richtigen Stelle auf der \acs{gui} verändert werden kann. Es gibt nämlich gleich viele \lstinline{Page} Instanzen wie \lstinline{PageFrame} Instanzen (vgl. Kapitel \ref{tkintercode}) und gleich viele \lstinline{Measurement} Instanzen wie \lstinline{MeasurementFrame} Instanzen. (siehe Abb.~\ref{fig:uml_backend}).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/UML_Backend}
@@ -11,7 +11,7 @@ Im Backend wird die Klassenstruktur der \ac{gui} nachgebildet. Es gibt eine \lst
 Die \lstinline{Page}, \lstinline{Measurement} und \lstinline{Sensor} Instanzen werden beim Einlesen der \acs{json} Konfigurationsdateien aufgrund der Objekte im \enquote{pages}  Array (vgl. Kapitel \ref{json_config_files}) erstellt und in Listen gespeichert. \newline
 Zum Einlesen werden drei Funktionen implementiert:
 \begin{itemize}
-	\item \textbf{\lstinline{load_config()}:} Diese Funktion lädt die gesamte Haupt-Konfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die \lstinline{Page}-, \lstinline{Measurement}- und \lstinline{Sensor} Instanzen erstellt. Dafür kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
+	\item \textbf{\lstinline{load_config()}:} Diese Funktion lädt die gesamte Haupt-Konfigurationsdatei ein. Es werden die angeschlossenen Geräte ermittelt und die \lstinline{Page}, \lstinline{Measurement} und \lstinline{Sensor} Instanzen erstellt. Dafür kommen die beiden folgenden Hilfsfunktionen zum Einsatz.
     \begin{itemize}
 		\item \textbf{\lstinline{get_sensor_unit()}:} Liest die Sensor-Konfigurationsdateien ein. Dadurch können den Messwerten die richtigen Maßeinheiten zugewiesen werden.
 		\item \textbf{\lstinline{get_sensor_data()}:} Liest aus der Geräte-Konfigurationsdatei am angegebenen Port die Parameter aus und liefert diese Parameter als \acs{json} Objekt zurück. Sie liest das Register, den \gls{modbus} Function Code und die Skalierung aus. Die Skalierung wird anhand der Maßeinheit aus der Sensor-Konfigurationsdatei ausgewählt.
@@ -63,4 +63,4 @@ for measurement in page_measurements:
 
 %\pythonfile[firstline=125, lastline=197]{Code/modbus.py}
 
-Im Konstruktor der \lstinline{Page}- \lstinline{Measurement}- und \lstinline{Sensor} Klasse werden die ausgelesenen Variablen in Instanzvariablen gespeichert.
+Im Konstruktor der \lstinline{Page}, \lstinline{Measurement} und \lstinline{Sensor} Klasse werden die ausgelesenen Variablen in Instanzvariablen gespeichert.

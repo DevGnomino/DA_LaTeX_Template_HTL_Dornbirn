@@ -35,7 +35,7 @@ def usb_routine():
 	return False # Fehler
 \end{pythoncode}
 
-Es gibt eine Hilfsfunktion namens \lstinline{start_window()}, mit der Meldungen in einem Pop-Up Fenster angezeigt werden können. Dabei wird eine \lstinline{Tk} Instanz erstellt, welches ein Tkinter Fenster darstellt. Zuerst wird die Überschrift, der Vollbildmodus und die Hintergrundfarbe des Fensters konfiguriert. Danach wird ein neues Label erstellt. Als Textinhalt wird der Parameter message zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn \gls{gls_ctk} bietet die Möglichkeit eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. Hier wird eine Lambda Funktion übergeben, die die \lstinline{Tk} Instanz  \lstinline{msg_window} zerstört.
+Es gibt eine Hilfsfunktion namens \lstinline{start_window()}, mit der Meldungen in einem Pop-Up Fenster angezeigt werden können. Dabei wird eine \lstinline{Tk} Instanz erstellt, welches ein Tkinter Fenster darstellt. Zuerst wird die Überschrift, der Vollbildmodus und die Hintergrundfarbe des Fensters konfiguriert. Danach wird ein neues Label erstellt. Als Textinhalt wird der Parameter \lstinline{message} zugewiesen. Das Fenster schließt sich nach 7 Sekunden wieder, denn \gls{gls_ctk} bietet die Möglichkeit eine Funktion nach Ablauf einer eingestellten Zeit auszuführen. Hier wird eine Lambda Funktion übergeben, die die \lstinline{Tk} Instanz  \lstinline{msg_window} zerstört.
 \begin{pythoncode}
 def start_window(message):
 	msg_window = tk.Tk()
