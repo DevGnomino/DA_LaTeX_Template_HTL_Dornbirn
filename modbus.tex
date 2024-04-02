@@ -1,11 +1,10 @@
 \label{modbus_kapitel}
 Die offizielle Definition des \gls{modbus} Protokolls von der \gls{modbus} Organization \cite[vgl.][]{Modbus_Organization_AP:2012} lautet:
 \begin{quotation}
-	\enquote{\emph{
-			MODBUS is an application layer messaging protocol, positioned at level 7 of the OSI model, which provides client/server communication between devices connected on different types of buses or networks.}}
+	\noindent\emph{\enquote{MODBUS is an application layer messaging protocol, positioned at level 7 of the OSI model, which provides client/server communication between devices connected on different types of buses or networks.}}
 \end{quotation}
 
-Der \gls{modbus} Standard definiert ein Application Layer Kommunikations Protokoll, das sich auf Schicht 7 des \gls{osi} Modells befindet. Es bietet \gls{client}/\gls{server} Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind.
+\noindent Der \gls{modbus} Standard definiert ein Application Layer Kommunikations Protokoll, das sich auf Schicht 7 des \gls{osi} Modells befindet. Es bietet \gls{client}/\gls{server} Kommunikation zwischen Geräten, die auf verschiedenen Bussen oder Netzwerken angeschlossen sind.
 
 Das \gls{modbus} Protokoll wurde 1979 von der Firma Gould-Modicon entwickelt. Besonders wird das Protokoll in Mess- und Regelsystemen eingesetzt, da es speziell für die Kommunikation mit speicherprogrammierbaren Steuerungen entwickelt wurde. Das \gls{modbus} Protokoll ist ein Industriestandard. Es bietet einen universellen Übertragungsweg, ganz egal welches Übertragungsmedium genutzt wird. Es funktioniert sowohl über ein serielles Bussystem, als auch über eine Netzwerkverbindung. Außerdem können mit sogenannten Protokollumsetzern Geräte mit serieller Kommunikation in ein Netzwerksystem eingebettet werden. Durch den Einsatz von Paritätsprüfungen und Checksummen gewährleistet das Protokoll eine zuverlässige Übertragung. \cite[vgl.][]{KUNBUS_GmbH:o.J., kvm-concepts_GmbH:2022}
 
@@ -23,7 +22,7 @@ Folgende Grafik (Siehe Abb.~\ref{fig:modbus_stack}) illustriert horizontal die u
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_layers}
-	\caption{\gls{modbus} Stack (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
+	\caption[\gls{modbus} Stack (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf}, Zugriff am 25.02.2024)]{\gls{modbus} Stack (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
 	\label{fig:modbus_stack}
 \end{figure}
 
@@ -48,7 +47,7 @@ Der Grundbestandteil des \gls{modbus} Protokolls ist die sogenannte \acf{pdu}. D
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/General_Modbus_Frame_Changed}
-	\caption{\gls{modbus} Dataframe (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf} [angepasst])}
+	\caption[\gls{modbus} Dataframe (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf} (angepasst), Zugriff am 24.01.2024)]{\gls{modbus} Dataframe (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
 	\label{fig:modbus_adu_pdu}
 \end{figure}
 
@@ -78,7 +77,7 @@ Jeder dieser Blöcke hat einen separaten Bereich im Speicher (Siehe Abb.~\ref{fi
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{Bilder/Modbus_Data_Model_with_separate_block}
-	\caption{\gls{modbus} Daten in separaten Blöcken (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
+	\caption[\gls{modbus} Daten in separaten Blöcken (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf}, Zugriff am 24.01.2024)]{\gls{modbus} Daten in separaten Blöcken (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
 	\label{fig:modbus_register_many_blocks}
 \end{figure}
 
@@ -86,7 +85,7 @@ Alternativ können die Blöcke auch zusammen geschaltet werden. Die Register kö
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{Bilder/Modbus_Data_Model_with_one_block}
-	\caption{\gls{modbus} Daten in einem Block (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
+	\caption[\gls{modbus} Daten in einem Block (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf}, Zugriff am 24.01.2024)]{\gls{modbus} Daten in einem Block (Quelle: \url{https://modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf})}
 	\label{fig:modbus_register_one_block}
 \end{figure}
 
@@ -109,7 +108,7 @@ Der Aufbau eines \gls{modbus} \acs{rtu} Frames ist in Abb.~\ref{fig:modbus_frame
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Bilder/Modbus_frame}
-	\caption{\gls{modbus} \acs{rtu} Frame (Quelle: \url{https://www.modbus.org/docs/Modbus_over_serial_line_V1.pdf})}
+	\caption[\gls{modbus} \acs{rtu} Frame (Quelle: \url{https://www.modbus.org/docs/Modbus_over_serial_line_V1.pdf}, Zugriff am 27.01.2024)]{\gls{modbus} \acs{rtu} Frame (Quelle: \url{https://www.modbus.org/docs/Modbus_over_serial_line_V1.pdf})}
 	\label{fig:modbus_frame}
 \end{figure}
 
@@ -156,7 +155,7 @@ Eine Darstellung der Spannungspegel der beiden Leitungen (dargestellt in Rot und
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{Bilder/RS485_signal_illustration}
-	\caption{\gls{gls_rs485} Signal (Quelle: \url{https://www.lorric.com/en/WhyLORRIC/Flowmeter/what-is-rs485})}
+	\caption[\gls{gls_rs485} Signal (Quelle: \url{https://www.lorric.com/en/WhyLORRIC/Flowmeter/what-is-rs485}, Zugriff am 22.02.2024)]{\gls{gls_rs485} Signal (Quelle: \url{https://www.lorric.com/en/WhyLORRIC/Flowmeter/what-is-rs485})}
 	\label{fig:rs485_signal}
 \end{figure}
 
