@@ -3,14 +3,14 @@ In diesem Kapitel werden kurz die erforderlichen Schritte erläutert, um einen R
 Zur Entwicklung der Diplomarbeit wurden unterschiedliche Versionen des Raspberry PIs genutzt (Raspberry PI 3 Modell B, Raspberry PI Zero). Dabei kommt als Betriebssystem Raspberry PI OS (Version 11 \enquote{bullseye}) zum Einsatz, welches leicht adaptiert wird.
 
 \subsection{Headless Setup}\label{raspi_headless_setup}
-Während der Entwicklung der \ac{rltanzeige} wird mit mehreren Raspberry PIs gearbeitet, die nicht alle gleichzeitig an einem externen Bildschirm angeschlossen werden können. Außerdem verfügt das Raspberry PI Zero Modell aufgrund seiner geringen Größe nur über einen Mini-\ac{hdmi} Anschluss, wofür ein spezielles Kabel \bzw ein spezieller Adapter benötigt wird, und somit nicht einfach ein externer Bildschirm angeschlossen werden kann. Daher wird ein sog. \enquote{Headless Setup} notwendig, bei dem der Raspberry PI ohne angeschlossenen Bildschirm, Tastatur oder Maus gestartet werden kann. Mittels \ac{ssh} oder \ac{vnc} Client kann dann auf den Raspberry PI zugegriffen werden.
+Während der Entwicklung der \ac{rltanzeige} wird mit mehreren Raspberry PIs gearbeitet, die nicht alle gleichzeitig an einen externen Bildschirm angeschlossen werden können. Außerdem verfügt das Raspberry PI Zero Modell aufgrund seiner geringen Größe nur über einen Mini-\ac{hdmi} Anschluss, wofür ein spezielles Kabel \bzw ein spezieller Adapter benötigt wird, und somit nicht einfach ein externer Bildschirm angeschlossen werden kann. Daher wird ein sog. \enquote{Headless Setup} notwendig, bei dem der Raspberry PI ohne angeschlossenen Bildschirm, Tastatur oder Maus gestartet werden kann. Mittels \ac{ssh} oder \ac{vnc} Client kann dann auf den Raspberry PI zugegriffen werden.
 \cite[vgl.][]{Piltch:2022}
 
 \paragraph{Aktivierung von \textit{SSH}}
 \ac{ssh} ist ein Netzwerkprotokoll, das verwendet wird, um sich sicher über das Netzwerk mit einem anderen Gerät zu verbinden und darauf Operationen auszuführen. \ac{ssh} ist am Raspberry PI standardmäßig deaktiviert.  Daher muss \ac{ssh}, durch das Erstellen einer Datei Namens \enquote{ssh.} auf der SD-Karte, aktiviert werden. Nun kann eine kabellose oder kabelgebundene \ac{ssh} Verbindung mit dem Raspberry PI aufgebaut werden.
 
 \paragraph{Kabellose Verbindung über \textit{SSH}}
-Für eine kabellose Verbindung über \ac{ssh} muss zuerst auf dem Raspberry PI ein Netzwerkzugang konfiguriert werden. Dazu wird auf der SD-Karte eine Konfigurationsdatei Namens \enquote{wpa\_supplicant.conf} mit folgendem Inhalt angelegt:
+Für eine kabellose Verbindung über \ac{ssh} muss zuerst auf dem Raspberry PI ein Netzwerkzugang konfiguriert werden. Dazu wird auf der SD-Karte eine Konfigurationsdatei Namens \enquote{wpa\_supplicant.conf} mit folgendem Inhalt angelegt \cite[vgl.][]{Piltch:2022}:
 \begin{textcode}
 country=DE
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -29,7 +29,7 @@ ssh [Username]@[IP-Adresse]
 \end{minted}
 
 \paragraph{Kabelgebundene Verbindung über \textit{SSH}}
-Da die normale Version des Raspberry PI Zero keine kabellose Netzwerkverbindung unterstützt, ist es notwendig, eine kabelgebundene Verbindung herzustellen, um \ac{ssh} zu verwenden. Dazu sind folgende Schritte notwendig:
+Da die normale Version des Raspberry PI Zero keine kabellose Netzwerkverbindung unterstützt, ist es notwendig, eine kabelgebundene Verbindung herzustellen, um \ac{ssh} zu verwenden. Dazu sind folgende Schritte notwendig \cite[vgl.][]{Piltch:2022}:
 
 \begin{enumerate}
     \item Am Ende der Datei \enquote{config.txt} auf der SD-Karte folgende Zeile hinzufügen: \begin{textcode}
@@ -41,7 +41,7 @@ Da die normale Version des Raspberry PI Zero keine kabellose Netzwerkverbindung 
     \end{textcode}
     \item Den Raspberry PI Zero über USB mit einem Computer verbinden, wobei am Raspberry PI der Daten-USB-Anschluss verwendet werden muss und nicht der Strom-USB-Anschluss.
     \item Apple Bonjour-Druckdienste auf dem Windows Computer herunterladen.
-    \item Nun lässt sich nun der Raspberry PI mit dem folgenden Befehl über die Kommandozeile verbinden:
+    \item Nun lässt sich der Raspberry PI mit dem folgenden Befehl über die Kommandozeile verbinden:
     \begin{minted}{console}
 ssh [Username]@[RaspberryPIZero-Name].local
     \end{minted}

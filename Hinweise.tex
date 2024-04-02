@@ -1,6 +1,6 @@
 \addchap{Begriffserklärung} \label{begriffserklaerung}
 
-\noindent In dieser Diplomarbeit werden zur einfacheren Lesbarkeit manche Bezeichnungen verkürzt geschrieben \bzw nicht voll ausgeschrieben. In Tab.~\ref{tab:begriffserklaerung} sind oft verwendete Abkürzungen mit den jeweils dazugehörenden langen Bezeichnungen zu sehen. Außerdem sind jeglich verwendete Akronyme am Ende der Diplomarbeit im Abkürzungsverzeichnis zu finden. 
+\noindent In dieser Diplomarbeit werden zur einfacheren Lesbarkeit gewisse Bezeichnungen verkürzt geschrieben \bzw nicht voll ausgeschrieben. In Tab.~\ref{tab:begriffserklaerung} sind oft verwendete Abkürzungen mit den jeweils dazugehörenden langen Bezeichnungen zu sehen. Außerdem sind jeglich verwendete Akronyme am Ende der Diplomarbeit im Abkürzungsverzeichnis zu finden. 
 \begin{table}[h]
 	\caption{Begriffserklärung \label{tab:begriffserklaerung}}
 	\begin{tabularx}{\textwidth}{@{}c|c|X@{}}
@@ -16,15 +16,15 @@
 
 
 %Modbus - Client/Server
-In vielen älteren Dokumentation über das Modbus Protokoll finden sich veraltete Bezeichnungen. In dieser Diplomarbeit wird auf die alten Bezeichnungen verzichtet und die Neuen verwendet. In einzelnen Abbildungen können die veralteten Bezeichnungen jedoch noch zu finden sein (siehe Tab.~\ref{tab:modbus_bezeichnung}). 
+In vielen älteren Dokumentation über das \gls{modbus} Protokoll finden sich veraltete Bezeichnungen. In dieser Diplomarbeit wird auf die alten Bezeichnungen verzichtet und die Neuen verwendet. In einzelnen Abbildungen können die veralteten Bezeichnungen jedoch noch zu finden sein (siehe Tab.~\ref{tab:modbus_bezeichnung}). 
 \begin{table}[h]
 	\caption{Modbus Bezeichnungen \label{tab:modbus_bezeichnung}}
 	\begin{tabularx}{\textwidth}{@{}c|c|X@{}}
 		\toprule
 		\textbf{Neu} & \textbf{Veraltet} & \textbf{Beschreibung} \\
 		\midrule
-		Client & Master & Initialisiert die Kommunikation und kann Daten von den Servern anfordern \\
-		Server & Slave & Wird vom Client angesprochen, um Daten zu senden und Handlungen auszuführen \\
+		\gls{client} & Master & Der \gls{client} initialisiert die Kommunikation mit den \gls{server}n und kann von ihnen Daten anfordern. \\
+		\gls{server} & Slave & Der \gls{server} wird vom \gls{client} angesprochen, um Daten zu senden und Handlungen auszuführen. \\
 		\bottomrule
 	\end{tabularx}
 \end{table}

@@ -9,7 +9,7 @@ def data_threading(app):
 \end{pythoncode}
 
 In diesem \gls{gls_thread} werden periodisch, jeweils in 0,4 Sekunden Abständen die Daten der Sensoren erneuert. Die Sensoren sind in den Measurements gespeichert. Es werden alle \lstinline{Page} Instanzen und darin alle \lstinline{Measurement} Instanzen iteriert und die \lstinline{run_calculation()} Methode aufgerufen. Diese liefert den ausgelesenen Wert zurück, der dann auf der \acs{gui} an der entsprechenden Stelle umgeändert wird. Dies passiert mit der \lstinline{set_page_text_at()} Methode der \lstinline{App} Klasse (siehe Kapitel \ref{tkintercode}). 
-\newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die zuletzt verfügbaren Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall "N/A" bzw. veraltete Werte an, bis die Daten erneuert werden. 
+\newline Mit dieser Implementierung werden kontinuierlich alle Werte ausgelesen und erneuert. Dadurch können beim Wechseln der Seite sofort die zuletzt verfügbaren Messwerte angesehen werden. Würde immer nur die aktuelle Seite geladen werden, wäre das Programm zwar etwas effizienter, aber beim Umschalten der Seite zeigen die Messwerte überall "N/A"\ bzw. veraltete Werte an, bis die Daten erneuert werden. 
 
 \begin{pythoncode}
 def data_refresh(app):
