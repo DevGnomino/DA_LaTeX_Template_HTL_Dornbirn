@@ -7,7 +7,7 @@ Während der Entwicklung der \ac{rltanzeige} wird mit mehreren Raspberry PIs gea
 \cite[vgl.][]{Piltch:2022}
 
 \paragraph{Aktivierung von \textit{SSH}}
-\ac{ssh} ist ein Netzwerkprotokoll, das verwendet wird, um sich sicher über das Netzwerk mit einem anderen Gerät zu verbinden und darauf Operationen auszuführen. \ac{ssh} ist am Raspberry PI standardmäßig deaktiviert.  Daher muss \ac{ssh}, durch das Erstellen einer Datei Namens \enquote{ssh.} auf der SD-Karte, aktiviert werden. Nun kann eine kabellose oder kabelgebundene \ac{ssh} Verbindung mit dem Raspberry PI aufgebaut werden.
+\ac{ssh} ist ein Netzwerkprotokoll, das verwendet wird, um sich sicher über das Netzwerk mit einem anderen Gerät zu verbinden und darauf Operationen auszuführen. \ac{ssh} ist am Raspberry PI standardmäßig deaktiviert.  Daher muss \ac{ssh}, durch das Erstellen einer Datei Namens \enquote{ssh} (keine Dateiendung) auf der SD-Karte, aktiviert werden. Nun kann eine kabellose oder kabelgebundene \ac{ssh} Verbindung mit dem Raspberry PI aufgebaut werden.
 
 \paragraph{Kabellose Verbindung über \textit{SSH}}
 Für eine kabellose Verbindung über \ac{ssh} muss zuerst auf dem Raspberry PI ein Netzwerkzugang konfiguriert werden. Dazu wird auf der SD-Karte eine Konfigurationsdatei Namens \enquote{wpa\_supplicant.conf} mit folgendem Inhalt angelegt \cite[vgl.][]{Piltch:2022}:
