@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+[Desktop Entry]
+Exec = python /home/pi/Documents/main.py
+\end{Verbatim}

@@ -63,8 +63,8 @@
 }
 
 \DeclareAcronym{crlf}{
-	short = CRLF,
-	long  = Carriage Return Line feed,
+	short = \gls{cr}\gls{lf},
+	long  = Carriage Return Line Feed,
 }
 
 \DeclareAcronym{pdu}{
@@ -138,7 +138,42 @@
 }
 
 \DeclareAcronym{gpio}{
-	short = GPIO,
+	short = \gls{gls_gpio},
 	long = General-Purpose Input-Output,
 }
 
+\DeclareAcronym{ssh}{
+	short = \gls{gls_ssh},
+	long = Secure Shell,
+}
+
+\DeclareAcronym{vnc}{
+	short = \gls{gls_vnc},
+	long = Virtual Network Computing,
+}
+
+\DeclareAcronym{rltanlage-engl}{
+	short = HVAC system,
+	long  = {heating, ventilation and air conditioning system},
+	short-plural = s,
+	long-plural-form = {heating, ventilation and air conditioning systems},
+}
+
+\DeclareAcronym{rltanzeige-engl}{
+	short = HVAC display,
+	long = universal display for \acsp{rltanlage-engl},
+}
+
+\DeclareAcronym{gui-engl}{
+	short = GUI,
+	long  = graphical user interface,
+	short-plural = s,
+	long-plural = s,
+}
+
+\DeclareAcronym{vm}{
+	short = \gls{gls_vm},
+	long  = virtuelle Maschine,
+	short-plural = s,
+	long-plural = n,
+}

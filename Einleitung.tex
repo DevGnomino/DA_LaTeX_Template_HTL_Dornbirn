@@ -1,26 +1,14 @@
 \chapter{Einleitung} 
 \label{aufgabenstellung}
-\noindent Im Rahmen der Diplomarbeit soll eine zentrale Visualisierung entwickelt werden, die alle 
-wichtigen Informationen des Lüftungsgerätes sammelt und direkt am Gerät anzeigt. Unter 
-den anzuzeigenden Informationen befinden sich alle Temperaturwerte, Druckwerte und 
-Leistungsdaten, wobei bei Letzteren die Effizienz der RLT-Anlage berechnet wird. So können 
-Fehler der Anlage schnell identifiziert werden.
+\noindent Im Rahmen der Diplomarbeit soll eine zentrale Visualisierung entwickelt werden, die alle wichtigen Informationen der \ac{rltanlage} sammelt und direkt am Gerät anzeigt. Unter den anzuzeigenden Informationen befinden sich jegliche Temperaturwerte, Druckwerte und Leistungsdaten, wobei bei letzteren die Effizienz der \ac{rltanlage} berechnet wird. So können Fehler der Anlage schnell identifiziert werden. 
 Die Anzeige soll parametrierbar ausgeführt werden, um für die unterschiedlichsten 
-Lüftungsgeräte verwendet werden zu können. Die Grunddaten, wie z.B. welche Art von 
-Sensor bzw. an welcher Stelle (z.B. Analog Input 1) dieser angeschlossen ist, werden aus JSON Konfigurationsdateien ausgelesen. Diese Dateien werden von dem/der Techniker*in, die den 
-Raspberry dann aufsetzt, ausgefüllt.
-Da die Anzeige an den meisten Lüftungsanlagen verbaut wird, sollten sich die Kosten für 
-diese in einem wirtschaftlich sinnvollen Rahmen bewegen.
-Die Anzeige soll NICHT für Steuerungsaufgaben verwendet werden. Benutzerverwaltung, 
+\acp{rltanlage} verwendet werden zu können. Die Grunddaten, wie \zB welche Art von 
+Sensor \bzw an welcher Stelle dieser angeschlossen ist, werden aus \ac{json} Konfigurationsdateien ausgelesen. Diese Dateien werden von der Technikerin oder dem Techniker, die oder der den Raspberry PI dann aufsetzt, ausgefüllt.
+Da die \ac{rltanzeige} an den meisten \acp{rltanlage} verbaut werden soll, sollten sich die Kosten für diese in einem wirtschaftlich sinnvollen Rahmen bewegen.
+Die \ac{rltanzeige} soll nicht für Steuerungsaufgaben verwendet werden. Benutzerverwaltung, 
 Bildschirm- und Bediensperren sind ebenfalls nicht vorzusehen. \\
 
-Nebenziel:
-Wenn es gelingt, die Messwerte über Modbus auszulesen und diese grafisch darzustellen (Raspberry Pi ist 
-Client), dann soll eine zweite Modbus Schnittstelle eingerichtet werden. Diese zweite 
-Schnittstelle ist als Server auszuführen und soll alle, auf dem ersten Modbus Bus
-gesammelte Daten bereitstellen. Dies ermöglicht eine einfache Anbindung von fremd 
-Steuerungen ohne Gefahr zu laufen, dass von dieser Parameter im Lüftungsgerät via 
-Modbus verstellt werden. Voraussetzung dafür ist jedoch, dass das Hauptziel erreicht wurde.
+Wenn es gelingt, die Messwerte über \gls{modbus} auszulesen und diese grafisch darzustellen (Raspberry PI ist dabei ein \gls{modbus} \gls{client}), wäre der nächste Schritt eine zweite \gls{modbus} Schnittstelle einzurichten. Diese zweite Schnittstelle ist als \gls{server} auszuführen und soll alle auf dem ersten \gls{modbus} Bus gesammelten Daten bereitstellen. Dies ermöglicht eine einfache Anbindung von fremden Steuerungen ohne Gefahr zu laufen, dass von dieser Parameter in der \ac{rltanlage} via \gls{modbus} verstellt werden. Da es sich hierbei um ein Nebenziel handelt, ist die Voraussetzung dafür, dass das Hauptziel erreicht wurde.
 
 %Kurzbeschreibung des Themas
 %eschreibung der Leistung: Ziel der Arbeit? Für wen hat die Arbeit relevant? ...

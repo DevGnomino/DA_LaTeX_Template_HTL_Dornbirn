@@ -13,8 +13,8 @@ CONFIG_PATH = '/home/pi/Documents/RLT_Config/'
 DEVICES_CONFIG_PATH = '/home/pi/Documents/RLT_Config/devices/'
 
 #for testing
-#CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\\"
-#DEVICES_CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\devices\\"
+# CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\\"
+# DEVICES_CONFIG_PATH = "c:\Schule\DA_LaTeX\Code\RLT_Config\devices\\"
 
 class Sensor():
     def __init__(self, baud_rate, mb_address, parity, stop_bits, scaling, register,
@@ -29,7 +29,7 @@ class Sensor():
         # Mit USB Connector auf Linux       /dev/ttyUSB0
         # Mit USB Connector auf Windows     COM4
         # Über TX (8) und RX (10) Pins      /dev/ttyAMA0
-        self.instrument = minmb.Instrument('/dev/ttyAMA0',
+        self.instrument = minmb.Instrument('COM3',
                                        mb_address)  # Make an "instrument" object called sensor (port name, slave address (in decimal))
         self.instrument.serial.baudrate = baud_rate
         self.instrument.serial.bytesize = 8  # Number of data bits to be requested

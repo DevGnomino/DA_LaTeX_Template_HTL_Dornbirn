@@ -163,13 +163,13 @@ afterindent=false
 
 \RequirePackage{booktabs} %% for better looking tables 
 
-
+\RequirePackage{pdfpages} % Um PDFs einzufügen
 
 \RequirePackage{longtable}
 \RequirePackage[para,flushleft]{threeparttable}
 \RequirePackage{multirow}
 
-\RequirePackage{url} %% links inside the document as well as to websites
+\RequirePackage{xurl} %% links inside the document as well as to websites
 
 \RequirePackage{pdfpages} %% to include pdf pages
 
@@ -213,7 +213,6 @@ afterindent=false
 \newmintedfile[pythonfile]{python}{
 	frame=lines,
 	framesep=2mm,
-	baselinestretch=1.2,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.in,
@@ -224,18 +223,17 @@ afterindent=false
 \newminted{python}{
 	frame=lines,
 	framesep=2mm,
-	baselinestretch=1.2,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.in,
 	breaklines=true,
 	tabsize=4,
+    breakanywhere=true,
 	baselinestretch=1 
 }
 \newminted{json}{
 	frame=lines,
 	framesep=2mm,
-	baselinestretch=1.2,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
@@ -246,7 +244,6 @@ afterindent=false
 \newminted[jsonfile]{json}{
 	frame=lines,
 	framesep=2mm,
-	baselinestretch=1.2,
 	linenos,
 	xleftmargin=4mm,
 	xrightmargin=.25in,
@@ -264,12 +261,30 @@ afterindent=false
 	xrightmargin=.25in,
 	baselinestretch=1
 }
-
-
+\newminted{text}{
+	frame=lines,
+	framesep=2mm,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true,
+	tabsize=4,
+	baselinestretch=1
+}
+\newminted{console}{
+	frame=lines,
+	framesep=2mm,
+	linenos,
+	xleftmargin=4mm,
+	xrightmargin=.25in,
+	breaklines=true,
+	tabsize=4,
+	baselinestretch=1 
+}
 
 %% Customize Code Listing
 \lstset{
-	basicstyle = \normalsize\ttfamily,
+	basicstyle = \large\ttfamily,
 	keywordstyle=\color{blue}\bfseries,
 	tabsize=4,
 	breaklines=true,
@@ -337,7 +352,7 @@ afterindent=false
 \begin{minipage}[t]{0.3\textwidth}
 	\textbf{Betreuer:}\\[2ex]
 	Prof. DI Klaus Battlogg \\[2ex]
-	Ing. Köldorfer Simon, BSc
+	Ing. Simon Köldorfer, BSc
 \end{minipage}
 
 \vspace{5ex}
