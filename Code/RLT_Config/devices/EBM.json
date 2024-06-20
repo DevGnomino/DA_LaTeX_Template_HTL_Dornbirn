@@ -13,13 +13,7 @@
     {
       "port": "RPMmax",
       "register": 53529,
-      "function_code": 3,
-      "units": [
-        {
-          "unit": "1/min",
-          "scaling": 1
-        }
-      ]
+      "function_code": 3
     },
     {
       "port": "Power",
