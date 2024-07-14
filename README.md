@@ -1,4 +1,6 @@
-# Vorlage zur Erstellung einer Diplomarbeit in LaTeX für die HTL Dornbirn.
+# BITTE UNBEDINGT DURCHLESEN
+
+# Vorlage zur Erstellung einer Diplomarbeit in LaTeX an der HTL Dornbirn
 Sie basiert auf der Vorlage für Diplomarbeiten und Dissertationen der TU Wien und enthält unterschiedliche nützliche Packages, die für eine Diplomarbeit nützlich sind.
 
 ## Kurz zu LaTeX
@@ -11,13 +13,17 @@ LaTeX ist ein Textsatzsystem, das speziell für das Setzen wissenschaftlicher un
 - Pakete: Erweiterungen, die zusätzliche Funktionen bieten. Sie werden mit \usepackage{} bzw. \RequirePackage{} (in der .sty-Datei) eingebunden.
 
 ### Die inkludierten Packages
-
+Da die Vorlage sehr viele Packages beinhält, werden hier nur kurz die beschrieben, die bei der Nutzung am öftesten aufkommen. Manche Packages sind optional. Wenn man sie also nicht benutzen will, sollte man ihr \RequirePackage{} aus der .sty-Datei löschen.
+- Minted: Dieses Package dient dazu schöne Codeblöcke einzubinden. Alternativ können Plugins für z.B. VS Code bentzt werden, die dann als Bilder eingebunden werden. Zur Nutzung dieses Packages ist es wichtig, dass "Pygments" funktioniert, was man mit "pygmentize -V" in der Konsole testen kann. Falles man irgendwelche Fehler bezüglich "pygmentize" und PATH-Variable bekommt, lässt sich das Problem am einfachsten durch die Neuinstallation von Python beheben, wobei unbedingt die automatische Erstellung der PATH-Variable angehakt werden muss!
+- Glossaries: Mit diesem .... 
+Zur Nutzung dieses Packages wird Perl benötigt, was auf Linux Systemen meist vorinstalliert ist. Auf Windows kann man [Strawberry Perl](https://strawberryperl.com/) herunterladen.
+- Acronyms: Dieses Package wird verwendet, um Acronyme zu erstellen. Allerdings würde ich die Nutzung von diesem Package in Kombination mit Glossaries nicht empfehlen
 
 ## Die Aufsetzung
 ### LaTeX Distribution und Editor
 Zur Bearbeitung des Dokuments würde ich eine dieser zwei folgenden Methoden empfehlen:
-- Lokal auf dem eigenen PC mit der LaTeX Distribution MikTex (https://miktex.org/download), da diese sehr leichtgewichtig ist und TeXstudio (https://www.texstudio.org/) als Editor. Dabei können aber auch andere Distributionen wie TeX Live sowie andere Editoren verwendet werden.
-- Im Browser über Overleaf (https://www.overleaf.com): Dies ist die "einfachste" Methode, allerdings ist für eine GitHub Verbindung ein Abo notwendig ist, das sich aber für die wenigen Monate auszahlt.
+- Lokal auf dem eigenen PC mit der LaTeX Distribution [MikTex](https://miktex.org/download), da diese sehr leichtgewichtig ist und [TeXstudio](https://www.texstudio.org/) als Editor. Dabei können aber auch andere Distributionen wie TeX Live sowie andere Editoren verwendet werden.
+- Im Browser über [Overleaf](https://www.overleaf.com): Dies ist die "einfachste" Methode, allerdings ist für eine GitHub Verbindung ein Abo notwendig ist, das sich aber für die wenigen Monate auszahlt.
 
 ### Das Dokument
 1. Dieses Git Repository auf ein eigenes Repo clonen.
