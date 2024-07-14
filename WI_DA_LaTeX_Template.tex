@@ -5,7 +5,7 @@
 %\subsection{}
 %\subsubsection{}
 %\paragraph{}
-%\minisec{} Kann man für kleine Überschriften ohne Nummerierung verwenden
+%\minisec{} Small headings without numbering
 
 \pdfminorversion=7
 
@@ -20,7 +20,7 @@
 
 \documentclass[12pt,twoside=false, a4paper]{scrreprt}
 
-\usepackage{TUWBUIDADISS}
+\usepackage{HTLDASTYLE} %LaTeX "Stylesheet" where Packages are loaded and so on
 
 \raggedbottom 
 %% prevents the expansion of the text till the end of the page (if you like)
@@ -42,10 +42,7 @@ urlseen = {Zugriff am}}
 \addbibresource{Literatur.bib}
 
 %% ===== additional packages to the ones already loaded ==============
-\usepackage{acro}
-\input{Acronyms}
-\usepackage{pdflscape}
-\usepackage{longtable}
+
 
 %% Einstellungen für Zeilenumbrüche von Weblinks im url-Paket
 \setcounter{biburllcpenalty}{9000}% Kleinbuchstaben
@@ -79,6 +76,10 @@ list-final-separator={ und }}
 % activate for double space between the lines (correction mode) 
 %\doublespacing
 
+
+%Use of Acronyms and Glossaries Package is not ideal. 
+%Instead try to only use the Glossaries Package for Acronyms and Glossary
+\input{Acronyms}
 \makeglossaries
 %\loadglsentries{Glossar}
 \input{Glossar}
@@ -109,7 +110,6 @@ list-final-separator={ und }}
 \include{Tools}
 \include{Resume}
 
-%\include{00-Beispiele}
 \ifoot{\leftmark}
 
 \phantomsection

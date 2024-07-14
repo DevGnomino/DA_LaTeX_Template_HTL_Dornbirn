@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{calc\PYGZus{}power}\PYG{p}{(}\PYG{n}{sensors}\PYG{p}{,} \PYG{n}{additional\PYGZus{}info}\PYG{p}{):}
-	\PYG{n}{byte\PYGZus{}value} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()}
-	\PYG{n}{Uz\PYGZus{}value} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()} \PYG{o}{/} \PYG{l+m+mi}{1000} \PYG{o}{*} \PYG{l+m+mi}{20}
-	\PYG{n}{Iz\PYGZus{}value} \PYG{o}{=} \PYG{n}{sensors}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{o}{.}\PYG{n}{get\PYGZus{}data\PYGZus{}from\PYGZus{}modbus}\PYG{p}{()} \PYG{o}{/} \PYG{l+m+mi}{1000} \PYG{o}{*} \PYG{l+m+mi}{2}
-	\PYG{n}{power} \PYG{o}{=} \PYG{p}{(}\PYG{n}{byte\PYGZus{}value} \PYG{o}{/} \PYG{l+m+mi}{65536}\PYG{p}{)} \PYG{o}{*} \PYG{n}{Uz\PYGZus{}value} \PYG{o}{*} \PYG{n}{Iz\PYGZus{}value}
-	\PYG{k}{return} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{power}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{))} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{} W\PYGZdq{}}
-\end{Verbatim}

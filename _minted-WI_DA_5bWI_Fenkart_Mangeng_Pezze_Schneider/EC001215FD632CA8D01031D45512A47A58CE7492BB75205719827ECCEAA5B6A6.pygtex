@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{g+go}{sudo dd if=/dev/sdb of=/home/ubuntu/Desktop/clone.img}
-\end{Verbatim}

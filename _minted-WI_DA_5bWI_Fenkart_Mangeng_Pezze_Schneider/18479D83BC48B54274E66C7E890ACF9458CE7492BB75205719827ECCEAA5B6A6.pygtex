@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{g+go}{sudo pishrink.sh /home/ubuntu/Desktop/clone.img /home/ubuntu/Desktop/shrunken\PYGZhy{}image.img}
-\end{Verbatim}

@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{o}{...}
-		\PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{:}
-			\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}frame\PYGZus{}list}\PYG{p}{)):}
-				\PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{ctk}\PYG{o}{.}\PYG{n}{CTkButton}\PYG{p}{(}\PYG{n}{master}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{...}\PYG{p}{,} \PYG{n}{fg\PYGZus{}color}\PYG{o}{=}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}hellgrau\PYGZdq{}} \PYG{k}{if} \PYG{n}{i} \PYG{o}{==} \PYG{n}{current\PYGZus{}page} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}dunkelgrau\PYGZdq{}}\PYG{p}{)))}
-				\PYG{n}{page\PYGZus{}indicator\PYGZus{}list}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{place}\PYG{p}{(}\PYG{n}{relx}\PYG{o}{=}\PYG{n}{start\PYGZus{}x\PYGZus{}position} \PYG{o}{+} \PYG{n}{number}\PYG{p}{,}\PYG{o}{...}\PYG{p}{)}
-\PYG{o}{...}
-\end{Verbatim}
