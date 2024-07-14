@@ -34,3 +34,5 @@ Zur Bearbeitung des Dokuments würde ich eine dieser zwei folgenden Methoden emp
 ![grafik](https://github.com/user-attachments/assets/058be2d6-2eba-43f5-b627-717aca496da4)
 
 3. Wenn man nun alle Schritte zum Aufsetzen des Dokuments und der einzelnen Packages erledigt hat, sollte man das Dokument kompilieren können und eine PDF daraus bekommen.
+
+# ZUR ORIENTIERUNG WURDEN TEILE EINER ALTEN DIPLOMARBEIT IM DOKUMENT GELASSEN. BITTE DIE TEXTE NICHT WIEDERVERWENDEN, SONDERN EIGENE SCHREIBEN UND DIE ALTEN LÖSCHEN!!!
