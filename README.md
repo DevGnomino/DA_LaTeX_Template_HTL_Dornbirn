@@ -7,10 +7,11 @@ Sie basiert auf der Vorlage für Diplomarbeiten und Dissertationen der TU Wien u
 LaTeX ist ein Textsatzsystem, das speziell für das Setzen wissenschaftlicher und technischer Dokumente entwickelt wurde. Im Gegensatz zu WYSIWYG (What You See Is What You Get)-Editoren wie Word, zeigt LaTeX den fertigen Text nicht direkt an. Stattdessen wird der Quellcode kompiliert, um das fertige Dokument zu erzeugen. Der Text wird in Textdateien mit der Endung .tex geschrieben und muss dann kompiliert werden, um das endgültige Dokument, meist im PDF-Format, zu erzeugen.
 
 ### Wichtige Konzepte
-- LaTeX-Dokumente können sehr umfangreich und komplex werden, daher ist es oft sinnvoll, das Dokument in mehrere Dateien aufzuteilen. Es gibt dann ein Hauptdokument, das die die Hauptstruktur und grundlegende Inhalte enthält. Kapitel oder Abschnitte können dann in separate Dateien geschrieben und in das Hauptdokument eingebunden werden. Auch die Bibliographie, das Literaturverzeichnis und Glossar werden oft in separaten Dateien geführt. Das Deckblatt wird in dieser Vorlage in der .sty-Datei definiert.
+- LaTeX-Dokumente können sehr umfangreich und komplex werden, daher ist es oft sinnvoll, das Dokument in mehrere Dateien aufzuteilen. Es gibt dann ein Hauptdokument, das die die Hauptstruktur und grundlegende Inhalte enthält. Kapitel oder Abschnitte können dann in separate Dateien geschrieben und in das Hauptdokument eingebunden werden. Auch die Bibliographie, das Literaturverzeichnis und Glossar werden oft in separaten Dateien geführt.
 - LaTeX-Befehle beginnen mit einem Backslash (\). Beispiele sind \documentclass, \usepackage, \begin, \end, \section, \title, etc.
 - Umgebungen werden mit \begin{} und \end{} definiert und umschließen Blöcke von Text oder anderen Inhalten, z.B. \begin{document}...\end{document}, \begin{equation}...\end{equation}.
 - Pakete: Erweiterungen, die zusätzliche Funktionen bieten. Sie werden mit \usepackage{} bzw. \RequirePackage{} (in der .sty-Datei) eingebunden.
+- Im .sty-File wird das meiste der Konfiguration getätigt, wie z.B. die Einbindung der meisten Packages, die Konfiguration des Deckblattes oder die Konfiguration der Minted-Umgebungen.
 
 ### Die inkludierten Packages
 Da die Vorlage sehr viele Packages beinhält, werden hier nur kurz die beschrieben, die bei der Nutzung am öftesten aufkommen. Manche Packages sind optional. Wenn man sie also nicht benutzen will, sollte man ihr \RequirePackage{} aus der .sty-Datei löschen.
