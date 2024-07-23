@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{counter} \PYG{o}{=} \PYG{l+m+mi}{0}
-\PYG{n}{last\PYGZus{}slice} \PYG{o}{=} \PYG{l+m+mi}{0}
-\PYG{k}{for} \PYG{n}{measurement} \PYG{o+ow}{in} \PYG{n}{page\PYGZus{}measurements}\PYG{p}{:}
-	\PYG{n}{counter} \PYG{o}{+=} \PYG{l+m+mi}{1}
-	\PYG{k}{if} \PYG{p}{((}\PYG{n}{counter} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{5}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o+ow}{or} \PYG{p}{(}\PYG{n}{counter} \PYG{o}{==} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{page\PYGZus{}measurements}\PYG{p}{)):}
-		\PYG{n}{all\PYGZus{}pages}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{Page}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{n}{title}\PYG{p}{,} \PYG{n}{measurements}\PYG{o}{=}\PYG{n}{page\PYGZus{}measurements}\PYG{p}{[}\PYG{n}{last\PYGZus{}slice}\PYG{p}{:}\PYG{n}{counter}\PYG{p}{]))}
-		\PYG{n}{last\PYGZus{}slice} \PYG{o}{=} \PYG{n}{counter}
-\end{Verbatim}
