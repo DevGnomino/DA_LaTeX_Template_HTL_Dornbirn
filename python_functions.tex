@@ -15,18 +15,6 @@ Der Parameter \enquote{additional\_info} ermöglicht die Übermittlung weiterer 
 
 Im folgenden Abschnitt werden die bisher definierten \gls{gls_python} Funktionen beschrieben, eine weitere Erklärung zum Ablauf bei der Ausführung der \gls{gls_python} Funktionen ist in Kapitel \ref{auslesen_rlt_parameter} zu finden.
 
-
-\paragraph{Funktion \enquote{standard}}
-Diese Funktion wird standardmäßig ausgeführt, wenn in der Haupt-Konfigurationsdatei (vgl. Kapitel \ref{json_config_files}) der Parameter \enquote{python\_function} nicht angegeben wird \bzw keine besondere \gls{gls_python} Funktion angegeben wird. Die \lstinline{standard()} Funktion wird daher als einzige dieser Funktionen nie direkt in der Haupt-Konfigurationsdatei referenziert.
-
-Wie im unten stehenden Code zu sehen ist, wird bei dieser Funktion nichts berechnet. Es wird lediglich die \lstinline{get_data_from_modbus()} Funktion der \lstinline{Sensor} Instanz aufgerufen, welche den Messwert aus dem jeweiligen \gls{modbus} Register ausliest und zurück gibt (weitere Erklärung in Kapitel \ref{auslesen_rlt_parameter}).
-
-\begin{pythoncode}
-def standard(sensors, additional_info):
-	return sensors[0].get_data_from_modbus()
-\end{pythoncode}
-
-
 \paragraph{Funktion \enquote{calc\_rpm}}
 Diese Funktion wird verwendet, um bei ebm-papst Ventilatoren die Soll- \bzw Ist-Drehzahl zu ermitteln. Dabei werden, wie im folgenden Code zu sehen ist, zwei Register ausgelesen. Daraufhin wird das Verhältnis der jeweiligen Drehzahl zur maximalen Drehzahl des Ventilators berechnet, das Ergebnis gerundet und in Prozent zurückgegeben.
 

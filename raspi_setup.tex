@@ -46,12 +46,3 @@ Da die normale Version des Raspberry PI Zero keine kabellose Netzwerkverbindung 
 ssh [Username]@[RaspberryPIZero-Name].local
     \end{minted}
 \end{enumerate}
-
-\subsection{Installieren der nötigen Python Pakete}
-Nach dem Aufsetzen des Raspberry PI OS und \ac{ssh} müssen zuletzt noch die Python Pakete für \gls{gls_tk}, \gls{gls_ctk} und \gls{gls_minimalmodbus} mit den folgenden Befehlen auf dem Raspberry PI installiert werden:
-
-\begin{minted}{console}
-pip install tk
-pip install customtkinter
-pip install minimalmodbus
-\end{minted}

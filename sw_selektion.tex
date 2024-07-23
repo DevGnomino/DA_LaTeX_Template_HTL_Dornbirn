@@ -27,10 +27,3 @@ Die folgenden Vor- und Nachteile beziehen sich auf \textcite[vgl.][]{Ceaseo:2020
 	\item Da die Sprache Zeile für Zeile interpretiert wird, dauert die Ausführung länger als bei kompilierten Sprachen.
 	\item Zur Initialisierung einer Variable muss kein Datentyp angegeben werden. Dadurch hat der Programmierer weniger Schreibaufwand, allerdings können in erhöhtem Maße Laufzeitfehler auftreten und auch die Übersichtlichkeit ist betroffen. Genauso ist die Abwesenheit von Klammern eine kontroverse Funktionalität.
 \end{itemize}
-
-\paragraph{Gründe für die Verwendung}
-Ein ausschlaggebender Grund für die Verwendung von \gls{gls_python} ist, dass alle Teammitglieder damit schon Erfahrungen gemacht haben. Beim Einsatz anderer Sprachen wäre die Einarbeitungszeit einzelner Teammitglieder zu berücksichtigen. Außerdem liegt es nahe, da es für den Raspberry PI eine Standardsprache ist. Die oben beschriebenen Nachteile der Sprache sind für ein Proof-of-Concept vernachlässigbar. Außerdem hat die Recherche ergeben, dass viele gut dokumentierte Bibliotheken für \gls{modbus} und grafische Benutzeroberflächen vorhanden sind.
-
-\paragraph{Verwendete \textit{Python}-Bibliotheken}
-Für das Auslesen der raumlufttechnischen Messwerte über das \gls{modbus} Protokoll wird \gls{gls_minimalmodbus} verwendet. Um die erhaltenen Werte auch grafisch anzuzeigen, wird \gls{gls_ctk} verwendet. Es folgen die Beschreibungen dieser beiden Bibliotheken.
-

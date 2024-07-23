@@ -11,6 +11,10 @@
 *.xmpi
 *.glo
 *.gls
+*.glg
+*.ist
+*.run.xml
+*.xml
 
 # LaTeX biber
 *.bbl
@@ -34,4 +38,5 @@
 # Ignore build directories
 _build/
 out/
+_minted-WI_DA_LaTeX_Template/
 
